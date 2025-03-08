@@ -74,11 +74,10 @@
             ]
           },
           {
-            "group": "Endpoint Examples",
+            "group": "Mobile Money Collection API",
             "pages": [
-              "api-reference/endpoint/get",
-              "api-reference/endpoint/create",
-              "api-reference/endpoint/delete"
+              "api-reference/Payments/preview-ussd-push-request",
+              "api-reference/Payments/initiate-ussd-push-request"
             ]
           }
         ]
