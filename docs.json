@@ -1,0 +1,106 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "palm",
+  "name": "ClickPesa Documentation",
+  "description": "ClickPesa API Documentation",
+  "favicon": "/favicon.png",
+  "logo": {
+    "light": "/logo/light.png",
+    "dark": "/logo/dark.png"
+  },
+  "colors": {
+    "primary": "#e6c602",
+    "light": "#fbd906",
+    "dark": "#fbe550"
+  },
+  "background": {
+    "color": {
+      "light": "#ffffff",
+      "dark": "#0b0909"
+    }
+  },
+  "fonts": {
+    "family": "CircularStd-Book",
+    "source": "https://res.cloudinary.com/dnhpcrm8k/raw/upload/v1712752815/assets/circular%20fonts/CircularStd-Book.otf",
+    "format": "woff"
+  },
+  "navigation": {
+    "global": {
+      "anchors": [
+        {
+          "anchor": "Website",
+          "href": "https://clickpesa.com",
+          "icon": "globe"
+        },
+        {
+          "anchor": "Blog",
+          "href": "https://medium.com/clickpesa-engineering-blog",
+          "icon": "newspaper"
+        }
+      ]
+    },
+    "tabs": [
+      {
+        "tab": "Docs",
+        "groups": [
+          {
+            "group": "Introduction",
+            "pages": [
+              "getting-started",
+              "quickstart",
+              "development"
+            ]
+          },
+          {
+            "group": "Essentials",
+            "pages": [
+              "essentials/markdown",
+              "essentials/code",
+              "essentials/images",
+              "essentials/settings",
+              "essentials/navigation",
+              "essentials/reusable-snippets"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "API Reference",
+        "groups": [
+          {
+            "group": "API Documentation",
+            "pages": [
+              "api-reference/introduction"
+            ]
+          },
+          {
+            "group": "Mobile Money Collection API",
+            "pages": [
+              "api-reference/Payments/preview-ussd-push-request",
+              "api-reference/Payments/initiate-ussd-push-request"
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "navbar": {
+    "links": [
+      {
+        "label": "Support",
+        "href": "mailto:aly@clickpesa.com"
+      }
+    ],
+    "primary": {
+      "type": "button",
+      "label": "Register",
+      "href": "https://merchant.clickpesa.com/register"
+    }
+  },
+  "footer": {
+    "socials": {
+      "x": "https://x.com/clickpesa",
+      "linkedin": "https://www.linkedin.com/company/clickpesa"
+    }
+  }
+}
