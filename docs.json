@@ -69,11 +69,17 @@
             "pages": ["api-reference/authorization/generate-token"]
           },
           {
-            "group": "Mobile Money Collection API",
+            "group": "Collection",
             "pages": [
-              "api-reference/online-api-collection/preview-ussd-push-request",
-              "api-reference/online-api-collection/initiate-ussd-push-request"
+              "api-reference/collection/preview-ussd-push-request",
+              "api-reference/collection/initiate-ussd-push-request",
+              "api-reference/collection/generate-checkout-link",
+              "api-reference/collection/querying-for-payments"
             ]
+          },
+          {
+            "group": "Disbursement",
+            "pages": []
           }
         ]
       }

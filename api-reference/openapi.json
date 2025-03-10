@@ -29,6 +29,7 @@
             "application/json": {
               "schema": {
                 "type": "object",
+                "required": ["amount", "orderReference"],
                 "properties": {
                   "amount": {
                     "type": "integer",
@@ -107,6 +108,7 @@
             "application/json": {
               "schema": {
                 "type": "object",
+                "required": ["amount", "orderReference", "phoneNumber"],
                 "properties": {
                   "amount": {
                     "type": "integer",
@@ -182,6 +184,164 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/InitiateUSSDPushInternalServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/checkout-link/generate-checkout-url": {
+      "post": {
+        "tags": ["Payments"],
+        "description": "Generate Checkout Link for receiving online payments",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "oneOf": [
+                  {
+                    "title": "Body With Total Amount",
+                    "required": [
+                      "totalPrice",
+                      "orderReference",
+                      "orderCurrency"
+                    ],
+                    "properties": {
+                      "totalPrice": {
+                        "type": "integer",
+                        "description": "Amount"
+                      },
+                      "orderReference": {
+                        "type": "string",
+                        "description": "Your unique Order reference"
+                      },
+                      "orderCurrency": {
+                        "type": "string",
+                        "enum": ["TZS", "USD"],
+                        "description": "Phone Number to receive USSD push and make payment"
+                      },
+                      "customerName": {
+                        "type": "string",
+                        "description": "Your customer name"
+                      },
+                      "customerEmail": {
+                        "type": "string",
+                        "description": "Your customer email"
+                      },
+                      "customerPhone": {
+                        "type": "string",
+                        "description": "Your customer phone number"
+                      }
+                    }
+                  },
+                  {
+                    "title": "Body With Order Items",
+                    "required": [
+                      "orderItems",
+                      "orderReference",
+                      "orderCurrency"
+                    ],
+                    "properties": {
+                      "orderItems": {
+                        "type": "array",
+                        "description": "Your order items",
+                        "items": {
+                          "type": "object",
+                          "required": ["name", "price", "quantity"],
+                          "properties": {
+                            "name": {
+                              "type": "string",
+                              "description": "Item name"
+                            },
+                            "price": {
+                              "type": "integer",
+                              "description": "Amount"
+                            },
+                            "quantity": {
+                              "type": "integer",
+                              "description": "Quantity"
+                            }
+                          }
+                        }
+                      },
+                      "orderReference": {
+                        "type": "string",
+                        "description": "Your unique Order reference"
+                      },
+                      "orderCurrency": {
+                        "type": "string",
+                        "enum": ["TZS", "USD"],
+                        "description": "Phone Number to receive USSD push and make payment"
+                      },
+                      "customerName": {
+                        "type": "string",
+                        "description": "Your customer name"
+                      },
+                      "customerEmail": {
+                        "type": "string",
+                        "description": "Your customer email"
+                      },
+                      "customerPhone": {
+                        "type": "string",
+                        "description": "Your customer phone number"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Generate Checkout Link Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenerateCheckoutLinkResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid or Expired Token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedError"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PreviewUssdPushValidationError"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PreviewUSSDPushConflictError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PreviewUssdPushNotFoundError"
                 }
               }
             }
@@ -367,6 +527,14 @@
           }
         },
         "required": ["message"]
+      },
+      "GenerateCheckoutLinkResponse": {
+        "type": "object",
+        "properties": {
+          "checkoutLink": {
+            "type": "string"
+          }
+        }
       }
     },
     "securitySchemes": {
