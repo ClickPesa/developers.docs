@@ -46,21 +46,14 @@
           {
             "group": "Introduction",
             "pages": [
-              "getting-started",
-              "quickstart",
-              "development"
+              "docs/introduction/getting-started",
+              "docs/introduction/quickstart",
+              "docs/introduction/development"
             ]
           },
           {
-            "group": "Essentials",
-            "pages": [
-              "essentials/markdown",
-              "essentials/code",
-              "essentials/images",
-              "essentials/settings",
-              "essentials/navigation",
-              "essentials/reusable-snippets"
-            ]
+            "group": "Applications",
+            "pages": []
           }
         ]
       },
@@ -69,15 +62,17 @@
         "groups": [
           {
             "group": "API Documentation",
-            "pages": [
-              "api-reference/introduction"
-            ]
+            "pages": ["api-reference/introduction"]
+          },
+          {
+            "group": "Authorization",
+            "pages": ["api-reference/authorization/generate-token"]
           },
           {
             "group": "Mobile Money Collection API",
             "pages": [
-              "api-reference/Payments/preview-ussd-push-request",
-              "api-reference/Payments/initiate-ussd-push-request"
+              "api-reference/online-api-collection/preview-ussd-push-request",
+              "api-reference/online-api-collection/initiate-ussd-push-request"
             ]
           }
         ]

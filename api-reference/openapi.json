@@ -10,7 +10,7 @@
   },
   "servers": [
     {
-      "url": "http://api.clickpesa.com/third-parties"
+      "url": "https://api.clickpesa.com/third-parties"
     }
   ],
   "security": [
@@ -21,38 +21,75 @@
   "paths": {
     "/payments/preview-ussd-push-request": {
       "post": {
+        "tags": ["Payments", "Preview"],
         "description": "Preview a PUSH request for payments",
-        "parameters": [
-          {
-            "name": "limit",
-            "in": "query",
-            "description": "The maximum number of results to return",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "amount": {
+                    "type": "integer",
+                    "description": "Amount"
+                  },
+                  "orderReference": {
+                    "type": "string",
+                    "description": "Your unique Order reference"
+                  }
+                }
+              }
             }
           }
-        ],
+        },
         "responses": {
           "200": {
-            "description": "Plant response",
+            "description": "USSD Push Preview response",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Plant"
-                  }
+                  "$ref": "#/components/schemas/PreviewUSSDPushResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid or Expired Token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedError"
                 }
               }
             }
           },
           "400": {
-            "description": "Unexpected error",
+            "description": "Validation Error",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/PreviewUssdPushValidationError"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PreviewUSSDPushConflictError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PreviewUssdPushNotFoundError"
                 }
               }
             }
@@ -62,38 +99,89 @@
     },
     "/payments/initiate-ussd-push-request": {
       "post": {
+        "tags": ["Payments", "Initiate"],
         "description": "Initiates a PUSH request for payments.",
-        "parameters": [
-          {
-            "name": "limit",
-            "in": "query",
-            "description": "The maximum number of results to return",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "amount": {
+                    "type": "integer",
+                    "description": "Amount"
+                  },
+                  "orderReference": {
+                    "type": "string",
+                    "description": "Your unique Order reference"
+                  },
+                  "phoneNumber": {
+                    "type": "string",
+                    "description": "Phone Number to receive USSD push and make payment"
+                  }
+                }
+              }
             }
           }
-        ],
+        },
         "responses": {
           "200": {
-            "description": "Plant response",
+            "description": "USSD Push Preview response",
             "content": {
               "application/json": {
                 "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/Plant"
-                  }
+                  "$ref": "#/components/schemas/InitiateUSSDPushResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid or Expired Token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedError"
                 }
               }
             }
           },
           "400": {
-            "description": "Unexpected error",
+            "description": "Validation Error",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/InitiateUssdPushValidationError"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InitiateUSSDPushConflictError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InitiateUssdPushNotFoundError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InitiateUSSDPushInternalServerError"
                 }
               }
             }
@@ -101,32 +189,48 @@
         }
       }
     },
-    "/plants/{id}": {
-      "delete": {
-        "description": "Deletes a single plant based on the ID supplied",
+    "/generate-token": {
+      "post": {
+        "tags": ["Authorization", "Security"],
+        "description": "Generate Token to use for all other api calls",
         "parameters": [
           {
-            "name": "id",
-            "in": "path",
-            "description": "ID of plant to delete",
+            "in": "header",
+            "name": "client-id",
             "required": true,
             "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
+              "type": "string"
+            },
+            "description": "Your Client ID for authentication."
+          },
+          {
+            "in": "header",
+            "name": "api-key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Your API Key for authentication."
           }
         ],
+        "security": [],
         "responses": {
-          "204": {
-            "description": "Plant deleted",
-            "content": {}
-          },
-          "400": {
-            "description": "unexpected error",
+          "200": {
+            "description": "Generate token response",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Error"
+                  "$ref": "#/components/schemas/GenerateTokenResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Client Details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenerateTokenInvalidClientDetailsError"
                 }
               }
             }
@@ -137,57 +241,132 @@
   },
   "components": {
     "schemas": {
-      "Plant": {
-        "required": [
-          "name"
-        ],
+      "PreviewUSSDPushResponse": {
         "type": "object",
         "properties": {
-          "name": {
-            "description": "The name of the plant",
-            "type": "string"
-          },
-          "tag": {
-            "description": "Tag to specify the type",
-            "type": "string"
-          }
-        }
-      },
-      "NewPlant": {
-        "allOf": [
-          {
-            "$ref": "#/components/schemas/Plant"
-          },
-          {
-            "required": [
-              "id"
-            ],
-            "type": "object",
-            "properties": {
-              "id": {
-                "description": "Identification number of the plant",
-                "type": "integer",
-                "format": "int64"
+          "activeMethods": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "Payment method name (e.g., TIGO-PESA, M-PESA, AIRTEL-MONEY)"
+                },
+                "status": {
+                  "type": "string",
+                  "enum": ["AVAILABLE", "UNAVAILABLE"],
+                  "description": "Status of the payment method"
+                },
+                "fee": {
+                  "type": "integer",
+                  "description": "Transaction fee in the smallest currency unit (e.g., cents)"
+                }
               }
             }
           }
-        ]
+        }
       },
-      "Error": {
-        "required": [
-          "error",
-          "message"
-        ],
+      "PreviewUssdPushValidationError": {
         "type": "object",
         "properties": {
-          "error": {
-            "type": "integer",
-            "format": "int32"
-          },
           "message": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "Valid Client ID is required",
+              "Application has no access to COLLECTION API feature. Enable it on your application.",
+              "Invalid Order Reference, should only contain alphanumeric characters and cannot be blank"
+            ],
+            "example": "Invalid Order Reference, should only contain alphanumeric characters and cannot be blank"
           }
         }
+      },
+      "PreviewUssdPushNotFoundError": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "enum": [
+              "Account has no payment collection methods",
+              "Account has no valid payment method"
+            ],
+            "example": "Account has no payment collection methods"
+          }
+        }
+      },
+      "PreviewUSSDPushConflictError": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Conflict message when an order reference is already used",
+            "example": "Order reference {Your reference} already used: Create a different reference"
+          }
+        }
+      },
+      "InitiateUSSDPushResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "description": "Unique identifier for the USSD push transaction"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["PROCESSING", "SUCCESS", "FAILED", "SETTLED"],
+            "description": "Current status of the transaction"
+          },
+          "channel": {
+            "type": "string",
+            "description": "Payment channel used for the transaction (e.g., TIGO-PESA, M-PESA, AIRTEL-MONEY)"
+          },
+          "orderReference": {
+            "type": "string",
+            "description": "Your unique Reference identifier for the order"
+          },
+          "collectedAmount": {
+            "type": "string",
+            "description": "Amount collected from the transaction"
+          },
+          "collectedCurrency": {
+            "type": "string",
+            "description": "Currency of the collected amount (e.g., TZS)"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Timestamp when the transaction was created"
+          }
+        }
+      },
+      "GenerateTokenResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "token": {
+            "type": "string",
+            "example": "Bearer token"
+          }
+        },
+        "required": ["success", "token"]
+      },
+      "GenerateTokenInvalidClientDetailsError": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "enum": [
+              "Invalid client details",
+              "Invalid or Expired API-Key",
+              "Unauthorized API-Key"
+            ],
+            "example": "Invalid or Expired API-Key"
+          }
+        },
+        "required": ["message"]
       }
     },
     "securitySchemes": {

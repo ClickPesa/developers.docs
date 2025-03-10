@@ -1,33 +1,29 @@
 ---
-title: 'Introduction'
-description: 'Example section for showcasing API endpoints'
+title: "Introduction"
+description: "Get started with ClickPesa Payment Gateway API for seamless payment collection and disbursement."
 ---
 
-<Note>
-  If you're not looking to build API reference documentation, you can delete
-  this section by removing the api-reference folder.
-</Note>
+## Welcome to ClickPesa Payment Gateway API
 
-## Welcome 🍊
+ClickPesa Payment Gateway Integration empowers businesses and developers to seamlessly **collect** and **disburse** payments across multiple channels. Whether you're integrating USSD push payments, automating disbursements, or tracking transactions, ClickPesa provides a **secure, scalable, and developer-friendly** solution.
 
-There are two ways to build API documentation: [OpenAPI](https://mintlify.com/docs/api-playground/openapi/setup) and [MDX components](https://mintlify.com/docs/api-playground/mdx/configuration). For the starter kit, we are using the following OpenAPI specification.
-
-<Card
-  title="Plant Store Endpoints"
-  icon="leaf"
-  href="https://github.com/mintlify/starter/blob/main/api-reference/openapi.json"
->
-  View the OpenAPI specification file here
+<Card title="ClickPesa API Endpoints" icon="leaf">
+  Access endpoints for payment collection, disbursement, authentication, and
+  transaction management.
 </Card>
 
 ## Authentication
 
-All API endpoints are authenticated using Bearer tokens and picked up from the specification file.
+Most API endpoints require authentication using a `Bearer token`. Before making requests, you must obtain an access token.
 
-```json
-"security": [
-  {
-    "bearerAuth": []
-  }
-]
+### Obtaining a Token
+
+To generate a Bearer token, use the [generate token](../api-reference/Authorization/generate-token) endpoint.
+
+### Using the Token
+
+Once you have a token, include it in the `Authorization` header for all authenticated requests:
+
+```bash
+Authorization: Bearer YOUR_ACCESS_TOKEN
 ```
