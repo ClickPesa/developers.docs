@@ -190,213 +190,6 @@
           }
         }
       }
-    },
-    "/checkout-link/generate-checkout-url": {
-      "post": {
-        "tags": ["Payments"],
-        "description": "Generate Checkout Link for receiving online payments",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "oneOf": [
-                  {
-                    "title": "Body With Total Amount",
-                    "required": [
-                      "totalPrice",
-                      "orderReference",
-                      "orderCurrency"
-                    ],
-                    "properties": {
-                      "totalPrice": {
-                        "type": "integer",
-                        "description": "Amount"
-                      },
-                      "orderReference": {
-                        "type": "string",
-                        "description": "Your unique Order reference"
-                      },
-                      "orderCurrency": {
-                        "type": "string",
-                        "enum": ["TZS", "USD"],
-                        "description": "Phone Number to receive USSD push and make payment"
-                      },
-                      "customerName": {
-                        "type": "string",
-                        "description": "Your customer name"
-                      },
-                      "customerEmail": {
-                        "type": "string",
-                        "description": "Your customer email"
-                      },
-                      "customerPhone": {
-                        "type": "string",
-                        "description": "Your customer phone number"
-                      }
-                    }
-                  },
-                  {
-                    "title": "Body With Order Items",
-                    "required": [
-                      "orderItems",
-                      "orderReference",
-                      "orderCurrency"
-                    ],
-                    "properties": {
-                      "orderItems": {
-                        "type": "array",
-                        "description": "Your order items",
-                        "items": {
-                          "type": "object",
-                          "required": ["name", "price", "quantity"],
-                          "properties": {
-                            "name": {
-                              "type": "string",
-                              "description": "Item name"
-                            },
-                            "price": {
-                              "type": "integer",
-                              "description": "Amount"
-                            },
-                            "quantity": {
-                              "type": "integer",
-                              "description": "Quantity"
-                            }
-                          }
-                        }
-                      },
-                      "orderReference": {
-                        "type": "string",
-                        "description": "Your unique Order reference"
-                      },
-                      "orderCurrency": {
-                        "type": "string",
-                        "enum": ["TZS", "USD"],
-                        "description": "Phone Number to receive USSD push and make payment"
-                      },
-                      "customerName": {
-                        "type": "string",
-                        "description": "Your customer name"
-                      },
-                      "customerEmail": {
-                        "type": "string",
-                        "description": "Your customer email"
-                      },
-                      "customerPhone": {
-                        "type": "string",
-                        "description": "Your customer phone number"
-                      }
-                    }
-                  }
-                ]
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Generate Checkout Link Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GenerateCheckoutLinkResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Invalid or Expired Token",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/UnauthorizedError"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Validation Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PreviewUssdPushValidationError"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "Conflict Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PreviewUSSDPushConflictError"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found Error",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PreviewUssdPushNotFoundError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/generate-token": {
-      "post": {
-        "tags": ["Authorization", "Security"],
-        "description": "Generate Token to use for all other api calls",
-        "parameters": [
-          {
-            "in": "header",
-            "name": "client-id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Your Client ID for authentication."
-          },
-          {
-            "in": "header",
-            "name": "api-key",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Your API Key for authentication."
-          }
-        ],
-        "security": [],
-        "responses": {
-          "200": {
-            "description": "Generate token response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GenerateTokenResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Invalid Client Details",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GenerateTokenInvalidClientDetailsError"
-                }
-              }
-            }
-          }
-        }
-      }
     }
   },
   "components": {
@@ -499,40 +292,61 @@
           }
         }
       },
-      "GenerateTokenResponse": {
-        "type": "object",
-        "properties": {
-          "success": {
-            "type": "boolean",
-            "example": true
-          },
-          "token": {
-            "type": "string",
-            "example": "Bearer token"
-          }
-        },
-        "required": ["success", "token"]
-      },
-      "GenerateTokenInvalidClientDetailsError": {
+      "InitiateUssdPushValidationError": {
         "type": "object",
         "properties": {
           "message": {
             "type": "string",
             "enum": [
-              "Invalid client details",
-              "Invalid or Expired API-Key",
-              "Unauthorized API-Key"
+              "Invalid / unsupported phone number",
+              "Valid Client ID is required",
+              "Application has no access to COLLECTION API feature. Enable it on your application.",
+              "Invalid Order Reference, should only contain alphanumeric characters and cannot be blank"
             ],
-            "example": "Invalid or Expired API-Key"
+            "example": "Invalid / unsupported phone number"
           }
-        },
-        "required": ["message"]
+        }
       },
-      "GenerateCheckoutLinkResponse": {
+      "InitiateUssdPushNotFoundError": {
         "type": "object",
         "properties": {
-          "checkoutLink": {
-            "type": "string"
+          "message": {
+            "type": "string",
+            "enum": [
+              "Account has no payment collection methods",
+              "Account has no valid payment method"
+            ],
+            "example": "Account has no payment collection methods"
+          }
+        }
+      },
+      "InitiateUSSDPushConflictError": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Conflict message when an order reference is already used",
+            "example": "Order reference {Your reference} already used: Create a different reference"
+          }
+        }
+      },
+      "InitiateUSSDPushInternalServerError": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Internal Server Error",
+            "example": "Error validating fee, try again later"
+          }
+        }
+      },
+      "UnauthorizedError": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Unauthorized Error",
+            "example": "Unauthorized"
           }
         }
       }
