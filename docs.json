@@ -69,10 +69,34 @@
             "pages": ["api-reference/authorization/generate-token"]
           },
           {
-            "group": "Mobile Money Collection API",
+            "group": "Collection",
             "pages": [
-              "api-reference/online-api-collection/preview-ussd-push-request",
-              "api-reference/online-api-collection/initiate-ussd-push-request"
+              "api-reference/collection/querying-for-payments/querying-for-payments"
+            ]
+          },
+          {
+            "group": "Hosted Collection",
+            "pages": [
+              "api-reference/collection/generate-checkout-link/generate-checkout-link"
+            ]
+          },
+          {
+            "group": "Collection API",
+            "pages": [
+              "api-reference/collection/ussd-push-requests/preview-ussd-push-request",
+              "api-reference/collection/ussd-push-requests/initiate-ussd-push-request"
+            ]
+          },
+          {
+            "group": "Disbursement",
+            "pages": [
+              "api-reference/disbursement/querying-for-payouts/querying-for-payouts"
+            ]
+          },
+          {
+            "group": "Hosted Disbursement",
+            "pages": [
+              "api-reference/disbursement/generate-payout-link/generate-payout-link"
             ]
           }
         ]

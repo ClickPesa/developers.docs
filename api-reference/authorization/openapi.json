@@ -1,0 +1,111 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "CORE API OpenAPI Specification",
+    "description": "This is the API documentation for the ClickPesa CORE API",
+    "license": {
+      "name": "MIT"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.clickpesa.com/third-parties"
+    }
+  ],
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "paths": {
+    "/generate-token": {
+      "post": {
+        "tags": ["Authorization", "Security"],
+        "description": "Generate Token to use for all other api calls",
+        "parameters": [
+          {
+            "in": "header",
+            "name": "client-id",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Your Client ID for authentication."
+          },
+          {
+            "in": "header",
+            "name": "api-key",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Your API Key for authentication."
+          }
+        ],
+        "security": [],
+        "responses": {
+          "200": {
+            "description": "Generate token response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenerateTokenResponse"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Invalid Client Details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenerateTokenInvalidClientDetailsError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "GenerateTokenResponse": {
+        "type": "object",
+        "properties": {
+          "success": {
+            "type": "boolean",
+            "example": true
+          },
+          "token": {
+            "type": "string",
+            "example": "Bearer token"
+          }
+        },
+        "required": ["success", "token"]
+      },
+      "GenerateTokenInvalidClientDetailsError": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "enum": [
+              "Invalid client details",
+              "Invalid or Expired API-Key",
+              "Unauthorized API-Key"
+            ],
+            "example": "Invalid or Expired API-Key"
+          }
+        },
+        "required": ["message"]
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  }
+}

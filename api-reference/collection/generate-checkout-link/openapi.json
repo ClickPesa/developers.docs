@@ -1,0 +1,247 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "CORE API OpenAPI Specification",
+    "description": "This is the API documentation for the ClickPesa CORE API",
+    "license": {
+      "name": "MIT"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.clickpesa.com/third-parties"
+    }
+  ],
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "paths": {
+    "/checkout-link/generate-checkout-url": {
+      "post": {
+        "description": "Generate Checkout Link for receiving online payments",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "oneOf": [
+                  {
+                    "title": "Body With Total Amount",
+                    "required": [
+                      "totalPrice",
+                      "orderReference",
+                      "orderCurrency"
+                    ],
+                    "properties": {
+                      "totalPrice": {
+                        "type": "integer",
+                        "description": "Amount"
+                      },
+                      "orderReference": {
+                        "type": "string",
+                        "description": "Your unique Order reference"
+                      },
+                      "orderCurrency": {
+                        "type": "string",
+                        "enum": ["TZS", "USD"],
+                        "description": "Phone Number to receive USSD push and make payment"
+                      },
+                      "customerName": {
+                        "type": "string",
+                        "description": "Your customer name"
+                      },
+                      "customerEmail": {
+                        "type": "string",
+                        "description": "Your customer email"
+                      },
+                      "customerPhone": {
+                        "type": "string",
+                        "description": "Your customer phone number"
+                      }
+                    }
+                  },
+                  {
+                    "title": "Body With Order Items",
+                    "required": [
+                      "orderItems",
+                      "orderReference",
+                      "orderCurrency"
+                    ],
+                    "properties": {
+                      "orderItems": {
+                        "type": "array",
+                        "description": "Your order items",
+                        "items": {
+                          "type": "object",
+                          "required": ["name", "price", "quantity"],
+                          "properties": {
+                            "name": {
+                              "type": "string",
+                              "description": "Item name"
+                            },
+                            "price": {
+                              "type": "integer",
+                              "description": "Amount"
+                            },
+                            "quantity": {
+                              "type": "integer",
+                              "description": "Quantity"
+                            }
+                          }
+                        }
+                      },
+                      "orderReference": {
+                        "type": "string",
+                        "description": "Your unique Order reference"
+                      },
+                      "orderCurrency": {
+                        "type": "string",
+                        "enum": ["TZS", "USD"],
+                        "description": "Phone Number to receive USSD push and make payment"
+                      },
+                      "customerName": {
+                        "type": "string",
+                        "description": "Your customer name"
+                      },
+                      "customerEmail": {
+                        "type": "string",
+                        "description": "Your customer email"
+                      },
+                      "customerPhone": {
+                        "type": "string",
+                        "description": "Your customer phone number"
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Generate Checkout Link Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid or Expired Token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedError"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationError"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConflictError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Response": {
+        "type": "object",
+        "properties": {
+          "checkoutLink": {
+            "type": "string"
+          }
+        }
+      },
+      "ValidationError": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "enum": [
+              "Valid Client ID is required",
+              "Application has no access to checkout link feature.",
+              "Order reference is required",
+              "All items must have a name",
+              "All items must have a price",
+              "All items must have a quantity",
+              "Total Price is required",
+              "Invalid Order Reference, should only contain alphanumeric characters and cannot be blank"
+            ],
+            "example": "Invalid Order Reference, should only contain alphanumeric characters and cannot be blank"
+          }
+        }
+      },
+      "NotFoundError": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "enum": ["Merchant shop does not exists"],
+            "example": "Merchant shop does not exists"
+          }
+        }
+      },
+      "ConflictError": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Conflict message when an order reference is already used",
+            "example": "Order reference {Your reference} already used: Create a different reference"
+          }
+        }
+      },
+      "UnauthorizedError": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Unauthorized Error",
+            "example": "Unauthorized"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  }
+}

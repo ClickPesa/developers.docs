@@ -1,0 +1,198 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "CORE API OpenAPI Specification",
+    "description": "This is the API documentation for the ClickPesa CORE API",
+    "license": {
+      "name": "MIT"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.clickpesa.com/third-parties"
+    }
+  ],
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "paths": {
+    "/payouts/:orderReference": {
+      "get": {
+        "description": "Generate Checkout Link for receiving online payments",
+        "parameters": [
+          {
+            "name": "orderReference",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier for the payout order"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Generate Checkout Link Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid or Expired Token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Response": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "updatedAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Last updated timestamp"
+            },
+            "createdAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Creation timestamp"
+            },
+            "id": {
+              "type": "string",
+              "description": "Payout ID"
+            },
+            "orderReference": {
+              "type": "string",
+              "description": "Associated order reference"
+            },
+            "amount": {
+              "type": "string",
+              "description": "Payout amount"
+            },
+            "currency": {
+              "type": "string",
+              "description": "Currency code"
+            },
+            "fee": {
+              "type": "string",
+              "description": "Transaction fee"
+            },
+            "status": {
+              "type": "string",
+              "description": "Payout status",
+              "enum": [
+                "SUCCESS",
+                "PROCESSING",
+                "PENDING",
+                "FAILED",
+                "REFUNDED",
+                "REVERSED"
+              ]
+            },
+            "channel": {
+              "type": "string",
+              "description": "Payment channel",
+              "enum": ["BANK TRANSFER", "MOBILE MONEY"]
+            },
+            "channelProvider": {
+              "type": "string",
+              "description": "Name of the payment provider"
+            },
+            "settlementType": {
+              "type": "string",
+              "description": "Settlement type if applicable",
+              "enum": ["ACH", "RTGS"]
+            },
+            "notes": {
+              "type": "string",
+              "description": "Additional notes if available"
+            },
+            "beneficiary": {
+              "type": "object",
+              "properties": {
+                "accountNumber": {
+                  "type": "string",
+                  "description": "Beneficiary's account number"
+                },
+                "accountName": {
+                  "type": "string",
+                  "description": "Beneficiary's account name"
+                },
+                "swiftNumber": {
+                  "type": "string",
+                  "description": "SWIFT number if applicable"
+                },
+                "routingNumber": {
+                  "type": "string",
+                  "description": "Routing number if applicable"
+                },
+                "beneficiaryMobileNumber": {
+                  "type": "string",
+                  "description": "Beneficiary's mobile number if applicable"
+                },
+                "beneficiaryEmail": {
+                  "type": "string",
+                  "format": "email",
+                  "description": "Beneficiary's email if applicable"
+                }
+              }
+            }
+          }
+        }
+      },
+      "NotFoundError": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Invalid or missing payout: {your order reference}"
+          }
+        }
+      },
+      "UnauthorizedError": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Unauthorized Error",
+            "example": "Unauthorized"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  }
+}

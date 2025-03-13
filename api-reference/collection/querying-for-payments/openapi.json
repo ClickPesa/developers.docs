@@ -1,0 +1,165 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "CORE API OpenAPI Specification",
+    "description": "This is the API documentation for the ClickPesa CORE API",
+    "license": {
+      "name": "MIT"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.clickpesa.com/third-parties"
+    }
+  ],
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "paths": {
+    "/payments/:orderReference": {
+      "get": {
+        "description": "Fetch ",
+        "parameters": [
+          {
+            "name": "orderReference",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Unique identifier for the payment order"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Query Payments by order reference response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid or Expired Token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Response": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "id": {
+              "type": "string",
+              "description": "Unique transaction ID"
+            },
+            "status": {
+              "type": "string",
+              "description": "Payment status",
+              "enum": ["SUCCESS", "SETTLED", "PROCESSING", "PENDING", "FAILED"]
+            },
+            "paymentReference": {
+              "type": "string",
+              "description": "Unique reference for the payment"
+            },
+            "orderReference": {
+              "type": "string",
+              "description": "Order reference associated with the payment"
+            },
+            "collectedAmount": {
+              "type": "integer",
+              "description": "Amount collected"
+            },
+            "collectedCurrency": {
+              "type": "string",
+              "description": "Currency in which payment was collected"
+            },
+            "message": {
+              "type": "string",
+              "description": "Message describing payment status"
+            },
+            "updatedAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Timestamp when payment was last updated"
+            },
+            "createdAt": {
+              "type": "string",
+              "format": "date-time",
+              "description": "Timestamp when payment was created"
+            },
+            "customer": {
+              "type": "object",
+              "properties": {
+                "customerName": {
+                  "type": "string",
+                  "description": "Customer's full name"
+                },
+                "customerPhoneNumber": {
+                  "type": "string",
+                  "description": "Customer's phone number"
+                },
+                "customerEmail": {
+                  "type": "string",
+                  "format": "email",
+                  "description": "Customer's email (if available)"
+                }
+              }
+            }
+          }
+        }
+      },
+      "NotFoundError": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Invalid or missing payment: {your order reference}"
+          }
+        }
+      },
+      "UnauthorizedError": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Unauthorized Error",
+            "example": "Unauthorized"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  }
+}

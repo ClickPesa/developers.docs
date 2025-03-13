@@ -29,6 +29,7 @@
             "application/json": {
               "schema": {
                 "type": "object",
+                "required": ["amount", "orderReference"],
                 "properties": {
                   "amount": {
                     "type": "integer",
@@ -107,6 +108,7 @@
             "application/json": {
               "schema": {
                 "type": "object",
+                "required": ["amount", "orderReference", "phoneNumber"],
                 "properties": {
                   "amount": {
                     "type": "integer",
@@ -182,55 +184,6 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/InitiateUSSDPushInternalServerError"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/generate-token": {
-      "post": {
-        "tags": ["Authorization", "Security"],
-        "description": "Generate Token to use for all other api calls",
-        "parameters": [
-          {
-            "in": "header",
-            "name": "client-id",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Your Client ID for authentication."
-          },
-          {
-            "in": "header",
-            "name": "api-key",
-            "required": true,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Your API Key for authentication."
-          }
-        ],
-        "security": [],
-        "responses": {
-          "200": {
-            "description": "Generate token response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GenerateTokenResponse"
-                }
-              }
-            }
-          },
-          "403": {
-            "description": "Invalid Client Details",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/GenerateTokenInvalidClientDetailsError"
                 }
               }
             }
@@ -339,34 +292,63 @@
           }
         }
       },
-      "GenerateTokenResponse": {
-        "type": "object",
-        "properties": {
-          "success": {
-            "type": "boolean",
-            "example": true
-          },
-          "token": {
-            "type": "string",
-            "example": "Bearer token"
-          }
-        },
-        "required": ["success", "token"]
-      },
-      "GenerateTokenInvalidClientDetailsError": {
+      "InitiateUssdPushValidationError": {
         "type": "object",
         "properties": {
           "message": {
             "type": "string",
             "enum": [
-              "Invalid client details",
-              "Invalid or Expired API-Key",
-              "Unauthorized API-Key"
+              "Invalid / unsupported phone number",
+              "Valid Client ID is required",
+              "Application has no access to COLLECTION API feature. Enable it on your application.",
+              "Invalid Order Reference, should only contain alphanumeric characters and cannot be blank"
             ],
-            "example": "Invalid or Expired API-Key"
+            "example": "Invalid / unsupported phone number"
           }
-        },
-        "required": ["message"]
+        }
+      },
+      "InitiateUssdPushNotFoundError": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "enum": [
+              "Account has no payment collection methods",
+              "Account has no valid payment method"
+            ],
+            "example": "Account has no payment collection methods"
+          }
+        }
+      },
+      "InitiateUSSDPushConflictError": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Conflict message when an order reference is already used",
+            "example": "Order reference {Your reference} already used: Create a different reference"
+          }
+        }
+      },
+      "InitiateUSSDPushInternalServerError": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Internal Server Error",
+            "example": "Error validating fee, try again later"
+          }
+        }
+      },
+      "UnauthorizedError": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Unauthorized Error",
+            "example": "Unauthorized"
+          }
+        }
       }
     },
     "securitySchemes": {
