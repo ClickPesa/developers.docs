@@ -1,6 +1,6 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "palm",
+  "theme": "maple",
   "name": "ClickPesa Documentation",
   "description": "ClickPesa API Documentation",
   "favicon": "/favicon.png",
@@ -18,11 +18,6 @@
       "light": "#ffffff",
       "dark": "#0b0909"
     }
-  },
-  "fonts": {
-    "family": "CircularStd-Book",
-    "source": "https://res.cloudinary.com/dnhpcrm8k/raw/upload/v1712752815/assets/circular%20fonts/CircularStd-Book.otf",
-    "format": "woff"
   },
   "navigation": {
     "global": {
