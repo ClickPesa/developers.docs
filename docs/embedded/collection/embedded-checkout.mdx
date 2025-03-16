@@ -1,0 +1,110 @@
+---
+title: "Checkout Link Widget"
+description: "The Checkout Link Widget enables the creation of payment links that can be sent to customers, facilitating easy and secure payments."
+---
+
+## React Integration
+
+### Installation
+
+```bash
+npm i clickpesa/checkout-link-widget
+```
+
+```jsx
+import CheckoutLinkWidget from "clickpesa/checkout-link-widget";
+
+function App() {
+  return (
+    <CheckoutLinkWidget
+      clientId="your-client-id" // required
+      theme={{
+        primaryColor: "primary color",
+        fontFamily: "font-family",
+        mode: "dark", // or light
+      }} // optional
+      orderDetails={{
+        orderReference: "1234",
+        orderCurrency: "TZS", // or USD
+      }} // optional
+      close={(checkoutLink: string) => {
+        console.log(checkoutLink);
+      }} // optional
+    />
+  );
+}
+
+export default App;
+```
+
+## HTML Integration
+
+### Setup
+
+```html
+<!-- Include in the head -->
+<link
+  crossorigin
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/@clickpesa/payout-widget@latest/lib/scripts/style.css"
+/>
+
+<!-- Include in the body -->
+<div id="clickpesa-payout-widget"></div>
+
+<script defer async>
+  window.clickpesaVariables = {
+    clientId: "${clientId}",
+    theme: {
+      primaryColor: "${color}",
+      fontFamily: "${fontFamily}",
+      mode: "${mode}",
+    }, // optional
+    orderDetails: {
+      orderReference: "1234",
+      orderCurrency: "TZS", // or USD
+    }, // optional
+    close: (checkoutLink: string) => {
+      console.log(checkoutLink);
+    }, // optional
+  };
+</script>
+
+<script
+  crossorigin
+  src="https://cdn.jsdelivr.net/npm/@clickpesa/payout-widget@latest/lib/scripts/script.js"
+></script>
+```
+
+### Dynamic Configuration
+
+Developers can dynamically change the clientId and other properties using the clickpesaVariablesChange event.
+
+```html
+<script>
+  const changeVariables = () => {
+    window.clickpesaVariables.clientId = "Different Client ID";
+    const event = new CustomEvent("clickpesaVariablesChange", {
+      detail: {
+        clickpesaVariables: {
+          ...window.clickpesaVariables,
+          // updated variables
+        },
+      },
+    });
+    window.dispatchEvent(event);
+  };
+</script>
+```
+
+## Authentication
+
+The Checkout Link Widget handles authentication. The merchant will need to log in within the widget to create the checkout link. The widget will sign them out when closed, and if the checkout link was created, it will be sent in the close callback.
+
+## Listening to Payment Events
+
+[Payment Webhooks Events](/docs/embedded/application/setup)
+
+## Querying For Payments
+
+[Query payment by order reference API](/docs/embedded/application/setup)

@@ -1,0 +1,70 @@
+---
+title: "Integration Setup"
+description: "Learn how to create an Hosted Application in ClickPesa."
+---
+
+The Hosted Integration method combines the simplicity of using generated links with the power of our secure and robust backend services. Developers can integrate our services by generating specific links via our APIs, which handle the necessary processes when accessed.
+
+## Step 1: Log in to the Merchant Dashboard
+
+Go to the [ClickPesa Merchant Dashboard](https://merchant.clickpesa.com) and log in with your credentials.
+
+## Step 2: Navigate to Developer Settings
+
+1. On the dashboard, click on **Settings**.
+2. Navigate to the **Developers** section.
+
+{/* <img height="200" src="/images/dashboard.jpg" /> */}
+
+## Step 3: Create a New Application
+
+Click on the **Create Application** button to start the process.
+
+{/* <img height="200" src="/images/dashboard.jpg" /> */}
+
+## Step 4: Configure Application Details
+
+When creating the application, fill in the following details:
+
+- **Application Name**: Choose a name to identify your app.
+- **Integration Type**: Select **Hosted**.
+- **Features**: Choose the features needed (e.g., Checkout Link Widget, Payout Widget).
+- **Return URL**: The Return URL is used in hosted solutions to redirect users after they complete an action like a payment or payout.
+
+## Step 5: Manage API Keys
+
+For applications using **Hosted** or **API** integration types, API keys are crucial for authentication and performing actions such as querying transactions. Here’s how you manage API keys for your applications:
+
+In your application settings, click **Manage API Keys**. This opens a drawer displaying a list of existing API keys for the application. The list includes:
+
+- **Name:** The name assigned to the API key.
+- **Last Activity:** The date of the most recent use of the API key.
+- **Revoke Button:** An option to revoke the API key.
+
+### Adding a New API Key
+
+To add a new API key:
+
+1. Click the **Add API Key** button.
+2. When prompted, enter the following details:
+   - **Name:** A name for the new API key.
+   - **Expiry Date:** Select an expiry date for the API key.
+3. After submitting, a modal will appear displaying:
+   - The **clientID** and the newly generated **API key**.
+   - The **expiry date**.
+
+### Viewing and Storing API Keys
+
+- The **api-key** is shown **only once** in the modal. **Copy and store it securely**—you'll need it for authentication and other actions.
+- The **client-id** is always visible in the application settings and can be used along with the API key for tasks such as authentication and querying transactions.
+
+{/* <img height="200" src="/images/dashboard.jpg" /> */}
+
+## Step 6: Submit and Retrieve Credentials
+
+1. Click **Submit** to create the application.
+2. After submission, you will receive your **Client ID**. This will be required to use our embedded solutions in your UI.
+
+> 💡 **Important**: Keep your credentials secure and do not share them publicly.
+
+---
