@@ -1,6 +1,6 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "maple",
+  "theme": "willow",
   "name": "ClickPesa Documentation",
   "description": "ClickPesa API Documentation",
   "favicon": "/favicon.png",
@@ -20,27 +20,28 @@
     }
   },
   "navigation": {
-    "global": {
-      "anchors": [
-        {
-          "anchor": "Website",
-          "href": "https://clickpesa.com",
-          "icon": "globe"
-        },
-        {
-          "anchor": "Blog",
-          "href": "https://medium.com/clickpesa-engineering-blog",
-          "icon": "newspaper"
-        }
-      ]
-    },
     "tabs": [
       {
+        "tab": "Getting Started",
+        "pages": [
+          "docs/home/introduction",
+          "docs/home/guidelines",
+          "docs/home/payment-methods",
+          "docs/home/onboarding"
+        ]
+      },
+      {
         "tab": "ClickPesa Dashboard",
+        "hidden": true,
         "groups": [
           {
-            "group": "Onboarding",
-            "pages": ["docs/dashboard/onboarding/get-started"]
+            "group": "Overview",
+            "pages": [
+              "docs/dashboard/introduction",
+              "docs/dashboard/transactions",
+              "docs/dashboard/account",
+              "docs/dashboard/statement"
+            ]
           },
           {
             "group": "Collection",
@@ -49,6 +50,19 @@
               "docs/dashboard/collection/invoice",
               "docs/dashboard/collection/payment-page",
               "docs/dashboard/collection/customers"
+            ]
+          },
+          {
+            "group": "Disbursement",
+            "pages": [
+              "docs/dashboard/disbursement/payouts",
+              "docs/dashboard/disbursement/transactions"
+            ]
+          },
+          {
+            "group": "Settings",
+            "pages": [
+              "docs/dashboard/disbursement/transaction"
             ]
           }
         ]
@@ -163,8 +177,14 @@
       },
       {
         "tab": "Plugins and SDK Integration",
+        "hidden": true,
         "groups": [
-          { "group": "Get Started", "pages": ["docs/sdk-plugins/page-1"] }
+          {
+            "group": "Get Started",
+            "pages": [
+              "docs/sdk-plugins/page-1"
+            ]
+          }
         ]
       }
     ]
