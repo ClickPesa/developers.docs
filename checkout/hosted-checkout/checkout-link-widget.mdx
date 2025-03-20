@@ -1,0 +1,131 @@
+---
+title: "Checkout Link Widget"
+description: "Learn how to generate Hosted Checkout links with our embedded widget"
+---
+
+- Quick & Ready-To-Share – Designed to generate quick and ready to share Hosted Checkout Links.
+- Minimal Code & Customizable – Copy and Paste the Widget code directly into your platform for branded experience.
+
+
+## Prerequisites
+
+1. **Client ID** -
+ [Create Integration Application](/application/embedded-application-setup) for Hosted Checkout to generate **Client ID**.
+
+
+## How It Works
+
+
+### React Application
+
+<Accordion title="Installation">
+
+```bash
+npm i clickpesa/checkout-link-widget
+```
+</Accordion>
+
+<Accordion title="Initiating Widget">
+```jsx
+import CheckoutLinkWidget from "clickpesa/checkout-link-widget";
+
+function App() {
+  return (
+    <CheckoutLinkWidget
+      clientId="your-client-id" // required
+      theme={{
+        primaryColor: "primary color",
+        fontFamily: "font-family",
+        mode: "dark", // or light
+      }} // optional
+      orderDetails={{
+        orderReference: "1234",
+        orderCurrency: "TZS", // or USD
+      }} // optional
+      close={(checkoutLink: string) => {
+        console.log(checkoutLink);
+      }} // optional
+    />
+  );
+}
+
+export default App;
+```
+</Accordion>
+
+<Accordion title="Generating Checkout Link">
+1. Open the Widget
+ ```jsx
+ const generateCheckoutLink = async () => {
+   const link = await CheckoutLinkWidget.generateLink({
+     orderReference: "1234",
+     orderCurrency: "TZS",
+   });
+  console.log(link);
+  return link;
+ };
+```
+2. Login with your email and password
+3. Enter your order details
+4. Click on the "Generate Link" button
+5. Copy the generated link
+</Accordion>
+
+### HTML/JavaScript Application
+
+<Accordion title="Installation">
+```html
+<!-- Include in the head -->
+<link
+  crossorigin
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/@clickpesa/payout-widget@latest/lib/scripts/style.css"
+/>
+<!-- Include in the body -->
+<script crossorigin src="https://cdn.jsdelivr.net/npm/@clickpesa/payout-widget@latest/lib/scripts/script.js"></script>
+```
+</Accordion>
+
+<Accordion title="Initiating Widget">
+```html
+<!-- Include in the body -->
+<div id="clickpesa-payout-widget"></div>
+<script defer async>
+  window.clickpesaVariables = {
+    clientId: "${clientId}",
+    theme: {
+      primaryColor: "${color}",
+      fontFamily: "${fontFamily}",
+      mode: "${mode}",
+    }, // optional
+    orderDetails: {
+      orderReference: "1234",
+      orderCurrency: "TZS", // or USD
+    }, // optional
+    close: (checkoutLink: string) => {
+      console.log(checkoutLink);
+    }, // optional
+  };
+</script>
+```
+</Accordion>
+
+<Accordion title="Generating Checkout Link">
+1. Open the Widget
+ ```html
+ <script>
+   const generateCheckoutLink = async () => {
+     const link = await CheckoutLinkWidget.generateLink({
+       orderReference: "1234",
+       orderCurrency: "TZS",
+     });
+    console.log(link);
+    return link;
+   };
+ </script>
+```
+2. Login with your email and password
+3. Enter your order details
+4. Click on the "Generate Link" button
+5. Copy the generated link
+</Accordion>

@@ -1,0 +1,42 @@
+---
+title: "Mobile Money Collection API"
+description: "The Mobile Money Collection API enables you to collect payments directly from customers' mobile money wallets using USSD push requests"
+---
+
+- **Instant** - Collect payments in real-time directly from customers' mobile money wallets
+- **Seamless** – Mobile Money USSD push enables a smooth and secure payment collection experience
+
+## Prerequisites
+
+1. **API Keys** -
+ [Generate API Keys](/application/embedded-application-setup) for Hosted Checkout integration
+
+2. **Authorization Token** -
+   Use **API Keys** to [Generate Authorization Token](/api-reference/authorization/generate-token)
+
+## How It Works
+
+ **Step 1** - Validate push request details
+  <Card
+   title="Preview USSD push Request"
+   icon="brackets-curly"
+   href="/api-reference/collection/ussd-push-requests/preview-ussd-push-request" horizontal>
+   This endpoint validates push details like **Mobile Number**, **Amount**, **Order Reference** and verifies **Payment Methods** availability
+   </Card>
+
+ **Step 2** -  Send push request
+  <Card
+   title="Initiate USSD push Request"
+   icon="brackets-curly"
+   href="/api-reference/collection/ussd-push-requests/initiate-ussd-push-request" horizontal>
+   This endpoint sends the **USSD** push request to customer's mobile device.
+   The customer will be prompted to enter their wallet PIN/password to complete the transaction
+   </Card>
+
+  **Step 3** -  Check payment status
+  <Card
+   title="Check Payment Status"
+   icon="brackets-curly"
+   href="/api-reference/collection/querying-for-payments/querying-for-payments" horizontal>
+   This endpoint queries for the payment status using payment's **Order Reference**
+   </Card>

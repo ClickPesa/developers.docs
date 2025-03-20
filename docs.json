@@ -16,7 +16,7 @@
   "background": {
     "color": {
       "light": "#ffffff",
-      "dark": "#0b0909"
+      "dark": "#181a1b"
     }
   },
   "navigation": {
@@ -24,45 +24,77 @@
       {
         "tab": "Getting Started",
         "pages": [
-          "docs/home/introduction",
-          "docs/home/guidelines",
-          "docs/home/payment-methods",
-          "docs/home/onboarding"
+          "home/introduction",
+          "home/guidelines",
+          "home/payment-methods",
+          "home/payment-status",
+          "home/webhooks",
+          "home/onboarding"
         ]
       },
       {
-        "tab": "ClickPesa Dashboard",
-        "hidden": true,
+        "tab": "ClickPesa Checkout",
         "groups": [
           {
-            "group": "Overview",
+            "group": "Get Started",
             "pages": [
-              "docs/dashboard/introduction",
-              "docs/dashboard/transactions",
-              "docs/dashboard/account",
-              "docs/dashboard/statement"
+              "checkout/checkout-overview"
             ]
           },
           {
-            "group": "Collection",
+            "group": "Embedded Checkout",
             "pages": [
-              "docs/dashboard/collection/offline-payments",
-              "docs/dashboard/collection/invoice",
-              "docs/dashboard/collection/payment-page",
-              "docs/dashboard/collection/customers"
+              "checkout/embedded-checkout/embedded-checkout"
             ]
           },
           {
-            "group": "Disbursement",
+            "group": "Hosted Checkout",
             "pages": [
-              "docs/dashboard/disbursement/payouts",
-              "docs/dashboard/disbursement/transactions"
+              "checkout/hosted-checkout/hosted-checkout",
+              "checkout/hosted-checkout/checkout-link-api",
+              "checkout/hosted-checkout/checkout-link-widget"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "ClickPesa Payout Widgets",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": [
+              "payout-widgets/payout-widgets-overview"
             ]
           },
           {
-            "group": "Settings",
+            "group": "Embedded Payout Widget",
             "pages": [
-              "docs/dashboard/disbursement/transaction"
+              "payout-widgets/embedded-payout-widget/embedded-payout-widget"
+            ]
+          },
+          {
+            "group": "Hosted Payout Widget",
+            "pages": [
+              "payout-widgets/hosted-payout-widget/hosted-payout-widget",
+              "payout-widgets/hosted-payout-widget/hosted-payout-link-api"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Collection API",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": [
+              "collection-api/collection-api-overview"
+            ]
+          },
+          {
+            "group": "Collection API",
+            "pages": [
+              "collection-api/mobile-money-collection-api/mobile-money-collection-api-overview",
+              "/collection-api/card-collection-api/card-collection-api-overview"
             ]
           }
         ]
@@ -74,27 +106,19 @@
             "group": "Get Started",
             "pages": [
               "docs/embedded/application/get-started",
-              "docs/embedded/application/setup"
+              "application/embedded-application-setup"
             ]
           },
           {
             "group": "Collection",
             "pages": [
-              "docs/embedded/collection/embedded-checkout",
-              "docs/shared/collection/webhooks",
-              {
-                "group": "API Reference",
-                "pages": [
-                  "api-reference/collection/querying-for-payments/querying-for-payments"
-                ]
-              }
+              "docs/embedded/collection/embedded-checkout"
             ]
           },
           {
             "group": "Disbursement",
             "pages": [
               "docs/embedded/disbursement/embedded-payout",
-              "docs/shared/disbursement/webhooks",
               {
                 "group": "API Reference",
                 "pages": [
@@ -106,71 +130,21 @@
         ]
       },
       {
-        "tab": "Hosted Integration",
-        "groups": [
+        "tab": "API Playground",
+        "pages": [
+          "api-reference/authorization/generate-token",
+          "api-reference/collection/querying-for-payments/querying-for-payments",
           {
-            "group": "Get Started",
+            "group": "MOBILE MONEY COLLECTION",
             "pages": [
-              "docs/hosted/application/get-started",
-              "docs/hosted/application/setup"
+              "api-reference/collection/ussd-push-requests/preview-ussd-push-request",
+              "api-reference/collection/ussd-push-requests/initiate-ussd-push-request"
             ]
           },
           {
-            "group": "Collection",
+            "group": "CARD COLLECTION",
             "pages": [
-              "docs/hosted/collection/hosted-checkout",
-              "docs/shared/collection/webhooks",
-              {
-                "group": "API Reference",
-                "pages": [
-                  "api-reference/authorization/generate-token",
-                  "api-reference/collection/generate-checkout-link/generate-checkout-link",
-                  "api-reference/collection/querying-for-payments/querying-for-payments"
-                ]
-              }
-            ]
-          },
-          {
-            "group": "Disbursement",
-            "pages": [
-              "docs/hosted/disbursement/hosted-payout",
-              "docs/shared/disbursement/webhooks",
-              {
-                "group": "API Reference",
-                "pages": [
-                  "api-reference/authorization/generate-token",
-                  "api-reference/disbursement/generate-payout-link/generate-payout-link",
-                  "api-reference/disbursement/querying-for-payouts/querying-for-payouts"
-                ]
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "API Integration",
-        "groups": [
-          {
-            "group": "Get Started",
-            "pages": [
-              "docs/api/application/get-started",
-              "docs/api/application/setup"
-            ]
-          },
-          {
-            "group": "Collection",
-            "pages": [
-              "docs/api/collection/mobile-money/mobile-money-api",
-              "docs/shared/collection/webhooks",
-              {
-                "group": "API Reference",
-                "pages": [
-                  "api-reference/authorization/generate-token",
-                  "api-reference/collection/ussd-push-requests/preview-ussd-push-request",
-                  "api-reference/collection/ussd-push-requests/initiate-ussd-push-request",
-                  "api-reference/collection/querying-for-payments/querying-for-payments"
-                ]
-              }
+              "api-reference/collection/ussd-push-requests/preview-ussd-push-request"
             ]
           }
         ]

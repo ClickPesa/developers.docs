@@ -1,0 +1,32 @@
+---
+title: "Payment Statuses"
+description: "Understand the different payment statuses and how to receive them"
+icon: "circle-info"
+---
+
+## Status Overview
+
+| Status     | Description                                                                                     |
+|------------|-------------------------------------------------------------------------------------------------|
+| `SUCCESS`    | Successfully made payment that has not been settled to the merchant account yet.              |
+| `SETTLED`    | Funds are already settled to the merchant account.                                            |
+| `PROCESSING` | Payment is currently being processed.                                                         |
+| `PENDING`    | Payment is pending and awaiting further action from the customer.                             |
+| `FAILED`     | Payment was not successful.                                                                   |
+| `ON-HOLD`    | Payment is on hold and requires further action from the merchant.                             |
+
+## Payment Status in the ClickPesa Dashboard
+- You can view the payment status in the [ClickPesa Dashboard]('/clickpesa-dashboard') under the [Transactions](/dashboard/transactions) section.
+- The payment statuses are updated in real-time as the payment progresses through different stages.
+
+## Payment Status In Your Application
+There are two ways to receive payment statuses in your application:
+
+1. [Webhooks](/home/webhooks) - ClickPesa sends real-time updates to your server when a payment status changes. You can use webhooks to receive these updates.
+2. **Querying** - Alternatively, you can make API calls periodically to [Collection API](/collection-api/collection-api-overview) query payment endpoint.
+
+## Payment Status for Customers
+
+- In both [Hosted](../checkout-hosted-overview) and [Embedded](../checkout-embedded-overview) Checkouts, payment status is displayed to the customer in real-time.
+- Additionally, the final payment status is sent to the customer via their registered email or mobile phone number.
+

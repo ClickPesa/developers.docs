@@ -5,7 +5,7 @@ description: "The Mobile Money Collection API enables businesses to collect paym
 
 ## Prerequisites
 
-- **API Keys**: Ensure you have generated your API keys (client ID and API key) as outlined in the [Integration Setup](/docs/api/application/setup) guide.
+- **API Keys**: Ensure you have generated your API keys (client ID and API key) as outlined in the [Integration Setup](/application/api-application-setup) guide.
 
 ## Step 1: Generate Authorization Token
 
@@ -17,7 +17,7 @@ To authenticate your API requests, you need to generate an authorization token u
 
 ## Step 2: Preview Push Request
 
-This endpoint checks if the specified **amount** and **order reference** are valid.  
+This endpoint checks if the specified **amount** and **order reference** are valid.
 It returns all available **payment methods** and their availability for processing the actual payment.
 
 This step is useful for validating the transaction before initiating the final request. If there are any issues, the response will contain relevant errors—these are meant for internal handling and **should not be shown to customers**.
@@ -28,7 +28,7 @@ This step is useful for validating the transaction before initiating the final r
 
 ## Step 3: Initiate Push Request
 
-This endpoint triggers a **USSD push** to the customer's mobile device.  
+This endpoint triggers a **USSD push** to the customer's mobile device.
 The user will receive a prompt on their phone, requiring them to enter their PIN/password to complete the transaction.
 
 <Link href="/api-reference/collection/ussd-push-requests/initiate-ussd-push-request">
