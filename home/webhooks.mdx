@@ -1,0 +1,205 @@
+---
+title: "Webhooks"
+description: "Understand ClickPesa Webhooks (Callbacks) and how to integrate them in your application"
+icon: "webhook"
+---
+
+Webhooks are HTTP `POST` callbacks that deliver notification messages for events.
+ClickPesa uses webhooks to inform your systems when transactional events occur. This way, your servers are always up to date with transaction information.
+
+
+<Note>Webhook events are published from actions in any of the ClickPesa products, including the ClickPesa Dashboard, Hosted Integrations, Embedded Solutions and APIs .</Note>
+
+
+## Webhook Events
+
+### `PAYOUT INITIATED`
+
+- **Description** - This event is triggered when a payout process is initiated. The webhook will provide details such as the payout amount, recipient information, and the initial status of the payout.
+
+- **Use Case** - Track when payouts begin, update internal records, or notify the recipient that a payout is in process.
+
+- **Sample Payload Data**
+
+```json [expandable]
+{
+  "event": "PAYOUT INITIATED",
+  "data": {
+    "updatedAt": "2024-09-02T10:15:30.000Z",
+    "createdAt": "2024-09-01T14:22:10.000Z",
+    "id": "PAY17072CD",
+    "orderReference": "order_123456",
+    "amount": "20000.00",
+    "currency": "TZS",
+    "fee": "2360.00",
+    "status": "SUCCESS",
+    "channel": "BANK TRANSFER", // or MOBILE MONEY
+    "channelProvider": "Equity Bank Tanzania Limited",
+    "settlementType": "ACH", // or RTGS // if available
+    "notes": "Payment for invoice no. 123456", // if available
+    "beneficiary": {
+      "accountNumber": "123456789",
+      "accountName": "John Doe",
+      "swiftNumber": "ABC1234XYZ", // if available
+      "routingNumber": "110000000", // if available
+      "beneficiaryMobileNumber": "255600000000", // if available
+      "beneficiaryEmail": "johndoe@example.com" // if available
+    }
+  }
+}
+```
+
+
+### `PAYOUT REFUNDED`
+
+- **Description** - This event occurs when a payout is refunded, due to an issue with the payout process. The webhook will include the refund details and the original payout information.
+
+- **Use Case** - Automatically update records, notify involved parties of the refund, and handle the refund process within your system.
+
+- **Sample Payload Data**
+
+```json [expandable]
+{
+  "event": "PAYOUT REFUNDED",
+  "data": {
+    "updatedAt": "2024-09-02T10:15:30.000Z",
+    "createdAt": "2024-09-01T14:22:10.000Z",
+    "id": "PAY17072CD",
+    "orderReference": "order_123456",
+    "amount": "20000.00",
+    "currency": "TZS",
+    "fee": "2360.00",
+    "status": "REFUNDED",
+    "channel": "BANK TRANSFER", // or MOBILE MONEY
+    "channelProvider": "Equity Bank Tanzania Limited",
+    "settlementType": "ACH", // or RTGS // if available
+    "notes": "Payment for invoice no. 123456", // if available
+    "refund": {
+      // reverse details
+      "message": "The payout was refunded due to insufficient balance.",
+      "refundedAt": "2024-09-02T09:30:00.000Z"
+    },
+    "beneficiary": {
+      "accountNumber": "123456789",
+      "accountName": "John Doe",
+      "swiftNumber": "ABC1234XYZ", // if available
+      "routingNumber": "110000000", // if available
+      "beneficiaryMobileNumber": "255600000000", // if available
+      "beneficiaryEmail": "johndoe@example.com" // if available
+    }
+  }
+}
+```
+
+### `PAYOUT REVERSED`
+
+- **Description**: This event is triggered when a payout is reversed, typically due to an error or a dispute. The webhook will contain details about the reversal, the original payout, and any related information.
+
+- **Use Case**: Adjust records, communicate with recipients, or trigger further actions in response to the reversal.
+
+- **Sample Payload Data**
+
+```json [expandable]
+{
+  "event": "PAYOUT REVERSED",
+  "data": {
+    "updatedAt": "2024-09-02T10:15:30.000Z",
+    "createdAt": "2024-09-01T14:22:10.000Z",
+    "id": "PAY17072CD",
+    "orderReference": "order_123456",
+    "amount": "20000.00",
+    "currency": "TZS",
+    "fee": "2360.00",
+    "status": "REVERSED",
+    "channel": "BANK TRANSFER", // or MOBILE MONEY
+    "channelProvider": "Equity Bank Tanzania Limited",
+    "settlementType": "ACH", // or RTGS // if available
+    "notes": "Payment for invoice no. 123456", // if available
+    "reverse": {
+      // reverse details
+      "message": "The payout was reversed due to invalid account information.",
+      "reversedAt": "2024-09-02T09:30:00.000Z",
+      "reversedWithFee": true // whether funds were returned with fee or not
+    },
+    "beneficiary": {
+      "accountNumber": "123456789",
+      "accountName": "John Doe",
+      "swiftNumber": "ABC1234XYZ", // if available
+      "routingNumber": "110000000", // if available
+      "beneficiaryMobileNumber": "255600000000", // if available
+      "beneficiaryEmail": "johndoe@example.com" // if available
+    }
+  }
+}
+```
+
+### `PAYMENT RECEIVED`
+
+When a payment is received successfully, this event is triggered. This event provides you with key information about the payment, including identifiers, amounts, and customer details.
+
+- **Description** - This event is triggered whenever a customer makes a successful payment. The webhook will send details of the transaction, including the amount, payer information, and transaction status.
+
+- **Use Case** - Automate confirmation processes, update records, or trigger further actions in your system upon receiving a payment.
+
+- **Sample Payload Data**
+
+```json [expandable]
+{
+  "event": "PAYMENT RECEIVED",
+  "data": {
+    "paymentId": "PAY123456",
+    "orderReference": "ORD987654",
+    "amount": "10000.00",
+    "currency": "TZS",
+    "status": "SUCCESS",
+    "customer": {
+      "name": "John Doe",
+      "email": "john@example.com",
+      "phone": "255700000000"
+    },
+    "createdAt": "2024-04-10T18:22:16.949Z",
+    "updatedAt": "2024-04-10T18:22:56.153Z"
+  }
+}
+```
+
+### `PAYMENT FAILED`
+
+- **Description** - This event is triggered when a payment attempt fails. The webhook will include information about the failure reason, the attempted transaction, and any relevant error codes.
+
+- **Use Case** - Notify customers of payment issues, log failed transactions, or prompt retries.
+
+- **Sample Payload Data**
+
+```json [expandable]
+{
+  "eventType": "PAYMENT FAILED",
+  "data": {
+    "id": "0969231256LCP2C95",
+    "status": "FAILED",
+    "orderReference": "0969231256", // unique order reference
+    "message": "Insufficient balance",
+    "updatedAt": "2024-04-11T04:58:31.036Z",
+    "createdAt": "2024-04-11T04:58:31.036Z"
+  }
+}
+```
+
+## Setting Up Webhooks
+
+### 1. Access Webhooks Settings
+
+- Log in to your ClickPesa Dashboard.
+- Navigate to **Settings** -> **Developers**.
+- Locate the **Webhooks Settings** section.
+
+### 2. Add a Webhook URL
+
+- Add URLs that will trigger `PAYOUT INITIATED`, `PAYOUT REVERSED` and `PAYOUT REFUNDED` events.
+
+### 3. Receiveing Webhook Calls
+
+- The system sends HTTP POST requests to the provided URL upon an event.
+- Your system must respond with a **2xx HTTP status code** to acknowledge receipt.
+
+<Note>Note: This status code only indicates receipt, not successful processing. Extra data in the response is ignored.</Note>

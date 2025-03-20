@@ -87,10 +87,6 @@
             "group": "API Reference",
             "pages": [
               {
-                "group": "Authorization",
-                "pages": ["api-reference/authorization/generate-token"]
-              },
-              {
                 "group": "Collection",
                 "pages": [
                   "api-reference/collection/querying-for-payments/querying-for-payments",
