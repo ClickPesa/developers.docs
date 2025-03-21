@@ -130,7 +130,7 @@
         ]
       },
       {
-        "tab": "API Playground",
+        "tab": "API Explorer",
         "pages": [
           "api-reference/authorization/generate-token",
           "api-reference/collection/querying-for-payments/querying-for-payments",
