@@ -32,7 +32,7 @@
                 "required": ["amount", "orderReference"],
                 "properties": {
                   "amount": {
-                    "type": "integer",
+                    "type": "string",
                     "description": "Amount"
                   },
                   "orderReference": {
@@ -111,7 +111,7 @@
                 "required": ["amount", "orderReference", "phoneNumber"],
                 "properties": {
                   "amount": {
-                    "type": "integer",
+                    "type": "string",
                     "description": "Amount"
                   },
                   "orderReference": {
