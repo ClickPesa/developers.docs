@@ -29,7 +29,7 @@
           "home/payment-methods",
           "home/payment-status",
           "home/webhooks",
-          "home/generating-checksum",
+          "home/checksum",
           "home/onboarding"
         ]
       },
