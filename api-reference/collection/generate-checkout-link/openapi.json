@@ -38,7 +38,7 @@
                     ],
                     "properties": {
                       "totalPrice": {
-                        "type": "integer",
+                        "type": "string",
                         "description": "Amount"
                       },
                       "orderReference": {
@@ -84,7 +84,7 @@
                               "description": "Item name"
                             },
                             "price": {
-                              "type": "integer",
+                              "type": "string",
                               "description": "Amount"
                             },
                             "quantity": {

@@ -30,7 +30,7 @@
                 "type": "object",
                 "properties": {
                   "amount": {
-                    "type": "integer",
+                    "type": "string",
                     "description": "Amount"
                   },
                   "orderReference": {
