@@ -35,13 +35,8 @@
       },
       {
         "tab": "ClickPesa Checkout",
-        "groups": [
-          {
-            "group": "Get Started",
-            "pages": [
-              "checkout/checkout-overview"
-            ]
-          },
+        "pages": [
+          "checkout/checkout-overview",
           {
             "group": "Embedded Checkout",
             "pages": [
@@ -60,13 +55,8 @@
       },
       {
         "tab": "ClickPesa Payout Widgets",
-        "groups": [
-          {
-            "group": "Get Started",
-            "pages": [
-              "payout-widgets/payout-widgets-overview"
-            ]
-          },
+        "pages": [
+          "payout-widgets/payout-widgets-overview",
           {
             "group": "Embedded Payout Widget",
             "pages": [
@@ -83,19 +73,14 @@
         ]
       },
       {
-        "tab": "Collection API",
-        "groups": [
+        "tab": "Payment API",
+        "pages": [
+          "payment-api/payment-api-overview",
           {
-            "group": "Get Started",
+            "group": "Payment API",
             "pages": [
-              "collection-api/collection-api-overview"
-            ]
-          },
-          {
-            "group": "Collection API",
-            "pages": [
-              "collection-api/mobile-money-collection-api/mobile-money-collection-api-overview",
-              "/collection-api/card-collection-api/card-collection-api-overview"
+              "payment-api/mobile-money-payment-api/mobile-money-payment-api-overview",
+              "payment-api/card-payment-api/card-payment-api-overview"
             ]
           }
         ]
@@ -111,7 +96,7 @@
             ]
           },
           {
-            "group": "Collection",
+            "group": "Payments",
             "pages": [
               "docs/embedded/collection/embedded-checkout"
             ]
@@ -136,14 +121,14 @@
           "api-reference/authorization/generate-token",
           "api-reference/collection/querying-for-payments/querying-for-payments",
           {
-            "group": "MOBILE MONEY COLLECTION",
+            "group": "MOBILE MONEY PAYMENTS",
             "pages": [
               "api-reference/collection/ussd-push-requests/preview-ussd-push-request",
               "api-reference/collection/ussd-push-requests/initiate-ussd-push-request"
             ]
           },
           {
-            "group": "CARD COLLECTION",
+            "group": "CARD PAYMENTS",
             "pages": [
               "api-reference/collection/ussd-push-requests/preview-ussd-push-request"
             ]

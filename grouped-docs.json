@@ -87,14 +87,14 @@
             "group": "API Reference",
             "pages": [
               {
-                "group": "Collection",
+                "group": "Payments",
                 "pages": [
                   "api-reference/collection/querying-for-payments/querying-for-payments",
                   "api-reference/collection/generate-checkout-link/generate-checkout-link"
                 ]
               },
               {
-                "group": "Collection API",
+                "group": "Payment API",
                 "pages": [
                   "api-reference/collection/ussd-push-requests/preview-ussd-push-request",
                   "api-reference/collection/ussd-push-requests/initiate-ussd-push-request"
