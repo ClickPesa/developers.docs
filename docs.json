@@ -54,6 +54,48 @@
         ]
       },
       {
+        "tab": "ClickPesa Dashboard",
+        "pages": [
+          "dashboard/introduction",
+          {
+            "group": "Overview",
+            "pages": [
+              "dashboard/account",
+              "dashboard/transactions",
+              "dashboard/data-export"
+            ]
+          },
+          {
+            "group": "Collection",
+            "pages": [
+              "dashboard/collection/invoice",
+              "dashboard/collection/payment-page",
+              "dashboard/collection/bill-pay",
+              "dashboard/collection/lipa-namba",
+              "dashboard/collection/lipa-qr"
+            ]
+          },
+          {
+            "group": "Disbursement",
+            "pages": [
+              "dashboard/disbursement/payout",
+              "dashboard/disbursement/bulk-payout"
+            ]
+          },
+          {
+            "group": "Settings",
+            "pages": [
+              "dashboard/settings/general-settings",
+              "dashboard/settings/collection-settings",
+              "dashboard/settings/disbursement-settings",
+              "dashboard/settings/team-settings",
+              "dashboard/settings/developers-settings",
+              "dashboard/settings/security-settings"
+            ]
+          }
+        ]
+      },
+      {
         "tab": "ClickPesa Payout Widgets",
         "hidden": true,
         "pages": [
@@ -87,11 +129,24 @@
         ]
       },
       {
+        "tab": "Payout API",
+        "pages": [
+          "payout-api/payout-api-overview",
+          {
+            "group": "Payout API",
+            "pages": [
+              "payout-api/mobile-money-payout-api/mobile-money-payout-api-overview",
+              "payout-api/bank-payout-api/bank-payout-api-overview"
+            ]
+          }
+        ]
+      },
+      {
         "tab": "API Explorer",
         "pages": [
           "api-reference/authorization/generate-token",
           "api-reference/collection/querying-for-payments/querying-for-payments",
-             "api-reference/disbursement/querying-for-payouts/querying-for-payouts",
+          "api-reference/disbursement/querying-for-payouts/querying-for-payouts",
           {
             "group": "MOBILE MONEY PAYMENTS",
             "pages": [
@@ -114,7 +169,7 @@
           {
             "group": "Get Started",
             "pages": [
-              "docs/sdk-plugins/page-1"
+              "sdk-plugins/sdk-plugin-overview"
             ]
           }
         ]
