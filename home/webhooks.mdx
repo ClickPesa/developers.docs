@@ -17,7 +17,6 @@ ClickPesa uses webhooks to inform your systems when transactional events occur. 
 
 - **Description** - This event is triggered when a payout process is initiated. The webhook will provide details such as the payout amount, recipient information, and the initial status of the payout.
 
-- **Use Case** - Track when payouts begin, update internal records, or notify the recipient that a payout is in process.
 
 - **Sample Payload Data**
 
@@ -54,7 +53,6 @@ ClickPesa uses webhooks to inform your systems when transactional events occur. 
 
 - **Description** - This event occurs when a payout is refunded, due to an issue with the payout process. The webhook will include the refund details and the original payout information.
 
-- **Use Case** - Automatically update records, notify involved parties of the refund, and handle the refund process within your system.
 
 - **Sample Payload Data**
 
@@ -95,7 +93,6 @@ ClickPesa uses webhooks to inform your systems when transactional events occur. 
 
 - **Description**: This event is triggered when a payout is reversed, typically due to an error or a dispute. The webhook will contain details about the reversal, the original payout, and any related information.
 
-- **Use Case**: Adjust records, communicate with recipients, or trigger further actions in response to the reversal.
 
 - **Sample Payload Data**
 
@@ -139,7 +136,6 @@ When a payment is received successfully, this event is triggered. This event pro
 
 - **Description** - This event is triggered whenever a customer makes a successful payment. The webhook will send details of the transaction, including the amount, payer information, and transaction status.
 
-- **Use Case** - Automate confirmation processes, update records, or trigger further actions in your system upon receiving a payment.
 
 - **Sample Payload Data**
 
@@ -167,7 +163,6 @@ When a payment is received successfully, this event is triggered. This event pro
 
 - **Description** - This event is triggered when a payment attempt fails. The webhook will include information about the failure reason, the attempted transaction, and any relevant error codes.
 
-- **Use Case** - Notify customers of payment issues, log failed transactions, or prompt retries.
 
 - **Sample Payload Data**
 

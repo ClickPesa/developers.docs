@@ -35,13 +35,8 @@
       },
       {
         "tab": "ClickPesa Checkout",
-        "groups": [
-          {
-            "group": "Get Started",
-            "pages": [
-              "checkout/checkout-overview"
-            ]
-          },
+        "pages": [
+          "checkout/checkout-overview",
           {
             "group": "Embedded Checkout",
             "pages": [
@@ -59,14 +54,52 @@
         ]
       },
       {
-        "tab": "ClickPesa Payout Widgets",
-        "groups": [
+        "tab": "ClickPesa Dashboard",
+        "pages": [
+          "dashboard/introduction",
           {
-            "group": "Get Started",
+            "group": "Overview",
             "pages": [
-              "payout-widgets/payout-widgets-overview"
+              "dashboard/account",
+              "dashboard/transactions",
+              "dashboard/data-export"
             ]
           },
+          {
+            "group": "Collection",
+            "pages": [
+              "dashboard/collection/invoice",
+              "dashboard/collection/payment-page",
+              "dashboard/collection/bill-pay",
+              "dashboard/collection/lipa-namba",
+              "dashboard/collection/lipa-qr"
+            ]
+          },
+          {
+            "group": "Disbursement",
+            "pages": [
+              "dashboard/disbursement/payout",
+              "dashboard/disbursement/bulk-payout"
+            ]
+          },
+          {
+            "group": "Settings",
+            "pages": [
+              "dashboard/settings/general-settings",
+              "dashboard/settings/collection-settings",
+              "dashboard/settings/disbursement-settings",
+              "dashboard/settings/team-settings",
+              "dashboard/settings/developers-settings",
+              "dashboard/settings/security-settings"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "ClickPesa Payout Widgets",
+        "hidden": true,
+        "pages": [
+          "payout-widgets/payout-widgets-overview",
           {
             "group": "Embedded Payout Widget",
             "pages": [
@@ -83,49 +116,27 @@
         ]
       },
       {
-        "tab": "Collection API",
-        "groups": [
+        "tab": "Payment API",
+        "pages": [
+          "payment-api/payment-api-overview",
           {
-            "group": "Get Started",
+            "group": "Payment API",
             "pages": [
-              "collection-api/collection-api-overview"
-            ]
-          },
-          {
-            "group": "Collection API",
-            "pages": [
-              "collection-api/mobile-money-collection-api/mobile-money-collection-api-overview",
-              "/collection-api/card-collection-api/card-collection-api-overview"
+              "payment-api/mobile-money-payment-api/mobile-money-payment-api-overview",
+              "payment-api/card-payment-api/card-payment-api-overview"
             ]
           }
         ]
       },
       {
-        "tab": "Embedded Integration",
-        "groups": [
+        "tab": "Payout API",
+        "pages": [
+          "payout-api/payout-api-overview",
           {
-            "group": "Get Started",
+            "group": "Payout API",
             "pages": [
-              "docs/embedded/application/get-started",
-              "application/embedded-application-setup"
-            ]
-          },
-          {
-            "group": "Collection",
-            "pages": [
-              "docs/embedded/collection/embedded-checkout"
-            ]
-          },
-          {
-            "group": "Disbursement",
-            "pages": [
-              "docs/embedded/disbursement/embedded-payout",
-              {
-                "group": "API Reference",
-                "pages": [
-                  "api-reference/disbursement/querying-for-payouts/querying-for-payouts"
-                ]
-              }
+              "payout-api/mobile-money-payout-api/mobile-money-payout-api-overview",
+              "payout-api/bank-payout-api/bank-payout-api-overview"
             ]
           }
         ]
@@ -135,15 +146,16 @@
         "pages": [
           "api-reference/authorization/generate-token",
           "api-reference/collection/querying-for-payments/querying-for-payments",
+          "api-reference/disbursement/querying-for-payouts/querying-for-payouts",
           {
-            "group": "MOBILE MONEY COLLECTION",
+            "group": "MOBILE MONEY PAYMENTS",
             "pages": [
               "api-reference/collection/ussd-push-requests/preview-ussd-push-request",
               "api-reference/collection/ussd-push-requests/initiate-ussd-push-request"
             ]
           },
           {
-            "group": "CARD COLLECTION",
+            "group": "CARD PAYMENTS",
             "pages": [
               "api-reference/collection/ussd-push-requests/preview-ussd-push-request"
             ]
@@ -157,7 +169,7 @@
           {
             "group": "Get Started",
             "pages": [
-              "docs/sdk-plugins/page-1"
+              "sdk-plugins/sdk-plugin-overview"
             ]
           }
         ]
