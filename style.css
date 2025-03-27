@@ -1,6 +1,9 @@
-
 .payment-methods-card .card img {
- width: 6em;
- margin: auto;
- padding-top: 1em;
+   width: 6em;
+   margin: auto;
+   padding-top: 1em;
+}
+
+#footer > div > div {
+   display: none;
 }

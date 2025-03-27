@@ -25,12 +25,24 @@
         "tab": "Getting Started",
         "pages": [
           "home/introduction",
-          "home/guidelines",
-          "home/payment-methods",
-          "home/payment-status",
-          "home/webhooks",
-          "home/checksum",
-          "home/onboarding"
+          "home/onboarding",
+          {
+            "group": "Integration Guides",
+            "pages": [
+              "home/payment-status",
+              "home/webhooks",
+              "home/checksum",
+              {
+                "group": "Integration Setup",
+                "icon": "gear",
+                "pages": [
+                  "application/api-application-setup",
+                  "application/hosted-application-setup",
+                  "application/embedded-application-setup"
+                ]
+              }
+            ]
+          }
         ]
       },
       {
@@ -38,59 +50,24 @@
         "pages": [
           "checkout/checkout-overview",
           {
-            "group": "Embedded Checkout",
-            "pages": [
-              "checkout/embedded-checkout/embedded-checkout"
-            ]
-          },
-          {
             "group": "Hosted Checkout",
             "pages": [
               "checkout/hosted-checkout/hosted-checkout",
-              "checkout/hosted-checkout/checkout-link-api",
-              "checkout/hosted-checkout/checkout-link-widget"
+              "checkout/hosted-checkout/checkout-link-api"
             ]
           }
         ]
       },
       {
-        "tab": "ClickPesa Dashboard",
+        "tab": "ClickPesa BillPay",
         "pages": [
-          "dashboard/introduction",
+          "bill-pay/bill-pay-overview",
+          "bill-pay/use-cases",
           {
-            "group": "Overview",
+            "group": "How It Works",
             "pages": [
-              "dashboard/account",
-              "dashboard/transactions",
-              "dashboard/data-export"
-            ]
-          },
-          {
-            "group": "Collection",
-            "pages": [
-              "dashboard/collection/invoice",
-              "dashboard/collection/payment-page",
-              "dashboard/collection/bill-pay",
-              "dashboard/collection/lipa-namba",
-              "dashboard/collection/lipa-qr"
-            ]
-          },
-          {
-            "group": "Disbursement",
-            "pages": [
-              "dashboard/disbursement/payout",
-              "dashboard/disbursement/bulk-payout"
-            ]
-          },
-          {
-            "group": "Settings",
-            "pages": [
-              "dashboard/settings/general-settings",
-              "dashboard/settings/collection-settings",
-              "dashboard/settings/disbursement-settings",
-              "dashboard/settings/team-settings",
-              "dashboard/settings/developers-settings",
-              "dashboard/settings/security-settings"
+              "bill-pay/generating-control-number",
+              "bill-pay/making-payment"
             ]
           }
         ]

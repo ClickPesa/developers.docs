@@ -8,7 +8,7 @@ icon: "circle-info"
 
 | Status     | Description                                                                                     |
 |------------|-------------------------------------------------------------------------------------------------|
-| `SUCCESS`    | Successfully made payment that has not been settled to the merchant account yet.              |
+| `SUCCESS`    | Received payment that has not been settled to the merchant account yet.              |
 | `SETTLED`    | Funds are already settled to the merchant account.                                            |
 | `PROCESSING` | Payment is currently being processed.                                                         |
 | `PENDING`    | Payment is pending and awaiting further action from the customer.                             |
@@ -28,5 +28,5 @@ There are two ways to receive payment statuses in your application:
 ## Payment Status for Customers
 
 - In both [Hosted](../checkout-hosted-overview) and [Embedded](../checkout-embedded-overview) Checkouts, payment status is displayed to the customer in real-time.
-- Additionally, the final payment status is sent to the customer via their registered email or mobile phone number.
+- Additionally, the final payment notificationSuccessfully made payment  is sent to the customer via their registered email or mobile phone number.
 

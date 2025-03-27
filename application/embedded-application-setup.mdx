@@ -1,45 +1,39 @@
 ---
-title: "Integration Setup"
-description: "Learn how to create an Embedded Application in ClickPesa."
+title: "Embedded Integration Setup"
+description: "Learn how to set up an embedded integration with ClickPesa to seamlessly integrate payment services into your application."
+icon: "diamonds-4"
 ---
 
-Embedded Integration allows you to seamlessly integrate ClickPesa’s payment services into your application. Follow the steps below to create an **Embedded Application**.
+## Authentication Overview
 
-## Step 1: Log in to the ClickPesa Dashboard
+### [Initialization](#)
+- Only a `ClientId` is required to initialize an embedded components
+- The `ClientId` is a unique identifier generated for each application and is always visible in the application settings
 
-Go to the [ClickPesa  Dashboard](https://merchant.clickpesa.com) and log in with your credentials.
+### [Authentication & Authorization](#)
+- When performing actions, users will be required to authenticate using their **Email** and **Password**.
+- Depending on the actions, **Two-Factor Authentication** (2FA) may also be required for authorization
 
-## Step 2: Navigate to Developer Settings
 
-1. On the dashboard, click on **Settings**.
+## Application Setup
+
+### Step 1: Log in to the ClickPesa Dashboard
+Go to the [ClickPesa Dashboard](https://merchant.clickpesa.com) and log in with your credentials.
+
+### Step 2: Access Developer Settings
+1. In the dashboard, click **Settings**.
 2. Navigate to the **Developers** section.
 
-{/* <img height="200" src="/images/dashboard.jpg" /> */}
+### Step 3: Create a New Application
+Click **Create Application** to begin the setup process.
 
-## Step 3: Create a New Application
-
-Click on the **Create Application** button to start the process.
-
-{/* <img height="200" src="/images/dashboard.jpg" /> */}
-
-## Step 4: Configure Application Details
+### Step 4: Configure Application Details
 
 When creating the application, fill in the following details:
 
 - **Application Name**: Choose a name to identify your app.
 - **Integration Type**: Select **Embedded**.
-- **Features**: Choose the features needed (e.g., Checkout Link Widget, Payout Widget).
+- **Features**: Choose the features needed (e.g., **Embedded Checkout** , **Embedded Payout Widget**).
 
-**Client ID**
-The Client ID is a unique identifier generated for each application. It’s used for authenticating and authorizing interactions with our platform and is always visible in the application settings.
-
-{/* <img height="200" src="/images/dashboard.jpg" /> */}
-
-## Step 5: Submit and Retrieve Credentials
-
-1. Click **Submit** to create the application.
-2. After submission, you will receive your **Client ID**. This will be required to use our embedded solutions in your UI.
-
-> 💡 **Important**: Keep your credentials secure and do not share them publicly.
-
----
+### Step 5: Submit Your Application
+Click **Create** to finalize the application setup.

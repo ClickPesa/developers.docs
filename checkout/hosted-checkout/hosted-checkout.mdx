@@ -8,15 +8,15 @@ description: "Accept payments by redirecting customers to the ClickPesa Hosted C
 
 ## How It Works
 
-1. [Create a Hosted Application](/application/embedded-application-setup) -
-   Create an application and generate **Client ID** and **API Keys** for Hosted Checkout.
+1. [Create a Hosted Application](/application/hosted-application-setup) -
+   Create an application and generate **Client ID** and **API Keys** for Hosted Checkout
 
 2. [Generate Authorization Token](/api-reference/authorization/generate-token) -
-Use **API Keys** to generate an Authorization Token.
+Use **API Keys** to generate an Authorization Token
 
-3. **Generate Hosted Checkout Link**
-   - [Checkout Link API](/checkout/hosted-checkout/checkout-link-api) - Use API to generate a hosted checkout link.
-   - [Checkout Link Widget](/checkout/hosted-checkout/checkout-link-widget) - Use Embedded Widget to generate a checkout link.
+3. **Generate Hosted Checkout Link** -
+ Use [Checkout Link API](/checkout/hosted-checkout/checkout-link-api) to generate a hosted checkout link
 
+4. **Redirect Customers**  - Add the generated checkout link into your checkout flow to seamlessly redirect customers to ClickPesa’s Hosted Checkout
 
-4. **Redirect Customers**  - Add the generated checkout link into your checkout flow to seamlessly redirect customers to ClickPesa’s Hosted Checkout.
+5. **Recieve Payment Confirmation**  - Receive real-time payment status update via [Webhook](/home/webhooks) or poll the transaction status via [Query Payment API](/api-reference/collection/querying-for-payments/querying-for-payments)

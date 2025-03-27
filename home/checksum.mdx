@@ -1,10 +1,14 @@
 ---
 title: "Checksum"
-description: "Generate checksums for secure transactions"
+description: "Generate checksum for secure transactions via API"
 icon: "lock"
 ---
 
- The checksum ensures data integrity and consistency when verifying API requests.
+The payloads checksum ensures data integrity and consistency during API requests.
+
+On incoming requests it ensures that the payment or payout request is from a valid merchant and that no one has tampered with it.
+
+[Webhooks](/home/webhooks) payload are also signed using the same method as defined below. This allows merchants to ensure that the webhook request came from ClickPesa and that no one has tampered with it.
 
 ## **Generating Payload Checksum**
 1. **Sort Payload Keys** - The keys of the payload are sorted alphabetically to maintain consistency.
@@ -19,7 +23,7 @@ icon: "lock"
 </Note>
 
 
-### **Generation Examples**
+### **Examples**
 
 <CodeGroup>
 
@@ -168,7 +172,7 @@ public class CreatePayloadChecksum {
    - If both checksums match, the payload is valid and untampered.
    - If they do not match, reject the request as it may have been modified.
 
-### **Validation Examples**
+### **Examples**
 
 <CodeGroup>
 

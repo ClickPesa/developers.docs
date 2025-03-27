@@ -1,71 +1,38 @@
 ---
-title: "Integration Setup"
-description: "Learn how to create an API Application in ClickPesa."
+title: "API Integration Setup"
+description: "Learn how to set up hosted integration with ClickPesa, including creating applications, managing API keys, and retrieving credentials"
+icon: "brackets-curly"
 ---
+import ManagingAPIKey from '/snippets/managing-api-keys.mdx';
 
-The API Integration method provides full control over payment processes by allowing direct interaction with ClickPesa's APIs. This approach is ideal for businesses seeking a customizable payment solution tailored to their specific business needs.
+## Authentication Overview
 
-## Step 1: Log in to the ClickPesa Dashboard
+[Client ID](#authentication-overview) - Remains accessible in your application settings and is also required for API authentication.
 
-Go to the [ClickPesa  Dashboard](https://merchant.clickpesa.com) and log in with your credentials.
+[API Key](#authentication-overview) - It is required for API authentication, displayed **only once** during creation. **Copy and store it securely**
 
-## Step 2: Navigate to Developer Settings
+[JWT Token](#authentication-overview) - `API Key` and `Client ID` are [exchanged](api-reference/authorization/generate-token) for a short-lived `JWT Token`, that will then be used in all subsequent API calls
 
-1. On the dashboard, click on **Settings**.
+## Application Setup
+
+### Step 1: Log in to the ClickPesa Dashboard
+Go to the [ClickPesa Dashboard](https://merchant.clickpesa.com) and log in with your credentials.
+
+### Step 2: Access Developer Settings
+1. In the dashboard, click **Settings**.
 2. Navigate to the **Developers** section.
 
-{/* <img height="200" src="/images/dashboard.jpg" alt="Developer Settings" /> */}
+### Step 3: Create a New Application
+Click **Create Application** to begin the setup process.
 
-## Step 3: Create a New Application
+### Step 4: Configure Application Details
+When creating your application, provide the following details:
 
-Click on the **Create Application** button to start the process.
-
-{/* <img height="200" src="/images/create_application.jpg" alt="Create Application" /> */}
-
-## Step 4: Configure Application Details
-
-When creating the application, fill in the following details:
-
-- **Application Name**: Choose a name to identify your app.
+- **Application Name**: A name to identify your app.
 - **Integration Type**: Select **API**.
-- **Features**: Choose the features needed (e.g., Payment API, Payout API).
+- **Features**: Choose the required features (e.g. **Payment API**, **Payout API**).
 
-## Step 5: Manage API Keys
+### Step 5: Submit Your Application
+Click **Create** to finalize the application setup.
 
-For applications using **API** integration types, API keys are crucial for authentication and performing actions such as querying transactions. Here’s how you manage API keys for your applications:
-
-In your application settings, click **Manage API Keys**. This opens a drawer displaying a list of existing API keys for the application. The list includes:
-
-- **Name:** The name assigned to the API key.
-- **Last Activity:** The date of the most recent use of the API key.
-- **Revoke Button:** An option to revoke the API key.
-
-### Adding a New API Key
-
-To add a new API key:
-
-1. Click the **Add API Key** button.
-2. When prompted, enter the following details:
-   - **Name:** A name for the new API key.
-   - **Expiry Date:** Select an expiry date for the API key.
-3. After submitting, a modal will appear displaying:
-   - The **clientID** and the newly generated **API key**.
-   - The **expiry date**.
-
-### Viewing and Storing API Keys
-
-- The **api-key** is shown **only once** in the modal. **Copy and store it securely**—you'll need it for authentication and other actions.
-- The **client-id** is always visible in the application settings and can be used along with the API key for tasks such as authentication and querying transactions.
-
-{/* <img height="200" src="/images/api_keys.jpg" alt="API Keys Management" /> */}
-
-## Step 6: Submit and Retrieve Credentials
-
-1. Click **Submit** to create the application.
-2. After submission, you will receive your **Client ID**. This will be required to use our API solutions in your system.
-
-> 💡 **Important**: Keep your credentials secure and do not share them publicly.
-
----
-
-This guide outlines the steps to set up an API Application in ClickPesa, enabling you to integrate our payment solutions directly into your platform.
+<ManagingAPIKey/>

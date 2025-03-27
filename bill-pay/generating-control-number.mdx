@@ -1,0 +1,24 @@
+---
+title: "Generating a BillPay Control Number"
+description: "Learn how to generate a BillPay Control Number using ClickPesa's BillPay-Namba and Order Reference."
+---
+
+Each **BillPay Control Number** consists of:
+
+- **ClickPesa BillPay-Namba**: A 4-digit number assigned to you by ClickPesa.
+
+- **Order Reference**: Any reference number used in the merchant’s system to identify the transaction or product.
+
+To create a **BillPay Control Number**, concatenate your ClickPesa BillPay-Namba with the Order Reference
+
+`[ClickPesa BillPay-Namba]` + `[Order Reference]` = `BillPay Control Number`
+
+```text
+Example:
+
+ClickPesa BillPay-Namba: 1122
+Order Reference: 231256
+BillPay Control Number: 122231256
+```
+
+### Generating BillPay Control Number with Code
