@@ -21,7 +21,7 @@
   "paths": {
     "/payouts/:orderReference": {
       "get": {
-        "description": "Generate Checkout Link for receiving online payments",
+        "description": "Queries for the payouts status using payout’s Order Reference",
         "parameters": [
           {
             "name": "orderReference",

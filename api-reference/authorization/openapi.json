@@ -22,7 +22,7 @@
     "/generate-token": {
       "post": {
         "tags": ["Authorization", "Security"],
-        "description": "Generate Token to use for all other api calls",
+        "description": "Generates JWT Authorization token required for accessing ClickPesa APIs",
         "parameters": [
           {
             "in": "header",

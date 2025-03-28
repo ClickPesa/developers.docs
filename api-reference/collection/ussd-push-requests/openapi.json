@@ -22,7 +22,7 @@
     "/payments/preview-ussd-push-request": {
       "post": {
         "tags": ["Payments", "Preview"],
-        "description": "Preview a PUSH request for payments",
+        "description": "Validates push details like phone number, amount, order-reference and verifies payment channels availability",
         "requestBody": {
           "required": true,
           "content": {
@@ -101,7 +101,7 @@
     "/payments/initiate-ussd-push-request": {
       "post": {
         "tags": ["Payments", "Initiate"],
-        "description": "Initiates a PUSH request for payments.",
+        "description": "Sends the USSD push request to customer's mobile device for payment authorization",
         "requestBody": {
           "required": true,
           "content": {

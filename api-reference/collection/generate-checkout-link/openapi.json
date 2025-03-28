@@ -21,7 +21,7 @@
   "paths": {
     "/checkout-link/generate-checkout-url": {
       "post": {
-        "description": "Generate Checkout Link for receiving online payments",
+        "description": "Generates a link for receiving online payments via ClickPesa Hosted Chekout",
         "requestBody": {
           "required": true,
           "content": {
@@ -211,8 +211,8 @@
         "properties": {
           "message": {
             "type": "string",
-            "enum": ["Merchant shop does not exists"],
-            "example": "Merchant shop does not exists"
+            "enum": ["Checkout is not available for this merchant"],
+            "example": "Checkout is not available for this merchant"
           }
         }
       },

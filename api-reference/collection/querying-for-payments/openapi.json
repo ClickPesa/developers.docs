@@ -21,7 +21,7 @@
   "paths": {
     "/payments/:orderReference": {
       "get": {
-        "description": "Fetch ",
+        "description": "Queries for the payment status using payment's Order Reference ",
         "parameters": [
           {
             "name": "orderReference",

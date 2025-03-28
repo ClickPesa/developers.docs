@@ -99,8 +99,7 @@
           {
             "group": "Payment API",
             "pages": [
-              "payment-api/mobile-money-payment-api/mobile-money-payment-api-overview",
-              "payment-api/card-payment-api/card-payment-api-overview"
+              "payment-api/mobile-money-payment-api/mobile-money-payment-api-overview"
             ]
           }
         ]
@@ -121,20 +120,30 @@
       {
         "tab": "API Explorer",
         "pages": [
-          "api-reference/authorization/generate-token",
-          "api-reference/collection/querying-for-payments/querying-for-payments",
-          "api-reference/disbursement/querying-for-payouts/querying-for-payouts",
           {
-            "group": "MOBILE MONEY PAYMENTS",
+            "group": "AUTHORIZATION",
             "pages": [
-              "api-reference/collection/ussd-push-requests/preview-ussd-push-request",
-              "api-reference/collection/ussd-push-requests/initiate-ussd-push-request"
+              "api-reference/authorization/generate-token"
             ]
           },
           {
-            "group": "CARD PAYMENTS",
+            "group": "CHECKOUT LINK",
             "pages": [
-              "api-reference/collection/ussd-push-requests/preview-ussd-push-request"
+              "api-reference/collection/generate-checkout-link/generate-checkout-link"
+            ]
+          },
+          {
+            "group": "MOBILE-MONEY PAYMENT",
+            "pages": [
+              "api-reference/collection/ussd-push-requests/preview-ussd-push-request",
+              "api-reference/collection/ussd-push-requests/initiate-ussd-push-request",
+              "api-reference/collection/querying-for-payments/querying-for-payments"
+            ]
+          },
+          {
+            "group": "MOBILE-MONEY PAYOUT",
+            "pages": [
+              "api-reference/disbursement/querying-for-payouts/querying-for-payouts"
             ]
           }
         ]
