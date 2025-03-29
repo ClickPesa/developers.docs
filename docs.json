@@ -29,6 +29,7 @@
           {
             "group": "Integration Guides",
             "pages": [
+              "home/integration-overview",
               "home/payment-status",
               "home/webhooks",
               "home/checksum",
