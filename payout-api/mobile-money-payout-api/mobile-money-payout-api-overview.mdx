@@ -1,39 +1,69 @@
 ---
 title: "Mobile Money Payout API"
-description: "The Mobile Money Payment API enables you to collect payments directly from customers' mobile money wallets using USSD push requests"
+description: "The Mobile Money Payout API enables you to send payouts directly to recipients' mobile money wallets."
 ---
 
 ## Prerequisites
 
 1. **API Keys** -
- [Generate API Keys](/application/embedded-application-setup) for Hosted Checkout integration
+   [Generate API Keys](/application/api-application-setup) for Hosted Checkout integration
 
 2. **Authorization Token** -
    Use **API Keys** to [Generate Authorization Token](/api-reference/authorization/generate-token)
 
 ## How It Works
 
- **Step 1** - Validate push request details
-  <Card
-   title="Preview USSD push Request"
-   icon="brackets-curly"
-   href="/api-reference/collection/ussd-push-requests/preview-ussd-push-request" horizontal>
-   This endpoint validates push details like **Mobile Number**, **Amount**, **Order Reference** and verifies **Payment Methods** availability
-   </Card>
+**Step 1** - Retrieve Account Balance
 
- **Step 2** -  Send push request
-  <Card
-   title="Initiate USSD push Request"
-   icon="brackets-curly"
-   href="/api-reference/collection/ussd-push-requests/initiate-ussd-push-request" horizontal>
-   This endpoint sends the **USSD** push request to customer's mobile device.
-   The customer will be prompted to enter their wallet PIN/password to complete the transaction
-   </Card>
+{" "}
 
-  **Step 3** -  Check payment status
-  <Card
-   title="Check Payment Status"
-   icon="brackets-curly"
-   href="/api-reference/collection/querying-for-payments/querying-for-payments" horizontal>
-   This endpoint queries for the payment status using payment's **Order Reference**
-   </Card>
+<Card
+  title="Retrieve account balance"
+  icon="brackets-curly"
+  href="/api-reference/disbursement/mno-payout-requests/get-account-balance"
+  horizontal
+>
+  This endpoint retrieves account balance that can help check if merchant has
+  enough funds to perform a payout
+</Card>
+
+**Step 2** - Validate push request details
+
+{" "}
+
+<Card
+  title="Preview Mobile Money Payout Request"
+  icon="brackets-curly"
+  href="/api-reference/disbursement/mno-payout-requests/preview-mno-payout-request"
+  horizontal
+>
+  Validates mobile money payout details like **phone number**, amount,
+  order-reference, fee
+</Card>
+
+**Step 3** - Send push request
+
+{" "}
+
+<Card
+  title="Create Mobile Money Payout Request"
+  icon="brackets-curly"
+  href="/api-reference/disbursement/mno-payout-requests/create-mno-payout-request"
+  horizontal
+>
+  Initiate a mobile money payout by sending a request to the API. The specified
+  amount will be transferred to the recipient’s mobile wallet.
+</Card>
+
+**Step 4** - Check payout status
+
+{" "}
+
+<Card
+  title="Check Payout Status"
+  icon="brackets-curly"
+  href="/api-reference/disbursement/mno-payout-requests/querying-for-payouts"
+  horizontal
+>
+  This endpoint queries for the payout status using payout's **Order Reference**
+</Card>

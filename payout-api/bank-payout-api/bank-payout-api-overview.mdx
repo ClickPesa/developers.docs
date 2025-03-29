@@ -1,15 +1,74 @@
 ---
 title: "Bank Payout API"
-description: "Accept card payments from all major cards processor including Visa, MasterCard, American Express and Union Pay using the Cards Payment API"
+description: "The Bank Payout API enables you to send payouts directly to recipients' bank accounts in Tanzania."
 ---
 
 ## Prerequisites
 
-1. **API Keys** -
- [Generate API Keys](/application/embedded-application-setup) for Hosted Checkout integration
+1. **API Keys** -  
+   [Generate API Keys](/application/api-application-setup) for Hosted Checkout integration.
 
-2. **Authorization Token** -
-   Use **API Keys** to [Generate Authorization Token](/api-reference/authorization/generate-token)
+2. **Authorization Token** -  
+   Use **API Keys** to [Generate Authorization Token](/api-reference/authorization/generate-token).
 
 ## How It Works
 
+### **Step 1** - Retrieve Account Balance
+
+<Card
+  title="Retrieve Account Balance"
+  icon="brackets-curly"
+  href="/api-reference/disbursement/bank-payout-requests/get-account-balance"
+  horizontal
+>
+  Retrieve your available account balance to ensure sufficient funds for
+  processing payouts.
+</Card>
+
+### **Step 2** - Retrieve Bank List
+
+<Card
+  title="Retrieve Banks List"
+  icon="brackets-curly"
+  href="/api-reference/disbursement/bank-payout-requests/get-bank-list"
+  horizontal
+>
+  Retrieve your available account balance to ensure sufficient funds for
+  processing payouts.
+</Card>
+
+### **Step 3** - Validate Payout Request Details
+
+<Card
+  title="Preview Bank Payout Request"
+  icon="brackets-curly"
+  href="/api-reference/disbursement/bank-payout-requests/preview-bank-payout-request"
+  horizontal
+>
+  Validates bank payout details like **bank name**, **amount**, **order
+  reference**, and **fee** before processing the payout.
+</Card>
+
+### **Step 4** - Initiate Bank Payout Request
+
+<Card
+  title="Create Bank Payout Request"
+  icon="brackets-curly"
+  href="/api-reference/disbursement/bank-payout-requests/create-bank-payout-request"
+  horizontal
+>
+  Initiate a bank payout by sending a request to the API. The specified amount
+  will be transferred to the recipient’s bank account.
+</Card>
+
+### **Step 5** - Check Payout Status
+
+<Card
+  title="Check Payout Status"
+  icon="brackets-curly"
+  href="/api-reference/disbursement/bank-payout-requests/querying-for-payouts"
+  horizontal
+>
+  Query the payout status using the **Order Reference** to track whether the
+  transaction was successful.
+</Card>

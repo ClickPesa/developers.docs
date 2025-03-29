@@ -6,20 +6,24 @@ icon: "circle-info"
 
 ## Status Overview
 
-| Status     | Description                                                                                     |
-|------------|-------------------------------------------------------------------------------------------------|
+| Status       | Description                                                                          |
+| ------------ | ------------------------------------------------------------------------------------ |
 | `SUCCESS`    | Received payment that has not been settled to the merchant account yet.              |
-| `SETTLED`    | Funds are already settled to the merchant account.                                            |
-| `PROCESSING` | Payment is currently being processed.                                                         |
-| `PENDING`    | Payment is pending and awaiting further action from the customer.                             |
-| `FAILED`     | Payment was not successful.                                                                   |
-| `ON-HOLD`    | Payment is on hold and requires further action from the merchant.                             |
+| `SETTLED`    | Funds are already settled to the merchant account.                                   |
+| `PROCESSING` | Payment is currently being processed.                                                |
+| `PENDING`    | Payment is pending and awaiting further action from the customer.                    |
+| `FAILED`     | Payment was not successful.                                                          |
+| `ON-HOLD`    | Payment is on hold and requires further action from the merchant.                    |
+| `REFUNDED`   | Payment was not settled to merchant account and funds returned to the customer       |
+| `REVERSED`   | Payment was settled to merchant account and then funds were returned to the customer |
 
 ## Payment Status in the ClickPesa Dashboard
+
 - You can view the payment status in the [ClickPesa Dashboard]('/clickpesa-dashboard') under the [Transactions](/dashboard/transactions) section.
 - The payment statuses are updated in real-time as the payment progresses through different stages.
 
 ## Payment Status In Your Application
+
 There are two ways to receive payment statuses in your application:
 
 1. [Webhooks](/home/webhooks) - ClickPesa sends real-time updates to your server when a payment status changes. You can use webhooks to receive these updates.
@@ -28,5 +32,4 @@ There are two ways to receive payment statuses in your application:
 ## Payment Status for Customers
 
 - In both [Hosted](../checkout-hosted-overview) and [Embedded](../checkout-embedded-overview) Checkouts, payment status is displayed to the customer in real-time.
-- Additionally, the final payment notificationSuccessfully made payment  is sent to the customer via their registered email or mobile phone number.
-
+- Additionally, the final payment notificationSuccessfully made payment is sent to the customer via their registered email or mobile phone number.
