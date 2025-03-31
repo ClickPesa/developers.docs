@@ -19,16 +19,16 @@
     }
   ],
   "paths": {
-    "/payouts/balance": {
+    "/list/banks": {
       "get": {
-        "description": "Get Account Balance",
+        "description": "Get Bank List",
         "responses": {
           "200": {
-            "description": "Get Account Balance response",
+            "description": "Get Bank List Response",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Response"
+                  "$ref": "#/components/schemas/BanksResponse"
                 }
               }
             }
@@ -49,23 +49,6 @@
   },
   "components": {
     "schemas": {
-      "Response": {
-        "type": "array",
-        "items": {
-          "type": "object",
-          "properties": {
-            "currency": {
-              "type": "string",
-              "description": "Currency",
-              "enum": ["TZS"]
-            },
-            "balance": {
-              "type": "number",
-              "description": "Account balance"
-            }
-          }
-        }
-      },
       "UnauthorizedError": {
         "type": "object",
         "properties": {
@@ -73,6 +56,22 @@
             "type": "string",
             "description": "Unauthorized Error",
             "example": "Unauthorized"
+          }
+        }
+      },
+      "BanksResponse": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Bank Name"
+            },
+            "bic": {
+              "type": "string",
+              "description": "Bank Business Identifier Codes "
+            }
           }
         }
       }

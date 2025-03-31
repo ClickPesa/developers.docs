@@ -216,33 +216,6 @@
           }
         }
       }
-    },
-    "/payouts/banks": {
-      "get": {
-        "description": "Get Bank List",
-        "responses": {
-          "200": {
-            "description": "Get Bank List Response",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/BanksResponse"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Invalid or Expired Token",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/UnauthorizedError"
-                }
-              }
-            }
-          }
-        }
-      }
     }
   },
   "components": {
@@ -390,22 +363,6 @@
             "type": "string",
             "description": "Unauthorized Error",
             "example": "Unauthorized"
-          }
-        }
-      },
-      "BanksResponse": {
-        "type": "array",
-        "items": {
-          "type": "object",
-          "properties": {
-            "name": {
-              "type": "string",
-              "description": "Bank Name"
-            },
-            "bic": {
-              "type": "string",
-              "description": "Bank Business Identifier Codes "
-            }
           }
         }
       }

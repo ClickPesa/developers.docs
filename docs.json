@@ -128,6 +128,14 @@
             "pages": ["api-reference/authorization/generate-token"]
           },
           {
+            "group": "ACCOUNT",
+            "pages": ["api-reference/account/get-account-balance"]
+          },
+          {
+            "group": "LIST",
+            "pages": ["api-reference/list/get-bank-list"]
+          },
+          {
             "group": "CHECKOUT LINK",
             "pages": [
               "api-reference/collection/generate-checkout-link/generate-checkout-link"
@@ -150,7 +158,6 @@
           {
             "group": "MOBILE-MONEY PAYOUT",
             "pages": [
-              "api-reference/disbursement/mno-payout-requests/get-account-balance",
               "api-reference/disbursement/mno-payout-requests/preview-mno-payout-request",
               "api-reference/disbursement/mno-payout-requests/create-mno-payout-request",
               "api-reference/disbursement/mno-payout-requests/querying-for-payouts"
@@ -159,8 +166,6 @@
           {
             "group": "BANK PAYOUT",
             "pages": [
-              "api-reference/disbursement/bank-payout-requests/get-account-balance",
-              "api-reference/disbursement/bank-payout-requests/get-bank-list",
               "api-reference/disbursement/bank-payout-requests/preview-bank-payout-request",
               "api-reference/disbursement/bank-payout-requests/create-bank-payout-request",
               "api-reference/disbursement/bank-payout-requests/querying-for-payouts"
