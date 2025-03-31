@@ -128,26 +128,6 @@
             "pages": ["api-reference/authorization/generate-token"]
           },
           {
-            "group": "ACCOUNT",
-            "pages": ["api-reference/account/get-account-balance"]
-          },
-          {
-            "group": "LIST",
-            "pages": ["api-reference/list/get-bank-list"]
-          },
-          {
-            "group": "CHECKOUT LINK",
-            "pages": [
-              "api-reference/collection/generate-checkout-link/generate-checkout-link"
-            ]
-          },
-          {
-            "group": "PAYOUT LINK",
-            "pages": [
-              "api-reference/disbursement/generate-payout-link/generate-payout-link"
-            ]
-          },
-          {
             "group": "MOBILE-MONEY PAYMENT",
             "pages": [
               "api-reference/collection/ussd-push-requests/preview-ussd-push-request",
@@ -169,6 +149,26 @@
               "api-reference/disbursement/bank-payout-requests/preview-bank-payout-request",
               "api-reference/disbursement/bank-payout-requests/create-bank-payout-request",
               "api-reference/disbursement/bank-payout-requests/querying-for-payouts"
+            ]
+          },
+          {
+            "group": "ACCOUNT",
+            "pages": ["api-reference/account/get-account-balance"]
+          },
+          {
+            "group": "LIST",
+            "pages": ["api-reference/list/get-bank-list"]
+          },
+          {
+            "group": "CHECKOUT LINK",
+            "pages": [
+              "api-reference/collection/generate-checkout-link/generate-checkout-link"
+            ]
+          },
+          {
+            "group": "PAYOUT LINK",
+            "pages": [
+              "api-reference/disbursement/generate-payout-link/generate-payout-link"
             ]
           }
         ]
