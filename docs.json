@@ -31,7 +31,9 @@
             "pages": [
               "home/integration-overview",
               "home/payment-status",
+              "home/payout-status",
               "home/webhooks",
+              "home/whitelisted-ip-address",
               "home/checksum",
               {
                 "group": "Integration Setup",
@@ -123,14 +125,18 @@
         "pages": [
           {
             "group": "AUTHORIZATION",
-            "pages": [
-              "api-reference/authorization/generate-token"
-            ]
+            "pages": ["api-reference/authorization/generate-token"]
           },
           {
             "group": "CHECKOUT LINK",
             "pages": [
               "api-reference/collection/generate-checkout-link/generate-checkout-link"
+            ]
+          },
+          {
+            "group": "PAYOUT LINK",
+            "pages": [
+              "api-reference/disbursement/generate-payout-link/generate-payout-link"
             ]
           },
           {
@@ -144,7 +150,20 @@
           {
             "group": "MOBILE-MONEY PAYOUT",
             "pages": [
-              "api-reference/disbursement/querying-for-payouts/querying-for-payouts"
+              "api-reference/disbursement/mno-payout-requests/get-account-balance",
+              "api-reference/disbursement/mno-payout-requests/preview-mno-payout-request",
+              "api-reference/disbursement/mno-payout-requests/create-mno-payout-request",
+              "api-reference/disbursement/mno-payout-requests/querying-for-payouts"
+            ]
+          },
+          {
+            "group": "BANK PAYOUT",
+            "pages": [
+              "api-reference/disbursement/bank-payout-requests/get-account-balance",
+              "api-reference/disbursement/bank-payout-requests/get-bank-list",
+              "api-reference/disbursement/bank-payout-requests/preview-bank-payout-request",
+              "api-reference/disbursement/bank-payout-requests/create-bank-payout-request",
+              "api-reference/disbursement/bank-payout-requests/querying-for-payouts"
             ]
           }
         ]
@@ -155,9 +174,7 @@
         "groups": [
           {
             "group": "Get Started",
-            "pages": [
-              "sdk-plugins/sdk-plugin-overview"
-            ]
+            "pages": ["sdk-plugins/sdk-plugin-overview"]
           }
         ]
       }

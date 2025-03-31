@@ -19,7 +19,7 @@
     }
   ],
   "paths": {
-    "/payouts/generate-payout-url": {
+    "/payout-link/generate-payout-url": {
       "post": {
         "description": "Generate Checkout Link for receiving online payments",
         "requestBody": {
@@ -36,6 +36,9 @@
                   "orderReference": {
                     "type": "string",
                     "description": "Your unique Order reference"
+                  },
+                  "checksum": {
+                    "type": "string"
                   }
                 }
               }
