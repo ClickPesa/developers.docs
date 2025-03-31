@@ -19,7 +19,7 @@
     }
   ],
   "paths": {
-    "/payouts/:orderReference": {
+    "/payouts/{orderReference}": {
       "get": {
         "description": "Queries for the payouts status using payout’s Order Reference",
         "parameters": [

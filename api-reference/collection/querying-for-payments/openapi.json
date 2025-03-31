@@ -19,7 +19,7 @@
     }
   ],
   "paths": {
-    "/payments/:orderReference": {
+    "/payments/{orderReference}": {
       "get": {
         "description": "Queries for the payment status using payment's Order Reference ",
         "parameters": [

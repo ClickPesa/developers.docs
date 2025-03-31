@@ -34,7 +34,8 @@
                   "orderReference",
                   "accountNumber",
                   "currency",
-                  "bic"
+                  "bic",
+                  "transferType"
                 ],
                 "properties": {
                   "amount": {
@@ -45,7 +46,6 @@
                   },
                   "currency": {
                     "type": "string",
-
                     "enum": ["TZS"]
                   },
                   "orderReference": {
@@ -55,6 +55,10 @@
                   "bic": {
                     "type": "string",
                     "description": "Beneficiary bank bic"
+                  },
+                  "transferType": {
+                    "type": "string",
+                    "enum": ["ACH", "RTGS"]
                   },
                   "checksum": {
                     "type": "string"
@@ -133,13 +137,18 @@
                   "orderReference",
                   "accountNumber",
                   "currency",
-                  "bic"
+                  "bic",
+                  "transferType",
+                  "accountName"
                 ],
                 "properties": {
                   "amount": {
                     "type": "number"
                   },
                   "accountNumber": {
+                    "type": "string"
+                  },
+                  "accountName": {
                     "type": "string"
                   },
                   "currency": {
@@ -154,6 +163,10 @@
                   "bic": {
                     "type": "string",
                     "description": "Beneficiary bank bic"
+                  },
+                  "transferType": {
+                    "type": "string",
+                    "enum": ["ACH", "RTGS"]
                   },
                   "checksum": {
                     "type": "string"
