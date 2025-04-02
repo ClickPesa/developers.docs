@@ -52,9 +52,9 @@
                     "type": "string",
                     "description": "Your unique Order reference"
                   },
-                  "bic": {
+                    "bic": {
                     "type": "string",
-                    "description": "Beneficiary bank bic"
+                    "description": "Beneficiary bank BIC. You can fetch the list of bank BICs from the [banks list endpoint.](/api-reference/list/get-bank-list)"
                   },
                   "transferType": {
                     "type": "string",
@@ -163,7 +163,7 @@
                   },
                   "bic": {
                     "type": "string",
-                    "description": "Beneficiary bank bic"
+                    "description": "Beneficiary bank BIC. You can fetch the list of bank BICs from the [banks list endpoint.](/api-reference/list/get-bank-list)"
                   },
                   "transferType": {
                     "type": "string",

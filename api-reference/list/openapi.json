@@ -70,7 +70,7 @@
             },
             "bic": {
               "type": "string",
-              "description": "Bank Business Identifier Codes "
+              "description": "Bank Business Identifier Code (BIC)"
             }
           }
         }
