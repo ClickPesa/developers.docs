@@ -38,7 +38,8 @@
                     "description": "Your unique Order reference"
                   },
                   "checksum": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "If enabled, generated checksum of the payload. See https://docs.clickpesa.com/home/checksum#generating-payload-checksum"
                   }
                 }
               }
