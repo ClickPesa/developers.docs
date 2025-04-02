@@ -48,7 +48,7 @@
                       "orderCurrency": {
                         "type": "string",
                         "enum": ["TZS", "USD"],
-                        "description": "Phone Number to receive USSD push and make payment"
+                        "description": "Your order payment currency to receive in(e.g., TZS, USD)"
                       },
                       "customerName": {
                         "type": "string",
@@ -60,7 +60,7 @@
                       },
                       "customerPhone": {
                         "type": "string",
-                        "description": "Your customer phone number"
+                        "description": "Your customer phone number, starting with country code and without the plus sign, e.g., 255712345678"
                       },
                       "checksum": {
                         "type": "string"
@@ -104,7 +104,7 @@
                       "orderCurrency": {
                         "type": "string",
                         "enum": ["TZS", "USD"],
-                        "description": "Phone Number to receive USSD push and make payment"
+                        "description": "Your order payment currency to receive in(e.g., TZS, USD)"
                       },
                       "customerName": {
                         "type": "string",
@@ -116,7 +116,7 @@
                       },
                       "customerPhone": {
                         "type": "string",
-                        "description": "Your customer phone number"
+                        "description": "Your customer phone number, starting with country code and without the plus sign, e.g., 255712345678"
                       },
                       "checksum": {
                         "type": "string"
