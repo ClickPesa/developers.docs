@@ -105,7 +105,7 @@
     "/payments/initiate-ussd-push-request": {
       "post": {
         "tags": ["Payments", "Initiate"],
-        "description": "Sends the USSD push request to customer's mobile device for payment authorization",
+        "description": "Sends the USSD-PUSH request to customer's mobile device for payment authorization",
         "requestBody": {
           "required": true,
           "content": {
@@ -124,7 +124,7 @@
                   },
                   "phoneNumber": {
                     "type": "string",
-                    "description": "Phone Number to receive USSD push and make payment"
+                    "description": "Phone Number to receive USSD-PUSH and make payment"
                   },
                   "checksum": {
                     "type": "string",
@@ -270,7 +270,7 @@
         "properties": {
           "id": {
             "type": "string",
-            "description": "Unique identifier for the USSD push transaction"
+            "description": "Unique identifier for the USSD-PUSH transaction"
           },
           "status": {
             "type": "string",

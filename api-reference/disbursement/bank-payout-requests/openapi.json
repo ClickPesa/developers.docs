@@ -126,7 +126,7 @@
     "/payouts/create-bank-payout-request": {
       "post": {
         "tags": ["Payments", "Initiate"],
-        "description": "Sends the USSD push request to customer's mobile device for payment authorization",
+        "description": "Sends the USSD-PUSH request to customer's mobile device for payment authorization",
         "requestBody": {
           "required": true,
           "content": {
