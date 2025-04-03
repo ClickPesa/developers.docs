@@ -60,7 +60,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/GenerateTokenInvalidClientDetailsError"
+                  "$ref": "#/components/schemas/GenerateTokenMissingCredentialsError"
                 }
               }
             }
@@ -106,6 +106,16 @@
               "Unauthorized API-Key"
             ],
             "example": "Invalid or Expired API-Key"
+          }
+        },
+        "required": ["message"]
+      },
+      "GenerateTokenMissingCredentialsError": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Unauthorized"
           }
         },
         "required": ["message"]
