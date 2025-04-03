@@ -55,6 +55,16 @@
               }
             }
           },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenerateTokenInvalidClientDetailsError"
+                }
+              }
+            }
+          },
           "403": {
             "description": "Invalid Client Details",
             "content": {
