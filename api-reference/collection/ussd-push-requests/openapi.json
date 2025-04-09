@@ -29,11 +29,15 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": ["amount", "orderReference"],
+                "required": ["amount", "orderReference", "currency"],
                 "properties": {
                   "amount": {
                     "type": "string",
                     "description": "Amount"
+                  },
+                  "currency": {
+                    "type": "string",
+                    "enum": ["TZS"]
                   },
                   "orderReference": {
                     "type": "string",
@@ -112,11 +116,20 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": ["amount", "orderReference", "phoneNumber"],
+                "required": [
+                  "amount",
+                  "orderReference",
+                  "phoneNumber",
+                  "currency"
+                ],
                 "properties": {
                   "amount": {
                     "type": "string",
                     "description": "Amount"
+                  },
+                  "currency": {
+                    "type": "string",
+                    "enum": ["TZS"]
                   },
                   "orderReference": {
                     "type": "string",
