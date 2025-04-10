@@ -1,0 +1,412 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "CORE API OpenAPI Specification",
+    "description": "This is the API documentation for the ClickPesa CORE API",
+    "license": {
+      "name": "MIT"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.clickpesa.com/third-parties"
+    }
+  ],
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "paths": {
+    "/payments/preview-card-payment-request": {
+      "post": {
+        "tags": ["Payments", "Preview"],
+        "description": "Validates push details like phone number, amount, order-reference and verifies payment channels availability",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["amount", "orderReference", "currency"],
+                "properties": {
+                  "amount": {
+                    "type": "string",
+                    "description": "Amount"
+                  },
+                  "currency": {
+                    "type": "string",
+                    "enum": ["USD"]
+                  },
+                  "orderReference": {
+                    "type": "string",
+                    "description": "Your unique Order reference"
+                  },
+                  "checksum": {
+                    "type": "string",
+                    "description": "If enabled, this is the generated checksum of the payload. Refer to the documentation at https://docs.clickpesa.com/home/checksum for more details."
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "USSD Push Preview response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PreviewCardPaymentResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid or Expired Token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedError"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PreviewCardPaymentValidationError"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PreviewCardPaymentConflictError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PreviewCardPaymentNotFoundError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/payments/initiate-card-payment-request": {
+      "post": {
+        "tags": ["Payments", "Initiate"],
+        "description": "Sends the USSD push request to customer's mobile device for payment authorization",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "oneOf": [
+                  {
+                    "title": "Body With Customer ID",
+                    "required": [
+                      "customer",
+                      "orderReference",
+                      "currency",
+                      "amount"
+                    ],
+                    "properties": {
+                      "amount": {
+                        "type": "string",
+                        "description": "Amount"
+                      },
+                      "orderReference": {
+                        "type": "string",
+                        "description": "Your unique Order reference"
+                      },
+                      "currency": {
+                        "type": "string",
+                        "enum": ["USD"]
+                      },
+                      "customer": {
+                        "type": "object",
+                        "description": "Customer",
+                        "required": ["id"],
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "description": "Customer ID"
+                          }
+                        }
+                      },
+                      "checksum": {
+                        "type": "string",
+                        "description": "If enabled, this is the generated checksum of the payload. Refer to the documentation at https://docs.clickpesa.com/home/checksum for more details."
+                      }
+                    }
+                  },
+                  {
+                    "title": "Body With Customer Details",
+                    "required": [
+                      "customer",
+                      "orderReference",
+                      "currency",
+                      "amount"
+                    ],
+                    "properties": {
+                      "amount": {
+                        "type": "string",
+                        "description": "Amount"
+                      },
+                      "orderReference": {
+                        "type": "string",
+                        "description": "Your unique Order reference"
+                      },
+                      "currency": {
+                        "type": "string",
+                        "enum": ["USD"]
+                      },
+                      "customer": {
+                        "type": "object",
+                        "description": "Customer",
+                        "required": ["phoneNumber", "email", "fullName"],
+                        "properties": {
+                          "fullName": {
+                            "type": "string",
+                            "description": "Customer Full Name, (NB: must match with card holder name)"
+                          },
+                          "email": {
+                            "type": "string",
+                            "description": "Customer Full Name, (NB: must match with card holder name)"
+                          },
+                          "phoneNumber": {
+                            "type": "string",
+                            "description": "Customer Full Name, (NB: must match with card holder name)"
+                          }
+                        }
+                      },
+                      "checksum": {
+                        "type": "string",
+                        "description": "If enabled, this is the generated checksum of the payload. Refer to the documentation at https://docs.clickpesa.com/home/checksum for more details."
+                      }
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "USSD Push Preview response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InitiateCardPaymentResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid or Expired Token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedError"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InitiateCardPaymentValidationError"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InitiateCardPaymentConflictError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InitiateCardPaymentNotFoundError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InitiateCardPaymentInternalServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "PreviewCardPaymentResponse": {
+        "type": "object",
+        "properties": {
+          "activeMethods": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "type": "string",
+                  "description": "Payment method name (e.g., TIGO-PESA, M-PESA, AIRTEL-MONEY)"
+                },
+                "status": {
+                  "type": "string",
+                  "enum": ["AVAILABLE", "UNAVAILABLE"],
+                  "description": "Status of the payment method"
+                },
+                "fee": {
+                  "type": "integer",
+                  "description": "Transaction fee in the smallest currency unit (e.g., cents)"
+                }
+              }
+            }
+          }
+        }
+      },
+      "PreviewCardPaymentValidationError": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "enum": [
+              "Valid Client ID is required",
+              "Application has no access to COLLECTION API feature. Enable it on your application.",
+              "Invalid Order Reference, should only contain alphanumeric characters and cannot be blank"
+            ],
+            "example": "Invalid Order Reference, should only contain alphanumeric characters and cannot be blank"
+          }
+        }
+      },
+      "PreviewCardPaymentNotFoundError": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "enum": [
+              "Account has no payment collection methods",
+              "Account has no valid payment method"
+            ],
+            "example": "Account has no payment collection methods"
+          }
+        }
+      },
+      "PreviewCardPaymentConflictError": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Conflict message when an order reference is already used",
+            "example": "Order reference {Your reference} already used: Create a different reference"
+          }
+        }
+      },
+      "InitiateCardPaymentResponse": {
+        "type": "object",
+        "properties": {
+          "cardPaymentLink": {
+            "type": "string",
+            "description": "A link for a customer to complete payment"
+          }
+        }
+      },
+      "InitiateCardPaymentValidationError": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "enum": [
+              "Invalid Order Reference, should only contain alphanumeric characters and cannot be blank",
+              "Application has no access to COLLECTION API feature. Enable it on your application.",
+              "Valid Client ID is required"
+            ]
+          }
+        }
+      },
+      "InitiateCardPaymentNotFoundError": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "enum": [
+              "Account has no payment collection methods",
+              "Account has no valid payment method"
+            ],
+            "example": "Account has no payment collection methods"
+          }
+        }
+      },
+      "InitiateCardPaymentConflictError": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Conflict message when an order reference is already used",
+            "example": "Order reference {Your reference} already used: Create a different reference"
+          }
+        }
+      },
+      "InitiateCardPaymentInternalServerError": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Internal Server Error",
+            "example": "Error validating fee, try again later"
+          }
+        }
+      },
+      "UnauthorizedError": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Unauthorized Error",
+            "example": "Unauthorized"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  }
+}
