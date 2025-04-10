@@ -6,10 +6,53 @@ description: "Accept card payments from all major cards processor including Visa
 ## Prerequisites
 
 1. **API Keys** -
- [Generate API Keys](/application/embedded-application-setup) for Hosted Checkout integration
+   [Generate API Keys](/application/embedded-application-setup) for Hosted Checkout integration
 
 2. **Authorization Token** -
    Use **API Keys** to [Generate Authorization Token](/api-reference/authorization/generate-token)
 
 ## How It Works
 
+**Step 1** - Validate Card Payment details
+
+<Card
+  title="Preview Card Payment Request"
+  icon="brackets-curly"
+  href="/api-reference/collection/card-payment-requests/preview-card-payment-request"
+  horizontal
+>
+  This endpoint validates push details like **Amount**, **Order Reference** and
+  verifies **Payment Methods** availability
+</Card>
+
+**Step 2** - Initiate payment request
+
+<Card
+  title="Initiate Card Payment Request"
+  icon="brackets-curly"
+  href="/api-reference/collection/card-payment-requests/initiate-card-payment-request"
+  horizontal
+>
+  This endpoint initiates card payment. It will return a link that will prompt
+  customer to enter their card information to complete the payment
+</Card>
+
+**Step 3** - Check payment status
+
+<Card
+  title="Check Payment Status"
+  icon="brackets-curly"
+  href="/api-reference/collection/card-payment-requests/querying-for-payments"
+  horizontal
+>
+  This endpoint queries for the payment status using payment's **Order
+  Reference**
+</Card>
+
+<Note>
+  - Card Payment will return Link that will prompt user to enter their card
+  information to complete payment.
+   {" "}
+
+   - We do not collect customer card information
+  </Note>

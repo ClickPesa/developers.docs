@@ -19,7 +19,7 @@
     }
   ],
   "paths": {
-    "/payments/preview-ussd-push-request": {
+    "/payments/preview-card-payment-request": {
       "post": {
         "tags": ["Payments", "Preview"],
         "description": "Validates push details like phone number, amount, order-reference and verifies payment channels availability",
@@ -37,7 +37,7 @@
                   },
                   "currency": {
                     "type": "string",
-                    "enum": ["TZS"]
+                    "enum": ["USD"]
                   },
                   "orderReference": {
                     "type": "string",
@@ -45,7 +45,7 @@
                   },
                   "checksum": {
                     "type": "string",
-                    "description": "If enabled, this is the generated checksum of the payload. Refer to the [documentation](/home/checksum) for more details."
+                    "description": "If enabled, this is the generated checksum of the payload. Refer to the documentation at https://docs.clickpesa.com/home/checksum for more details."
                   }
                 }
               }
@@ -58,7 +58,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PreviewUSSDPushResponse"
+                  "$ref": "#/components/schemas/PreviewCardPaymentResponse"
                 }
               }
             }
@@ -78,7 +78,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PreviewUssdPushValidationError"
+                  "$ref": "#/components/schemas/PreviewCardPaymentValidationError"
                 }
               }
             }
@@ -88,7 +88,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PreviewUSSDPushConflictError"
+                  "$ref": "#/components/schemas/PreviewCardPaymentConflictError"
                 }
               }
             }
@@ -98,7 +98,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PreviewUssdPushNotFoundError"
+                  "$ref": "#/components/schemas/PreviewCardPaymentNotFoundError"
                 }
               }
             }
@@ -106,44 +106,102 @@
         }
       }
     },
-    "/payments/initiate-ussd-push-request": {
+    "/payments/initiate-card-payment-request": {
       "post": {
         "tags": ["Payments", "Initiate"],
-        "description": "Sends the USSD-PUSH request to customer's mobile device for payment authorization",
+        "description": "Sends the USSD push request to customer's mobile device for payment authorization",
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": [
-                  "amount",
-                  "orderReference",
-                  "phoneNumber",
-                  "currency"
-                ],
-                "properties": {
-                  "amount": {
-                    "type": "string",
-                    "description": "Amount"
+                "oneOf": [
+                  {
+                    "title": "Body With Customer ID",
+                    "required": [
+                      "customer",
+                      "orderReference",
+                      "currency",
+                      "amount"
+                    ],
+                    "properties": {
+                      "amount": {
+                        "type": "string",
+                        "description": "Amount"
+                      },
+                      "orderReference": {
+                        "type": "string",
+                        "description": "Your unique Order reference"
+                      },
+                      "currency": {
+                        "type": "string",
+                        "enum": ["USD"]
+                      },
+                      "customer": {
+                        "type": "object",
+                        "description": "Customer",
+                        "required": ["id"],
+                        "properties": {
+                          "id": {
+                            "type": "string",
+                            "description": "Customer ID"
+                          }
+                        }
+                      },
+                      "checksum": {
+                        "type": "string",
+                        "description": "If enabled, this is the generated checksum of the payload. Refer to the documentation at https://docs.clickpesa.com/home/checksum for more details."
+                      }
+                    }
                   },
-                  "currency": {
-                    "type": "string",
-                    "enum": ["TZS"]
-                  },
-                  "orderReference": {
-                    "type": "string",
-                    "description": "Your unique Order reference"
-                  },
-                  "phoneNumber": {
-                    "type": "string",
-                    "description": "Phone Number to receive USSD-PUSH and make payment"
-                  },
-                  "checksum": {
-                    "type": "string",
-                    "description": "If enabled, this is the generated checksum of the payload. Refer to the [documentation](/home/checksum) for more details."
+                  {
+                    "title": "Body With Customer Details",
+                    "required": [
+                      "customer",
+                      "orderReference",
+                      "currency",
+                      "amount"
+                    ],
+                    "properties": {
+                      "amount": {
+                        "type": "string",
+                        "description": "Amount"
+                      },
+                      "orderReference": {
+                        "type": "string",
+                        "description": "Your unique Order reference"
+                      },
+                      "currency": {
+                        "type": "string",
+                        "enum": ["USD"]
+                      },
+                      "customer": {
+                        "type": "object",
+                        "description": "Customer",
+                        "required": ["phoneNumber", "email", "fullName"],
+                        "properties": {
+                          "fullName": {
+                            "type": "string",
+                            "description": "Customer Full Name, (NB: must match with card holder name)"
+                          },
+                          "email": {
+                            "type": "string",
+                            "description": "Customer Full Name, (NB: must match with card holder name)"
+                          },
+                          "phoneNumber": {
+                            "type": "string",
+                            "description": "Customer Full Name, (NB: must match with card holder name)"
+                          }
+                        }
+                      },
+                      "checksum": {
+                        "type": "string",
+                        "description": "If enabled, this is the generated checksum of the payload. Refer to the documentation at https://docs.clickpesa.com/home/checksum for more details."
+                      }
+                    }
                   }
-                }
+                ]
               }
             }
           }
@@ -154,7 +212,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/InitiateUSSDPushResponse"
+                  "$ref": "#/components/schemas/InitiateCardPaymentResponse"
                 }
               }
             }
@@ -174,7 +232,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/InitiateUssdPushValidationError"
+                  "$ref": "#/components/schemas/InitiateCardPaymentValidationError"
                 }
               }
             }
@@ -184,7 +242,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/InitiateUSSDPushConflictError"
+                  "$ref": "#/components/schemas/InitiateCardPaymentConflictError"
                 }
               }
             }
@@ -194,7 +252,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/InitiateUssdPushNotFoundError"
+                  "$ref": "#/components/schemas/InitiateCardPaymentNotFoundError"
                 }
               }
             }
@@ -204,7 +262,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/InitiateUSSDPushInternalServerError"
+                  "$ref": "#/components/schemas/InitiateCardPaymentInternalServerError"
                 }
               }
             }
@@ -215,7 +273,7 @@
   },
   "components": {
     "schemas": {
-      "PreviewUSSDPushResponse": {
+      "PreviewCardPaymentResponse": {
         "type": "object",
         "properties": {
           "activeMethods": {
@@ -241,7 +299,7 @@
           }
         }
       },
-      "PreviewUssdPushValidationError": {
+      "PreviewCardPaymentValidationError": {
         "type": "object",
         "properties": {
           "message": {
@@ -255,7 +313,7 @@
           }
         }
       },
-      "PreviewUssdPushNotFoundError": {
+      "PreviewCardPaymentNotFoundError": {
         "type": "object",
         "properties": {
           "message": {
@@ -268,7 +326,7 @@
           }
         }
       },
-      "PreviewUSSDPushConflictError": {
+      "PreviewCardPaymentConflictError": {
         "type": "object",
         "properties": {
           "message": {
@@ -278,57 +336,29 @@
           }
         }
       },
-      "InitiateUSSDPushResponse": {
+      "InitiateCardPaymentResponse": {
         "type": "object",
         "properties": {
-          "id": {
+          "cardPaymentLink": {
             "type": "string",
-            "description": "Unique identifier for the USSD-PUSH transaction"
-          },
-          "status": {
-            "type": "string",
-            "enum": ["PROCESSING", "SUCCESS", "FAILED", "SETTLED"],
-            "description": "Current status of the transaction"
-          },
-          "channel": {
-            "type": "string",
-            "description": "Payment channel used for the transaction (e.g., TIGO-PESA, M-PESA, AIRTEL-MONEY)"
-          },
-          "orderReference": {
-            "type": "string",
-            "description": "Your unique Reference identifier for the order"
-          },
-          "collectedAmount": {
-            "type": "string",
-            "description": "Amount collected from the transaction"
-          },
-          "collectedCurrency": {
-            "type": "string",
-            "description": "Currency of the collected amount (e.g., TZS)"
-          },
-          "createdAt": {
-            "type": "string",
-            "format": "date-time",
-            "description": "Timestamp when the transaction was created"
+            "description": "A link for a customer to complete payment"
           }
         }
       },
-      "InitiateUssdPushValidationError": {
+      "InitiateCardPaymentValidationError": {
         "type": "object",
         "properties": {
           "message": {
             "type": "string",
             "enum": [
-              "Invalid / unsupported phone number",
-              "Valid Client ID is required",
+              "Invalid Order Reference, should only contain alphanumeric characters and cannot be blank",
               "Application has no access to COLLECTION API feature. Enable it on your application.",
-              "Invalid Order Reference, should only contain alphanumeric characters and cannot be blank"
-            ],
-            "example": "Invalid / unsupported phone number"
+              "Valid Client ID is required"
+            ]
           }
         }
       },
-      "InitiateUssdPushNotFoundError": {
+      "InitiateCardPaymentNotFoundError": {
         "type": "object",
         "properties": {
           "message": {
@@ -341,7 +371,7 @@
           }
         }
       },
-      "InitiateUSSDPushConflictError": {
+      "InitiateCardPaymentConflictError": {
         "type": "object",
         "properties": {
           "message": {
@@ -351,7 +381,7 @@
           }
         }
       },
-      "InitiateUSSDPushInternalServerError": {
+      "InitiateCardPaymentInternalServerError": {
         "type": "object",
         "properties": {
           "message": {
