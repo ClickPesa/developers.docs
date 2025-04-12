@@ -21,7 +21,7 @@
   "paths": {
     "/checkout-link/generate-checkout-url": {
       "post": {
-        "description": "Generates a link for receiving online payments via ClickPesa Hosted Chekout",
+        "description": "Generates a link for receiving payments via ClickPesa Hosted Chekout",
         "requestBody": {
           "required": true,
           "content": {

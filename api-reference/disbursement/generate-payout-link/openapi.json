@@ -21,7 +21,7 @@
   "paths": {
     "/payout-link/generate-payout-url": {
       "post": {
-        "description": "Generate Checkout Link for receiving online payments",
+        "description": "Generate Payout Link for making payouts",
         "requestBody": {
           "required": true,
           "content": {
