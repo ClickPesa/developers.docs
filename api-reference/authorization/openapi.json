@@ -55,6 +55,16 @@
               }
             }
           },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenerateTokenMissingCredentialsError"
+                }
+              }
+            }
+          },
           "403": {
             "description": "Invalid Client Details",
             "content": {
@@ -96,6 +106,16 @@
               "Unauthorized API-Key"
             ],
             "example": "Invalid or Expired API-Key"
+          }
+        },
+        "required": ["message"]
+      },
+      "GenerateTokenMissingCredentialsError": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Unauthorized"
           }
         },
         "required": ["message"]
