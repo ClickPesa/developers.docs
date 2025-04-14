@@ -25,7 +25,7 @@ description: "Accept card payments from all major cards processor including Visa
   verifies **Payment Methods** availability
 </Card>
 
-**Step 2** - Initiate payment
+**Step 2** - Initiate card payment
 
 <Card
   title="Initiate Card Payment"
@@ -33,11 +33,16 @@ description: "Accept card payments from all major cards processor including Visa
   href="/api-reference/collection/card-payment/initiate-card-payment"
   horizontal
 >
-  This endpoint initiates card payment. It will return a link that will prompt
-  customer to enter their card information to complete the payment
+  This endpoint initiates card payment. It will return a mastercard widget hosted link.
 </Card>
 
-**Step 3** - Check payment status
+**Step 3** - Open the hosted link in a new tab or window to prompt user to enter their card information and the complete payment.
+
+<Note>
+  - For security reasons, We do not collect or store customer card information
+</Note>
+
+**Step 4** - Check payment status
 
 <Card
   title="Check Payment Status"
@@ -48,10 +53,3 @@ description: "Accept card payments from all major cards processor including Visa
   This endpoint queries for the payment status using payment's **Order
   Reference**
 </Card>
-
-<Note>
-  - Card Payment will return Link that will prompt user to enter their card
-  information to complete payment.
-   {" "}
-  - We do not collect customer card information
-  </Note>
