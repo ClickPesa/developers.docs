@@ -54,7 +54,7 @@
         },
         "responses": {
           "200": {
-            "description": "USSD Push Preview response",
+            "description": "Preview USSD Push response",
             "content": {
               "application/json": {
                 "schema": {
@@ -150,7 +150,7 @@
         },
         "responses": {
           "200": {
-            "description": "USSD Push Preview response",
+            "description": "Initiate USSD Push response",
             "content": {
               "application/json": {
                 "schema": {
