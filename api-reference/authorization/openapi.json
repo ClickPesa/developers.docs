@@ -21,7 +21,10 @@
   "paths": {
     "/generate-token": {
       "post": {
-        "tags": ["Authorization", "Security"],
+        "tags": [
+          "Authorization",
+          "Security"
+        ],
         "description": "Generates JWT Authorization token required for accessing ClickPesa APIs",
         "parameters": [
           {
@@ -93,7 +96,10 @@
             "example": "Bearer token"
           }
         },
-        "required": ["success", "token"]
+        "required": [
+          "success",
+          "token"
+        ]
       },
       "GenerateTokenInvalidClientDetailsError": {
         "type": "object",
@@ -108,7 +114,9 @@
             "example": "Invalid or Expired API-Key"
           }
         },
-        "required": ["message"]
+        "required": [
+          "message"
+        ]
       },
       "GenerateTokenMissingCredentialsError": {
         "type": "object",
@@ -118,13 +126,17 @@
             "example": "Unauthorized"
           }
         },
-        "required": ["message"]
+        "required": [
+          "message"
+        ]
       }
     },
     "securitySchemes": {
       "bearerAuth": {
         "type": "http",
-        "scheme": "bearer"
+        "scheme": "bearer",
+        "description": "Authorization header in the form of `Bearer <token>`, where `<token>` is a valid JWT from generate token endpoint",
+        "bearerFormat": "JWT"
       }
     }
   }

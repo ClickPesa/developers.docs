@@ -21,7 +21,10 @@
   "paths": {
     "/payouts/preview-mobile-money-payout": {
       "post": {
-        "tags": ["Payouts", "Preview"],
+        "tags": [
+          "Payouts",
+          "Preview"
+        ],
         "description": "Validates mobile money payout details like phone number, amount, order-reference, fee",
         "requestBody": {
           "required": true,
@@ -44,8 +47,9 @@
                   },
                   "currency": {
                     "type": "string",
-
-                    "enum": ["TZS"]
+                    "enum": [
+                      "TZS"
+                    ]
                   },
                   "orderReference": {
                     "type": "string",
@@ -116,7 +120,10 @@
     },
     "/payouts/create-mobile-money-payout": {
       "post": {
-        "tags": ["Payouts", "Create"],
+        "tags": [
+          "Payouts",
+          "Create"
+        ],
         "description": "Initiate a mobile money payout by sending a request to the API. The specified amount will be transferred to the recipient’s mobile wallet.",
         "requestBody": {
           "required": true,
@@ -139,8 +146,9 @@
                   },
                   "currency": {
                     "type": "string",
-
-                    "enum": ["TZS"]
+                    "enum": [
+                      "TZS"
+                    ]
                   },
                   "orderReference": {
                     "type": "string",
@@ -215,25 +223,47 @@
       "PreviewMobileMoneyPayoutResponse": {
         "type": "object",
         "properties": {
-          "amount": { "type": "number", "example": 1047.1 },
-          "balance": { "type": "number", "example": 2000 },
+          "amount": {
+            "type": "number",
+            "example": 1047.1
+          },
+          "balance": {
+            "type": "number",
+            "example": 2000
+          },
           "channelProvider": {
             "type": "string",
             "example": "TIGO PESA"
           },
-          "fee": { "type": "number", "example": 47.1 },
+          "fee": {
+            "type": "number",
+            "example": 47.1
+          },
           "order": {
             "type": "object",
             "properties": {
-              "amount": { "type": "number", "example": 1000 },
-              "currency": { "type": "string", "example": "TZS" },
-              "id": { "type": "string", "example": "UNIQUEREFERENCE" }
+              "amount": {
+                "type": "number",
+                "example": 1000
+              },
+              "currency": {
+                "type": "string",
+                "example": "TZS"
+              },
+              "id": {
+                "type": "string",
+                "example": "UNIQUEREFERENCE"
+              }
             }
           },
           "payoutFeeBearer": {
             "type": "string",
             "example": "merchant",
-            "enum": ["merchant", "both", "customer"]
+            "enum": [
+              "merchant",
+              "both",
+              "customer"
+            ]
           },
           "receiver": {
             "type": "object",
@@ -242,7 +272,10 @@
                 "type": "string",
                 "example": "John Doe"
               },
-              "accountNumber": { "type": "string", "example": "255650000000" }
+              "accountNumber": {
+                "type": "string",
+                "example": "255650000000"
+              }
             }
           }
         }
@@ -279,11 +312,17 @@
           },
           "status": {
             "type": "string",
-            "enum": ["AUTHORIZED", "SUCCESS", "REVERSED"]
+            "enum": [
+              "AUTHORIZED",
+              "SUCCESS",
+              "REVERSED"
+            ]
           },
           "channel": {
             "type": "string",
-            "enum": ["MOBILE MONEY"]
+            "enum": [
+              "MOBILE MONEY"
+            ]
           },
           "channelProvider": {
             "type": "string",
@@ -352,7 +391,9 @@
     "securitySchemes": {
       "bearerAuth": {
         "type": "http",
-        "scheme": "bearer"
+        "scheme": "bearer",
+        "description": "Authorization header in the form of `Bearer <token>`, where `<token>` is a valid JWT from generate token endpoint",
+        "bearerFormat": "JWT"
       }
     }
   }

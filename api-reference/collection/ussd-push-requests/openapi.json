@@ -21,7 +21,10 @@
   "paths": {
     "/payments/preview-ussd-push-request": {
       "post": {
-        "tags": ["Payments", "Preview"],
+        "tags": [
+          "Payments",
+          "Preview"
+        ],
         "description": "Validates push details like phone number, amount, order-reference and verifies payment channels availability",
         "requestBody": {
           "required": true,
@@ -29,7 +32,11 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": ["amount", "orderReference", "currency"],
+                "required": [
+                  "amount",
+                  "orderReference",
+                  "currency"
+                ],
                 "properties": {
                   "amount": {
                     "type": "string",
@@ -37,7 +44,9 @@
                   },
                   "currency": {
                     "type": "string",
-                    "enum": ["TZS"]
+                    "enum": [
+                      "TZS"
+                    ]
                   },
                   "orderReference": {
                     "type": "string",
@@ -108,7 +117,10 @@
     },
     "/payments/initiate-ussd-push-request": {
       "post": {
-        "tags": ["Payments", "Initiate"],
+        "tags": [
+          "Payments",
+          "Initiate"
+        ],
         "description": "Sends the USSD-PUSH request to customer's mobile device for payment authorization",
         "requestBody": {
           "required": true,
@@ -129,7 +141,9 @@
                   },
                   "currency": {
                     "type": "string",
-                    "enum": ["TZS"]
+                    "enum": [
+                      "TZS"
+                    ]
                   },
                   "orderReference": {
                     "type": "string",
@@ -229,16 +243,19 @@
                 },
                 "status": {
                   "type": "string",
-                  "enum": ["AVAILABLE", "UNAVAILABLE"],
+                  "enum": [
+                    "AVAILABLE",
+                    "UNAVAILABLE"
+                  ],
                   "description": "Status of the payment method"
                 },
                 "fee": {
                   "type": "integer",
-                    "description": "Fee amount if the payment method is available."
+                  "description": "Fee amount if the payment method is available."
                 },
                 "message": {
                   "type": "integer",
-                    "description": "Message if the payment method is unavailable."
+                  "description": "Message if the payment method is unavailable."
                 }
               }
             }
@@ -291,7 +308,12 @@
           },
           "status": {
             "type": "string",
-            "enum": ["PROCESSING", "SUCCESS", "FAILED", "SETTLED"],
+            "enum": [
+              "PROCESSING",
+              "SUCCESS",
+              "FAILED",
+              "SETTLED"
+            ],
             "description": "Current status of the transaction"
           },
           "channel": {
@@ -379,7 +401,9 @@
     "securitySchemes": {
       "bearerAuth": {
         "type": "http",
-        "scheme": "bearer"
+        "scheme": "bearer",
+        "description": "Authorization header in the form of `Bearer <token>`, where `<token>` is a valid JWT from generate token endpoint",
+        "bearerFormat": "JWT"
       }
     }
   }

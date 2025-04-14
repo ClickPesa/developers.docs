@@ -120,7 +120,10 @@
             "channel": {
               "type": "string",
               "description": "Payout channel",
-              "enum": ["BANK TRANSFER", "MOBILE MONEY"]
+              "enum": [
+                "BANK TRANSFER",
+                "MOBILE MONEY"
+              ]
             },
             "channelProvider": {
               "type": "string",
@@ -129,7 +132,10 @@
             "transferType": {
               "type": "string",
               "description": "Transfer type - when applicable",
-              "enum": ["ACH", "RTGS"]
+              "enum": [
+                "ACH",
+                "RTGS"
+              ]
             },
             "notes": {
               "type": "string",
@@ -191,7 +197,9 @@
     "securitySchemes": {
       "bearerAuth": {
         "type": "http",
-        "scheme": "bearer"
+        "scheme": "bearer",
+        "description": "Authorization header in the form of `Bearer <token>`, where `<token>` is a valid JWT from generate token endpoint",
+        "bearerFormat": "JWT"
       }
     }
   }

@@ -21,7 +21,10 @@
   "paths": {
     "/payouts/preview-bank-payout": {
       "post": {
-        "tags": ["Payouts", "Preview"],
+        "tags": [
+          "Payouts",
+          "Preview"
+        ],
         "description": "Validates bank payout details like amount, order-reference and verifies payout channels availability",
         "requestBody": {
           "required": true,
@@ -46,19 +49,24 @@
                   },
                   "currency": {
                     "type": "string",
-                    "enum": ["TZS"]
+                    "enum": [
+                      "TZS"
+                    ]
                   },
                   "orderReference": {
                     "type": "string",
                     "description": "Your unique Order reference"
                   },
-                    "bic": {
+                  "bic": {
                     "type": "string",
                     "description": "Beneficiary bank BIC. You can fetch the list of bank BICs from the [banks list endpoint.](/api-reference/list/get-bank-list)"
                   },
                   "transferType": {
                     "type": "string",
-                    "enum": ["ACH", "RTGS"]
+                    "enum": [
+                      "ACH",
+                      "RTGS"
+                    ]
                   },
                   "checksum": {
                     "type": "string",
@@ -125,7 +133,10 @@
     },
     "/payouts/create-bank-payout": {
       "post": {
-        "tags": ["Payouts", "Initiate"],
+        "tags": [
+          "Payouts",
+          "Initiate"
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -153,8 +164,9 @@
                   },
                   "currency": {
                     "type": "string",
-
-                    "enum": ["TZS"]
+                    "enum": [
+                      "TZS"
+                    ]
                   },
                   "orderReference": {
                     "type": "string",
@@ -166,7 +178,10 @@
                   },
                   "transferType": {
                     "type": "string",
-                    "enum": ["ACH", "RTGS"]
+                    "enum": [
+                      "ACH",
+                      "RTGS"
+                    ]
                   },
                   "checksum": {
                     "type": "string",
@@ -237,25 +252,47 @@
       "PreviewBankPayoutResponse": {
         "type": "object",
         "properties": {
-          "amount": { "type": "number", "example": 1047.1 },
-          "balance": { "type": "number", "example": 2000 },
+          "amount": {
+            "type": "number",
+            "example": 1047.1
+          },
+          "balance": {
+            "type": "number",
+            "example": 2000
+          },
           "channelProvider": {
             "type": "string",
             "example": "AMANA BANK LIMITED"
           },
-          "fee": { "type": "number", "example": 47.1 },
+          "fee": {
+            "type": "number",
+            "example": 47.1
+          },
           "order": {
             "type": "object",
             "properties": {
-              "amount": { "type": "number", "example": 1000 },
-              "currency": { "type": "string", "example": "TZS" },
-              "id": { "type": "string", "example": "UNIQUEREFERENCE" }
+              "amount": {
+                "type": "number",
+                "example": 1000
+              },
+              "currency": {
+                "type": "string",
+                "example": "TZS"
+              },
+              "id": {
+                "type": "string",
+                "example": "UNIQUEREFERENCE"
+              }
             }
           },
           "payoutFeeBearer": {
             "type": "string",
             "example": "merchant",
-            "enum": ["merchant", "both", "customer"]
+            "enum": [
+              "merchant",
+              "both",
+              "customer"
+            ]
           },
           "receiver": {
             "type": "object",
@@ -268,11 +305,13 @@
           },
           "transferType": {
             "type": "string",
-            "enum": ["ACH", "RTGS"]
+            "enum": [
+              "ACH",
+              "RTGS"
+            ]
           }
         }
       },
-
       "CreateBankPayoutResponse": {
         "type": "object",
         "properties": {
@@ -304,11 +343,17 @@
           },
           "status": {
             "type": "string",
-            "enum": ["AUTHORIZED", "SUCCESS", "REVERSED"]
+            "enum": [
+              "AUTHORIZED",
+              "SUCCESS",
+              "REVERSED"
+            ]
           },
           "channel": {
             "type": "string",
-            "enum": ["BANK TRANSFER"]
+            "enum": [
+              "BANK TRANSFER"
+            ]
           },
           "channelProvider": {
             "type": "string",
@@ -316,7 +361,10 @@
           },
           "transferType": {
             "type": "string",
-            "enum": ["ACH", "RTGS"],
+            "enum": [
+              "ACH",
+              "RTGS"
+            ],
             "nullable": true,
             "example": "ACH"
           },
@@ -384,7 +432,9 @@
     "securitySchemes": {
       "bearerAuth": {
         "type": "http",
-        "scheme": "bearer"
+        "scheme": "bearer",
+        "description": "Authorization header in the form of `Bearer <token>`, where `<token>` is a valid JWT from generate token endpoint",
+        "bearerFormat": "JWT"
       }
     }
   }

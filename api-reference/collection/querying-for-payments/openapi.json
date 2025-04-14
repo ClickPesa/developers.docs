@@ -82,7 +82,13 @@
             "status": {
               "type": "string",
               "description": "Payment status",
-              "enum": ["SUCCESS", "SETTLED", "PROCESSING", "PENDING", "FAILED"]
+              "enum": [
+                "SUCCESS",
+                "SETTLED",
+                "PROCESSING",
+                "PENDING",
+                "FAILED"
+              ]
             },
             "paymentReference": {
               "type": "string",
@@ -158,7 +164,9 @@
     "securitySchemes": {
       "bearerAuth": {
         "type": "http",
-        "scheme": "bearer"
+        "scheme": "bearer",
+        "description": "Authorization header in the form of `Bearer <token>`, where `<token>` is a valid JWT from generate token endpoint",
+        "bearerFormat": "JWT"
       }
     }
   }

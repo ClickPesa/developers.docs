@@ -21,14 +21,21 @@
   "paths": {
     "/payments/preview-card-payment": {
       "post": {
-        "tags": ["Payments", "Preview"],
+        "tags": [
+          "Payments",
+          "Preview"
+        ],
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": ["amount", "orderReference", "currency"],
+                "required": [
+                  "amount",
+                  "orderReference",
+                  "currency"
+                ],
                 "properties": {
                   "amount": {
                     "type": "string",
@@ -36,7 +43,9 @@
                   },
                   "currency": {
                     "type": "string",
-                    "enum": ["USD"]
+                    "enum": [
+                      "USD"
+                    ]
                   },
                   "orderReference": {
                     "type": "string",
@@ -107,7 +116,10 @@
     },
     "/payments/initiate-card-payment": {
       "post": {
-        "tags": ["Payments", "Initiate"],
+        "tags": [
+          "Payments",
+          "Initiate"
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -134,12 +146,16 @@
                       },
                       "currency": {
                         "type": "string",
-                        "enum": ["USD"]
+                        "enum": [
+                          "USD"
+                        ]
                       },
                       "customer": {
                         "type": "object",
                         "description": "Customer",
-                        "required": ["id"],
+                        "required": [
+                          "id"
+                        ],
                         "properties": {
                           "id": {
                             "type": "string",
@@ -172,12 +188,18 @@
                       },
                       "currency": {
                         "type": "string",
-                        "enum": ["USD"]
+                        "enum": [
+                          "USD"
+                        ]
                       },
                       "customer": {
                         "type": "object",
                         "description": "Customer details",
-                        "required": ["phoneNumber", "email", "fullName"],
+                        "required": [
+                          "phoneNumber",
+                          "email",
+                          "fullName"
+                        ],
                         "properties": {
                           "fullName": {
                             "type": "string",
@@ -285,16 +307,19 @@
                 },
                 "status": {
                   "type": "string",
-                  "enum": ["AVAILABLE", "UNAVAILABLE"],
+                  "enum": [
+                    "AVAILABLE",
+                    "UNAVAILABLE"
+                  ],
                   "description": "Status of the payment method"
                 },
                 "fee": {
                   "type": "integer",
-                    "description": "Fee amount if the payment method is available."
+                  "description": "Fee amount if the payment method is available."
                 },
                 "message": {
                   "type": "integer",
-                    "description": "Message if the payment method is unavailable."
+                  "description": "Message if the payment method is unavailable."
                 }
               }
             }
@@ -407,7 +432,9 @@
     "securitySchemes": {
       "bearerAuth": {
         "type": "http",
-        "scheme": "bearer"
+        "scheme": "bearer",
+        "description": "Authorization header in the form of `Bearer <token>`, where `<token>` is a valid JWT from generate token endpoint",
+        "bearerFormat": "JWT"
       }
     }
   }

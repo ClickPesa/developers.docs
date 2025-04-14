@@ -21,7 +21,7 @@
   "paths": {
     "/checkout-link/generate-checkout-url": {
       "post": {
-        "description": "Generates a link for receiving payments via ClickPesa Hosted Chekout",
+        "description": "Generates a link for receiving payments via ClickPesa Hosted Checkout",
         "requestBody": {
           "required": true,
           "content": {
@@ -47,7 +47,10 @@
                       },
                       "orderCurrency": {
                         "type": "string",
-                        "enum": ["TZS", "USD"],
+                        "enum": [
+                          "TZS",
+                          "USD"
+                        ],
                         "description": "Your order payment currency to receive in(e.g., TZS, USD)"
                       },
                       "customerName": {
@@ -81,7 +84,11 @@
                         "description": "Your order items",
                         "items": {
                           "type": "object",
-                          "required": ["name", "price", "quantity"],
+                          "required": [
+                            "name",
+                            "price",
+                            "quantity"
+                          ],
                           "properties": {
                             "name": {
                               "type": "string",
@@ -104,7 +111,10 @@
                       },
                       "orderCurrency": {
                         "type": "string",
-                        "enum": ["TZS", "USD"],
+                        "enum": [
+                          "TZS",
+                          "USD"
+                        ],
                         "description": "Your order payment currency to receive in(e.g., TZS, USD)"
                       },
                       "customerName": {
@@ -219,7 +229,9 @@
         "properties": {
           "message": {
             "type": "string",
-            "enum": ["Checkout is not available for this merchant"],
+            "enum": [
+              "Checkout is not available for this merchant"
+            ],
             "example": "Checkout is not available for this merchant"
           }
         }
@@ -248,7 +260,9 @@
     "securitySchemes": {
       "bearerAuth": {
         "type": "http",
-        "scheme": "bearer"
+        "scheme": "bearer",
+        "description": "Authorization header in the form of `Bearer <token>`, where `<token>` is a valid JWT from generate token endpoint",
+        "bearerFormat": "JWT"
       }
     }
   }
