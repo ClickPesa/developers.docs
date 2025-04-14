@@ -53,7 +53,7 @@
         },
         "responses": {
           "200": {
-            "description": "USSD Push Preview response",
+            "description": "Preview Card response",
             "content": {
               "application/json": {
                 "schema": {
@@ -206,7 +206,7 @@
         },
         "responses": {
           "200": {
-            "description": "USSD Push Preview response",
+            "description": "Initiate Card response",
             "content": {
               "application/json": {
                 "schema": {

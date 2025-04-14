@@ -71,7 +71,7 @@
         },
         "responses": {
           "200": {
-            "description": "USSD Push Preview response",
+            "description": "Bank payout preview response",
             "content": {
               "application/json": {
                 "schema": {
@@ -179,7 +179,7 @@
         },
         "responses": {
           "200": {
-            "description": "USSD Push Preview response",
+            "description": "Create bank payout response",
             "content": {
               "application/json": {
                 "schema": {
