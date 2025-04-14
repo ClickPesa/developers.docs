@@ -32,7 +32,7 @@
                 "properties": {
                   "amount": {
                     "type": "string",
-                    "description": "Amount"
+                    "description": "Your payment amount"
                   },
                   "currency": {
                     "type": "string",
@@ -126,7 +126,7 @@
                     "properties": {
                       "amount": {
                         "type": "string",
-                        "description": "Amount"
+                        "description": "Your payment amount"
                       },
                       "orderReference": {
                         "type": "string",
@@ -164,7 +164,7 @@
                     "properties": {
                       "amount": {
                         "type": "string",
-                        "description": "Amount"
+                        "description": "Your payment amount"
                       },
                       "orderReference": {
                         "type": "string",

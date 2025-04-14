@@ -31,7 +31,7 @@
                 "properties": {
                   "amount": {
                     "type": "string",
-                    "description": "Amount"
+                    "description": "Your payout amount"
                   },
                   "orderReference": {
                     "type": "string",
