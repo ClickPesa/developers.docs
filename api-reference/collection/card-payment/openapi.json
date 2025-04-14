@@ -281,7 +281,7 @@
               "properties": {
                 "name": {
                   "type": "string",
-                  "description": "Payment method name (e.g., TIGO-PESA, M-PESA, AIRTEL-MONEY)"
+                  "description": "Payment method name (VISA/MASTER CARD)"
                 },
                 "status": {
                   "type": "string",
