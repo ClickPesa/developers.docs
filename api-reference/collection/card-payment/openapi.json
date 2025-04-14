@@ -44,7 +44,7 @@
                   },
                   "checksum": {
                     "type": "string",
-                    "description": "If enabled, this is the generated checksum of the payload. Refer to the documentation at https://docs.clickpesa.com/home/checksum for more details."
+                    "description": "If enabled, this is the generated checksum of the payload. Refer to the [documentation](https://docs.clickpesa.com/home/checksum) for more details."
                   }
                 }
               }
@@ -149,7 +149,7 @@
                       },
                       "checksum": {
                         "type": "string",
-                        "description": "If enabled, this is the generated checksum of the payload. Refer to the documentation at https://docs.clickpesa.com/home/checksum for more details."
+                        "description": "If enabled, this is the generated checksum of the payload. Refer to the [documentation](https://docs.clickpesa.com/home/checksum) for more details."
                       }
                     }
                   },
@@ -176,26 +176,26 @@
                       },
                       "customer": {
                         "type": "object",
-                        "description": "Customer",
+                        "description": "Customer details",
                         "required": ["phoneNumber", "email", "fullName"],
                         "properties": {
                           "fullName": {
                             "type": "string",
-                            "description": "Customer Full Name, (NB: must match with card holder name)"
+                            "description": "Customer Full Name - must match with card holder name"
                           },
                           "email": {
                             "type": "string",
-                            "description": "Customer Full Name, (NB: must match with card holder name)"
+                            "description": "Valid customer email address"
                           },
                           "phoneNumber": {
                             "type": "string",
-                            "description": "Customer Full Name, (NB: must match with card holder name)"
+                            "description": "Valid customer phone number, starting with country code and without the plus sign, e.g., 255712345678"
                           }
                         }
                       },
                       "checksum": {
                         "type": "string",
-                        "description": "If enabled, this is the generated checksum of the payload. Refer to the documentation at https://docs.clickpesa.com/home/checksum for more details."
+                        "description": "If enabled, this is the generated checksum of the payload. Refer to the [documentation](https://docs.clickpesa.com/home/checksum) for more details."
                       }
                     }
                   }
