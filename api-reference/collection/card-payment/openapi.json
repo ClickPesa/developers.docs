@@ -290,7 +290,11 @@
                 },
                 "fee": {
                   "type": "integer",
-                  "description": "Transaction fee in the smallest currency unit (e.g., cents)"
+                    "description": "Fee amount if the payment method is available."
+                },
+                "message": {
+                  "type": "integer",
+                    "description": "Message if the payment method is unavailable."
                 }
               }
             }
