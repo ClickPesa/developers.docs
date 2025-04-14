@@ -19,7 +19,7 @@
     }
   ],
   "paths": {
-    "/payouts/preview-bank-payout-request": {
+    "/payouts/preview-bank-payout": {
       "post": {
         "tags": ["Payouts", "Preview"],
         "description": "Validates bank payout details like amount, order-reference and verifies payout channels availability",
@@ -123,10 +123,9 @@
         }
       }
     },
-    "/payouts/create-bank-payout-request": {
+    "/payouts/create-bank-payout": {
       "post": {
-        "tags": ["Payments", "Initiate"],
-        "description": "Sends the USSD-PUSH request to customer's mobile device for payment authorization",
+        "tags": ["Payouts", "Initiate"],
         "requestBody": {
           "required": true,
           "content": {

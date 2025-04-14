@@ -19,7 +19,7 @@
     }
   ],
   "paths": {
-    "/payouts/preview-mobile-money-payout-request": {
+    "/payouts/preview-mobile-money-payout": {
       "post": {
         "tags": ["Payouts", "Preview"],
         "description": "Validates mobile money payout details like phone number, amount, order-reference, fee",
@@ -114,7 +114,7 @@
         }
       }
     },
-    "/payouts/create-mobile-money-payout-request": {
+    "/payouts/create-mobile-money-payout": {
       "post": {
         "tags": ["Payouts", "Create"],
         "description": "Initiate a mobile money payout by sending a request to the API. The specified amount will be transferred to the recipient’s mobile wallet.",

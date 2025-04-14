@@ -148,17 +148,17 @@
           {
             "group": "MOBILE-MONEY PAYOUT",
             "pages": [
-              "api-reference/disbursement/mno-payout-requests/preview-mno-payout-request",
-              "api-reference/disbursement/mno-payout-requests/create-mno-payout-request",
-              "api-reference/disbursement/mno-payout-requests/querying-for-payouts"
+              "api-reference/disbursement/mno-payout/preview-mno-payout",
+              "api-reference/disbursement/mno-payout/create-mno-payout",
+              "api-reference/disbursement/mno-payout/querying-for-payouts"
             ]
           },
           {
             "group": "BANK PAYOUT",
             "pages": [
-              "api-reference/disbursement/bank-payout-requests/preview-bank-payout-request",
-              "api-reference/disbursement/bank-payout-requests/create-bank-payout-request",
-              "api-reference/disbursement/bank-payout-requests/querying-for-payouts"
+              "api-reference/disbursement/bank-payout/preview-bank-payout",
+              "api-reference/disbursement/bank-payout/create-bank-payout",
+              "api-reference/disbursement/bank-payout/querying-for-payouts"
             ]
           },
           {
