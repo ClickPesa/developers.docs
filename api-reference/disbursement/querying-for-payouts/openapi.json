@@ -35,7 +35,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Generate Checkout Link Response",
+            "description": "Query Payout Response",
             "content": {
               "application/json": {
                 "schema": {
@@ -119,12 +119,12 @@
             },
             "channel": {
               "type": "string",
-              "description": "Payment channel",
+              "description": "Payout channel",
               "enum": ["BANK TRANSFER", "MOBILE MONEY"]
             },
             "channelProvider": {
               "type": "string",
-              "description": "Name of the payment provider"
+              "description": "Name of the payout channel provider"
             },
             "settlementType": {
               "type": "string",

@@ -48,7 +48,7 @@
         },
         "responses": {
           "200": {
-            "description": "Generate Checkout Link Response",
+            "description": "Generate Payout URL Response",
             "content": {
               "application/json": {
                 "schema": {
