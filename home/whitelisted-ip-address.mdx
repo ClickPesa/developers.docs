@@ -1,16 +1,20 @@
 ---
-title: "Whitelisted IP Address"
-description: "Whitelist IP Address to secure API calls."
-icon: "lock"
+title: "Whitelist IP"
+description: "Whitelisting IP Address to secure API calls."
+icon: "ban"
 ---
 
 To help keep your data and API usage secure, ClickPesa allows you to restrict access to your APIs by whitelisting specific IP addresses. This ensures only requests from trusted sources can interact with your account.
+
+<Tip>
+Whitelisting IPs is an added layer of security to protect your data and your business. We highly recommend enabling this feature when you're using the APIs in production.
+</Tip>
 
 ## Accessing Whitelisted IP Settings
 
 To access your whitelisted IPs:
 
-1. Log in to your **ClickPesa Dashboard**.
+1. Log in to your [ClickPesa Dashboard](https://merchant.clickpesa.com).
 2. Navigate to **Settings** → **Developers**.
 3. Scroll to the **Whitelisted IP** section.
 
@@ -22,3 +26,4 @@ To access your whitelisted IPs:
 <Warning>
 If **no** IP addresses are added, your API will accept requests from **any** IP address. - As soon as **one or more IPs** are added, requests from **all other IPs** will be automatically **blocked**
 </Warning>
+
