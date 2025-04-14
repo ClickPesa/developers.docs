@@ -314,7 +314,7 @@
             "type": "string",
             "example": "Equity Bank Tanzania Limited"
           },
-          "settlementType": {
+          "transferType": {
             "type": "string",
             "enum": ["ACH", "RTGS"],
             "nullable": true,

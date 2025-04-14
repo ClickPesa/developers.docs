@@ -126,7 +126,7 @@
               "type": "string",
               "description": "Name of the payout channel provider"
             },
-            "settlementType": {
+            "transferType": {
               "type": "string",
               "description": "Settlement type if applicable",
               "enum": ["ACH", "RTGS"]

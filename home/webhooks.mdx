@@ -34,7 +34,7 @@ ClickPesa uses webhooks to inform your systems when transactional events occur. 
     "status": "SUCCESS",
     "channel": "BANK TRANSFER", // or MOBILE MONEY
     "channelProvider": "Equity Bank Tanzania Limited",
-    "settlementType": "ACH", // or RTGS // if available
+    "transferType": "ACH", // or RTGS // if available
     "notes": "Payment for invoice no. 123456", // if available
     "beneficiary": {
       "accountNumber": "123456789",
@@ -70,7 +70,7 @@ ClickPesa uses webhooks to inform your systems when transactional events occur. 
     "status": "REFUNDED",
     "channel": "BANK TRANSFER", // or MOBILE MONEY
     "channelProvider": "Equity Bank Tanzania Limited",
-    "settlementType": "ACH", // or RTGS // if available
+    "transferType": "ACH", // or RTGS // if available
     "notes": "Payment for invoice no. 123456", // if available
     "refund": {
       // reverse details
@@ -110,7 +110,7 @@ ClickPesa uses webhooks to inform your systems when transactional events occur. 
     "status": "REVERSED",
     "channel": "BANK TRANSFER", // or MOBILE MONEY
     "channelProvider": "Equity Bank Tanzania Limited",
-    "settlementType": "ACH", // or RTGS // if available
+    "transferType": "ACH", // or RTGS // if available
     "notes": "Payment for invoice no. 123456", // if available
     "reverse": {
       // reverse details
