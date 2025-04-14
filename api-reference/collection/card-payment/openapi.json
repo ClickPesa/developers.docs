@@ -19,10 +19,9 @@
     }
   ],
   "paths": {
-    "/payments/preview-card-payment-request": {
+    "/payments/preview-card-payment": {
       "post": {
         "tags": ["Payments", "Preview"],
-        "description": "Validates push details like phone number, amount, order-reference and verifies payment channels availability",
         "requestBody": {
           "required": true,
           "content": {
@@ -106,10 +105,9 @@
         }
       }
     },
-    "/payments/initiate-card-payment-request": {
+    "/payments/initiate-card-payment": {
       "post": {
         "tags": ["Payments", "Initiate"],
-        "description": "Sends the USSD push request to customer's mobile device for payment authorization",
         "requestBody": {
           "required": true,
           "content": {
