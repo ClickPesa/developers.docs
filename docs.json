@@ -140,9 +140,9 @@
           {
             "group": "CARD PAYMENT",
             "pages": [
-              "api-reference/collection/card-payment-requests/preview-card-payment-request",
-              "api-reference/collection/card-payment-requests/initiate-card-payment-request",
-              "api-reference/collection/card-payment-requests/querying-for-payments"
+              "api-reference/collection/card-payment/preview-card-payment",
+              "api-reference/collection/card-payment/initiate-card-payment",
+              "api-reference/collection/card-payment/querying-for-payments"
             ]
           },
           {

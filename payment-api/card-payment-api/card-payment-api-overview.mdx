@@ -16,21 +16,21 @@ description: "Accept card payments from all major cards processor including Visa
 **Step 1** - Validate Card Payment details
 
 <Card
-  title="Preview Card Payment Request"
+  title="Preview Card Payment"
   icon="brackets-curly"
-  href="/api-reference/collection/card-payment-requests/preview-card-payment-request"
+  href="/api-reference/collection/card-payment/preview-card-payment"
   horizontal
 >
-  This endpoint validates push details like **Amount**, **Order Reference** and
+  This endpoint validates payment details like **Amount**, **Order Reference** and
   verifies **Payment Methods** availability
 </Card>
 
-**Step 2** - Initiate payment request
+**Step 2** - Initiate payment
 
 <Card
-  title="Initiate Card Payment Request"
+  title="Initiate Card Payment"
   icon="brackets-curly"
-  href="/api-reference/collection/card-payment-requests/initiate-card-payment-request"
+  href="/api-reference/collection/card-payment/initiate-card-payment"
   horizontal
 >
   This endpoint initiates card payment. It will return a link that will prompt
@@ -53,6 +53,5 @@ description: "Accept card payments from all major cards processor including Visa
   - Card Payment will return Link that will prompt user to enter their card
   information to complete payment.
    {" "}
-
-   - We do not collect customer card information
+  - We do not collect customer card information
   </Note>
