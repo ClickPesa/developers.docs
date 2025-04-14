@@ -31,7 +31,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Your Client ID for authentication."
+            "description": "Your Application Client ID."
           },
           {
             "in": "header",
@@ -40,7 +40,7 @@
             "schema": {
               "type": "string"
             },
-            "description": "Your API Key for authentication."
+            "description": "Your Application API Key."
           }
         ],
         "security": [],
