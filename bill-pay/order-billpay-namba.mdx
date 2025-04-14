@@ -1,0 +1,35 @@
+---
+title: "Order BillPay Control Number"
+description: ""
+---
+
+
+import PaymentInstructions from "/snippets/making-payment.mdx";
+
+An **Order BillPay Control Number** is a dynamic control number generated for a specific transaction or invoice. It’s designed for one-time use and is best suited for e-commerce, invoicing, or any scenario where a customer is making a payment tied to a unique order.
+
+##  Generating Order BillPay Control Number
+Each **Order BillPay Control Number** consists of:
+
+- [Merchant BillPay-Namba](/bill-pay/billpay-namba): A 4-digit number assigned to you by ClickPesa.
+
+- **Order Reference**: Any reference number used in the merchant’s system to identify the transaction or product.
+
+To create a **Order BillPay Control Number**, concatenate your Merchant BillPay-Namba with the Order Reference
+
+`[Merchant BillPay-Namba]` + `[Order Reference]` = `BillPay Control Number`
+
+```text
+Example:
+
+Merchant BillPay-Namba: 1122
+Order Reference: 231256
+Order BillPay Control Number: 122231256
+```
+
+
+## Making Payment Using an Order BillPay Control Number
+
+Customers can conveniently make payments using **Order BillPay Control Number** through Tanzania’s leading mobile money services such as Tigopesa, Airtel Money, Halopesa and M-Pesa, as well as CRDB SIM Banking (APP and USSD), CRDB Internet Banking and CRDB Wakalas.
+
+<PaymentInstructions operation="Pay" controlNumber="Order BillPay Control Number"/>

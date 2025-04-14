@@ -7,13 +7,13 @@ description: "Explore common use cases and  userflow for BillPay, including webs
 
 A webshop generates a BillPay Control Number at checkout and displays payment instructions for the customer:
 
-- Customer selects mobile money USSD method
+- Customer selects mobile money method
 
-- Webshop generates the **BillPay Control Number**
+- Webshop generates the **Order BillPay Control Number**
 
-- BillPay Control Number, Payment instructions, including mobile money USSD codes, are displayed
+- Payment instructions, including mobile money USSD code and **Order BillPay Control Number**, are displayed
 
-- The customer completes the payment
+- The customer completes the payment via mobile money USSD menu
 
 - The webshop receives payment confirmation via webhook
 
@@ -22,18 +22,18 @@ A webshop generates a BillPay Control Number at checkout and displays payment in
 
 Businesses can generate a BillPay Control Number for each invoice and send it to customers:
 
-- Invoice is issued with a **BillPay Control Number** and payment instructions
+- Invoice is issued with a **Order BillPay Control Number** and payment instructions
 
 - Customer pays using mobile money, CRDB SIM banking, or Wakala
 
-- The invoicing system matches the payment to the invoice using Payment APIs
+- The invoicing system matches the payment to the invoice using the [Query Payment API](/api-reference/collection/querying-for-payments/querying-for-payments)
 
 
 ### Offline Purchases
 
 For merchants with physical stores or restaurants:
 
-- The restaurant provides the customer with a unique **BillPay Control Number**. This could be printed on the bill or shared verbally.
+- The restaurant provides the customer with a unique **Order BillPay Control Number**. This could be printed on the bill or shared verbally.
 
 - The customer pays their mobile money service (like M-Pesa) or CRDB SIM banking
 
