@@ -128,7 +128,7 @@
             },
             "transferType": {
               "type": "string",
-              "description": "Settlement type if applicable",
+              "description": "Transfer type - when applicable",
               "enum": ["ACH", "RTGS"]
             },
             "notes": {
