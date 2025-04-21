@@ -151,7 +151,7 @@
                   },
                   "phoneNumber": {
                     "type": "string",
-                    "description": "Phone Number to receive USSD-PUSH and make payment"
+                    "description": "Mobile phone number to receive USSD-PUSH and make payment, starting with country code and without the plus sign, e.g., 255712345678"
                   },
                   "checksum": {
                     "type": "string",

@@ -40,16 +40,19 @@
                 ],
                 "properties": {
                   "amount": {
-                    "type": "number"
+                    "type": "number",
+                    "description": "Your payout amount"
                   },
                   "phoneNumber": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Mobile phone number to receive mobile money payout, starting with country code and without the plus sign, e.g., 255712345678"
                   },
                   "currency": {
                     "type": "string",
                     "enum": [
                       "TZS"
-                    ]
+                    ],
+                    "description": "Your order payment currency to receive in (Will always be TZS)"
                   },
                   "orderReference": {
                     "type": "string",
@@ -139,16 +142,19 @@
                 ],
                 "properties": {
                   "amount": {
-                    "type": "number"
+                    "type": "number",
+                    "description": "Your payout amount"
                   },
                   "phoneNumber": {
-                    "type": "string"
+                    "type": "string",
+                    "description": "Mobile phone number to receive mobile money payout, starting with country code and without the plus sign, e.g., 255712345678"
                   },
                   "currency": {
                     "type": "string",
                     "enum": [
                       "TZS"
-                    ]
+                    ],
+                    "description": "Your order payment currency to receive in (Will always be TZS)"
                   },
                   "orderReference": {
                     "type": "string",
