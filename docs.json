@@ -205,7 +205,7 @@
     "primary": {
       "type": "button",
       "label": "Register",
-      "href": "https://merchant.clickpesa.com/register"
+      "href": "https://merchant.clickpesa.com/account-registration"
     }
   },
   "footer": {
