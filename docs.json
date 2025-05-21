@@ -65,7 +65,8 @@
         "tab": "ClickPesa BillPay",
         "pages": [
           "bill-pay/bill-pay-overview",
-          "bill-pay/use-cases",
+          "bill-pay/billpay-use-cases",
+          "bill-pay/billpay-faq",
           {
             "group": "How It Works",
             "pages": [
