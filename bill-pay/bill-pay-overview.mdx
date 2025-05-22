@@ -24,16 +24,17 @@ ClickPesa BillPay supports 3 types of control numbers to fit different collectio
 
 A 4-digit static number assigned to every merchant.
 
+- Used by the merchant to deposit funds into their own account.
 - Used as the base for generating other types of BillPay control numbers.
-- Can also be used directly by the merchant to deposit funds into their own account.
-- Typically not shared with customers unless used in combination with order references.
+- Not shared with customers unless used in combination with order references.
 
-### [Order BillPay Control Number](/bill-pay/order-billpay-namba.mdx)
+### [Order BillPay Control Number](/bill-pay/order-billpay-namba)
 
-A dynamic control number generated for each specific transaction or invoice.
+A dynamic control number generated for each specific transaction or invoice. 
 
+
+- This number exists out of your Merchant BillPay-Namba + Order Reference. The order reference is created by Merchant.
 - Best for one-time or ad-hoc payments.
-- Created using your Merchant BillPay-Namba + Order Reference.
 - Customers use this control number to make payment for a specific transaction.
 
 **Example**<br/>
@@ -42,8 +43,9 @@ An e-commerce store creates a BillPay Control Number for Order #12345. The custo
 
 ### [Customer BillPay Control Number](/bill-pay/customer-billpay-namba)
 
-A static control number assigned by the merchant to a specific customer for ongoing payments.
+A static control number assigned by the merchant to a specific customer for ongoing payments. 
 
+- This number exists out of your Merchant BillPay-Namba + static unique number. The static unique number is created by ClickPesa.
 - Useful for repeat or subscription-style payments from the same customer.
 - Helps in automating reconciliation and tracking of payments per customer.
 

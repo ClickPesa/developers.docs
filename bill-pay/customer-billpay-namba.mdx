@@ -8,7 +8,7 @@ import PaymentInstructions from "/snippets/making-payment.mdx";
 A Customer BillPay Control Number is a static control number assigned by a merchant to a specific customer. It can be reused for multiple payments, making it ideal for scenarios where customers make frequent or recurring payments.
 
 ##  How to Generate or Assign a Customer BillPay Control Number
-You can generate or assign a Customer Control Number through the ClickPesa Dashboard or via API.
+You can generate or assign a Customer Control Number through the ClickPesa Dashboard or via API. This number exists out of your Merchant BillPay-Namba + static unique number.
 
 - Log in to your [Merchant Dashboard](https://merchant.clickpesa.com).
 - Navigate to **Collection → Customers**.
@@ -16,6 +16,9 @@ You can generate or assign a Customer Control Number through the ClickPesa Dashb
 - In the **Customer Overview**, find the `CUSTOMER BILLPAY CONTROL NUMBER`
 - If not shown, click **Assign BillPay Number** to generate one.
 - Share the control number with the customer for making payments.
+
+## BillPay Payment Notifications  
+You can receive payment notifications for your billpay numbers by setting up a [webhook](/home/webhooks). Alternatively, you can use the [Payment Query API](/api-reference/collection/querying-for-payments/querying-for-payments) using the customer BillPay number to check payment status.
 
 ## Making Payments Using a Customer BillPay Control Number
 Customers can make payments using their assigned control number via mobile money, SIM banking, or at a CRDB bank Wakala.
