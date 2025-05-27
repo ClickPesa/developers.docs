@@ -1,6 +1,13 @@
 ---
 title: "FAQ"
 description: "Frequently Asked Questions about BillPay Control Numbers"
+
+---
+
+[ Where can I find the endpoint to create an Order BillPay Control Number?](#)
+
+**A:** There is no API endpoint to create an Order BillPay Control Number. Instead, you create it on your side by combining your Merchant BillPay-Namba (assigned by ClickPesa) with a unique order reference from your system. This combined value is what you share with the customer as the payment reference. When a customer makes a payment using that BillPay number, ClickPesa uses the BillPay-Namba to route the payment to your account and sends you a webhook notification containing the full BillPay number and payment details.
+
 ---
 
 [If a client is given a control number for 1,000,000/= but pays only 500,000/=, will the payment go through?](#)
@@ -9,7 +16,7 @@ description: "Frequently Asked Questions about BillPay Control Numbers"
 
 ---
 
-[ Can the same control number be used to pay the remaining balance later?]()
+[ Can the same control number be used to pay the remaining balance later?](#)
 
 **A:** It depends on the type of BillPay control number:
 
@@ -20,3 +27,4 @@ description: "Frequently Asked Questions about BillPay Control Numbers"
 - **Customer BillPay Control Number** - **Yes**
   - Designed for ongoing or repeat payments from the same customer.
   - Can receive multiple payments, making it suitable **for partial or recurring payments**.
+

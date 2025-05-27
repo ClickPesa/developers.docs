@@ -37,3 +37,7 @@ description: "The Mobile Money Payment API enables you to collect payments direc
    href="/api-reference/collection/querying-for-payments/querying-for-payments" horizontal>
    This endpoint queries for the payment status using payment's **Order Reference**
    </Card>
+
+## Notes
+**BillPay Control Numbers**  
+There's no API to create an [BillPay Control Numbers](/bill-pay/bill-pay-overview). You generate it by combining your Merchant BillPay-Namba with an reference. This full order number is shared with the customer as the payment reference. Once paid, ClickPesa routes the payment using the BillPay-Namba and sends a webhook with the full control number and payment details.
