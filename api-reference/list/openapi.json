@@ -80,7 +80,7 @@
       "bearerAuth": {
         "type": "http",
         "scheme": "bearer",
-        "description": "Authorization header in the form of `Bearer <token>`, where `<token>` is a valid JWT from generate token endpoint",
+        "description": "Authorization header containing the JWT access token returned from the generate token endpoint. The token already includes the Bearer prefix. Example: `Authorization: Bearer eyJhbGciOi...`",
         "bearerFormat": "JWT"
       }
     }
