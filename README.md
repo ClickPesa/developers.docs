@@ -14,3 +14,4 @@ mintlify dev
 
 - [ ] Add docs for TigoPesa BillPay Instructions via App
 - [ ] Add docs for Halopesa Billpay and PUSh
+- [ ] Add Expiration / Validity time on the generate token payload response
