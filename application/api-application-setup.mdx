@@ -11,7 +11,12 @@ import ManagingAPIKey from '/snippets/managing-api-keys.mdx';
 
 [API Key](#authentication-overview) - It is required for API authentication, displayed **only once** during creation. **Copy and store it securely**
 
-[JWT Token](#authentication-overview) - `API Key` and `Client ID` are [exchanged](api-reference/authorization/generate-token) for a short-lived `JWT Token`, that will then be used in all subsequent API calls
+[JWT Token](#authentication-overview) - `API Key` and `Client ID` are [exchanged](/api-reference/authorization/generate-token) for a short-lived `JWT Token`, which is then used in all subsequent API calls.
+The JWT token is valid for **1hr (60 Minutes)** from the time of issuance. After it expires, you must generate a new token using your `API Key` and `Client ID`.
+
+<Warning >
+Never share your API credentials or JWT token publicly. Always use HTTPS to protect your credentials during transmission.
+</Warning>
 
 ## Application Setup
 
