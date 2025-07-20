@@ -5,6 +5,7 @@ icon: "webhook"
 ---
 
 Webhooks are HTTP `POST` callbacks that deliver notification messages for events.
+
 ClickPesa uses webhooks to inform your systems when transactional events occur. This way, your servers are always up to date with transaction information.
 
 
@@ -12,6 +13,56 @@ ClickPesa uses webhooks to inform your systems when transactional events occur. 
 
 
 ## Webhook Events
+
+### `PAYMENT RECEIVED`
+
+When a payment is received successfully, this event is triggered. This event provides you with key information about the payment, including identifiers, amounts, and customer details.
+
+- **Description** - This event is triggered whenever a customer makes a successful payment. The webhook will send details of the transaction, including the amount, payer information, and transaction status.
+
+
+- **Sample Payload Data**
+
+```json [expandable]
+{
+  "event": "PAYMENT RECEIVED",
+  "data": {
+    "paymentId": "PAY123456",
+    "orderReference": "ORD987654",
+    "collectedAmount": "10000.00",
+    "collectedCurrency": "TZS",
+    "status": "SUCCESS",
+    "customer": {
+      "name": "John Doe",
+      "email": "john@example.com",
+      "phone": "255700000000"
+    },
+    "createdAt": "2024-04-10T18:22:16.949Z",
+    "updatedAt": "2024-04-10T18:22:56.153Z"
+  }
+}
+```
+
+### `PAYMENT FAILED`
+
+- **Description** - This event is triggered when a payment attempt fails. The webhook will include information about the failure reason, the attempted transaction, and any relevant error codes.
+
+
+- **Sample Payload Data**
+
+```json [expandable]
+{
+  "eventType": "PAYMENT FAILED",
+  "data": {
+    "id": "0969231256LCP2C95",
+    "status": "FAILED",
+    "orderReference": "0969231256", // unique order reference
+    "message": "Insufficient balance",
+    "updatedAt": "2024-04-11T04:58:31.036Z",
+    "createdAt": "2024-04-11T04:58:31.036Z"
+  }
+}
+```
 
 ### `PAYOUT INITIATED`
 
@@ -130,52 +181,27 @@ ClickPesa uses webhooks to inform your systems when transactional events occur. 
 }
 ```
 
-### `PAYMENT RECEIVED`
+### `DEPOSIT RECEIVED`
 
-When a payment is received successfully, this event is triggered. This event provides you with key information about the payment, including identifiers, amounts, and customer details.
-
-- **Description** - This event is triggered whenever a customer makes a successful payment. The webhook will send details of the transaction, including the amount, payer information, and transaction status.
+- **Description**: This event is triggered when a deposit is received. The webhook will contain details about the deposit and any related information.
 
 
 - **Sample Payload Data**
 
 ```json [expandable]
 {
-  "event": "PAYMENT RECEIVED",
+  "event": "DEPOSIT RECEIVED",
   "data": {
-    "paymentId": "PAY123456",
-    "orderReference": "ORD987654",
-    "collectedAmount": "10000.00",
-    "collectedCurrency": "TZS",
+    "id": "DEP17C9LPL",
     "status": "SUCCESS",
-    "customer": {
-      "name": "John Doe",
-      "email": "john@example.com",
-      "phone": "255700000000"
-    },
-    "createdAt": "2024-04-10T18:22:16.949Z",
-    "updatedAt": "2024-04-10T18:22:56.153Z"
-  }
-}
-```
-
-### `PAYMENT FAILED`
-
-- **Description** - This event is triggered when a payment attempt fails. The webhook will include information about the failure reason, the attempted transaction, and any relevant error codes.
-
-
-- **Sample Payload Data**
-
-```json [expandable]
-{
-  "eventType": "PAYMENT FAILED",
-  "data": {
-    "id": "0969231256LCP2C95",
-    "status": "FAILED",
-    "orderReference": "0969231256", // unique order reference
-    "message": "Insufficient balance",
-    "updatedAt": "2024-04-11T04:58:31.036Z",
-    "createdAt": "2024-04-11T04:58:31.036Z"
+    "paymentReference": "1982813f15938863",
+    "orderReference": "DEP17C9LPL",
+    "depositAmount": "2000",
+    "depositCurrency": "TZS",
+    "channel": "CRDB COLLECTION",
+    "updatedAt": "2025-07-20T13:44:22.902Z",
+    "createdAt": "2025-07-20T13:44:13.893Z",
+    "message": "Payment from Payclick Co Ltd"
   }
 }
 ```
@@ -190,7 +216,7 @@ When a payment is received successfully, this event is triggered. This event pro
 
 ### 2. Add a Webhook URL
 
-- Select event types to subscribe to, such as `PAYOUT INITIATED`, `PAYOUT REVERSED`, `PAYOUT REFUNDED`, `PAYMENT RECEIVED`, or `PAYMENT FAILED` and set the webhook URL.
+- Select event types to subscribe to, such as `PAYOUT INITIATED`, `PAYOUT REVERSED`, `PAYOUT REFUNDED`, `PAYMENT RECEIVED`, `PAYMENT FAILED` or `DEPOSIT RECEIVED` and set the webhook URL.
 
 ### 3. Receiveing Webhook Calls
 
