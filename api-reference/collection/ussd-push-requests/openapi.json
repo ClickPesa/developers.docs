@@ -336,6 +336,10 @@
             "type": "string",
             "format": "date-time",
             "description": "Timestamp when the transaction was created"
+          },
+          "clientId": {
+            "type": "string",
+            "description": "Application Client ID associated with the payment"
           }
         }
       },

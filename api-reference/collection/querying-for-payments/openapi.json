@@ -137,6 +137,10 @@
                   "description": "Customer's email (if available)"
                 }
               }
+            },
+            "clientId": {
+              "type": "string",
+              "description": "Application Client ID associated with the payment"
             }
           }
         }

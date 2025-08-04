@@ -170,6 +170,10 @@
                   "description": "Beneficiary's email if applicable"
                 }
               }
+            },
+            "clientId": {
+              "type": "string",
+              "description": "Application Client ID associated with the payout"
             }
           }
         }

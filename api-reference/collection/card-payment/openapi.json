@@ -369,6 +369,10 @@
           "cardPaymentLink": {
             "type": "string",
             "description": "A link for a customer to complete payment"
+          },
+          "clientId": {
+            "type": "string",
+            "description": "Application Client ID associated with the payment"
           }
         }
       },

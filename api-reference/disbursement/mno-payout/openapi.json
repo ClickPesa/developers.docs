@@ -346,6 +346,10 @@
                 "example": "John Doe"
               }
             }
+          },
+          "clientId": {
+            "type": "string",
+            "description": "Application Client ID associated with the payout"
           }
         }
       },
