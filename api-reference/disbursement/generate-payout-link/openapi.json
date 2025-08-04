@@ -97,7 +97,12 @@
         "type": "object",
         "properties": {
           "payoutLink": {
-            "type": "string"
+            "type": "string",
+            "description": "Hosted Payout Link"
+          },
+          "clientId": {
+            "type": "string",
+            "description": "Application Client ID associated with the payoutLink"
           }
         }
       },

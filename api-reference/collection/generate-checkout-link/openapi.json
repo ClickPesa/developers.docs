@@ -201,7 +201,12 @@
         "type": "object",
         "properties": {
           "checkoutLink": {
-            "type": "string"
+            "type": "string",
+            "description": "Hosted Checkout Link"
+          },
+          "clientId": {
+            "type": "string",
+            "description": "Application Client ID associated with the checkoutLink"
           }
         }
       },
