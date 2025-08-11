@@ -52,6 +52,10 @@
                     "type": "string",
                     "description": "Your unique Order reference"
                   },
+                  "phoneNumber": {
+                    "type": "string",
+                    "description": "Mobile phone number to receive USSD-PUSH and make payment, starting with country code and without the plus sign e.g., 255712345678"
+                  },
                   "checksum": {
                     "type": "string",
                     "description": "If enabled, this is the generated checksum of the payload. Refer to the [documentation](/home/checksum) for more details."
@@ -257,6 +261,21 @@
                   "type": "integer",
                   "description": "Message if the payment method is unavailable."
                 }
+              }
+            }
+          },
+          "sender": {
+            "type": "object",
+            "properties": {
+              "accountName": {
+                "type": "string",
+                "description": "Sender name",
+                "example": "Mathayo John"
+              },
+              "accountNumber": {
+                "type": "string",
+                "description": "Sender phone number",
+                "example": "255712345678"
               }
             }
           }
