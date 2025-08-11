@@ -276,6 +276,11 @@
                 "type": "string",
                 "description": "Sender phone number",
                 "example": "255712345678"
+              },
+              "accountProvider": {
+                "type": "string",
+                "description": "Sender mobile money provider",
+                "example": "TIGO-PESA"
               }
             }
           }
