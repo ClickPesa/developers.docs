@@ -135,7 +135,8 @@
             "pages": [
               "api-reference/collection/ussd-push-requests/preview-ussd-push-request",
               "api-reference/collection/ussd-push-requests/initiate-ussd-push-request",
-              "api-reference/collection/querying-for-payments/querying-for-payments"
+              "api-reference/collection/querying-for-payments/querying-for-payments",
+              "api-reference/collection/ussd-push-requests/query-all-payments"
             ]
           },
           {
@@ -143,7 +144,8 @@
             "pages": [
               "api-reference/collection/card-payment/preview-card-payment",
               "api-reference/collection/card-payment/initiate-card-payment",
-              "api-reference/collection/card-payment/querying-for-payments"
+              "api-reference/collection/card-payment/querying-for-payments",
+              "api-reference/collection/card-payment/query-all-payments"
             ]
           },
           {
@@ -151,7 +153,8 @@
             "pages": [
               "api-reference/disbursement/mno-payout/preview-mno-payout",
               "api-reference/disbursement/mno-payout/create-mno-payout",
-              "api-reference/disbursement/mno-payout/querying-for-payouts"
+              "api-reference/disbursement/mno-payout/querying-for-payouts",
+              "api-reference/disbursement/mno-payout/query-all-payouts"
             ]
           },
           {
@@ -159,7 +162,8 @@
             "pages": [
               "api-reference/disbursement/bank-payout/preview-bank-payout",
               "api-reference/disbursement/bank-payout/create-bank-payout",
-              "api-reference/disbursement/bank-payout/querying-for-payouts"
+              "api-reference/disbursement/bank-payout/querying-for-payouts",
+              "api-reference/disbursement/bank-payout/query-all-payouts"
             ]
           },
           {

@@ -1,0 +1,346 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "CORE API OpenAPI Specification",
+    "description": "This is the API documentation for the ClickPesa CORE API",
+    "license": {
+      "name": "MIT"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.clickpesa.com/third-parties"
+    }
+  ],
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "paths": {
+    "/payouts/all": {
+      "get": {
+        "description": "Query all payouts with filtering, sorting, pagination, and search capabilities",
+        "parameters": [
+          {
+            "name": "startDate",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "description": "Start date for filtering payouts (YYYY-MM-DD)"
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "description": "End date for filtering payouts (YYYY-MM-DD)"
+          },
+          {
+            "name": "channel",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": ["BANK TRANSFER", "MOBILE MONEY"]
+            },
+            "description": "Payout channel filter"
+          },
+          {
+            "name": "currency",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Currency filter (e.g., TZS, USD)"
+          },
+          {
+            "name": "id",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Payout ID filter"
+          },
+          {
+            "name": "orderReference",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Order reference filter"
+          },
+          {
+            "name": "status",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "SUCCESS",
+                "PROCESSING",
+                "PENDING",
+                "FAILED",
+                "REFUNDED",
+                "REVERSED"
+              ]
+            },
+            "description": "Payout status filter"
+          },
+          {
+            "name": "transferType",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": ["ACH", "RTGS"]
+            },
+            "description": "Settlement type filter"
+          },
+          {
+            "name": "clientId",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Client ID filter"
+          },
+          {
+            "name": "sortBy",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Field to sort by (default: createdAt). All response fields are sortable including beneficiary fields"
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": ["ASC", "DESC"],
+              "default": "DESC"
+            },
+            "description": "Sort order (default: DESC)"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 0,
+              "default": 0
+            },
+            "description": "Number of records to skip for pagination"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "minimum": 1,
+              "default": 20
+            },
+            "description": "Number of records to return"
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Search across specific fields using format: field=keyword,another_field=another_keyword. Available searchable fields: id, orderReference, amount, currency, status, channel, channelProvider, settlementType, notes, createdAt, updatedAt, beneficiary.accountNumber, beneficiary.accountName, beneficiary.swiftNumber, beneficiary.routingNumber, beneficiary.beneficiaryMobileNumber, beneficiary.email. Example: search=beneficiary.accountName=John,currency=TZS,status=SUCCESS"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Query all payouts response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PayoutsListResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/BadRequestError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid or Expired Token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "PayoutsListResponse": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/PayoutResponse"
+            },
+            "description": "Array of payout records"
+          },
+          "totalCount": {
+            "type": "integer",
+            "description": "Total number of payouts matching the query criteria"
+          }
+        }
+      },
+      "PayoutResponse": {
+        "type": "object",
+        "properties": {
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Last updated timestamp"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Creation timestamp"
+          },
+          "id": {
+            "type": "string",
+            "description": "Payout ID"
+          },
+          "orderReference": {
+            "type": "string",
+            "description": "Associated order reference"
+          },
+          "amount": {
+            "type": "string",
+            "description": "Payout amount"
+          },
+          "currency": {
+            "type": "string",
+            "description": "Currency code"
+          },
+          "fee": {
+            "type": "string",
+            "description": "Transaction fee"
+          },
+          "status": {
+            "type": "string",
+            "description": "Payout status",
+            "enum": [
+              "SUCCESS",
+              "PROCESSING",
+              "PENDING",
+              "FAILED",
+              "REFUNDED",
+              "REVERSED"
+            ]
+          },
+          "channel": {
+            "type": "string",
+            "description": "Payment channel",
+            "enum": ["BANK TRANSFER", "MOBILE MONEY"]
+          },
+          "channelProvider": {
+            "type": "string",
+            "description": "Name of the payment provider"
+          },
+          "settlementType": {
+            "type": "string",
+            "description": "Settlement type if applicable",
+            "enum": ["ACH", "RTGS"]
+          },
+          "notes": {
+            "type": "string",
+            "description": "Additional notes if available"
+          },
+          "beneficiary": {
+            "type": "object",
+            "properties": {
+              "accountNumber": {
+                "type": "string",
+                "description": "Beneficiary's account number"
+              },
+              "accountName": {
+                "type": "string",
+                "description": "Beneficiary's account name"
+              },
+              "swiftNumber": {
+                "type": "string",
+                "description": "SWIFT number if applicable"
+              },
+              "routingNumber": {
+                "type": "string",
+                "description": "Routing number if applicable"
+              },
+              "beneficiaryMobileNumber": {
+                "type": "string",
+                "description": "Beneficiary's mobile number if applicable"
+              },
+              "beneficiaryEmail": {
+                "type": "string",
+                "format": "email",
+                "description": "Beneficiary's email if applicable"
+              }
+            }
+          }
+        }
+      },
+      "BadRequestError": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Bad request error message"
+          }
+        }
+      },
+      "UnauthorizedError": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Unauthorized Error",
+            "example": "Unauthorized"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  }
+}
