@@ -12,6 +12,5 @@ mintlify dev
 
 ## TODO
 
-- [ ] Add docs for Halopesa Billpay and PUSh
 - [ ] Add Expiration / Validity time on the generate token payload response
 - [ ] Add account statement docs https://api.clickpesa.com/third-parties/account/statement?currency=TZS&startDate=22-05-2025&endDate=21-07-2025
