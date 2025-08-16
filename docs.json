@@ -72,7 +72,8 @@
             "pages": [
               "bill-pay/billpay-namba",
               "bill-pay/order-billpay-namba",
-              "bill-pay/customer-billpay-namba"
+              "bill-pay/customer-billpay-namba",
+              "bill-pay/billpay-api-overview"
             ]
           }
         ]
@@ -128,51 +129,40 @@
         "pages": [
           {
             "group": "AUTHORIZATION",
-            "pages": ["api-reference/authorization/generate-token"]
+            "pages": [
+              "api-reference/authorization/generate-token"
+            ]
           },
           {
-            "group": "MOBILE-MONEY PAYMENT",
+            "group": "PAYMENTS",
             "pages": [
               "api-reference/collection/ussd-push-requests/preview-ussd-push-request",
               "api-reference/collection/ussd-push-requests/initiate-ussd-push-request",
+              "api-reference/collection/card-payment/preview-card-payment",
+              "api-reference/collection/card-payment/initiate-card-payment",
               "api-reference/collection/querying-for-payments/querying-for-payments",
               "api-reference/collection/ussd-push-requests/query-all-payments"
             ]
           },
           {
-            "group": "CARD PAYMENT",
-            "pages": [
-              "api-reference/collection/card-payment/preview-card-payment",
-              "api-reference/collection/card-payment/initiate-card-payment",
-              "api-reference/collection/card-payment/querying-for-payments",
-              "api-reference/collection/card-payment/query-all-payments"
-            ]
-          },
-          {
-            "group": "MOBILE-MONEY PAYOUT",
+            "group": "PAYOUTS",
             "pages": [
               "api-reference/disbursement/mno-payout/preview-mno-payout",
               "api-reference/disbursement/mno-payout/create-mno-payout",
-              "api-reference/disbursement/mno-payout/querying-for-payouts",
-              "api-reference/disbursement/mno-payout/query-all-payouts"
-            ]
-          },
-          {
-            "group": "BANK PAYOUT",
-            "pages": [
               "api-reference/disbursement/bank-payout/preview-bank-payout",
               "api-reference/disbursement/bank-payout/create-bank-payout",
-              "api-reference/disbursement/bank-payout/querying-for-payouts",
-              "api-reference/disbursement/bank-payout/query-all-payouts"
+              "api-reference/disbursement/mno-payout/querying-for-payouts",
+              "api-reference/disbursement/mno-payout/query-all-payouts",
+              "api-reference/list/get-bank-list"
             ]
           },
           {
-            "group": "ACCOUNT",
-            "pages": ["api-reference/account/get-account-balance"]
-          },
-          {
-            "group": "LIST",
-            "pages": ["api-reference/list/get-bank-list"]
+            "group": "BILLPAY",
+            "pages": [
+              "api-reference/collection/billpay/create-order-control-number",
+              "api-reference/collection/billpay/create-customer-control-number",
+              "api-reference/collection/billpay/querying-for-billpay-details"
+            ]
           },
           {
             "group": "CHECKOUT LINK",
@@ -185,6 +175,12 @@
             "pages": [
               "api-reference/disbursement/generate-payout-link/generate-payout-link"
             ]
+          },
+          {
+            "group": "ACCOUNT",
+            "pages": [
+              "api-reference/account/get-account-balance"
+            ]
           }
         ]
       },
@@ -194,7 +190,9 @@
         "groups": [
           {
             "group": "Get Started",
-            "pages": ["sdk-plugins/sdk-plugin-overview"]
+            "pages": [
+              "sdk-plugins/sdk-plugin-overview"
+            ]
           }
         ]
       }

@@ -1,71 +1,96 @@
 ---
 title: "ClickPesa BillPay Overview"
-description: "Create custom billpay control number for bills and receive payments from mobile money wallets and bank free of charge"
+description: "Create and use BillPay Control Numbers to receive instant payments from mobile money and banks"
 ---
 
+A **BillPay Control Number** is a unique numeric identifier that customers use to pay a merchant through supported payment channels—including mobile money, SIM banking, and CRDB Wakalas.
+
 <Tip>
-  Receiving payments via ClickPesa BillPay is completely **FREE**—Zero fees,
-  Zero hassle, Nada!
+ClickPesa BillPay payment are **instant** and are instantly visible in your [Dashboard](https://merchant.clickpesa.com).
+You can also track them via the [Query Payment API](/api-reference/collection/querying-for-payments/querying-for-payments) or receive real-time [webhook notifications](/home/webhooks).
 </Tip>
 
 
-A **BillPay Control Number** is a unique
-numeric identifier that customers use to make payments to a merchant through supported payment channels—including mobile money, SIM banking, and Wakalas.
+## Why Use BillPay Control Numbers?
+- Instant payment confirmation.
+- Automated reconciliation.
+- Works across all major Tanzanian payment channels (mobile money, SIM banking, CRDB Internet Banking, and Wakalas).
+- Flexible for different payment needs.
+- Supports **one-time payments** and **subscriptions or recurring payments**.
+- Can be generated **offline** and via the [Dashboard](https://merchant.clickpesa.com) and [BillPay API](/bill-pay/billpay-api-overview).
 
-ClickPesa supports different types of control numbers to cater to various payment scenarios, such as one-time purchases, recurring payments, or merchant deposits.
 
-Payments and deposits made using the ClickPesa BillPay Control Numbers are processed **Instantly**, with real-time tracking available via the [ClickPesa Dashboard](https://merchant.clickpesa.com), [Query Payment API](/api-reference/collection/querying-for-payments/querying-for-payments) and [Webhooks](/home/webhooks).
-
-<h2>Types of BillPay Control Numbers</h2>
-ClickPesa BillPay supports 3 types of control numbers to fit different collection needs:
-
+## Types of BillPay Control Numbers
+ClickPesa supports **three** types of control numbers:
 
 ### [Merchant BillPay-Namba](/bill-pay/billpay-namba)
-
-A 4-digit static number assigned to every merchant.
-
-- Used by the merchant to deposit funds into their own account.
-- Used as the base for generating other types of BillPay control numbers.
-- Not shared with customers unless used in combination with order references.
+A **4-digit static number** assigned to your merchant account.
+- Used to deposit funds into your ClickPesa balance.
+- A base number for generating Order BillPay numbers offline.
+- **Not** for sharing with customers.
 
 ### [Order BillPay Control Number](/bill-pay/order-billpay-namba)
+A **dynamic number** for a specific transaction or invoice.
 
-A dynamic control number generated for each specific transaction or invoice. 
+**Two ways to generate:**
+1. **Offline / Manual Concatenation:** Combine your Merchant BillPay-Namba with an internal order reference (e.g., `1122` + `231256` = `1122231256`). Quick way to accept online payments for offline invoices.
+2. **API Generation:** Create via [BillPay API](/api-reference/collection/billpay/create-order-control-number) with full flexibility:
+   - Set the **amount** to be paid.
+   - Control **payment mode**: full, partial, or over.
+   - Add a **bill description**.
+   - Provide a **custom reference** as the control number.
+   - If no reference is provided, ClickPesa will **auto-generate** one.
 
-
-- This number exists out of your Merchant BillPay-Namba + Order Reference. The order reference is created by Merchant.
-- Best for one-time or ad-hoc payments.
-- Customers use this control number to make payment for a specific transaction.
-
-**Example**<br/>
-An e-commerce store creates a BillPay Control Number for Order #12345. The customer uses that number to pay for just that order. Once paid, the control number is closed or marked as fulfilled.
-
+- Ideal for **one-time payments**.
+- Closes automatically once paid.
 
 ### [Customer BillPay Control Number](/bill-pay/customer-billpay-namba)
+A **static unique number** assigned to a specific customer.
 
-A static control number assigned by the merchant to a specific customer for ongoing payments. 
+**Two ways to generate:**
+1. [Via Dashboard](https://merchant.clickpesa.com): Assign a control number linked to the customer in the Merchant Dashboard.
+2. **API Generation:** Create via [BillPay API](/api-reference/collection/billpay/create-customer-control-number) with full flexibility:
+   - Specify **customer name** (e.g., student, client).
+   - Add **bill description** (e.g., Tuition Fees, Rent - July 2025 ).
+   - Set **payment amount** and **mode** (full, partial, over).
+   - Allow **multiple control numbers per customer**, each for a different bill or purpose.
+   - Provide a **custom reference** or let ClickPesa auto-generate one.
 
-- This number exists out of your Merchant BillPay-Namba + static unique number. The static unique number is created by ClickPesa.
-- Useful for repeat or subscription-style payments from the same customer.
-- Helps in automating reconciliation and tracking of payments per customer.
+- Ideal for **repeating or subscription payments**.
+- Enables **automatic payment tracking per customer**.
 
-**Example**<br/>
-A school assigns a unique control number to each student. The student (or parent) can use this same number to pay tuition each term without requesting a new one.
+## Making Payments with BillPay Control Numbers
+Payments can be made through:
+- **Mobile Money:** Tigopesa, Airtel Money, Halopesa, M-Pesa
+- **CRDB Banking:** SIM Banking (APP/USSD), Internet Banking, CRDB Wakalas
+
+Step-by-step payment instructions are available on each BillPay Control Number page:
+- [Top up using Merchant BillPay-Namba](/bill-pay/billpay-namba#depositing-using-merchant-billpay-namba)
+- [Pay using Order BillPay Control Number](/bill-pay/order-billpay-namba#making-payments-with-order-billpay-control-numbers)
+- [Pay using Customer BillPay Control Number](/bill-pay/customer-billpay-namba#making-payments-with-customer-billpay-control-numbers)
+
 
 <br/>
-<CardGroup cols={2} >
-    <Card
-    title="Common BillPay Use Cases"
+<CardGroup cols={2}>
+  <Card
+    title="BillPay API"
+    icon="book-open"
+    href="/bill-pay/billpay-api-overview"
+  >
+    Understand how to work with BillPay Control Numbers with BillPay API.
+  </Card>
+  <Card
+    title="BillPay Use Cases"
     icon="screen-users"
     href="/bill-pay/billpay-use-cases"
   >
-    See more use cases examples of how you can collect payments using ClickPesa BillPay
+    See practical examples of how to collect payments with ClickPesa BillPay.
   </Card>
   <Card
-    title="FAQ"
+    title="BillPay FAQ"
     icon="screen-users"
     href="/bill-pay/billpay-faq"
   >
-    Frequently Asked Questions about ClickPesa BillPay
+    Answers to common questions about ClickPesa BillPay.
   </Card>
 </CardGroup>

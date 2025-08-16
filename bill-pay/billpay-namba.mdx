@@ -1,22 +1,30 @@
 ---
 title: "Merchant BillPay-Namba"
-description: ""
+description: "Your 4-digit static BillPay number for merchant deposits"
 ---
 
 import PaymentInstructions from "/snippets/making-payment.mdx";
 
-The BillPay-Namba is a unique 4-digit identifier assigned to every ClickPesa merchant. It serves as the root reference for all BillPay Control Numbers and can also be used directly to deposit funds into the merchant's own account.
+The **Merchant BillPay-Namba** is a unique **4-digit number** assigned to every ClickPesa merchant.
+Used directly to deposit funds into your ClickPesa account and serves as the **root reference** for offline order number generation.
 
-## How to Access Your BillPay-Namba
-You can find your BillPay-Namba by following these steps:
 
-- Log in to the [Merchant Dashboard](https://merchant.clickpesa.com).
-- Go to Settings → Collection.
-- Scroll down to the BillPay Payments Collection section under Collection Tools.
-- Your 4-digit BillPay-Namba will be displayed there.
+## How to Access Your Merchant BillPay-Namba
+1. Log in to your [Dashboard](https://merchant.clickpesa.com).
+2. Go to **Settings → Collection**.
+3. Scroll to the **BillPay Payments Collection** section.
+4. Your **4-digit BillPay-Namba** will be displayed there.
 
-## How to Deposit Using Your BillPay-Namba
-Merchants can use their own BillPay-Namba to deposit funds into their ClickPesa balance through Tanzania’s leading mobile money services such as Tigopesa, Airtel Money, Halopesa and M-Pesa, as well as CRDB SIM Banking (APP and USSD), CRDB Internet Banking and CRDB Wakalas
 
-<PaymentInstructions operation="Deposit" controlNumber="BillPay-Namba"/>
-Funds will reflect instantly on your ClickPesa Dashboard, and a confirmation will be sent via SMS and email.
+## Depositing Using Merchant BillPay-Namba
+Merchants can deposit funds into their ClickPesa balance using this number via:
+- **Mobile Money:** Tigopesa, Airtel Money, Halopesa, M-Pesa
+- **CRDB Banking:** SIM Banking (APP/USSD), Internet Banking, CRDB Wakalas
+
+<PaymentInstructions operation="Deposit" controlNumber="BillPay-Namba" />
+
+Funds will reflect instantly on your ClickPesa Dashboard, and confirmation will be sent by SMS and email.
+
+## Deposit Tracking
+- **Automatic Notifications:** Receive instant updates via [Webhooks](/home/webhooks) and Web Notifications.
+- **Manual Check:** In your [Dashboard](https://merchant.clickpesa.com).

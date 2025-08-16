@@ -1,38 +1,55 @@
 ---
 title: "Order BillPay Control Number"
-description: ""
+description: "A one-time payment number for a specific transaction or invoice — created manually or via API."
 ---
-
 
 import PaymentInstructions from "/snippets/making-payment.mdx";
 
-An **Order BillPay Control Number** is a dynamic control number generated for a specific transaction or invoice. It’s designed for one-time use and is best suited for e-commerce, invoicing, or any scenario where a customer is making a payment tied to a unique order.
+An **Order BillPay Control Number** is a **dynamic number** for a single transaction or invoice.
+It is ideal for **one-time payments** such as e-commerce orders, invoices, or single service charges.
 
-##  Generating Order BillPay Control Number
-Each **Order BillPay Control Number** consists of:
+You can generate an Order BillPay Control Number in **two ways** — each with different flexibility and structure.
 
-- [Merchant BillPay-Namba](/bill-pay/billpay-namba): A 4-digit number assigned to you by ClickPesa.
+## 1. Offline / Manual Concatenation
+**Structure:**
+[Merchant BillPay-Namba] + [Order Reference]
+- **Merchant BillPay-Namba** — your 4-digit merchant number assigned by ClickPesa.
+- **Order Reference** — any unique reference from your internal billing or order system.
 
-- **Order Reference**: Any reference number used in the merchant’s system to identify the transaction or product.
-
-To create a **Order BillPay Control Number**, concatenate your Merchant BillPay-Namba with the Order Reference
-
-`[Merchant BillPay-Namba]` + `[Order Reference]` = `BillPay Control Number`
-
-```text
-Example:
-
+**Example:**
 Merchant BillPay-Namba: 1122
 Order Reference: 231256
 Order BillPay Control Number: 1122231256
-```
 
-## BillPay Payment Notifications  
-You can receive payment notifications for your billpay numbers by setting up a [webhook](/home/webhooks). Alternatively, you can use the [Payment Query API](/api-reference/collection/querying-for-payments/querying-for-payments) using the order BillPay number to check payment status.
+<Tip>
+This method is quick and does not require any API calls.
+It’s useful when you already have an offline billing system but **want to instantly collect payments online** using ClickPesa.
+</Tip>
+
+## 2. Via API
+When using the [BillPay API](/api-reference/collection/billpay/create-order-control-number), you get full control over the control number. You can directly set the **custom reference**, which becomes the **actual control number customers will use to pay**.
+This means the number does **not** need to follow the offline concatenation format.
+
+With API generation, you can also:
+- **Set the amount** to be paid.
+- **Control payment mode**:
+  - Require full payment only.
+  - Allow partial payments.
+  - Allow overs.
+- **Add a bill description**.
+- **Set a custom reference** (actual customer-facing control number).
+
+**Example use case:**
+A SaaS platform generates an Order BillPay Control Number via API with a fixed amount, partial payment allowed, and a meaningful control number like `INV2025001`.
 
 
-## Making Payment Using an Order BillPay Control Number
+## Making Payments with Order BillPay Control Numbers
+Customers can pay via:
+- **Mobile Money:** Tigopesa, Airtel Money, Halopesa, M-Pesa
+- **CRDB Banking:** SIM Banking (APP/USSD), Internet Banking, CRDB Wakalas
 
-Customers can conveniently make payments using **Order BillPay Control Number** through Tanzania’s leading mobile money services such as Tigopesa, Airtel Money, Halopesa and M-Pesa, as well as CRDB SIM Banking (APP and USSD), CRDB Internet Banking and CRDB Wakalas.
+<PaymentInstructions operation="Pay" controlNumber="Order BillPay Control Number" />
 
-<PaymentInstructions operation="Pay" controlNumber="Order BillPay Control Number"/>
+## Payment Tracking
+- **Automatic Notifications:** Receive instant updates via [Webhooks](/home/webhooks).
+- **Manual Check:** Use the [Payment Query API](/api-reference/collection/querying-for-payments/querying-for-payments).

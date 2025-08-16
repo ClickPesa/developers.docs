@@ -4,6 +4,10 @@
    padding-top: 1em;
 }
 
+#sidebar {
+   width: auto;
+}
+
 #footer > div > div {
    display: none;
 }

@@ -1,0 +1,323 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "CORE API - BillPay Control Number Creation",
+    "description": "API for creating BillPay Control Numbers",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.clickpesa.com/third-parties"
+    }
+  ],
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "paths": {
+    "/billpay/create-order-control-number": {
+      "post": {
+        "description": "Generates a BillPay Control Number for a specific bill, transaction or invoice",
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "billDescription": {
+                    "type": "string",
+                    "description": "Description of the bill",
+                    "example": "Water Bill - July 2024"
+                  },
+                  "billPaymentMode": {
+                    "type": "string",
+                    "enum": [
+                      "ALLOW_PARTIAL_AND_OVER_PAYMENT",
+                      "EXACT"
+                    ],
+                    "default": "ALLOW_PARTIAL_AND_OVER_PAYMENT",
+                    "description": "Payment mode for the bill. Applied only when billAmount is set"
+                  },
+                  "billAmount": {
+                    "type": "number",
+                    "description": "Amount of the bill",
+                    "example": 90900
+                  },
+                  "billReference": {
+                    "type": "string",
+                    "description": "Custom bill reference. If not provided, the system auto-generates one"
+                  }
+                }
+              },
+              "example": {
+                "billDescription": "Water Bill - July 2024",
+                "billPaymentMode": "EXACT",
+                "billAmount": 90900,
+                "billReference": "CUSTOMJH121"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully generated BillPay Control Number",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedError"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConflictError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/billpay/create-customer-control-number": {
+      "post": {
+        "description": "Generates a BillPay Control Number for a specific customer",
+        "requestBody": {
+          "required": false,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "customerName"
+                ],
+                "properties": {
+                  "customerName": {
+                    "type": "string",
+                    "description": "Name of the customer"
+                  },
+                  "customerEmail": {
+                    "type": "string",
+                    "description": "Email address of the customer **(required if customerPhone is not provided)**"
+                  },
+                  "customerPhone": {
+                    "type": "string",
+                    "description": "Phone number of the customer **(required if customerEmail is not provided)**, starting with country code and without the plus sign, e.g., 255712345678"
+                  },
+                  "billDescription": {
+                    "type": "string",
+                    "description": "Description of the bill",
+                    "example": "Water Bill - July 2024"
+                  },
+                  "billPaymentMode": {
+                    "type": "string",
+                    "enum": [
+                      "ALLOW_PARTIAL_AND_OVER_PAYMENT",
+                      "EXACT"
+                    ],
+                    "default": "ALLOW_PARTIAL_AND_OVER_PAYMENT",
+                    "description": "Payment mode for the bill. Applied only when billAmount is set"
+                  },
+                  "billAmount": {
+                    "type": "number",
+                    "description": "Amount of the bill",
+                    "example": 90900
+                  },
+                  "billReference": {
+                    "type": "string",
+                    "description": "Custom bill reference. If not provided, the system auto-generates one"
+                  }
+                }
+              },
+              "example": {
+                "billDescription": "Water Bill - July 2024",
+                "billPaymentMode": "EXACT",
+                "billAmount": 90900,
+                "billReference": "CUSTOMJH121",
+                "customerName": "John Doe",
+                "customerEmail": "john@example.com",
+                "customerPhone": "255712345678"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully generated Customer BillPay Control Number",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedError"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConflictError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/billpay/{billPayNumber}": {
+      "get": {
+        "description": "Queries for BillPay number details",
+        "parameters": [
+          {
+            "name": "billPayNumber",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "BillPay number to query for details"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully queried for BillPay number details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Response"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Response": {
+        "type": "object",
+        "properties": {
+          "billPayNumber": {
+            "type": "string",
+            "description": "BillPay number",
+            "example": "55042914871931"
+          },
+          "billDescription": {
+            "type": "string",
+            "description": "Description of the bill",
+            "example": "Generic Bamboo Chees"
+          },
+          "billCustomerName": {
+            "type": "string",
+            "description": "Name of the customer - for customer billpay numbers",
+            "example": "Mr. Freddie Walker-Graham"
+          },
+          "billAmount": {
+            "type": "number",
+            "description": "Amount of the bill",
+            "example": 90900
+          },
+          "billPaymentMode": {
+            "type": "string",
+            "description": "Payment mode for the bill. Applied only when billAmount is set",
+            "example": "EXACT"
+          }
+        }
+      },
+      "NotFoundError": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "BillPay Number does not exist"
+          }
+        }
+      },
+      "UnauthorizedError": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Unauthorized Error",
+            "example": "Unauthorized"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "Authorization header containing the JWT access token returned from the generate token endpoint. The token already includes the Bearer prefix. Example: `Authorization: Bearer eyJhbGciOi...`",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}

@@ -1,31 +1,61 @@
 ---
 title: "FAQ"
 description: "Frequently Asked Questions about BillPay Control Numbers"
-
 ---
 
-[ Where can I find the endpoint to create an Order BillPay Control Number?](#)
+[Where can I find the endpoint to create an Order BillPay Control Number?](#)
 
-**A:** There is no API endpoint to create an Order BillPay Control Number. Instead, you create it on your side by combining your Merchant BillPay-Namba (assigned by ClickPesa) with a unique order reference from your system.
-This combined value is what you share with the customer as the payment reference. When a customer makes a payment using that BillPay number, ClickPesa uses the BillPay-Namba to route the payment to your account and sends you a webhook notification containing the full BillPay number and payment details.
+**A:** You can now create an **Order BillPay Control Number via the [BillPay API](/api-reference/collection/billpay/create-order-control-number)**.
+
+- **API Generation:** Provides flexibility to specify:
+  - Amount to be paid
+  - Payment mode (full, partial, or over)
+  - Bill description
+  - Custom reference (used as the customer-facing control number)
+  - If no custom reference is provided, ClickPesa will auto-generate one.
+- **Offline / Manual Generation:** You can also generate an Order BillPay Control Number on your side by combining your Merchant BillPay-Namba with a unique order reference from your system. This method is quick for offline or manual invoicing.
+
+When a customer pays using the control number, ClickPesa routes the payment to your account and sends a **webhook notification** containing the full BillPay number and payment details.
 
 ---
 
 [If a client is given a control number for 1,000,000/= but pays only 500,000/=, will the payment go through?](#)
 
-**A:** Yes. Partial payments are accepted, and you'll be notified of the amount received via webhook, email and web notfications.
+**A:** Yes. Partial payments are accepted **if enabled** during API creation.
+- You'll be notified of the amount received via **webhook**, **email**, and **dashboard notifications**.
 
 ---
 
-[ Can the same control number be used to pay the remaining balance later?](#)
+[Can the same control number be used to pay the remaining balance later?](#)
 
 **A:** It depends on the type of BillPay control number:
 
-- **Order BillPay Control Number** - **No**
-  - Meant for one-time, specific transactions.
-  - Cannot be reused—once paid (even partially), it’s **closed** or marked **fulfilled**.
+- **Order BillPay Control Number** – **No**
+  - Designed for one-time, specific transactions.
+  - Once paid (even partially), it is **closed** or marked **fulfilled**.
+  - If partial payments are allowed, the system will reflect the partial amount, but the number is still considered closed.
 
-- **Customer BillPay Control Number** - **Yes**
+- **Customer BillPay Control Number** – **Yes**
   - Designed for ongoing or repeat payments from the same customer.
-  - Can receive multiple payments, making it suitable **for partial or recurring payments**.
+  - Can receive multiple payments.
+  - Ideal for **partial, recurring, or subscription payments**.
+  - You can also create **multiple numbers per customer**, each tied to a different bill or purpose.
 
+---
+
+[Can I assign multiple Customer BillPay Control Numbers to a single customer?](#)
+
+**A:** Yes. Each customer can have **multiple Customer BillPay Control Numbers**, allowing you to manage different bills (e.g., tuition, fees, pocket money) independently. Each number can accept multiple payments and be tracked separately.
+
+---
+
+[Can I specify customer details and bill descriptions when creating a control number via API?](#)
+
+**A:** Yes. When creating **Customer or Order BillPay Control Numbers via API**, you can:
+- Provide the **customer name** (for Customer numbers)
+- Add a **bill description**
+- Set payment amount and mode
+- Provide a **custom reference** or let ClickPesa auto-generate one
+This improves reconciliation and reporting, especially for recurring or batch payments.
+
+---

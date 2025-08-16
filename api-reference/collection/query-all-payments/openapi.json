@@ -21,7 +21,7 @@
   "paths": {
     "/payments/all": {
       "get": {
-        "description": "Query all payments with filtering, sorting, pagination, and search capabilities",
+        "description": "Query all payments with filtering, sorting, and pagination capabilities",
         "parameters": [
           {
             "name": "startDate",
@@ -70,15 +70,6 @@
               "type": "string"
             },
             "description": "Payment channel filter"
-          },
-          {
-            "name": "id",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Payment ID filter"
           },
           {
             "name": "orderReference",
@@ -139,15 +130,6 @@
               "default": 20
             },
             "description": "Number of records to return"
-          },
-          {
-            "name": "search",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Search across specific fields using format: field=keyword,another_field=another_keyword. Available searchable fields: id, status, paymentReference, orderReference, collectedAmount, collectedCurrency, message, createdAt, updatedAt, customer.customerName, customer.customerPhoneNumber, customer.customerEmail. Example: search=customer.customerName=John,collectedCurrency=TZS,status=SUCCESS"
           }
         ],
         "responses": {

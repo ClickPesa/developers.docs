@@ -21,7 +21,7 @@
   "paths": {
     "/payouts/all": {
       "get": {
-        "description": "Query all payouts with filtering, sorting, pagination, and search capabilities",
+        "description": "Query all payouts with filtering, sorting, and pagination capabilities",
         "parameters": [
           {
             "name": "startDate",
@@ -61,15 +61,6 @@
               "type": "string"
             },
             "description": "Currency filter (e.g., TZS, USD)"
-          },
-          {
-            "name": "id",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Payout ID filter"
           },
           {
             "name": "orderReference",
@@ -157,15 +148,6 @@
               "default": 20
             },
             "description": "Number of records to return"
-          },
-          {
-            "name": "search",
-            "in": "query",
-            "required": false,
-            "schema": {
-              "type": "string"
-            },
-            "description": "Search across specific fields using format: field=keyword,another_field=another_keyword. Available searchable fields: id, orderReference, amount, currency, status, channel, channelProvider, settlementType, notes, createdAt, updatedAt, beneficiary.accountNumber, beneficiary.accountName, beneficiary.swiftNumber, beneficiary.routingNumber, beneficiary.beneficiaryMobileNumber, beneficiary.email. Example: search=beneficiary.accountName=John,currency=TZS,status=SUCCESS"
           }
         ],
         "responses": {
