@@ -45,6 +45,74 @@
           }
         }
       }
+    },
+    "/account/statement": {
+      "get": {
+        "description": "Get Account Statement",
+        "parameters": [
+          {
+            "name": "startDate",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "description": "Start date for filtering transactions (YYYY-MM-DD)"
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "format": "date"
+            },
+            "description": "End date for filtering transactions (YYYY-MM-DD)"
+          },
+          {
+            "name": "currency",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "Currency filter (e.g., TZS, USD)"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Get Account Statement response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatementResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid Token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedError"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -68,6 +136,107 @@
           }
         }
       },
+      "StatementResponse": {
+        "type": "object",
+        "properties": {
+          "accountDetails": {
+            "type": "object",
+            "description": "Account details",
+            "properties": {
+              "currency": {
+                "type": "string",
+                "description": "Balance currency",
+                "enum": [
+                  "TZS",
+                  "USD"
+                ]
+              },
+              "openingBalance": {
+                "type": "number",
+                "description": "Account opening balance for the period"
+              },
+              "closingBalance": {
+                "type": "number",
+                "description": "Account closing balance for the period"
+              },
+              "totalCredits": {
+                "type": "number",
+                "description": "Total credits for the period"
+              },
+              "totalDebits": {
+                "type": "number",
+                "description": "Total debits for the period"
+              }
+            }
+          },
+          "transactions": {
+            "type": "array",
+            "description": "List of transactions",
+            "items": {
+              "type": "object",
+              "properties": {
+                "balance": {
+                  "type": "number",
+                  "description": "Account balance after the transaction"
+                },
+                "date": {
+                  "type": "string",
+                  "description": "Transaction date"
+                },
+                "description": {
+                  "type": "string",
+                  "description": "Transaction description"
+                },
+                "entry": {
+                  "type": "string",
+                  "description": "Transaction entry",
+                  "enum": [
+                    "Credit",
+                    "Debit"
+                  ]
+                },
+                "amount": {
+                  "type": "number",
+                  "description": "Transaction amount"
+                },
+                "currency": {
+                  "type": "string",
+                  "description": "Currency",
+                  "enum": [
+                    "TZS",
+                    "USD"
+                  ]
+                },
+                "orderReference": {
+                  "type": "string",
+                  "description": "Transaction order reference"
+                },
+                "id": {
+                  "type": "string",
+                  "description": "Transaction id"
+                },
+                "type": {
+                  "type": "string",
+                  "description": "Transaction type",
+                  "enum": [
+                    "Payment",
+                    "Deposit",
+                    "Withdraw",
+                    "Payout",
+                    "Fee - Payout",
+                    "Fee - Withdraw",
+                    "Fee - Payment",
+                    "Reversed Payout",
+                    "Reversed Withdraw",
+                    "Refunded Payout",
+                    "Refunded Withdraw"
+                  ]
+                }
+              }
+            }
+          }
+        }
+      },
       "UnauthorizedError": {
         "type": "object",
         "properties": {
@@ -75,6 +244,16 @@
             "type": "string",
             "description": "Unauthorized Error",
             "example": "Unauthorized"
+          }
+        }
+      },
+      "ValidationError": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Bad Request Error",
+            "example": "Invalid currency: currency must be either TZS or USD"
           }
         }
       }

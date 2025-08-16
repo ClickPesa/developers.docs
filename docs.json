@@ -179,7 +179,8 @@
           {
             "group": "ACCOUNT",
             "pages": [
-              "api-reference/account/get-account-balance"
+              "api-reference/account/get-account-balance",
+              "api-reference/account/get-account-statement"
             ]
           }
         ]
