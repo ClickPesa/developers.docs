@@ -32,6 +32,9 @@ A **4-digit static number** assigned to your merchant account.
 ### [Order BillPay Control Number](/bill-pay/order-billpay-namba)
 A **dynamic number** for a specific transaction or invoice.
 
+- Ideal for **one-time payments**.
+- Closes automatically once processed.
+
 **Two ways to generate:**
 1. **Offline / Manual Concatenation:** Combine your Merchant BillPay-Namba with an internal order reference (e.g., `1122` + `231256` = `1122231256`). Quick way to accept online payments for offline invoices.
 2. **API Generation:** Create via [BillPay API](/api-reference/collection/billpay/create-order-control-number) with full flexibility:
@@ -41,11 +44,11 @@ A **dynamic number** for a specific transaction or invoice.
    - Provide a **custom reference** as the control number.
    - If no reference is provided, ClickPesa will **auto-generate** one.
 
-- Ideal for **one-time payments**.
-- Closes automatically once paid.
-
 ### [Customer BillPay Control Number](/bill-pay/customer-billpay-namba)
 A **static unique number** assigned to a specific customer.
+
+- Ideal for **repeating or subscription payments**.
+- Enables **automatic payment tracking per customer**.
 
 **Two ways to generate:**
 1. [Via Dashboard](https://merchant.clickpesa.com): Assign a control number linked to the customer in the Merchant Dashboard.
@@ -56,18 +59,18 @@ A **static unique number** assigned to a specific customer.
    - Allow **multiple control numbers per customer**, each for a different bill or purpose.
    - Provide a **custom reference** or let ClickPesa auto-generate one.
 
-- Ideal for **repeating or subscription payments**.
-- Enables **automatic payment tracking per customer**.
-
 ## Making Payments with BillPay Control Numbers
 Payments can be made through:
 - **Mobile Money:** Tigopesa, Airtel Money, Halopesa, M-Pesa
 - **CRDB Banking:** SIM Banking (APP/USSD), Internet Banking, CRDB Wakalas
 
 Step-by-step payment instructions are available on each BillPay Control Number page:
-- [Top up using Merchant BillPay-Namba](/bill-pay/billpay-namba#depositing-using-merchant-billpay-namba)
-- [Pay using Order BillPay Control Number](/bill-pay/order-billpay-namba#making-payments-with-order-billpay-control-numbers)
-- [Pay using Customer BillPay Control Number](/bill-pay/customer-billpay-namba#making-payments-with-customer-billpay-control-numbers)
+
+ [Top up using Merchant BillPay-Namba](/bill-pay/billpay-namba#depositing-using-merchant-billpay-namba)
+
+ [Pay using Order BillPay Control Number](/bill-pay/order-billpay-namba#making-payments-with-order-billpay-control-numbers)
+
+ [Pay using Customer BillPay Control Number](/bill-pay/customer-billpay-namba#making-payments-with-customer-billpay-control-numbers)
 
 
 <br/>
