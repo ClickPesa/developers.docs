@@ -182,6 +182,12 @@
               "api-reference/account/get-account-balance",
               "api-reference/account/get-account-statement"
             ]
+          },
+          {
+            "group": "EXCHANGE RATES",
+            "pages": [
+              "api-reference/exchange/get-latest-exchange-rates"
+            ]
           }
         ]
       },

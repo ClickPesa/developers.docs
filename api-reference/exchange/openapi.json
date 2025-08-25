@@ -1,0 +1,137 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "CORE API OpenAPI Specification",
+    "description": "This is the API documentation for the ClickPesa CORE API",
+    "license": {
+      "name": "MIT"
+    },
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.clickpesa.com/third-parties"
+    }
+  ],
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "paths": {
+    "/exchange-rates/all": {
+      "get": {
+        "description": "Retrieve latest exchange rates between currencies. If no params are passed, all available rates will be returned.",
+        "parameters": [
+          {
+            "name": "source",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "USD"
+            },
+            "description": "Filter by source currency (3-letter ISO code) Ex. USD"
+          },
+          {
+            "name": "target",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "example": "TZS"
+            },
+            "description": "Filter by target currency (3-letter ISO code) Ex. TZS"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Exchange Rates Response",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/ExchangeRate"
+                  }
+                },
+                "example": [
+                  {
+                    "source": "TZS",
+                    "target": "USD",
+                    "rate": 0.00037736,
+                    "date": "2025-08-19T06:59:07Z"
+                  },
+                  {
+                    "source": "USD",
+                    "target": "TZS",
+                    "rate": 2510,
+                    "date": "2025-08-19T06:58:34Z"
+                  }
+                ]
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid or Expired Token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedError"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "UnauthorizedError": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Unauthorized Error",
+            "example": "Unauthorized"
+          }
+        }
+      },
+      "ExchangeRate": {
+        "type": "object",
+        "properties": {
+          "source": {
+            "type": "string",
+            "description": "Source currency code (3-letter ISO)",
+            "example": "USD"
+          },
+          "target": {
+            "type": "string",
+            "description": "Target currency code (3-letter ISO)",
+            "example": "TZS"
+          },
+          "rate": {
+            "type": "number",
+            "description": "Exchange rate from source to target",
+            "example": 2510
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Time the rate was last updated",
+            "example": "2025-08-19T06:59:07Z"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "description": "Authorization header containing the JWT access token returned from the generate token endpoint. The token already includes the Bearer prefix. Example: `Authorization: Bearer eyJhbGciOi...`",
+        "bearerFormat": "JWT"
+      }
+    }
+  }
+}
