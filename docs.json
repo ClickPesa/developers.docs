@@ -26,6 +26,7 @@
         "pages": [
           "home/introduction",
           "home/onboarding",
+          "home/changelog",
           {
             "group": "Integration Guides",
             "pages": [

@@ -56,6 +56,11 @@
                     "type": "string",
                     "description": "Mobile phone number to receive USSD-PUSH and make payment, starting with country code and without the plus sign e.g., 255712345678"
                   },
+                  "fetchSenderDetails": {
+                    "type": "boolean",
+                    "description": "If `true`, fetch sender details. Defaults to false.",
+                    "default": false
+                  },
                   "checksum": {
                     "type": "string",
                     "description": "If enabled, this is the generated checksum of the payload. Refer to the [documentation](/home/checksum) for more details."
