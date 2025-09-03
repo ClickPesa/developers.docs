@@ -12,7 +12,13 @@ noindex: true
 
 - Added new optional parameter **`fetchSenderDetails`** to **[payments/preview-ussd-push-request](/api-reference/collection/ussd-push-requests/preview-ussd-push-request)** API endpoint to enable fetching sender details.
   - Type: `boolean`
-  - Description: If set to `true` fetch sender details.
+  - Description: If set to `true` fetch sender details
   - Default: `false`
+
+## Payout API updates
+
+- Introduced request cooldown for **[payouts/create-mobile-money-payout](/api-reference/disbursement/mno-payout/create-mno-payout)** and **[payouts/create-bank-payout](/api-reference/disbursement/bank-payout/create-bank-payout)** API endpoints to prevent rapid re-submissions.
+  - If a request is re-submitted before the cooldown period ends, the API will respond with an error message indicating the remaining wait time
+  - Default cooldown duration: **60 seconds**
 
 </Update>

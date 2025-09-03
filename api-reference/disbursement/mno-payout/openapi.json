@@ -362,9 +362,10 @@
               "Valid Client ID is required",
               "Application has no access to PAYOUT API feature. Enable it on your application.",
               "Invalid Order Reference, should only contain alphanumeric characters and cannot be blank",
-              "Insufficient balance: available balance is {balance} TZS"
+              "Insufficient balance: available balance is {balance} TZS",
+              "Payout request is already in progress, please retry after {remaining time} seconds"
             ],
-            "example": "Invalid Order Reference, should only contain alphanumeric characters and cannot be blank"
+            "example": "Insufficient balance: available balance is {balance} TZS"
           }
         }
       },
