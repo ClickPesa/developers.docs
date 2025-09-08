@@ -21,4 +21,21 @@ noindex: true
   - If a request is re-submitted before the cooldown period ends, the API will respond with an error message indicating the remaining wait time
   - Default cooldown duration: **60 seconds**
 
+- Enhanced payout APIs with cross-currency support:
+  - Updated **`currency`** field to support USD in addition to TZS for account asset currency
+  - Added **`accountCurrency`** field for bank payouts to specify receiving currency (TZS)
+  - Added ability to pay out from USD asset to TZS receiving currency
+  - Updated response schemas to include **`exchanged`** and **`exchange`** fields for currency conversion details
+
+## Query API updates
+
+- Added comprehensive query endpoints for payments and payouts:
+  - **[payments/all](/api-reference/collection/query-all-payments/query-all-payments)**: Query all payments with filtering, sorting, pagination, and search
+  - **[payouts/all](/api-reference/disbursement/query-all-payouts/query-all-payouts)**: Query all payouts with filtering, sorting, pagination, and search
+  - Both endpoints support filtering by date range, status, currency, channel, order reference, and more
+  - Advanced search across all response fields including nested objects (customer/beneficiary details)
+  - Flexible sorting by any response field with ASC/DESC order
+  - Pagination with skip/limit parameters
+  - Response format: `{ data: Response[], totalCount: number }`
+
 </Update>

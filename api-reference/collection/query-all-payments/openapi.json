@@ -197,6 +197,37 @@
             "description": "Payment status",
             "enum": ["SUCCESS", "SETTLED", "PROCESSING", "PENDING", "FAILED"]
           },
+          "exchanged": {
+            "type": "boolean",
+            "description": "Indicates if currency conversion was applied (true when source currency differs from receiving currency)",
+            "example": true
+          },
+          "exchange": {
+            "type": "object",
+            "description": "Exchange rate details (only present when exchanged is true)",
+            "properties": {
+              "sourceCurrency": {
+                "type": "string",
+                "description": "Source currency for the exchange",
+                "example": "USD"
+              },
+              "targetCurrency": {
+                "type": "string",
+                "description": "Target currency for the exchange",
+                "example": "TZS"
+              },
+              "sourceAmount": {
+                "type": "number",
+                "description": "Amount in source currency",
+                "example": 1000
+              },
+              "rate": {
+                "type": "number",
+                "description": "Exchange rate used for conversion",
+                "example": 2500
+              }
+            }
+          },
           "paymentReference": {
             "type": "string",
             "description": "Unique reference for the payment"

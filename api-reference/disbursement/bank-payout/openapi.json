@@ -21,10 +21,7 @@
   "paths": {
     "/payouts/preview-bank-payout": {
       "post": {
-        "tags": [
-          "Payouts",
-          "Preview"
-        ],
+        "tags": ["Payouts", "Preview"],
         "description": "Validates bank payout details like amount, order-reference and verifies payout channels availability",
         "requestBody": {
           "required": true,
@@ -49,9 +46,38 @@
                   },
                   "currency": {
                     "type": "string",
-                    "enum": [
-                      "TZS"
-                    ]
+                    "enum": ["TZS", "USD"],
+                    "description": "Account asset currency to pay out from (TZS or USD)"
+                  },
+                  "accountCurrency": {
+                    "type": "string",
+                    "enum": ["TZS"],
+                    "default": "TZS",
+                    "description": "Receiving currency for the payout (TZS)"
+                  },
+                  "exchange": {
+                    "type": "object",
+                    "description": "Exchange rate information for currency conversion (required when payout currency differs from account asset currency)",
+                    "properties": {
+                      "fromCurrency": {
+                        "type": "string",
+                        "enum": ["USD", "TZS"],
+                        "description": "Source currency for conversion"
+                      },
+                      "toCurrency": {
+                        "type": "string",
+                        "enum": ["USD", "TZS"],
+                        "description": "Target currency for conversion"
+                      },
+                      "rate": {
+                        "type": "number",
+                        "description": "Exchange rate for conversion"
+                      },
+                      "amount": {
+                        "type": "number",
+                        "description": "Amount in source currency before conversion"
+                      }
+                    }
                   },
                   "orderReference": {
                     "type": "string",
@@ -63,10 +89,7 @@
                   },
                   "transferType": {
                     "type": "string",
-                    "enum": [
-                      "ACH",
-                      "RTGS"
-                    ]
+                    "enum": ["ACH", "RTGS"]
                   },
                   "checksum": {
                     "type": "string",
@@ -133,10 +156,7 @@
     },
     "/payouts/create-bank-payout": {
       "post": {
-        "tags": [
-          "Payouts",
-          "Initiate"
-        ],
+        "tags": ["Payouts", "Initiate"],
         "requestBody": {
           "required": true,
           "content": {
@@ -164,9 +184,38 @@
                   },
                   "currency": {
                     "type": "string",
-                    "enum": [
-                      "TZS"
-                    ]
+                    "enum": ["TZS", "USD"],
+                    "description": "Account asset currency to pay out from (TZS or USD)"
+                  },
+                  "accountCurrency": {
+                    "type": "string",
+                    "enum": ["TZS"],
+                    "default": "TZS",
+                    "description": "Receiving currency for the payout (TZS)"
+                  },
+                  "exchange": {
+                    "type": "object",
+                    "description": "Exchange rate information for currency conversion (required when payout currency differs from account asset currency)",
+                    "properties": {
+                      "fromCurrency": {
+                        "type": "string",
+                        "enum": ["USD", "TZS"],
+                        "description": "Source currency for conversion"
+                      },
+                      "toCurrency": {
+                        "type": "string",
+                        "enum": ["USD", "TZS"],
+                        "description": "Target currency for conversion"
+                      },
+                      "rate": {
+                        "type": "number",
+                        "description": "Exchange rate for conversion"
+                      },
+                      "amount": {
+                        "type": "number",
+                        "description": "Amount in source currency before conversion"
+                      }
+                    }
                   },
                   "orderReference": {
                     "type": "string",
@@ -178,10 +227,7 @@
                   },
                   "transferType": {
                     "type": "string",
-                    "enum": [
-                      "ACH",
-                      "RTGS"
-                    ]
+                    "enum": ["ACH", "RTGS"]
                   },
                   "checksum": {
                     "type": "string",
@@ -254,6 +300,7 @@
         "properties": {
           "amount": {
             "type": "number",
+            "description": "Total amount to be deducted from your account asset (includes fee)",
             "example": 1047.1
           },
           "balance": {
@@ -266,13 +313,46 @@
           },
           "fee": {
             "type": "number",
+            "description": "Transaction fee deducted from source asset (included in amount)",
             "example": 47.1
+          },
+          "exchanged": {
+            "type": "boolean",
+            "description": "Indicates if currency conversion was applied (true when source currency differs from receiving currency)",
+            "example": true
+          },
+          "exchange": {
+            "type": "object",
+            "description": "Exchange rate details (only present when exchanged is true)",
+            "properties": {
+              "sourceCurrency": {
+                "type": "string",
+                "description": "Source currency for the exchange",
+                "example": "USD"
+              },
+              "targetCurrency": {
+                "type": "string",
+                "description": "Target currency for the exchange",
+                "example": "TZS"
+              },
+              "sourceAmount": {
+                "type": "number",
+                "description": "Amount in source currency",
+                "example": 1000
+              },
+              "rate": {
+                "type": "number",
+                "description": "Exchange rate used for conversion",
+                "example": 2500
+              }
+            }
           },
           "order": {
             "type": "object",
             "properties": {
               "amount": {
                 "type": "number",
+                "description": "Amount to be added during order creation/payload",
                 "example": 1000
               },
               "currency": {
@@ -288,11 +368,7 @@
           "payoutFeeBearer": {
             "type": "string",
             "example": "merchant",
-            "enum": [
-              "merchant",
-              "both",
-              "customer"
-            ]
+            "enum": ["merchant", "both", "customer"]
           },
           "receiver": {
             "type": "object",
@@ -300,15 +376,22 @@
               "accountNumber": {
                 "type": "string",
                 "example": "0112345400847jhs"
+              },
+              "accountCurrency": {
+                "type": "string",
+                "description": "Currency the user will receive funds in",
+                "example": "TZS"
+              },
+              "amount": {
+                "type": "number",
+                "description": "Amount the user will receive in accountCurrency",
+                "example": 1000
               }
             }
           },
           "transferType": {
             "type": "string",
-            "enum": [
-              "ACH",
-              "RTGS"
-            ]
+            "enum": ["ACH", "RTGS"]
           }
         }
       },
@@ -331,7 +414,8 @@
           },
           "amount": {
             "type": "string",
-            "example": "20000.00"
+            "description": "Total amount deducted from your account asset (includes fee)",
+            "example": "202360.00"
           },
           "currency": {
             "type": "string",
@@ -339,21 +423,47 @@
           },
           "fee": {
             "type": "string",
+            "description": "Transaction fee deducted from source asset (included in amount)",
             "example": "2360.00"
+          },
+          "exchanged": {
+            "type": "boolean",
+            "description": "Indicates if currency conversion was applied (true when source currency differs from receiving currency)",
+            "example": true
+          },
+          "exchange": {
+            "type": "object",
+            "description": "Exchange rate details (only present when exchanged is true)",
+            "properties": {
+              "sourceCurrency": {
+                "type": "string",
+                "description": "Source currency for the exchange",
+                "example": "USD"
+              },
+              "targetCurrency": {
+                "type": "string",
+                "description": "Target currency for the exchange",
+                "example": "TZS"
+              },
+              "sourceAmount": {
+                "type": "number",
+                "description": "Amount in source currency",
+                "example": 1000
+              },
+              "rate": {
+                "type": "number",
+                "description": "Exchange rate used for conversion",
+                "example": 2500
+              }
+            }
           },
           "status": {
             "type": "string",
-            "enum": [
-              "AUTHORIZED",
-              "SUCCESS",
-              "REVERSED"
-            ]
+            "enum": ["AUTHORIZED", "SUCCESS", "REVERSED"]
           },
           "channel": {
             "type": "string",
-            "enum": [
-              "BANK TRANSFER"
-            ]
+            "enum": ["BANK TRANSFER"]
           },
           "channelProvider": {
             "type": "string",
@@ -361,12 +471,23 @@
           },
           "transferType": {
             "type": "string",
-            "enum": [
-              "ACH",
-              "RTGS"
-            ],
+            "enum": ["ACH", "RTGS"],
             "nullable": true,
             "example": "ACH"
+          },
+          "order": {
+            "type": "object",
+            "properties": {
+              "amount": {
+                "type": "string",
+                "description": "Amount added during order creation/payload",
+                "example": "20000.00"
+              },
+              "currency": {
+                "type": "string",
+                "example": "TZS"
+              }
+            }
           },
           "beneficiary": {
             "type": "object",
@@ -378,6 +499,11 @@
               "accountName": {
                 "type": "string",
                 "example": "John Doe"
+              },
+              "amount": {
+                "type": "string",
+                "description": "Amount the user will receive in accountCurrency",
+                "example": "20000.00"
               }
             }
           },
