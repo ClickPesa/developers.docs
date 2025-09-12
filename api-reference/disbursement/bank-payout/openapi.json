@@ -47,7 +47,7 @@
                   "currency": {
                     "type": "string",
                     "enum": ["TZS", "USD"],
-                    "description": "Account asset currency to pay out from (TZS or USD)"
+                    "description": "Account currency to pay out from (TZS or USD)"
                   },
                   "accountCurrency": {
                     "type": "string",
@@ -57,7 +57,7 @@
                   },
                   "exchange": {
                     "type": "object",
-                    "description": "Exchange rate information for currency conversion (required when payout currency differs from account asset currency)",
+                    "description": "Exchange rate information for currency conversion (required when payout currency differs from Account currency)",
                     "properties": {
                       "fromCurrency": {
                         "type": "string",
@@ -185,7 +185,7 @@
                   "currency": {
                     "type": "string",
                     "enum": ["TZS", "USD"],
-                    "description": "Account asset currency to pay out from (TZS or USD)"
+                    "description": "Account currency to pay out from (TZS or USD)"
                   },
                   "accountCurrency": {
                     "type": "string",
@@ -195,7 +195,7 @@
                   },
                   "exchange": {
                     "type": "object",
-                    "description": "Exchange rate information for currency conversion (required when payout currency differs from account asset currency)",
+                    "description": "Exchange rate information for currency conversion (required when payout currency differs from Account currency)",
                     "properties": {
                       "fromCurrency": {
                         "type": "string",
@@ -300,7 +300,7 @@
         "properties": {
           "amount": {
             "type": "number",
-            "description": "Total amount to be deducted from your account asset (includes fee)",
+            "description": "Total amount to be deducted from your account balance (includes fee)",
             "example": 1047.1
           },
           "balance": {
@@ -313,7 +313,7 @@
           },
           "fee": {
             "type": "number",
-            "description": "Transaction fee deducted from source asset (included in amount)",
+            "description": "Transaction fee deducted from source currency (included in amount)",
             "example": 47.1
           },
           "exchanged": {
@@ -414,7 +414,7 @@
           },
           "amount": {
             "type": "string",
-            "description": "Total amount deducted from your account asset (includes fee)",
+            "description": "Total amount deducted from your account balance (includes fee)",
             "example": "202360.00"
           },
           "currency": {
@@ -423,7 +423,7 @@
           },
           "fee": {
             "type": "string",
-            "description": "Transaction fee deducted from source asset (included in amount)",
+            "description": "Transaction fee deducted from source currency (included in amount)",
             "example": "2360.00"
           },
           "exchanged": {
