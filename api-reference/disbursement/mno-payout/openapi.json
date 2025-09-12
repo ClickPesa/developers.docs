@@ -21,10 +21,7 @@
   "paths": {
     "/payouts/preview-mobile-money-payout": {
       "post": {
-        "tags": [
-          "Payouts",
-          "Preview"
-        ],
+        "tags": ["Payouts", "Preview"],
         "description": "Validates mobile money payout details like phone number, amount, order-reference, fee",
         "requestBody": {
           "required": true,
@@ -49,10 +46,32 @@
                   },
                   "currency": {
                     "type": "string",
-                    "enum": [
-                      "TZS"
-                    ],
-                    "description": "Your order payment currency to receive in (Will always be TZS)"
+                    "enum": ["TZS", "USD"],
+                    "description": "Account currency to pay out from (TZS or USD). User will receive funds in TZS"
+                  },
+                  "exchange": {
+                    "type": "object",
+                    "description": "Exchange rate information for currency conversion (required when payout currency differs from Account currency)",
+                    "properties": {
+                      "fromCurrency": {
+                        "type": "string",
+                        "enum": ["USD", "TZS"],
+                        "description": "Source currency for conversion"
+                      },
+                      "toCurrency": {
+                        "type": "string",
+                        "enum": ["USD", "TZS"],
+                        "description": "Target currency for conversion"
+                      },
+                      "rate": {
+                        "type": "number",
+                        "description": "Exchange rate for conversion"
+                      },
+                      "amount": {
+                        "type": "number",
+                        "description": "Amount in source currency before conversion"
+                      }
+                    }
                   },
                   "orderReference": {
                     "type": "string",
@@ -123,11 +142,8 @@
     },
     "/payouts/create-mobile-money-payout": {
       "post": {
-        "tags": [
-          "Payouts",
-          "Create"
-        ],
-        "description": "Initiate a mobile money payout by sending a request to the API. The specified amount will be transferred to the recipient’s mobile wallet.",
+        "tags": ["Payouts", "Create"],
+        "description": "Initiate a mobile money payout by sending a request to the API. The specified amount will be transferred to the recipient's mobile wallet.",
         "requestBody": {
           "required": true,
           "content": {
@@ -151,10 +167,32 @@
                   },
                   "currency": {
                     "type": "string",
-                    "enum": [
-                      "TZS"
-                    ],
-                    "description": "Your order payment currency to receive in (Will always be TZS)"
+                    "enum": ["TZS", "USD"],
+                    "description": "Account currency to pay out from (TZS or USD). User will receive funds in TZS (Mobile can't hold USD)"
+                  },
+                  "exchange": {
+                    "type": "object",
+                    "description": "Exchange rate information for currency conversion (required when payout currency differs from Account currency)",
+                    "properties": {
+                      "fromCurrency": {
+                        "type": "string",
+                        "enum": ["USD", "TZS"],
+                        "description": "Source currency for conversion"
+                      },
+                      "toCurrency": {
+                        "type": "string",
+                        "enum": ["USD", "TZS"],
+                        "description": "Target currency for conversion"
+                      },
+                      "rate": {
+                        "type": "number",
+                        "description": "Exchange rate for conversion"
+                      },
+                      "amount": {
+                        "type": "number",
+                        "description": "Amount in source currency before conversion"
+                      }
+                    }
                   },
                   "orderReference": {
                     "type": "string",
@@ -231,6 +269,7 @@
         "properties": {
           "amount": {
             "type": "number",
+            "description": "Total amount to be deducted from your account balance (includes fee)",
             "example": 1047.1
           },
           "balance": {
@@ -243,13 +282,46 @@
           },
           "fee": {
             "type": "number",
+            "description": "Transaction fee deducted from source currency (included in amount)",
             "example": 47.1
+          },
+          "exchanged": {
+            "type": "boolean",
+            "description": "Indicates if currency conversion was applied (true when source currency differs from receiving currency)",
+            "example": true
+          },
+          "exchange": {
+            "type": "object",
+            "description": "Exchange rate details (only present when exchanged is true)",
+            "properties": {
+              "sourceCurrency": {
+                "type": "string",
+                "description": "Source currency for the exchange",
+                "example": "USD"
+              },
+              "targetCurrency": {
+                "type": "string",
+                "description": "Target currency for the exchange",
+                "example": "TZS"
+              },
+              "sourceAmount": {
+                "type": "number",
+                "description": "Amount in source currency",
+                "example": 1000
+              },
+              "rate": {
+                "type": "number",
+                "description": "Exchange rate used for conversion",
+                "example": 2500
+              }
+            }
           },
           "order": {
             "type": "object",
             "properties": {
               "amount": {
                 "type": "number",
+                "description": "Amount to be added during order creation/payload",
                 "example": 1000
               },
               "currency": {
@@ -265,11 +337,7 @@
           "payoutFeeBearer": {
             "type": "string",
             "example": "merchant",
-            "enum": [
-              "merchant",
-              "both",
-              "customer"
-            ]
+            "enum": ["merchant", "both", "customer"]
           },
           "receiver": {
             "type": "object",
@@ -281,6 +349,16 @@
               "accountNumber": {
                 "type": "string",
                 "example": "255650000000"
+              },
+              "accountCurrency": {
+                "type": "string",
+                "description": "Currency the user will receive funds in",
+                "example": "TZS"
+              },
+              "amount": {
+                "type": "number",
+                "description": "Amount the user will receive in TZS",
+                "example": 1000
               }
             }
           }
@@ -306,7 +384,8 @@
           },
           "amount": {
             "type": "string",
-            "example": "1000"
+            "description": "Total amount deducted from your account balance (includes fee)",
+            "example": "1047.10"
           },
           "currency": {
             "type": "string",
@@ -314,25 +393,65 @@
           },
           "fee": {
             "type": "string",
-            "example": "47.00"
+            "description": "Transaction fee deducted from source currency (included in amount)",
+            "example": "47.10"
+          },
+          "exchanged": {
+            "type": "boolean",
+            "description": "Indicates if currency conversion was applied (true when source currency differs from receiving currency)",
+            "example": true
+          },
+          "exchange": {
+            "type": "object",
+            "description": "Exchange rate details (only present when exchanged is true)",
+            "properties": {
+              "sourceCurrency": {
+                "type": "string",
+                "description": "Source currency for the exchange",
+                "example": "USD"
+              },
+              "targetCurrency": {
+                "type": "string",
+                "description": "Target currency for the exchange",
+                "example": "TZS"
+              },
+              "sourceAmount": {
+                "type": "number",
+                "description": "Amount in source currency",
+                "example": 1000
+              },
+              "rate": {
+                "type": "number",
+                "description": "Exchange rate used for conversion",
+                "example": 2500
+              }
+            }
           },
           "status": {
             "type": "string",
-            "enum": [
-              "AUTHORIZED",
-              "SUCCESS",
-              "REVERSED"
-            ]
+            "enum": ["AUTHORIZED", "SUCCESS", "REVERSED"]
           },
           "channel": {
             "type": "string",
-            "enum": [
-              "MOBILE MONEY"
-            ]
+            "enum": ["MOBILE MONEY"]
           },
           "channelProvider": {
             "type": "string",
             "example": "MPESA TANZANIA"
+          },
+          "order": {
+            "type": "object",
+            "properties": {
+              "amount": {
+                "type": "string",
+                "description": "Amount added during order creation/payload",
+                "example": "1000.00"
+              },
+              "currency": {
+                "type": "string",
+                "example": "TZS"
+              }
+            }
           },
           "beneficiary": {
             "type": "object",
@@ -344,6 +463,11 @@
               "accountName": {
                 "type": "string",
                 "example": "John Doe"
+              },
+              "amount": {
+                "type": "string",
+                "description": "Amount the user will receive in TZS",
+                "example": "1000.00"
               }
             }
           },

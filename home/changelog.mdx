@@ -6,19 +6,37 @@ rss: true
 noindex: true
 ---
 
-<Update label="September 2025" tags={["Improvements"]} rss={{ title: "Weekly Updates", description: "USSD-PUSH Payments API updates" }}>
+<Update label="September 2025" tags={["Improvements"]} rss={{ title: "Monthly Updates", description: "September 2025 - Product updates and improvements" }}>
 
-## Payments API updates
+## Support Fetching Sender Details in USSD-PUSH Payments API
 
 - Added new optional parameter **`fetchSenderDetails`** to **[payments/preview-ussd-push-request](/api-reference/collection/ussd-push-requests/preview-ussd-push-request)** API endpoint to enable fetching sender details.
   - Type: `boolean`
   - Description: If set to `true` fetch sender details
   - Default: `false`
 
-## Payout API updates
+## Introduced Request Cooldown on Payout APIs
 
 - Introduced request cooldown for **[payouts/create-mobile-money-payout](/api-reference/disbursement/mno-payout/create-mno-payout)** and **[payouts/create-bank-payout](/api-reference/disbursement/bank-payout/create-bank-payout)** API endpoints to prevent rapid re-submissions.
   - If a request is re-submitted before the cooldown period ends, the API will respond with an error message indicating the remaining wait time
   - Default cooldown duration: **60 seconds**
+
+## Added Support for USD->USD and USD->TZS Payouts via Payout APIs
+
+- Enhanced payout APIs with cross-currency support:
+  - Updated **`currency`** field to support USD in addition to TZS
+  - Added **`accountCurrency`** field for bank payouts to specify receiving currency (TZS/USD)
+  - Updated response schemas to include **`exchanged`** and **`exchange`** fields for currency conversion details
+
+## Added New Transactions Query APIs
+
+- Added comprehensive query endpoints for payments and payouts:
+  - **[payments/all](/api-reference/collection/query-all-payments/query-all-payments)**: Query all payments with filtering, sorting, pagination, and search
+  - **[payouts/all](/api-reference/disbursement/query-all-payouts/query-all-payouts)**: Query all payouts with filtering, sorting, pagination, and search
+  - Both endpoints support filtering by date range, status, currency, channel, order reference, and more
+  - Advanced search across all response fields including nested objects (customer/beneficiary details)
+  - Flexible sorting by any response field with ASC/DESC order
+  - Pagination with skip/limit parameters
+  - Response format: `{ data: Response[], totalCount: number }`
 
 </Update>
