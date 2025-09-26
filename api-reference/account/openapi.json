@@ -58,7 +58,7 @@
               "type": "string",
               "format": "date"
             },
-            "description": "Start date for filtering transactions (YYYY-MM-DD)"
+            "description": "Start date for filtering transactions . Accepted formats :  `YYYY-MM-DD` or `DD-MM-YYYY`"
           },
           {
             "name": "endDate",
@@ -68,7 +68,7 @@
               "type": "string",
               "format": "date"
             },
-            "description": "End date for filtering transactions (YYYY-MM-DD)"
+            "description": "End date for filtering transactions . Accepted formats :  `YYYY-MM-DD` or `DD-MM-YYYY`"
           },
           {
             "name": "currency",

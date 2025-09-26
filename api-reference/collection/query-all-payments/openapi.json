@@ -31,7 +31,7 @@
               "type": "string",
               "format": "date"
             },
-            "description": "Start date for filtering payments (YYYY-MM-DD)"
+            "description": "Start date for filtering payments . Accepted formats :  `YYYY-MM-DD` or `DD-MM-YYYY`"
           },
           {
             "name": "endDate",
@@ -41,7 +41,7 @@
               "type": "string",
               "format": "date"
             },
-            "description": "End date for filtering payments (YYYY-MM-DD)"
+            "description": "End date for filtering payments . Accepted formats :  `YYYY-MM-DD` or `DD-MM-YYYY`"
           },
           {
             "name": "status",
