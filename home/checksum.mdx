@@ -10,6 +10,10 @@ On incoming requests it ensures that the payment or payout request is from a val
 
 [Webhooks](/home/webhooks) payload are also signed using the same method as defined below. This allows merchants to ensure that the webhook request came from ClickPesa and that no one has tampered with it.
 
+<Warning>
+**Important** <br/> When you change your checksum settings (turning on/off), you must [regenerate your API tokens](/api-reference/authorization/generate-token) to ensure continued access to the API. Existing tokens will become invalid when checksum settings are modified.
+</Warning>
+
 ## **Generating Payload Checksum**
 1. **Sort Payload Keys** - The keys of the payload are sorted alphabetically to maintain consistency.
 2. **Concatenate Sorted Values** - The values of the sorted object are concatenated into a single string.
