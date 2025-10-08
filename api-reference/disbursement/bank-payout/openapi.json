@@ -47,7 +47,7 @@
                   "currency": {
                     "type": "string",
                     "enum": ["TZS", "USD"],
-                    "description": "Account asset currency to pay out from (TZS or USD)"
+                    "description": "Account currency to pay out from (TZS or USD)"
                   },
                   "accountCurrency": {
                     "type": "string",
@@ -161,37 +161,13 @@
                   "currency": {
                     "type": "string",
                     "enum": ["TZS", "USD"],
-                    "description": "Account asset currency to pay out from (TZS or USD)"
+                    "description": "Account currency to pay out from (TZS or USD)"
                   },
                   "accountCurrency": {
                     "type": "string",
                     "enum": ["TZS"],
                     "default": "TZS",
                     "description": "Receiving currency for the payout (TZS)"
-                  },
-                  "exchange": {
-                    "type": "object",
-                    "description": "Exchange rate information for currency conversion (required when payout currency differs from account asset currency)",
-                    "properties": {
-                      "fromCurrency": {
-                        "type": "string",
-                        "enum": ["USD", "TZS"],
-                        "description": "Source currency for conversion"
-                      },
-                      "toCurrency": {
-                        "type": "string",
-                        "enum": ["USD", "TZS"],
-                        "description": "Target currency for conversion"
-                      },
-                      "rate": {
-                        "type": "number",
-                        "description": "Exchange rate for conversion"
-                      },
-                      "amount": {
-                        "type": "number",
-                        "description": "Amount in source currency before conversion"
-                      }
-                    }
                   },
                   "orderReference": {
                     "type": "string",
@@ -276,7 +252,7 @@
         "properties": {
           "amount": {
             "type": "number",
-            "description": "Total amount to be deducted from your account asset (includes fee)",
+            "description": "Total amount to be deducted from your account balance (includes fee)",
             "example": 1047.1
           },
           "balance": {
@@ -289,7 +265,7 @@
           },
           "fee": {
             "type": "number",
-            "description": "Transaction fee deducted from source asset (included in amount)",
+            "description": "Transaction fee deducted from source currency (included in amount)",
             "example": 47.1
           },
           "exchanged": {
@@ -390,7 +366,7 @@
           },
           "amount": {
             "type": "string",
-            "description": "Total amount deducted from your account asset (includes fee)",
+            "description": "Total amount deducted from your account balance (includes fee)",
             "example": "202360.00"
           },
           "currency": {
@@ -399,7 +375,7 @@
           },
           "fee": {
             "type": "string",
-            "description": "Transaction fee deducted from source asset (included in amount)",
+            "description": "Transaction fee deducted from source currency (included in amount)",
             "example": "2360.00"
           },
           "exchanged": {
