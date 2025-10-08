@@ -49,30 +49,6 @@
                     "enum": ["TZS", "USD"],
                     "description": "Account currency to pay out from (TZS or USD). User will receive funds in TZS"
                   },
-                  "exchange": {
-                    "type": "object",
-                    "description": "Exchange rate information for currency conversion (required when payout currency differs from Account currency)",
-                    "properties": {
-                      "fromCurrency": {
-                        "type": "string",
-                        "enum": ["USD", "TZS"],
-                        "description": "Source currency for conversion"
-                      },
-                      "toCurrency": {
-                        "type": "string",
-                        "enum": ["USD", "TZS"],
-                        "description": "Target currency for conversion"
-                      },
-                      "rate": {
-                        "type": "number",
-                        "description": "Exchange rate for conversion"
-                      },
-                      "amount": {
-                        "type": "number",
-                        "description": "Amount in source currency before conversion"
-                      }
-                    }
-                  },
                   "orderReference": {
                     "type": "string",
                     "description": "Your unique Order reference"
@@ -169,30 +145,6 @@
                     "type": "string",
                     "enum": ["TZS", "USD"],
                     "description": "Account currency to pay out from (TZS or USD). User will receive funds in TZS (Mobile can't hold USD)"
-                  },
-                  "exchange": {
-                    "type": "object",
-                    "description": "Exchange rate information for currency conversion (required when payout currency differs from Account currency)",
-                    "properties": {
-                      "fromCurrency": {
-                        "type": "string",
-                        "enum": ["USD", "TZS"],
-                        "description": "Source currency for conversion"
-                      },
-                      "toCurrency": {
-                        "type": "string",
-                        "enum": ["USD", "TZS"],
-                        "description": "Target currency for conversion"
-                      },
-                      "rate": {
-                        "type": "number",
-                        "description": "Exchange rate for conversion"
-                      },
-                      "amount": {
-                        "type": "number",
-                        "description": "Amount in source currency before conversion"
-                      }
-                    }
                   },
                   "orderReference": {
                     "type": "string",
