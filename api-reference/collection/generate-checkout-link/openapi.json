@@ -65,6 +65,10 @@
                         "type": "string",
                         "description": "Your customer phone number, starting with country code and without the plus sign, e.g., 255712345678"
                       },
+                      "description": {
+                        "type": "string",
+                        "description": "Your order description"
+                      },
                       "checksum": {
                         "type": "string",
                         "description": "If enabled, this is the generated checksum of the payload. Refer to the [documentation](/home/checksum) for more details."
