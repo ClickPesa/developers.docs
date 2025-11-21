@@ -18,6 +18,12 @@ The JWT token is valid for **1hr (60 Minutes)** from the time of issuance. After
 Never share your API credentials or JWT token publicly. Always use HTTPS to protect your credentials during transmission.
 </Warning>
 
+[API Rate Limits](#authentication-overview) - The ClickPesa API enforces a rate limit of **120 requests per minute** per IP address. This limit applies to **all API endpoints**. If you exceed this limit, your requests will be throttled.
+
+<Tip>
+Implement appropriate retry logic with exponential backoff in your application to handle rate limit responses gracefully.
+</Tip>
+
 ## Application Setup
 
 ### Step 1: Log in to the ClickPesa Dashboard
