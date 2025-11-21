@@ -43,6 +43,29 @@ When a customer pays using the control number, ClickPesa routes the payment to y
 
 ---
 
+[What's the lifespan of the Order BillPay Control Number?](#)
+
+**A:** An **Order BillPay Control Number** remains **valid until it is paid** or manually closed.
+
+- **Designed for one-time payments:** Order BillPay Control Numbers are created for specific transactions or invoices and are intended to be used once.
+- **No automatic expiration:** The control number does not expire automatically if unpaid—it remains active and can accept payments until it is fulfilled or closed.
+- **Closes automatically once processed:** Once a payment is received (even if partial or failed), the Order BillPay Control Number is automatically **closed** or marked as **fulfilled** and cannot be reused.
+- **Best practice:** For time-sensitive invoices or orders, consider implementing your own expiration logic in your system and generating new control numbers when needed.
+
+---
+
+[What's the lifespan of the Customer BillPay Control Number?](#)
+
+**A:** A **Customer BillPay Control Number** is a **static, permanent number** that remains **active indefinitely** until manually deactivated or removed.
+
+- **Designed for recurring payments:** Customer BillPay Control Numbers are created for ongoing relationships with customers and are intended for multiple transactions over time.
+- **No expiration:** Unlike Order BillPay Control Numbers, Customer BillPay Control Numbers do **not expire** and do **not close automatically** after payment.
+- **Reusable for multiple payments:** The same Customer BillPay Control Number can be used repeatedly for **partial, recurring, or subscription payments** from the same customer.
+- **Multiple numbers per customer:** You can create **multiple Customer BillPay Control Numbers** for the same customer, each tied to a different bill or purpose (e.g., tuition, fees, pocket money).
+- **Manual management:** You can deactivate or remove Customer BillPay Control Numbers through the API when they are no longer needed.
+
+---
+
 [Can I assign multiple Customer BillPay Control Numbers to a single customer?](#)
 
 **A:** Yes. Each customer can have **multiple Customer BillPay Control Numbers**, allowing you to manage different bills (e.g., tuition, fees, pocket money) independently. Each number can accept multiple payments and be tracked separately.
