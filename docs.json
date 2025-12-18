@@ -162,7 +162,8 @@
             "pages": [
               "api-reference/collection/billpay/create-order-control-number",
               "api-reference/collection/billpay/create-customer-control-number",
-              "api-reference/collection/billpay/querying-for-billpay-details"
+              "api-reference/collection/billpay/querying-for-billpay-details",
+              "api-reference/collection/billpay/update-billpay-reference-status"
             ]
           },
           {

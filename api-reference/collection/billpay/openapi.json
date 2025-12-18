@@ -257,6 +257,87 @@
           }
         }
       }
+    },
+    "/third-parties/billpay/update-status": {
+      "put": {
+        "description": "Updates the status of a BillPay reference. Use this endpoint to set a BillPay reference to inactive. Inactive references will be rejected during verification and confirmation.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "billPayNumber",
+                  "status"
+                ],
+                "properties": {
+                  "billPayNumber": {
+                    "type": "string",
+                    "description": "The BillPay reference number to update",
+                    "example": "55042914871931"
+                  },
+                  "status": {
+                    "type": "string",
+                    "enum": [
+                      "ACTIVE",
+                      "INACTIVE"
+                    ],
+                    "description": "The status to set for the BillPay reference. ACTIVE allows payments to be processed, INACTIVE prevents payments from being processed.",
+                    "example": "INACTIVE"
+                  }
+                }
+              },
+              "example": {
+                "billPayNumber": "55042914871931",
+                "status": "INACTIVE"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully updated BillPay reference status",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/StatusUpdateResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationError"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundError"
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "components": {
@@ -291,6 +372,25 @@
           }
         }
       },
+      "StatusUpdateResponse": {
+        "type": "object",
+        "properties": {
+          "billPayNumber": {
+            "type": "string",
+            "description": "The BillPay reference number that was updated",
+            "example": "55042914871931"
+          },
+          "status": {
+            "type": "string",
+            "enum": [
+              "ACTIVE",
+              "INACTIVE"
+            ],
+            "description": "The updated status of the BillPay reference",
+            "example": "INACTIVE"
+          }
+        }
+      },
       "NotFoundError": {
         "type": "object",
         "properties": {
@@ -307,6 +407,26 @@
             "type": "string",
             "description": "Unauthorized Error",
             "example": "Unauthorized"
+          }
+        }
+      },
+      "ValidationError": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Validation error message",
+            "example": "billPayNumber is required"
+          }
+        }
+      },
+      "ConflictError": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Conflict error message",
+            "example": "Bill reference already used: Use a different reference"
           }
         }
       }
