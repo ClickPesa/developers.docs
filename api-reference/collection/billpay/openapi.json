@@ -258,7 +258,7 @@
         }
       }
     },
-    "/third-parties/billpay/update-status": {
+    "/billpay/update-status": {
       "put": {
         "description": "Updates the status of a BillPay reference. Use this endpoint to set a BillPay reference to inactive. Inactive references will be rejected during verification and confirmation.",
         "requestBody": {
