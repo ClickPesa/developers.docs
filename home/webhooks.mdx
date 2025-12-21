@@ -27,19 +27,22 @@ When a payment is received successfully, this event is triggered. This event pro
 {
   "event": "PAYMENT RECEIVED",
   "data": {
-    "paymentId": "PAY123456",
-    "orderReference": "ORD987654",
-    "collectedAmount": "10000.00",
-    "collectedCurrency": "TZS",
+    "id": "ORD123456LCP7890",
     "status": "SUCCESS",
-    "customer": {
-      "name": "John Doe",
-      "email": "john@example.com",
-      "phone": "255700000000"
-    },
+    "paymentReference": "abc123def456ghi789",
+    "orderReference": "ORD123456",
+    "collectedAmount": "10000",
+    "collectedCurrency": "TZS",
+    "message": "success",
+    "channel": "CRDB DIRECT DEBIT MANDATE",
+    "updatedAt": "2024-04-10T18:22:56.153Z",
     "createdAt": "2024-04-10T18:22:16.949Z",
-    "updatedAt": "2024-04-10T18:22:56.153Z"
-    "clientId": "ID1234XHYAJK"
+    "customer": {
+      "customerName": "John Doe",
+      "customerEmail": "john@example.com",
+      "customerPhoneNumber": "255700000000"
+    }
+  }
 }
 ```
 
@@ -52,11 +55,12 @@ When a payment is received successfully, this event is triggered. This event pro
 
 ```json [expandable]
 {
-  "eventType": "PAYMENT FAILED",
+  "event": "PAYMENT FAILED",
   "data": {
-    "id": "0969231256LCP2C95",
+    "id": "ORD123456LCP7890",
     "status": "FAILED",
-    "orderReference": "0969231256", // unique order reference
+    "channel": "CRDB DIRECT DEBIT MANDATE",
+    "orderReference": "ORD123456",
     "message": "Insufficient balance",
     "updatedAt": "2024-04-11T04:58:31.036Z",
     "createdAt": "2024-04-11T04:58:31.036Z",
