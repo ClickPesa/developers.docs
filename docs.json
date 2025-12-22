@@ -38,6 +38,7 @@
               "home/checksum",
               {
                 "group": "Integration Setup",
+                "defaultOpen": true,
                 "icon": "gear",
                 "pages": [
                   "application/api-application-setup",

@@ -6,6 +6,39 @@ rss: true
 noindex: true
 ---
 
+<Update label="December 2025" tags={["New Feature"]} rss={{ title: "Monthly Updates", description: "December 2025 - Product updates and improvements" }}>
+
+## Added Endpoint to Update BillPay Number Status
+
+- Added new endpoint **[billpay/update-status](/api-reference/collection/billpay/update-billpay-reference-status)** to update the status of BillPay references
+- Allows setting BillPay references to **ACTIVE** or **INACTIVE** status
+- Inactive references will be rejected during verification and confirmation
+- Use this endpoint to manage the lifecycle of BillPay control numbers programmatically
+
+</Update>
+
+<Update label="November 2025" tags={["Improvements"]} rss={{ title: "Monthly Updates", description: "November 2025 - Product updates and improvements" }}>
+
+## Increased API Rate Limit
+
+- Increased the API rate limit for all endpoints to improve performance and accommodate higher request volumes
+- The rate limit has been increased from **60 requests per minute** to **120 requests per minute** per IP address
+- This limit applies to **all API endpoints** across the ClickPesa API
+
+</Update>
+
+<Update label="October 2025" tags={["New Feature"]} rss={{ title: "Monthly Updates", description: "October 2025 - Product updates and improvements" }}>
+
+## BillPay API Feature Release
+
+- Released the **BillPay API** feature, enabling merchants to create BillPay Control Numbers for orders and customers to receive payments from mobile money wallets and bank accounts
+- Added three new API endpoints:
+  - **[billpay/create-order-control-number](/api-reference/collection/billpay/create-order-control-number)**: Create an Order Control Number for a specific transaction or invoice
+  - **[billpay/create-customer-control-number](/api-reference/collection/billpay/create-customer-control-number)**: Create a Customer Control Number for a specific customer
+  - **[billpay/{billPayNumber}](/api-reference/collection/billpay/querying-for-billpay-details)**: Query BillPay Control Number details including amount, reference, linked customer and invoice details
+
+</Update>
+
 <Update label="September 2025" tags={["Improvements"]} rss={{ title: "Monthly Updates", description: "September 2025 - Product updates and improvements" }}>
 
 ## Support Fetching Sender Details in USSD-PUSH Payments API
