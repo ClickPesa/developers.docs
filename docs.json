@@ -32,20 +32,25 @@
             "pages": [
               "home/integration-overview",
               "home/payment-status",
-              "home/payout-status",
+              "home/payout-status"
+            ]
+          },
+          {
+            "group": "Integration Configurations",
+            "pages": [
               "home/webhooks",
               "home/whitelisted-ip-address",
-              "home/checksum",
-              {
-                "group": "Integration Setup",
-                "defaultOpen": true,
-                "icon": "gear",
-                "pages": [
-                  "application/api-application-setup",
-                  "application/hosted-application-setup",
-                  "application/embedded-application-setup"
-                ]
-              }
+              "home/checksum"
+            ]
+          },
+          {
+            "group": "Integration Setup",
+            "defaultOpen": true,
+            "icon": "gear",
+            "pages": [
+              "application/api-application-setup",
+              "application/hosted-application-setup",
+              "application/embedded-application-setup"
             ]
           }
         ]

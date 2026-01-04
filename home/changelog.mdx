@@ -6,6 +6,25 @@ rss: true
 noindex: true
 ---
 
+<Update label="January 2026" tags={["Breaking Change", "Improvements"]} rss={{ title: "Monthly Updates", description: "January 2026 - Product updates and improvements" }}>
+
+## Enhanced Checksum Generation Algorithm
+
+- **Improved checksum generation** with support for **recursive canonicalization** and **JSON serialization** for better consistency and reliability
+- The new canonical checksum algorithm:
+  - Recursively sorts all object keys alphabetically at every nesting level
+  - Serializes the canonicalized payload to compact JSON format
+  - Generates HMAC-SHA256 hash from the JSON string
+  - Returns a 64-character hexadecimal checksum
+- **Key improvements:**
+  - **Order-independent**: The same checksum is generated regardless of key order in the payload
+  - **Nested object support**: Properly handles complex nested objects and arrays
+  - **Type-safe**: All data types (strings, numbers, objects, arrays) are properly handled through JSON serialization
+  - **Cross-language compatible**: All language implementations (JavaScript, Python, PHP, Java, Go) produce identical checksums for the same input
+- **⚠️ Breaking Change**: The new canonical method is now the default. This means existing integrations using the legacy string concatenation method will need to update their checksum generation code to match the new algorithm, or explicitly specify `checksumMethod: 'legacy'` in the options parameter to continue using the old method temporarily during migration. See the updated [Checksum documentation](/home/checksum) for implementation examples in all supported languages.
+
+</Update>
+
 <Update label="December 2025" tags={["New Feature"]} rss={{ title: "Monthly Updates", description: "December 2025 - Product updates and improvements" }}>
 
 ## Added Endpoint to Update BillPay Number Status

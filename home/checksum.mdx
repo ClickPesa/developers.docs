@@ -15,15 +15,19 @@ On incoming requests it ensures that the payment or payout request is from a val
 </Warning>
 
 ## **Generating Payload Checksum**
-1. **Sort Payload Keys** - The keys of the payload are sorted alphabetically to maintain consistency.
-2. **Concatenate Sorted Values** - The values of the sorted object are concatenated into a single string.
-3. **Generate HMAC-SHA256 Hash** - The concatenated string is hashed using HMAC-SHA256 with the provided secret key.
-4. **Return the Hex Digest** - The resulting hash is returned in hexadecimal format.
+1. **Canonicalize Payload** - Recursively sort all object keys alphabetically at every nesting level to ensure consistent ordering regardless of how the payload is structured.
+2. **Serialize to JSON** - Convert the canonicalized payload to a compact JSON string (no extra whitespace).
+3. **Generate HMAC-SHA256 Hash** - The JSON string is hashed using HMAC-SHA256 with the provided secret key.
+4. **Return the Hex Digest** - The resulting hash is returned as a 64-character hexadecimal string.
 
 
 <Note>
-  - The order of values matters, so **sorting** is crucial to maintain consistency.
-  - The function assumes all values are **strings**; if they contain complex types, they should be serialized properly before hashing.
+  - **Recursive sorting** ensures that nested objects maintain consistent key ordering at all levels.
+  - The same checksum is generated **regardless of key order** in the original payload.
+  - All data types (strings, numbers, objects, arrays) are properly handled through JSON serialization.
+  - The checksum is **order-independent** - the same payload with keys in different orders will produce the same checksum.
+  - **Important**: When generating a checksum, ensure the payload does **not** include the `checksum` or `checksumMethod` fields. These fields should be excluded from the payload before checksum calculation.
+  -  [Checksum demo repository](https://github.com/ClickPesa/clickpesa-api-checksum-demo) includes implementations in JavaScript, Python, PHP, Java, and Go, all verified for cross-language interoperability.
 </Note>
 
 
@@ -34,53 +38,153 @@ On incoming requests it ensures that the payment or payout request is from a val
 ```javascript Javascript
 const crypto = require("crypto");
 
-const createPayloadChecksum = (checksumKey, payload) => {
-  const sortedPayload = Object.keys(payload)
+function canonicalize(obj) {
+  if (obj === null || typeof obj !== 'object') return obj;
+  if (Array.isArray(obj)) {
+    return obj.map(canonicalize);
+  }
+  return Object.keys(obj)
     .sort()
-    .reduce((obj, key) => {
-      obj[key] = payload[key];
-      return obj;
+    .reduce((acc, key) => {
+      acc[key] = canonicalize(obj[key]);
+      return acc;
     }, {});
-  const payloadString = Object.values(sortedPayload).join("");
+}
+
+const createPayloadChecksum = (checksumKey, payload) => {
+  // Canonicalize the payload recursively for consistent ordering
+  const canonicalPayload = canonicalize(payload);
+  // Serialize the canonical payload
+  const payloadString = JSON.stringify(canonicalPayload);
+  // Create HMAC with SHA256
   const hmac = crypto.createHmac("sha256", checksumKey);
   hmac.update(payloadString);
   return hmac.digest("hex");
 };
 
 // Example usage:
-const payload = { amount: 100, currency: "USD", reference: "TX123" };
+const payload = {
+  amount: 100,
+  currency: "USD",
+  reference: "TX123",
+  exchange: {
+    fromCurrency: "TZS",
+    toCurrency: "TZS",
+    rate: "1",
+    amount: "1000",
+  },
+  customer: {
+    name: "John Doe",
+    email: "john@example.com",
+    phone: "+255123456789"
+  }
+};
 const checksumKey = "secret-key";
 console.log(createPayloadChecksum(checksumKey, payload));
 ```
 
 ```python Python
-import hashlib
+import json
 import hmac
+import hashlib
+
+def canonicalize(obj):
+    if obj is None or not isinstance(obj, (dict, list)):
+        return obj
+
+    if isinstance(obj, list):
+        return [canonicalize(item) for item in obj]
+
+    return {
+        key: canonicalize(obj[key])
+        for key in sorted(obj.keys())
+    }
 
 def create_payload_checksum(checksum_key, payload):
-    sorted_payload = {k: payload[k] for k in sorted(payload)}
-    payload_string = "".join(str(value) for value in sorted_payload.values())
-    return hmac.new(checksum_key.encode(), payload_string.encode(), hashlib.sha256).hexdigest()
+    # Canonicalize the payload recursively for consistent ordering
+    canonical_payload = canonicalize(payload)
+    # Serialize the canonical payload
+    payload_string = json.dumps(canonical_payload, separators=(',', ':'), sort_keys=False)
+    # Create HMAC with SHA256
+    hmac_obj = hmac.new(
+        checksum_key.encode('utf-8'),
+        payload_string.encode('utf-8'),
+        hashlib.sha256
+    )
+    return hmac_obj.hexdigest()
 
 # Example usage:
-payload = {"amount": 100, "currency": "USD", "reference": "TX123"}
+payload = {
+    "amount": 100,
+    "currency": "USD",
+    "reference": "TX123",
+    "exchange": {
+        "fromCurrency": "TZS",
+        "toCurrency": "TZS",
+        "rate": "1",
+        "amount": "1000",
+    },
+    "customer": {
+        "name": "John Doe",
+        "email": "john@example.com",
+        "phone": "+255123456789"
+    }
+}
 checksum_key = "secret-key"
 print(create_payload_checksum(checksum_key, payload))
 ```
+
 ```php PHP
 <?php
+function canonicalize($obj) {
+    if ($obj === null || !is_array($obj)) {
+        return $obj;
+    }
+
+    // Check if array is a list (sequential numeric keys starting from 0)
+    if (array_values($obj) === $obj) {
+        return array_map('canonicalize', $obj);
+    }
+
+    ksort($obj);
+    $result = [];
+    foreach ($obj as $key => $value) {
+        $result[$key] = canonicalize($value);
+    }
+    return $result;
+}
+
 function createPayloadChecksum($checksumKey, $payload) {
-    ksort($payload); // Sort array by key
-    $payloadString = implode("", array_values($payload));
-    return hash_hmac("sha256", $payloadString, $checksumKey);
+    // Canonicalize the payload recursively for consistent ordering
+    $canonicalPayload = canonicalize($payload);
+    // Serialize the canonical payload
+    $payloadString = json_encode($canonicalPayload, JSON_UNESCAPED_SLASHES);
+    // Create HMAC with SHA256
+    return hash_hmac('sha256', $payloadString, $checksumKey);
 }
 
 // Example usage:
-$payload = ["amount" => 100, "currency" => "USD", "reference" => "TX123"];
+$payload = [
+    "amount" => 100,
+    "currency" => "USD",
+    "reference" => "TX123",
+    "exchange" => [
+        "fromCurrency" => "TZS",
+        "toCurrency" => "TZS",
+        "rate" => "1",
+        "amount" => "1000",
+    ],
+    "customer" => [
+        "name" => "John Doe",
+        "email" => "john@example.com",
+        "phone" => "+255123456789"
+    ]
+];
 $checksumKey = "secret-key";
 echo createPayloadChecksum($checksumKey, $payload);
 ?>
 ```
+
 ```go Go
 package main
 
@@ -88,72 +192,162 @@ import (
 	"crypto/hmac"
 	"crypto/sha256"
 	"encoding/hex"
+	"encoding/json"
 	"fmt"
 	"sort"
 )
 
-func createPayloadChecksum(checksumKey string, payload map[string]string) string {
-	keys := make([]string, 0, len(payload))
-	for k := range payload {
-		keys = append(keys, k)
+func canonicalize(obj interface{}) interface{} {
+	switch v := obj.(type) {
+	case nil:
+		return nil
+	case map[string]interface{}:
+		result := make(map[string]interface{})
+		keys := make([]string, 0, len(v))
+		for k := range v {
+			keys = append(keys, k)
+		}
+		sort.Strings(keys)
+		for _, k := range keys {
+			result[k] = canonicalize(v[k])
+		}
+		return result
+	case []interface{}:
+		result := make([]interface{}, len(v))
+		for i, item := range v {
+			result[i] = canonicalize(item)
+		}
+		return result
+	default:
+		return obj
 	}
-	sort.Strings(keys)
+}
 
-	payloadString := ""
-	for _, k := range keys {
-		payloadString += payload[k]
+func createPayloadChecksum(checksumKey string, payload map[string]interface{}) (string, error) {
+	// Canonicalize the payload recursively for consistent ordering
+	canonicalPayload := canonicalize(payload)
+
+	// Serialize the canonical payload
+	payloadBytes, err := json.Marshal(canonicalPayload)
+	if err != nil {
+		return "", err
 	}
 
-	h := hmac.New(sha256.New, []byte(checksumKey))
-	h.Write([]byte(payloadString))
-	return hex.EncodeToString(h.Sum(nil))
+	// Create HMAC with SHA256
+	mac := hmac.New(sha256.New, []byte(checksumKey))
+	mac.Write(payloadBytes)
+	hashBytes := mac.Sum(nil)
+
+	// Convert to hexadecimal string
+	return hex.EncodeToString(hashBytes), nil
 }
 
 // Example usage:
 func main() {
-	payload := map[string]string{"amount": "100", "currency": "USD", "reference": "TX123"}
+	payload := map[string]interface{}{
+		"amount":    100,
+		"currency":  "USD",
+		"reference": "TX123",
+		"exchange": map[string]interface{}{
+			"fromCurrency": "TZS",
+			"toCurrency":   "TZS",
+			"rate":         "1",
+			"amount":       "1000",
+		},
+		"customer": map[string]interface{}{
+			"name":  "John Doe",
+			"email": "john@example.com",
+			"phone": "+255123456789",
+		},
+	}
 	checksumKey := "secret-key"
-	fmt.Println(createPayloadChecksum(checksumKey, payload))
+	checksum, _ := createPayloadChecksum(checksumKey, payload)
+	fmt.Println(checksum)
 }
 ```
 
 ```java Java
-import java.util.*;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
-import java.security.NoSuchAlgorithmException;
 import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.util.Map;
+import java.util.TreeMap;
 
-public class CreatePayloadChecksum {
-    public static String createPayloadChecksum(String checksumKey, Map<String, String> payload) throws NoSuchAlgorithmException, InvalidKeyException {
-        List<String> keys = new ArrayList<>(payload.keySet());
-        Collections.sort(keys);
+public class Checksum {
+    private static final Gson gson = new GsonBuilder()
+            .disableHtmlEscaping()
+            .create();
 
-        StringBuilder payloadString = new StringBuilder();
-        for (String key : keys) {
-            payloadString.append(payload.get(key));
+    @SuppressWarnings("unchecked")
+    private static Object canonicalize(Object obj) {
+        if (obj == null || !(obj instanceof Map)) {
+            return obj;
         }
 
-        Mac sha256_HMAC = Mac.getInstance("HmacSHA256");
-        SecretKeySpec secret_key = new SecretKeySpec(checksumKey.getBytes(StandardCharsets.UTF_8), "HmacSHA256");
-        sha256_HMAC.init(secret_key);
+        Map<String, Object> map = (Map<String, Object>) obj;
+        Map<String, Object> sortedMap = new TreeMap<>();
 
-        byte[] hash = sha256_HMAC.doFinal(payloadString.toString().getBytes(StandardCharsets.UTF_8));
+        for (Map.Entry<String, Object> entry : map.entrySet()) {
+            sortedMap.put(entry.getKey(), canonicalize(entry.getValue()));
+        }
+
+        return sortedMap;
+    }
+
+    public static String createPayloadChecksum(String checksumKey, Map<String, Object> payload)
+            throws NoSuchAlgorithmException, InvalidKeyException {
+        // Canonicalize the payload recursively for consistent ordering
+        Object canonicalPayload = canonicalize(payload);
+
+        // Serialize the canonical payload
+        String payloadString = gson.toJson(canonicalPayload);
+
+        // Create HMAC with SHA256
+        Mac mac = Mac.getInstance("HmacSHA256");
+        SecretKeySpec secretKeySpec = new SecretKeySpec(
+                checksumKey.getBytes(StandardCharsets.UTF_8),
+                "HmacSHA256"
+        );
+        mac.init(secretKeySpec);
+        byte[] hashBytes = mac.doFinal(payloadString.getBytes(StandardCharsets.UTF_8));
+
+        // Convert to hexadecimal string
         StringBuilder hexString = new StringBuilder();
-        for (byte b : hash) {
-            hexString.append(String.format("%02x", b));
+        for (byte b : hashBytes) {
+            String hex = Integer.toHexString(0xff & b);
+            if (hex.length() == 1) {
+                hexString.append('0');
+            }
+            hexString.append(hex);
         }
+
         return hexString.toString();
     }
 
     // Example usage:
     public static void main(String[] args) {
         try {
-            Map<String, String> payload = new HashMap<>();
-            payload.put("amount", "100");
+            Map<String, Object> payload = new java.util.HashMap<>();
+            payload.put("amount", 100);
             payload.put("currency", "USD");
             payload.put("reference", "TX123");
+
+            Map<String, Object> exchange = new java.util.HashMap<>();
+            exchange.put("fromCurrency", "TZS");
+            exchange.put("toCurrency", "TZS");
+            exchange.put("rate", "1");
+            exchange.put("amount", "1000");
+            payload.put("exchange", exchange);
+
+            Map<String, Object> customer = new java.util.HashMap<>();
+            customer.put("name", "John Doe");
+            customer.put("email", "john@example.com");
+            customer.put("phone", "+255123456789");
+            payload.put("customer", customer);
 
             String checksumKey = "secret-key";
             System.out.println(createPayloadChecksum(checksumKey, payload));
@@ -170,9 +364,17 @@ public class CreatePayloadChecksum {
 
 1. **Extract Checksum**  - Extract the checksum from the received request.
 
-2. **Recompute Checksum** - Using the same `createPayloadChecksum` function, recompute the checksum from the received payload using the checksum key.
+2. **Extract Checksum Method** - If present, extract the `checksumMethod` field from the payload to determine which checksum algorithm to use:
+   - `canonical` (default) - Uses the new recursive canonicalization method
+   - `legacy` - Uses the legacy string concatenation method for backward compatibility
 
-3. **Compare the Computed and Received Checksum**
+3. **Prepare Payload** - Before recomputing the checksum, **exclude** the following fields from the payload:
+   - `checksum` - The checksum field itself
+   - `checksumMethod` - The checksum method indicator (extract before excluding)
+
+4. **Recompute Checksum** - Using the same `createPayloadChecksum` function, recompute the checksum from the prepared payload (without `checksum` and `checksumMethod` fields) using the checksum key and the extracted `checksumMethod` as an option.
+
+5. **Compare the Computed and Received Checksum**
    - If both checksums match, the payload is valid and untampered.
    - If they do not match, reject the request as it may have been modified.
 
@@ -183,26 +385,56 @@ public class CreatePayloadChecksum {
 ```javascript Javascript
 const crypto = require("crypto");
 
-const createPayloadChecksum = (checksumKey, payload) => {
-  const sortedPayload = Object.keys(payload)
+function canonicalize(obj) {
+  if (obj === null || typeof obj !== 'object') return obj;
+  if (Array.isArray(obj)) {
+    return obj.map(canonicalize);
+  }
+  return Object.keys(obj)
     .sort()
-    .reduce((obj, key) => {
-      obj[key] = payload[key];
-      return obj;
+    .reduce((acc, key) => {
+      acc[key] = canonicalize(obj[key]);
+      return acc;
     }, {});
-  const payloadString = Object.values(sortedPayload).join("");
+}
+
+const createPayloadChecksum = (checksumKey, payload) => {
+  const canonicalPayload = canonicalize(payload);
+  const payloadString = JSON.stringify(canonicalPayload);
   const hmac = crypto.createHmac("sha256", checksumKey);
   hmac.update(payloadString);
   return hmac.digest("hex");
 };
 
 const validateChecksum = (checksumKey, payload, receivedChecksum) => {
-  const computedChecksum = createPayloadChecksum(checksumKey, payload);
+  // Extract checksumMethod before excluding it from payload
+  const checksumMethod = payload.checksumMethod || 'canonical';
+  // Exclude checksum and checksumMethod from payload before validation
+  const payloadForValidation = { ...payload };
+  delete payloadForValidation.checksum;
+  delete payloadForValidation.checksumMethod;
+  // Pass checksumMethod as option to support legacy method
+  const computedChecksum = createPayloadChecksum(checksumKey, payloadForValidation, { checksumMethod });
   return computedChecksum === receivedChecksum;
 };
 
 // Example usage:
-const payload = { amount: 100, currency: "USD", reference: "TX123" };
+const payload = {
+  amount: 100,
+  currency: "USD",
+  reference: "TX123",
+  exchange: {
+    fromCurrency: "TZS",
+    toCurrency: "TZS",
+    rate: "1",
+    amount: "1000",
+  },
+  customer: {
+    name: "John Doe",
+    email: "john@example.com",
+    phone: "+255123456789"
+  }
+};
 const checksumKey = "secret-key";
 const receivedChecksum = "some-checksum-from-request"; // Replace with actual received checksum
 
@@ -210,32 +442,124 @@ console.log(validateChecksum(checksumKey, payload, receivedChecksum) ? "Valid" :
 ```
 
 ```python Python
-import hashlib
+import json
 import hmac
+import hashlib
+
+def canonicalize(obj):
+    if obj is None or not isinstance(obj, (dict, list)):
+        return obj
+
+    if isinstance(obj, list):
+        return [canonicalize(item) for item in obj]
+
+    return {
+        key: canonicalize(obj[key])
+        for key in sorted(obj.keys())
+    }
 
 def create_payload_checksum(checksum_key, payload):
-    sorted_payload = {k: payload[k] for k in sorted(payload)}
-    payload_string = "".join(str(value) for value in sorted_payload.values())
-    return hmac.new(checksum_key.encode(), payload_string.encode(), hashlib.sha256).hexdigest()
+    canonical_payload = canonicalize(payload)
+    payload_string = json.dumps(canonical_payload, separators=(',', ':'), sort_keys=False)
+    hmac_obj = hmac.new(
+        checksum_key.encode('utf-8'),
+        payload_string.encode('utf-8'),
+        hashlib.sha256
+    )
+    return hmac_obj.hexdigest()
 
 def validate_checksum(checksum_key, payload, received_checksum):
-    computed_checksum = create_payload_checksum
+    if not received_checksum:
+        return False
+    # Extract checksumMethod before excluding it from payload
+    checksum_method = payload.get('checksumMethod', 'canonical')
+    # Exclude checksum and checksumMethod from payload before validation
+    payload_for_validation = {k: v for k, v in payload.items() if k not in ['checksum', 'checksumMethod']}
+    # Pass checksumMethod as option to support legacy method
+    computed_checksum = create_payload_checksum(checksum_key, payload_for_validation, {'checksumMethod': checksum_method})
+    return computed_checksum == received_checksum
+
+# Example usage:
+payload = {
+    "amount": 100,
+    "currency": "USD",
+    "reference": "TX123",
+    "exchange": {
+        "fromCurrency": "TZS",
+        "toCurrency": "TZS",
+        "rate": "1",
+        "amount": "1000",
+    },
+    "customer": {
+        "name": "John Doe",
+        "email": "john@example.com",
+        "phone": "+255123456789"
+    }
+}
+checksum_key = "secret-key"
+received_checksum = "some-checksum-from-request"  # Replace with actual received checksum
+
+print("Valid" if validate_checksum(checksum_key, payload, received_checksum) else "Invalid")
 ```
+
 ```php PHP
 <?php
+function canonicalize($obj) {
+    if ($obj === null || !is_array($obj)) {
+        return $obj;
+    }
+
+    if (array_values($obj) === $obj) {
+        return array_map('canonicalize', $obj);
+    }
+
+    ksort($obj);
+    $result = [];
+    foreach ($obj as $key => $value) {
+        $result[$key] = canonicalize($value);
+    }
+    return $result;
+}
+
 function createPayloadChecksum($checksumKey, $payload) {
-    ksort($payload); // Sort array by key
-    $payloadString = implode("", array_values($payload));
-    return hash_hmac("sha256", $payloadString, $checksumKey);
+    $canonicalPayload = canonicalize($payload);
+    $payloadString = json_encode($canonicalPayload, JSON_UNESCAPED_SLASHES);
+    return hash_hmac('sha256', $payloadString, $checksumKey);
 }
 
 function validateChecksum($checksumKey, $payload, $receivedChecksum) {
-    $computedChecksum = createPayloadChecksum($checksumKey, $payload);
+    if (empty($receivedChecksum)) {
+        return false;
+    }
+    // Extract checksumMethod before excluding it from payload
+    $checksumMethod = $payload['checksumMethod'] ?? 'canonical';
+    // Exclude checksum and checksumMethod from payload before validation
+    $payloadForValidation = $payload;
+    unset($payloadForValidation['checksum']);
+    unset($payloadForValidation['checksumMethod']);
+    // Pass checksumMethod as option to support legacy method
+    // Note: Your createPayloadChecksum function should accept options parameter
+    $computedChecksum = createPayloadChecksum($checksumKey, $payloadForValidation, ['checksumMethod' => $checksumMethod]);
     return hash_equals($computedChecksum, $receivedChecksum); // Prevent timing attacks
 }
 
 // Example usage:
-$payload = ["amount" => 100, "currency" => "USD", "reference" => "TX123"];
+$payload = [
+    "amount" => 100,
+    "currency" => "USD",
+    "reference" => "TX123",
+    "exchange" => [
+        "fromCurrency" => "TZS",
+        "toCurrency" => "TZS",
+        "rate" => "1",
+        "amount" => "1000",
+    ],
+    "customer" => [
+        "name" => "John Doe",
+        "email" => "john@example.com",
+        "phone" => "+255123456789"
+    ]
+];
 $checksumKey = "secret-key";
 $receivedChecksum = "some-checksum-from-request"; // Replace with actual received checksum
 
@@ -254,39 +578,99 @@ import (
 	"crypto/hmac"
 	"crypto/sha256"
 	"encoding/hex"
+	"encoding/json"
 	"fmt"
 	"sort"
 )
 
-func createPayloadChecksum(checksumKey string, payload map[string]string) string {
-	keys := make([]string, 0, len(payload))
-	for k := range payload {
-		keys = append(keys, k)
+func canonicalize(obj interface{}) interface{} {
+	switch v := obj.(type) {
+	case nil:
+		return nil
+	case map[string]interface{}:
+		result := make(map[string]interface{})
+		keys := make([]string, 0, len(v))
+		for k := range v {
+			keys = append(keys, k)
+		}
+		sort.Strings(keys)
+		for _, k := range keys {
+			result[k] = canonicalize(v[k])
+		}
+		return result
+	case []interface{}:
+		result := make([]interface{}, len(v))
+		for i, item := range v {
+			result[i] = canonicalize(item)
+		}
+		return result
+	default:
+		return obj
 	}
-	sort.Strings(keys)
-
-	payloadString := ""
-	for _, k := range keys {
-		payloadString += payload[k]
-	}
-
-	h := hmac.New(sha256.New, []byte(checksumKey))
-	h.Write([]byte(payloadString))
-	return hex.EncodeToString(h.Sum(nil))
 }
 
-func validateChecksum(checksumKey string, payload map[string]string, receivedChecksum string) bool {
-	computedChecksum := createPayloadChecksum(checksumKey, payload)
-	return computedChecksum == receivedChecksum
+func createPayloadChecksum(checksumKey string, payload map[string]interface{}) (string, error) {
+	canonicalPayload := canonicalize(payload)
+	payloadBytes, err := json.Marshal(canonicalPayload)
+	if err != nil {
+		return "", err
+	}
+
+	mac := hmac.New(sha256.New, []byte(checksumKey))
+	mac.Write(payloadBytes)
+	hashBytes := mac.Sum(nil)
+
+	return hex.EncodeToString(hashBytes), nil
+}
+
+func validateChecksum(checksumKey string, payload map[string]interface{}, receivedChecksum string) (bool, error) {
+	if receivedChecksum == "" {
+		return false, nil
+	}
+	// Extract checksumMethod before excluding it from payload
+	checksumMethod := "canonical"
+	if method, ok := payload["checksumMethod"].(string); ok {
+		checksumMethod = method
+	}
+	// Exclude checksum and checksumMethod from payload before validation
+	payloadForValidation := make(map[string]interface{})
+	for k, v := range payload {
+		if k != "checksum" && k != "checksumMethod" {
+			payloadForValidation[k] = v
+		}
+	}
+	// Pass checksumMethod as option to support legacy method
+	// Note: Your createPayloadChecksum function should accept options parameter
+	computedChecksum, err := createPayloadChecksum(checksumKey, payloadForValidation, map[string]interface{}{"checksumMethod": checksumMethod})
+	if err != nil {
+		return false, err
+	}
+	return computedChecksum == receivedChecksum, nil
 }
 
 // Example usage:
 func main() {
-	payload := map[string]string{"amount": "100", "currency": "USD", "reference": "TX123"}
+	payload := map[string]interface{}{
+		"amount":    100,
+		"currency":  "USD",
+		"reference": "TX123",
+		"exchange": map[string]interface{}{
+			"fromCurrency": "TZS",
+			"toCurrency":   "TZS",
+			"rate":         "1",
+			"amount":       "1000",
+		},
+		"customer": map[string]interface{}{
+			"name":  "John Doe",
+			"email": "john@example.com",
+			"phone": "+255123456789",
+		},
+	}
 	checksumKey := "secret-key"
 	receivedChecksum := "some-checksum-from-request" // Replace with actual received checksum
 
-	if validateChecksum(checksumKey, payload, receivedChecksum) {
+	isValid, _ := validateChecksum(checksumKey, payload, receivedChecksum)
+	if isValid {
 		fmt.Println("Valid Checksum")
 	} else {
 		fmt.Println("Invalid Checksum")
@@ -295,47 +679,98 @@ func main() {
 ```
 
 ```java Java
-import java.util.*;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 import java.nio.charset.StandardCharsets;
-import java.security.NoSuchAlgorithmException;
 import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.util.Map;
+import java.util.TreeMap;
 
-public class ValidatePayloadChecksum {
-    public static String createPayloadChecksum(String checksumKey, Map<String, String> payload) throws NoSuchAlgorithmException, InvalidKeyException {
-        List<String> keys = new ArrayList<>(payload.keySet());
-        Collections.sort(keys);
+public class Checksum {
+    private static final Gson gson = new GsonBuilder()
+            .disableHtmlEscaping()
+            .create();
 
-        StringBuilder payloadString = new StringBuilder();
-        for (String key : keys) {
-            payloadString.append(payload.get(key));
+    @SuppressWarnings("unchecked")
+    private static Object canonicalize(Object obj) {
+        if (obj == null || !(obj instanceof Map)) {
+            return obj;
         }
 
-        Mac sha256_HMAC = Mac.getInstance("HmacSHA256");
-        SecretKeySpec secret_key = new SecretKeySpec(checksumKey.getBytes(StandardCharsets.UTF_8), "HmacSHA256");
-        sha256_HMAC.init(secret_key);
+        Map<String, Object> map = (Map<String, Object>) obj;
+        Map<String, Object> sortedMap = new TreeMap<>();
 
-        byte[] hash = sha256_HMAC.doFinal(payloadString.toString().getBytes(StandardCharsets.UTF_8));
+        for (Map.Entry<String, Object> entry : map.entrySet()) {
+            sortedMap.put(entry.getKey(), canonicalize(entry.getValue()));
+        }
+
+        return sortedMap;
+    }
+
+    public static String createPayloadChecksum(String checksumKey, Map<String, Object> payload)
+            throws NoSuchAlgorithmException, InvalidKeyException {
+        Object canonicalPayload = canonicalize(payload);
+        String payloadString = gson.toJson(canonicalPayload);
+
+        Mac mac = Mac.getInstance("HmacSHA256");
+        SecretKeySpec secretKeySpec = new SecretKeySpec(
+                checksumKey.getBytes(StandardCharsets.UTF_8),
+                "HmacSHA256"
+        );
+        mac.init(secretKeySpec);
+        byte[] hashBytes = mac.doFinal(payloadString.getBytes(StandardCharsets.UTF_8));
+
         StringBuilder hexString = new StringBuilder();
-        for (byte b : hash) {
-            hexString.append(String.format("%02x", b));
+        for (byte b : hashBytes) {
+            String hex = Integer.toHexString(0xff & b);
+            if (hex.length() == 1) {
+                hexString.append('0');
+            }
+            hexString.append(hex);
         }
+
         return hexString.toString();
     }
 
-    public static boolean validateChecksum(String checksumKey, Map<String, String> payload, String receivedChecksum) throws NoSuchAlgorithmException, InvalidKeyException {
-        String computedChecksum = createPayloadChecksum(checksumKey, payload);
+    public static boolean validateChecksum(String checksumKey, Map<String, Object> payload, String receivedChecksum)
+            throws NoSuchAlgorithmException, InvalidKeyException {
+        // Extract checksumMethod before excluding it from payload
+        String checksumMethod = (String) payload.getOrDefault("checksumMethod", "canonical");
+        // Exclude checksum and checksumMethod from payload before validation
+        Map<String, Object> payloadForValidation = new java.util.HashMap<>(payload);
+        payloadForValidation.remove("checksum");
+        payloadForValidation.remove("checksumMethod");
+        // Pass checksumMethod as option to support legacy method
+        // Note: Your createPayloadChecksum function should accept options parameter
+        Map<String, Object> options = new java.util.HashMap<>();
+        options.put("checksumMethod", checksumMethod);
+        String computedChecksum = createPayloadChecksum(checksumKey, payloadForValidation, options);
         return computedChecksum.equals(receivedChecksum);
     }
 
     // Example usage:
     public static void main(String[] args) {
         try {
-            Map<String, String> payload = new HashMap<>();
-            payload.put("amount", "100");
+            Map<String, Object> payload = new java.util.HashMap<>();
+            payload.put("amount", 100);
             payload.put("currency", "USD");
             payload.put("reference", "TX123");
+
+            Map<String, Object> exchange = new java.util.HashMap<>();
+            exchange.put("fromCurrency", "TZS");
+            exchange.put("toCurrency", "TZS");
+            exchange.put("rate", "1");
+            exchange.put("amount", "1000");
+            payload.put("exchange", exchange);
+
+            Map<String, Object> customer = new java.util.HashMap<>();
+            customer.put("name", "John Doe");
+            customer.put("email", "john@example.com");
+            customer.put("phone", "+255123456789");
+            payload.put("customer", customer);
 
             String checksumKey = "secret-key";
             String receivedChecksum = "some-checksum-from-request"; // Replace with actual received checksum
