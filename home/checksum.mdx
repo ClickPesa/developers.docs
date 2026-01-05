@@ -14,6 +14,10 @@ On incoming requests it ensures that the payment or payout request is from a val
 **Important** <br/> When you change your checksum settings (turning on/off), you must [regenerate your API tokens](/api-reference/authorization/generate-token) to ensure continued access to the API. Existing tokens will become invalid when checksum settings are modified.
 </Warning>
 
+<Warning>
+ **Important** <br/>  When generating or validating a checksum, ensure the payload does **not** include the `checksumMethod` or `checksum` fields. These fields should be excluded from checksum computations.
+</Warning>
+
 ## **Generating Payload Checksum**
 1. **Canonicalize Payload** - Recursively sort all object keys alphabetically at every nesting level to ensure consistent ordering regardless of how the payload is structured.
 2. **Serialize to JSON** - Convert the canonicalized payload to a compact JSON string (no extra whitespace).
@@ -26,8 +30,6 @@ On incoming requests it ensures that the payment or payout request is from a val
   - The same checksum is generated **regardless of key order** in the original payload.
   - All data types (strings, numbers, objects, arrays) are properly handled through JSON serialization.
   - The checksum is **order-independent** - the same payload with keys in different orders will produce the same checksum.
-  - **Important**: When generating a checksum, ensure the payload does **not** include the `checksum` or `checksumMethod` fields. These fields should be excluded from the payload before checksum calculation.
-  -  [Checksum demo repository](https://github.com/ClickPesa/clickpesa-api-checksum-demo) includes implementations in JavaScript, Python, PHP, Java, and Go, all verified for cross-language interoperability.
 </Note>
 
 
@@ -364,17 +366,11 @@ public class Checksum {
 
 1. **Extract Checksum**  - Extract the checksum from the received request.
 
-2. **Extract Checksum Method** - If present, extract the `checksumMethod` field from the payload to determine which checksum algorithm to use:
-   - `canonical` (default) - Uses the new recursive canonicalization method
-   - `legacy` - Uses the legacy string concatenation method for backward compatibility
+2. **Prepare Payload** - Before recomputing the checksum, **exclude** the `checksum` and `checksumMethod` fields from the payload.
 
-3. **Prepare Payload** - Before recomputing the checksum, **exclude** the following fields from the payload:
-   - `checksum` - The checksum field itself
-   - `checksumMethod` - The checksum method indicator (extract before excluding)
+3. **Recompute Checksum** - Using the same `createPayloadChecksum` function, recompute the checksum from the prepared payload using the checksum key.
 
-4. **Recompute Checksum** - Using the same `createPayloadChecksum` function, recompute the checksum from the prepared payload (without `checksum` and `checksumMethod` fields) using the checksum key and the extracted `checksumMethod` as an option.
-
-5. **Compare the Computed and Received Checksum**
+4. **Compare the Computed and Received Checksum**
    - If both checksums match, the payload is valid and untampered.
    - If they do not match, reject the request as it may have been modified.
 
@@ -787,3 +783,7 @@ public class Checksum {
 }
 ```
 </CodeGroup>
+
+
+## **Demo**
+[Checksum Demo Repository](https://github.com/ClickPesa/clickpesa-api-checksum-demo) - includes implementations in JavaScript, Python, PHP, Java, and Go, all verified for cross-language interoperability.
