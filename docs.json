@@ -132,6 +132,12 @@
         ]
       },
       {
+        "tab": "Plugins and SDK",
+        "pages": [
+          "sdk-plugins/plugins-and-extensions"
+        ]
+      },
+      {
         "tab": "API Explorer",
         "pages": [
           {
@@ -195,18 +201,6 @@
             "group": "EXCHANGE RATES",
             "pages": [
               "api-reference/exchange/get-latest-exchange-rates"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "Plugins and SDK Integration",
-        "hidden": true,
-        "groups": [
-          {
-            "group": "Get Started",
-            "pages": [
-              "sdk-plugins/sdk-plugin-overview"
             ]
           }
         ]
