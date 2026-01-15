@@ -47,7 +47,7 @@
                   },
                   "billReference": {
                     "type": "string",
-                    "description": "Custom bill reference. If not provided, the system auto-generates one"
+                    "description": "Custom bill reference (alphanumeric). If provided, this will be the number used to make payment. If not provided, the system auto-generates one"
                   }
                 }
               },
@@ -150,7 +150,7 @@
                   },
                   "billReference": {
                     "type": "string",
-                    "description": "Custom bill reference. If not provided, the system auto-generates one"
+                    "description": "Custom bill reference (alphanumeric). If provided, this will be the number used to make payment. If not provided, the system auto-generates one"
                   }
                 }
               },
@@ -347,7 +347,7 @@
         "properties": {
           "billPayNumber": {
             "type": "string",
-            "description": "BillPay number",
+            "description": "BillPay number - This is the number that will be used to make payment. If a custom `billReference` was provided in the request, this will match that value.",
             "example": "55042914871931"
           },
           "billDescription": {
