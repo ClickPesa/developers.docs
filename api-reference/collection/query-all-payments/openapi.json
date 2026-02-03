@@ -232,6 +232,11 @@
             "type": "string",
             "description": "Unique reference for the payment"
           },
+          "paymentPhoneNumber": {
+            "type": "string",
+            "description": "Sender's phone number (only available for USSD Push Payment requests and BillPay Payment requests)",
+            "example": "255712345678"
+          },
           "orderReference": {
             "type": "string",
             "description": "Order reference associated with the payment"
