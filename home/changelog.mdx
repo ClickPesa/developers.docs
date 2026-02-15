@@ -6,12 +6,7 @@ rss: true
 noindex: true
 ---
 
-<Update label="February 2026" tags={["Improvements", "New Feature", "Plugin"]} rss={{ title: "Monthly Updates", description: "February 2026 - Product updates and improvements" }}>
-
-## Added Sender Phone Number to Mobile Money Payments API
-
-- Added new field **`paymentPhoneNumber`** to the **[payments/all](/api-reference/collection/query-all-payments/query-all-payments)** and **[payments/{paymentId}](/api-reference/collection/querying-for-payments/querying-for-payments)** API endpoints to include the sender's phone number
-- This field is only available for USSD Push Payment requests and BillPay Payment requests
+<Update label="February 2026" tags={["Improvements", "New Feature", "WooCommerce Plugin"]} rss={{ title: "Monthly Updates", description: "February 2026 - Product updates and improvements" }}>
 
 ## WooCommerce Plugin: USD Store Support (v1.1.18)
 
@@ -22,6 +17,11 @@ noindex: true
   - Order confirmation: Displays the applied exchange rate and converted amount on the thank-you page
 - **Order details**: Order notes and payment details include the applied exchange rate, source amount, and converted TZS amount for full transparency.
 - **Admin settings**: An alert is shown when the store currency is neither TZS nor USD, and the ClickPesa Mobile Money payment method does not load for unsupported currencies.
+
+## Added Sender Phone Number to Mobile Money Payments API
+
+- Added new field **`paymentPhoneNumber`** to the **[payments/all](/api-reference/collection/query-all-payments/query-all-payments)** and **[payments/{paymentId}](/api-reference/collection/querying-for-payments/querying-for-payments)** API endpoints to include the sender's phone number
+- This field is only available for USSD Push Payment requests and BillPay Payment requests
 
 </Update>
 
