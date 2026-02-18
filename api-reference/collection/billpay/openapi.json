@@ -390,11 +390,95 @@
             }
           }
         }
+      },
+      "patch": {
+        "description": "Partially updates a BillPay reference. Use to update amount, description, payment mode, or status without recreating the reference.",
+        "parameters": [
+          {
+            "name": "billPayNumber",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string" },
+            "description": "BillPay number to update"
+          }
+        ],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "minProperties": 1,
+                "properties": {
+                  "billStatus": {
+                    "type": "string",
+                    "enum": ["ACTIVE", "INACTIVE"],
+                    "description": "Status of the BillPay reference"
+                  },
+                  "billAmount": {
+                    "type": "number",
+                    "minimum": 0.01,
+                    "description": "Amount of the bill (positive, max 2 decimal places)"
+                  },
+                  "billDescription": {
+                    "type": "string",
+                    "maxLength": 500,
+                    "description": "Description of the bill"
+                  },
+                  "billPaymentMode": {
+                    "type": "string",
+                    "enum": ["ALLOW_PARTIAL_AND_OVER_PAYMENT", "EXACT"],
+                    "description": "Payment mode"
+                  }
+                }
+              },
+              "example": {
+                "billAmount": 50000,
+                "billDescription": "Updated order description"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successfully updated BillPay reference",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/UpdateBillPayReferenceResponse" }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ValidationError" }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/UnauthorizedError" }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/NotFoundError" }
+              }
+            }
+          }
+        }
       }
     },
     "/billpay/update-status": {
       "put": {
-        "description": "Updates the status of a BillPay reference. Use this endpoint to set a BillPay reference to inactive. Inactive references will be rejected during verification and confirmation.",
+        "deprecated": true,
+        "description": "**Deprecated.** Use PATCH /billpay/{billPayNumber} with body { billStatus } instead. Updates the status of a BillPay reference. Inactive references will be rejected during verification and confirmation.",
         "requestBody": {
           "required": true,
           "content": {
@@ -545,6 +629,34 @@
             ],
             "description": "The updated status of the BillPay reference",
             "example": "INACTIVE"
+          }
+        }
+      },
+      "UpdateBillPayReferenceResponse": {
+        "type": "object",
+        "properties": {
+          "billPayNumber": {
+            "type": "string",
+            "description": "The BillPay reference number that was updated",
+            "example": "55042914871931"
+          },
+          "billStatus": {
+            "type": "string",
+            "enum": ["ACTIVE", "INACTIVE"],
+            "description": "The updated status of the BillPay reference"
+          },
+          "billAmount": {
+            "type": "number",
+            "description": "Amount of the bill"
+          },
+          "billDescription": {
+            "type": "string",
+            "description": "Description of the bill"
+          },
+          "billPaymentMode": {
+            "type": "string",
+            "enum": ["ALLOW_PARTIAL_AND_OVER_PAYMENT", "EXACT"],
+            "description": "Payment mode"
           }
         }
       },

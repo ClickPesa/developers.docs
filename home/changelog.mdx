@@ -8,7 +8,15 @@ noindex: true
 
 <Update label="February 2026" tags={["Improvements", "New Feature", "WooCommerce Plugin"]} rss={{ title: "Monthly Updates", description: "February 2026 - Product updates and improvements" }}>
 
-## BillPay Bulk Create Control Numbers
+## BillPay: Update Reference Details
+
+- Added new endpoint `PATCH` **[billpay/[billPayNumber]](/api-reference/collection/billpay/update-billpay-reference)** to partially update BillPay references details
+- Supports updating **billStatus**, **billAmount**, **billDescription**, and **billPaymentMode** — at least one field required
+- Use for amount changes, description updates, payment mode changes, or status changes without recreating the reference
+- Field names and structure match the creation endpoints for consistency
+- The existing `PUT` **[billpay/update-status](/api-reference/collection/billpay/update-billpay-reference-status)** endpoint is deprecated (to be removed in a future release); instead use `PATCH` **[billpay/[billPayNumber]](/api-reference/collection/billpay/update-billpay-reference)**  with body `{ billStatus }`
+
+## BillPay: Bulk Create Control Numbers
 
 - Added two new bulk endpoints for creating BillPay Control Numbers:
   - **[billpay/bulk-create-order-control-numbers](/api-reference/collection/billpay/bulk-create-order-control-numbers)**: Bulk create Order Control Numbers (up to 50 per request)

@@ -177,6 +177,7 @@
               "api-reference/collection/billpay/bulk-create-order-control-numbers",
               "api-reference/collection/billpay/bulk-create-customer-control-numbers",
               "api-reference/collection/billpay/querying-for-billpay-details",
+              "api-reference/collection/billpay/update-billpay-reference",
               "api-reference/collection/billpay/update-billpay-reference-status"
             ]
           },
