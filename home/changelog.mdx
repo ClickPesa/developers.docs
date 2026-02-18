@@ -8,6 +8,16 @@ noindex: true
 
 <Update label="February 2026" tags={["Improvements", "New Feature", "WooCommerce Plugin"]} rss={{ title: "Monthly Updates", description: "February 2026 - Product updates and improvements" }}>
 
+## BillPay Bulk Create Control Numbers
+
+- Added two new bulk endpoints for creating BillPay Control Numbers:
+  - **[billpay/bulk-create-order-control-numbers](/api-reference/collection/billpay/bulk-create-order-control-numbers)**: Bulk create Order Control Numbers (up to 50 per request)
+  - **[billpay/bulk-create-customer-control-numbers](/api-reference/collection/billpay/bulk-create-customer-control-numbers)**: Bulk create Customer Control Numbers (up to 50 per request)
+- Each item in the `controlNumbers` array has the same shape as the corresponding single-create endpoint
+- Supports **partial success**: valid items are created while invalid items are reported in the `errors` array with index and reason
+- Order bulk requests must not include `customerName`, `customerEmail`, or `customerPhone` in any item
+- Customer bulk requests require `customerName` and either `customerEmail` or `customerPhone` for each item
+
 ## WooCommerce Plugin: USD Store Support (v1.1.18)
 
 - **ClickPesa for WooCommerce** [v1.1.18](https://github.com/ClickPesa/ClickPesa-WooCommerce-Plugin-Release/releases/tag/v1.1.18) now supports **USD stores** in addition to TZS stores. Mobile Push payments can be accepted from stores priced in either currency.

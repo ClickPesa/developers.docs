@@ -210,6 +210,140 @@
         }
       }
     },
+    "/billpay/bulk-create-order-control-numbers": {
+      "post": {
+        "description": "Bulk creates BillPay Order Control Numbers (max 50 per request). Supports partial success: valid items are created while invalid items are reported in the errors array.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["controlNumbers"],
+                "properties": {
+                  "controlNumbers": {
+                    "type": "array",
+                    "minItems": 1,
+                    "maxItems": 50,
+                    "description": "Array of order control number items",
+                    "items": {
+                      "type": "object",
+                      "properties": {
+                        "billReference": { "type": "string", "description": "Custom bill reference (alphanumeric, max 20 chars)" },
+                        "billAmount": { "type": "number", "description": "Amount of the bill" },
+                        "billDescription": { "type": "string", "description": "Description of the bill" },
+                        "billPaymentMode": { "type": "string", "enum": ["ALLOW_PARTIAL_AND_OVER_PAYMENT", "EXACT"], "description": "Payment mode. Applied only when billAmount is set" }
+                      }
+                    }
+                  }
+                }
+              },
+              "example": {
+                "controlNumbers": [
+                  { "billAmount": 25000, "billDescription": "Order 1" },
+                  { "billReference": "ORD002", "billAmount": 50000 }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Bulk create result - may include partial success with per-item errors",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/BulkCreateResponse" }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ValidationError" }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/UnauthorizedError" }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/billpay/bulk-create-customer-control-numbers": {
+      "post": {
+        "description": "Bulk create BillPay Customer Control Numbers (max 50 per request). Each item follows the single-create format. Supports partial success — valid items are created; invalid ones are returned in the errors array",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["controlNumbers"],
+                "properties": {
+                  "controlNumbers": {
+                    "type": "array",
+                    "minItems": 1,
+                    "maxItems": 50,
+                    "description": "Array of customer control number items",
+                    "items": {
+                      "type": "object",
+                      "required": ["customerName"],
+                      "properties": {
+                        "customerName": { "type": "string", "description": "Name of the customer" },
+                        "customerEmail": { "type": "string", "description": "Email (required if customerPhone not provided)" },
+                        "customerPhone": { "type": "string", "description": "Phone - 12 digits, country code, no plus (required if customerEmail not provided)" },
+                        "billReference": { "type": "string", "description": "Custom bill reference" },
+                        "billAmount": { "type": "number", "description": "Amount of the bill" },
+                        "billDescription": { "type": "string", "description": "Description of the bill" },
+                        "billPaymentMode": { "type": "string", "enum": ["ALLOW_PARTIAL_AND_OVER_PAYMENT", "EXACT"], "description": "Payment mode" }
+                      }
+                    }
+                  }
+                }
+              },
+              "example": {
+                "controlNumbers": [
+                  { "customerName": "John Doe", "customerEmail": "john@example.com", "billAmount": 25000 },
+                  { "customerName": "Jane Smith", "customerPhone": "255712345678", "billReference": "CUST002" }
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Bulk create result - may include partial success with per-item errors",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/BulkCreateResponse" }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/ValidationError" }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/UnauthorizedError" }
+              }
+            }
+          }
+        }
+      }
+    },
     "/billpay/{billPayNumber}": {
       "get": {
         "description": "Queries for BillPay number details",
@@ -369,6 +503,29 @@
             "type": "string",
             "description": "Payment mode for the bill. Applied only when billAmount is set",
             "example": "EXACT"
+          }
+        }
+      },
+      "BulkCreateResponse": {
+        "type": "object",
+        "properties": {
+          "billPayNumbers": {
+            "type": "array",
+            "items": { "type": "string" },
+            "description": "Array of successfully created BillPay numbers"
+          },
+          "created": { "type": "number", "description": "Count of successfully created control numbers" },
+          "failed": { "type": "number", "description": "Count of failed items" },
+          "errors": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "index": { "type": "number", "description": "0-based index of the failed item in the request array" },
+                "reason": { "type": "string", "description": "Error message for the failed item" }
+              }
+            },
+            "description": "Present only when failed > 0"
           }
         }
       },
