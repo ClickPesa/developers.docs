@@ -296,6 +296,7 @@
             "properties": {
               "accountName": {
                 "type": "string",
+                "description": "Receiver name: fetched from MNO; if unavailable, falls back to phone number when not required. If required and unavailable, payout fails validation.",
                 "example": "John Doe"
               },
               "accountNumber": {
@@ -414,6 +415,7 @@
               },
               "accountName": {
                 "type": "string",
+                "description": "Beneficiary name: fetched from MNO; if unavailable, falls back to phone number when not required. If required and unavailable, payout fails validation.",
                 "example": "John Doe"
               },
               "amount": {
