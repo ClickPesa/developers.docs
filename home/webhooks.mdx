@@ -9,7 +9,20 @@ Webhooks are HTTP `POST` callbacks that deliver notification messages for events
 ClickPesa uses webhooks to inform your systems when transactional events occur. This way, your servers are always up to date with transaction information.
 
 
-<Note>Webhook events are published from actions in any of the ClickPesa products, including the ClickPesa Dashboard, Hosted Integrations, Embedded Solutions and APIs .</Note>
+<Note>Webhook events are published from actions in any of the ClickPesa products, including the ClickPesa Dashboard, Hosted Integrations, Embedded Solutions and APIs.</Note>
+
+## Webhook Levels
+
+ClickPesa supports webhooks at two levels:
+
+| Level | Scope | When Used |
+|-------|-------|-----------|
+| **Merchant webhooks** | All transactions for the merchant | Dashboard, Hosted, Embedded, and API transactions that have no application context |
+| **Application webhooks** | API-initiated transactions only | Payments and payouts created via API |
+
+<Info>
+For API-initiated payments and payouts, if the application has a webhook URL configured for the event, the callback is sent to the **application webhook only** — the merchant webhook is not used. If the application has no webhook for the event, the merchant webhook is used instead.
+</Info>
 
 
 ## Webhook Events
@@ -216,19 +229,41 @@ When a payment is received successfully, this event is triggered. This event pro
 
 ## Setting Up Webhooks
 
-### 1. Access Webhooks Settings
+### Merchant-Level Webhooks
 
-- Log in to your [ClickPesa Dashboard](https://merchant.clickpesa.com).
-- Navigate to **Settings** -> **Developers**.
-- Locate the **Webhooks Settings** section.
+Merchant webhooks apply to all transactions unless an application webhook is used (see below).
 
-### 2. Add a Webhook URL
+1. **Access webhook settings**
+   - Log in to your [ClickPesa Dashboard](https://merchant.clickpesa.com)
+   - Navigate to **Settings** → **Developers**
+   - Locate the **Webhooks** section
 
-- Select event types to subscribe to, such as `PAYOUT INITIATED`, `PAYOUT REVERSED`, `PAYOUT REFUNDED`, `PAYMENT RECEIVED`, `PAYMENT FAILED` or `DEPOSIT RECEIVED` and set the webhook URL.
+2. **Add webhook URLs**
+   - Select event types: `PAYOUT INITIATED`, `PAYOUT REVERSED`, `PAYOUT REFUNDED`, `PAYMENT RECEIVED`, `PAYMENT FAILED`, or `DEPOSIT RECEIVED`
+   - Set the webhook URL for each event
 
-### 3. Receiveing Webhook Calls
+### Application-Level Webhooks
 
-- The gateway sends HTTP POST requests to the provided URL upon an event.
-- Your system should respond with a **2xx HTTP status code** to acknowledge receipt.
+Application webhooks let you receive events per application for API-initiated transactions. Use them when you have multiple applications (e.g. different apps or environments) and want separate webhook endpoints.
 
-<Note>Note: This status code only indicates receipt, not successful processing.<br/> Extra data in the response is ignored.</Note>
+**Supported events:** `PAYMENT RECEIVED`, `PAYMENT FAILED`, `PAYOUT INITIATED`, `PAYOUT REFUNDED`, `PAYOUT REVERSED`
+
+<Note>`DEPOSIT RECEIVED` is only available at the merchant level.</Note>
+
+1. **Access application settings**
+   - Log in to your [ClickPesa Dashboard](https://merchant.clickpesa.com)
+   - Navigate to **Settings** → **Developers**
+   - Click on an application to open its details
+
+2. **Configure application webhooks**
+   - In the **Application Webhooks** section, add webhook URLs for the events you need
+   - Each application can have its own URLs per event
+
+
+### Receiving Webhook Calls
+
+- The gateway sends HTTP POST requests to the provided URL upon an event
+- Your system should respond with a **2xx HTTP status code** to acknowledge receipt
+- Payloads can include a `checksum` and `checksumMethod` for verification (see [Checksum documentation](/home/checksum))
+
+<Note>This status code only indicates receipt, not successful processing.<br/>Extra data in the response is ignored.</Note>

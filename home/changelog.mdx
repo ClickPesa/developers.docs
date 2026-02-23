@@ -8,6 +8,14 @@ noindex: true
 
 <Update label="February 2026" tags={["Improvements", "New Feature", "WooCommerce Plugin"]} rss={{ title: "Monthly Updates", description: "February 2026 - Product updates and improvements" }}>
 
+## Application Webhooks
+
+- **Webhooks per application**: You can now configure webhooks at the **application level** in addition to merchant-level webhooks
+- **For API-initiated transactions**: When configured, webhook events for API-initiated transactions (both payments and payouts) are sent to the **application-level webhook**; merchant webhooks are not used in this flow
+- **Events supported**: `PAYMENT RECEIVED`, `PAYMENT FAILED`, `PAYOUT INITIATED`, `PAYOUT REFUNDED`, `PAYOUT REVERSED`
+- **Setup**: Configure application webhooks in **Settings** -> **Developers** -> select your application -> **Application Webhooks**
+- See the updated [Webhooks documentation](/home/webhooks) for details
+
 ## BillPay: Update Reference Details
 
 - Added new endpoint `PATCH` **[billpay/[billPayNumber]](/api-reference/collection/billpay/update-billpay-reference)** to partially update BillPay references details
