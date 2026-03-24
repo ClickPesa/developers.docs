@@ -1,6 +1,6 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "theme": "willow",
+  "theme": "palm",
   "name": "ClickPesa Documentation",
   "description": "ClickPesa API Documentation",
   "favicon": "/favicon.png",
