@@ -6,7 +6,13 @@ rss: true
 noindex: true
 ---
 
-<Update label="March 2026" tags={["Community", "Documentation"]} rss={{ title: "Monthly Updates", description: "March 2026 - Product updates and improvements" }}>
+<Update label="March 2026" tags={["Community", "Improvements"]} rss={{ title: "Monthly Updates", description: "March 2026 - Product updates and improvements" }}>
+
+## Webhooks: PAYMENT RECEIVED `collectedAmount` Safeguard
+
+- Updated the `PAYMENT RECEIVED` webhook behavior so that `collectedAmount` is **never negative** in payloads
+- If ClickPesa’s internal calculation results in a negative value, the webhook now sends `"0"` for `collectedAmount` to protect downstream systems
+- Added clarification in the [Webhooks documentation](/home/webhooks#payment-received) so integrators can rely on `collectedAmount` always being zero or positive
 
 ## Community: Python SDK Added
 

@@ -33,7 +33,6 @@ When a payment is received successfully, this event is triggered. This event pro
 
 - **Description** - This event is triggered whenever a customer makes a successful payment. The webhook will send details of the transaction, including the amount, payer information, and transaction status.
 
-
 - **Sample Payload Data**
 
 ```json [expandable]
@@ -58,6 +57,10 @@ When a payment is received successfully, this event is triggered. This event pro
   }
 }
 ```
+
+<Note>
+For `PAYMENT RECEIVED` webhooks, the `collectedAmount` field is always zero or more. If our internal calculation ever ends up with a negative value, we send `"0"` instead so that you never receive a negative collected amount.
+</Note>
 
 ### `PAYMENT FAILED`
 
