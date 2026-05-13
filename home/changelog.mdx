@@ -6,6 +6,30 @@ rss: true
 noindex: true
 ---
 
+<Update label="May 2026" tags={["Improvements", "Email", "Notifications"]} rss={{ title: "Monthly Updates", description: "May 2026 - Product updates and improvements" }}>
+
+## Notification Experience Improvements
+
+- **Multilingual notifications:** Notifications to merchants, customers, and internal users now read more naturally in **English** or **Swahili**. **Set your default** in the **Merchant Dashboard** under **Settings → General**, in the **Language** section (your profile shows this as **Default Language**). That choice is normally used for **both** your own merchant alerts and **customer-facing** messages tied to your account (such as payment confirmations to customers), so language stays consistent across who receives the update.
+- **Language overrides on some payouts:** When a flow lets you choose the language for a **beneficiary** message separately—such as **bulk payouts** using **Note To Beneficiary Language**—that selection is used **only for that beneficiary notification** and overrides your dashboard default for that send. Your saved **Settings → General** language remains your default everywhere else.
+- **Localized formatting for money, dates, and details:** Amounts, dates, and transaction detail sections are now formatted according to the notification language, while important business values such as statuses, references, channel names, and IDs remain consistent with the transaction record.
+- **More complete transaction context:** Payment, payout, deposit, invoice, KYC, and application-related notifications now include richer detail sections so recipients can quickly see what happened, when it happened, the amount involved, the reference, and the relevant status without opening another system.
+- **Expanded email coverage:** New transactional email templates have been added for invoice updates and other key account events, giving merchants and system users more consistent communication across invoice creation, sharing, updates, and payment-related workflows.
+
+</Update>
+
+<Update label="April 2026" tags={["Improvements", "Payments", "BillPay"]} rss={{ title: "Monthly Updates", description: "April 2026 - Product updates and improvements" }}>
+
+## Payments and BillPay Reliability Improvements
+
+- **More reliable payment processing:** Improved payment creation and error handling across local payment flows, helping reduce failed or unclear payment attempts and making payment status updates more dependable.
+- **Improved webhook delivery for payment outcomes:** Payment success and failure callbacks are now handled through dedicated processing flows, making merchant system updates more reliable and more quicker.
+- **Better BillPay recovery flows:** BillPay payments now better support reversal and retry scenarios to manage payments received via invalid or wrong BillPay references.
+- **Clearer sender details:** BillPay confirmations now shows the actual payment sender information, making payment records easier to review and reconcile.
+- **Improved direct debit validation:** CRDB direct debit mandate flows now include stronger account-name verification and mandate lookup support, helping merchants and partners validate mandate details more confidently.
+
+</Update>
+
 <Update label="March 2026" tags={["Community", "Improvements"]} rss={{ title: "Monthly Updates", description: "March 2026 - Product updates and improvements" }}>
 
 ## Webhooks: PAYMENT RECEIVED `collectedAmount` Safeguard
