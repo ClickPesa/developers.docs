@@ -24,7 +24,7 @@ noindex: true
 
 - **More reliable payment processing:** Improved payment creation and error handling across local payment flows, helping reduce failed or unclear payment attempts and making payment status updates more dependable.
 - **Improved webhook delivery for payment outcomes:** Payment success and failure callbacks are now handled through dedicated processing flows, making merchant system updates more reliable and more quicker.
-- **Application webhooks for BillPay and Collection API:** Payments against API-created BillPay control numbers and Collection API requests (including M-Pesa USSD push) now persist application context so `PAYMENT RECEIVED` and `PAYMENT FAILED` route to the correct [application webhook](/home/webhooks#application-level-webhooks) when configured.
+- **Application webhooks for BillPay and Collection API:** BillPay and Collection API payments (including M-Pesa USSD push) can now send `PAYMENT RECEIVED` and `PAYMENT FAILED` to your [application webhook](/home/webhooks#application-level-webhooks) when configured.
 - **Better BillPay recovery flows:** BillPay payments now better support reversal and retry scenarios to manage payments received via invalid or wrong BillPay references.
 - **Clearer sender details:** BillPay confirmations now shows the actual payment sender information, making payment records easier to review and reconcile.
 - **Improved direct debit validation:** CRDB direct debit mandate flows now include stronger account-name verification and mandate lookup support, helping merchants and partners validate mandate details more confidently.
@@ -59,7 +59,7 @@ noindex: true
 ## Application Webhooks
 
 - **Webhooks per application**: You can now configure webhooks at the **application level** in addition to merchant-level webhooks
-- **Per application**: When configured, webhook events for transactions tied to that application (Collection API, Disbursement API, BillPay API, and hosted checkout or payout links created with the application's Client ID) are sent to the **application-level webhook**; merchant webhooks are not used in that flow
+- **Per application**: When configured, webhook events for that application's Collection API, Disbursement API, BillPay API, and hosted checkout or payout activity are sent to the **application-level webhook**; merchant webhooks are not used in that flow
 - **Events supported**: `PAYMENT RECEIVED`, `PAYMENT FAILED`, `PAYOUT INITIATED`, `PAYOUT REFUNDED`, `PAYOUT REVERSED`
 - **Setup**: Configure application webhooks in **Settings** -> **Developers** -> select your application -> **Application Webhooks**
 - See the updated [Webhooks documentation](/home/webhooks) for details
