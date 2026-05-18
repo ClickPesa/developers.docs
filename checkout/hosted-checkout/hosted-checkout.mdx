@@ -13,4 +13,4 @@ description: "Accept payments in your platform by redirecting customers to the C
 
 2. **Redirect Customers**  - Add the generated checkout link into your checkout, website or share it via WhatsApp and redirect customers to ClickPesa’s Checkout to make a payment
 
-3. **Recieve Payment Confirmation**  - Receive real-time payment status update  in your application via [Webhooks](/home/webhooks) or poll the transaction status via [Query Payment API](/api-reference/collection/querying-for-payments/querying-for-payments)
+3. **Recieve Payment Confirmation**  - Receive real-time payment status updates in your application via [Application Webhooks](/home/webhooks#application-level-webhooks) (configure under your hosted application in the dashboard), an optional per-link `callbackUrl`, or by polling via [Query Payment API](/api-reference/collection/querying-for-payments/querying-for-payments). Application webhooks apply to all payment methods on the hosted checkout page, including mobile push payments.

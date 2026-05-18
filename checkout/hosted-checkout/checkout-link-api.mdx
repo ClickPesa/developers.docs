@@ -18,3 +18,12 @@ Use **API Keys** of to [Generate Authorization Token](/api-reference/authorizati
 <Card title="Generate Hosted Checkout Link" icon="brackets-curly" href="/api-reference/collection/generate-checkout-link/generate-checkout-link" horizontal>
 Use this API endpoint to generate a Hosted Checkout Link
 </Card>
+
+## Payment notifications
+
+When a customer completes payment on the hosted checkout page (including mobile push payments), you can receive status updates in two ways:
+
+1. **[Application webhooks](/home/webhooks#application-level-webhooks)** — Configure `PAYMENT RECEIVED` (and `PAYMENT FAILED` if needed) under your hosted application in the dashboard. Events are sent to your application webhook because the checkout link is created with your application's Client ID.
+2. **Per-link `callbackUrl`** — Optional URL passed when generating the link; ClickPesa POSTs to this URL when that specific payment succeeds.
+
+If an application webhook is configured for the event, it is used instead of the merchant-level webhook. See [Webhooks](/home/webhooks) for payload details.

@@ -58,7 +58,7 @@ noindex: true
 ## Application Webhooks
 
 - **Webhooks per application**: You can now configure webhooks at the **application level** in addition to merchant-level webhooks
-- **For API-initiated transactions**: When configured, webhook events for API-initiated transactions (both payments and payouts) are sent to the **application-level webhook**; merchant webhooks are not used in this flow
+- **Per application**: When configured, webhook events for transactions tied to that application (direct API requests and hosted checkout or payout links created with the application's Client ID) are sent to the **application-level webhook**; merchant webhooks are not used in that flow
 - **Events supported**: `PAYMENT RECEIVED`, `PAYMENT FAILED`, `PAYOUT INITIATED`, `PAYOUT REFUNDED`, `PAYOUT REVERSED`
 - **Setup**: Configure application webhooks in **Settings** -> **Developers** -> select your application -> **Application Webhooks**
 - See the updated [Webhooks documentation](/home/webhooks) for details
