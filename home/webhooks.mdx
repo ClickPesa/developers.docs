@@ -18,10 +18,10 @@ ClickPesa supports webhooks at two levels:
 | Level | Scope | When Used |
 |-------|-------|-----------|
 | **Merchant webhooks** | All transactions for the merchant | Dashboard, Hosted, Embedded, and API transactions that have no application context |
-| **Application webhooks** | Transactions tied to an application | Direct API payments and payouts, and hosted checkout or payout flows created with that application's Client ID |
+| **Application webhooks** | Transactions tied to an application | Collection API, Disbursement API, [BillPay API](/bill-pay/billpay-api-overview), and hosted checkout or payout links created with that application's Client ID |
 
 <Info>
-For payments and payouts tied to an application (including [Hosted Checkout](/checkout/hosted-checkout/hosted-checkout) links generated with your application's Client ID), if the application has a webhook URL configured for the event, the callback is sent to the **application webhook only** — the merchant webhook is not used. If the application has no webhook for the event, the merchant webhook is used instead.
+For payments and payouts tied to an application (including [USSD push](/api-reference/collection/ussd-push-requests/initiate-ussd-push-request) and card payments via the Collection API, [BillPay](/bill-pay/billpay-api-overview) control numbers created via API, and [Hosted Checkout](/checkout/hosted-checkout/hosted-checkout) links), if the application has a webhook URL configured for the event, the callback is sent to the **application webhook only** — the merchant webhook is not used. If the application has no webhook for the event, the merchant webhook is used instead.
 </Info>
 
 
@@ -249,10 +249,16 @@ Merchant webhooks apply to all transactions unless an application webhook is use
 
 Application webhooks let you receive events per application for transactions tied to that application. This includes:
 
-- **Direct API** — payments and payouts created through the Collection or Disbursement APIs using your application's credentials
+- **Collection API** — USSD push, card, and other payment methods initiated with your application's JWT (Client ID is stored on the payment as `initiator.application_client_id`)
+- **Disbursement API** — mobile money and bank payouts created with your application's credentials
+- **BillPay API** — when a customer pays against an [order or customer control number](/bill-pay/billpay-api-overview) you created via API (the reference stores your Client ID and it is copied to the payment record on confirmation)
 - **Hosted integrations** — payments (including mobile push, card, and other methods) and payouts completed through hosted links generated with your application's Client ID, such as [Hosted Checkout](/checkout/hosted-checkout/hosted-checkout) links
 
 Use application webhooks when you have multiple applications (e.g. different apps or environments) and want separate webhook endpoints per application.
+
+<Note>
+Application webhooks do **not** apply to offline or LMS-style BillPay references that are not created through the BillPay API (those have no application Client ID on file). Dashboard-only transactions without an application context use merchant webhooks instead.
+</Note>
 
 <Note>
 A hosted checkout link's optional `callbackUrl` is separate from application webhooks. Application webhooks are configured in the dashboard under your application and fire for all qualifying transactions for that application, regardless of whether a per-link `callbackUrl` was set.

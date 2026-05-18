@@ -79,12 +79,25 @@ This allows you to retrieve real-time payment information for reconciliation or 
 
 #### Receive Webhook Notifications
 
+Configure **[Application webhooks](/home/webhooks#application-level-webhooks)** on the same application you use to create control numbers (the API stores your **Client ID** on each reference). When a customer pays via mobile money or bank BillPay against that reference, a successful payment triggers `PAYMENT RECEIVED` on your **application webhook** URL if configured for that event.
+
 <Card
- title="Webhook Notifications"
+ title="Application Webhooks"
  icon="webhook"
- href="/home/webhooks#setting-up-webhooks" horizontal>
-Alternatively, set up a webhook to automatically receive callbacks whenever a payment is completed or updated.
+ href="/home/webhooks#application-level-webhooks" horizontal>
+Set up `PAYMENT RECEIVED` (and `PAYMENT FAILED` if needed) under **Settings → Developers → your application → Application Webhooks**. The webhook payload includes `clientId` matching your application's Client ID.
 </Card>
+
+<Card
+ title="Merchant Webhooks"
+ icon="webhook"
+ href="/home/webhooks#merchant-level-webhooks" horizontal>
+If no application webhook is configured for the event, callbacks fall back to your merchant-level webhook (if set).
+</Card>
+
+<Note>
+This applies to **API-created** order and customer control numbers only. Offline or merchant-brand BillPay references that were not created through the BillPay API do not carry application context; use merchant webhooks or query the [payments API](/api-reference/collection/querying-for-payments/querying-for-payments) for those cases.
+</Note>
 
 
 ### Step 4 – Fetch BillPay Details (Optional)
