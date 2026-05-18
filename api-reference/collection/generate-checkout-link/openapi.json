@@ -21,7 +21,7 @@
   "paths": {
     "/checkout-link/generate-checkout-url": {
       "post": {
-        "description": "Generates a link for receiving payments via ClickPesa Hosted Checkout",
+        "description": "Generates a link for receiving payments via ClickPesa Hosted Checkout. After payment, customers are redirected to the Return URL configured on your hosted application in the dashboard. For payment status updates, use application webhooks and/or an optional callbackUrl on the request body (see Payment notifications in the Checkout Link API guide).",
         "requestBody": {
           "required": true,
           "content": {
@@ -68,6 +68,14 @@
                       "description": {
                         "type": "string",
                         "description": "Your order description"
+                      },
+                      "callbackUrl": {
+                        "type": "string",
+                        "description": "Optional URL that receives an HTTP POST when a payment for this checkout link succeeds. Separate from application webhooks configured in the dashboard."
+                      },
+                      "wooCommerceCallbackURL": {
+                        "type": "string",
+                        "description": "Optional WooCommerce order callback URL for this checkout link."
                       },
                       "checksum": {
                         "type": "string",
@@ -132,6 +140,18 @@
                       "customerPhone": {
                         "type": "string",
                         "description": "Your customer phone number, starting with country code and without the plus sign, e.g., 255712345678"
+                      },
+                      "description": {
+                        "type": "string",
+                        "description": "Your order description"
+                      },
+                      "callbackUrl": {
+                        "type": "string",
+                        "description": "Optional URL that receives an HTTP POST when a payment for this checkout link succeeds. Separate from application webhooks configured in the dashboard."
+                      },
+                      "wooCommerceCallbackURL": {
+                        "type": "string",
+                        "description": "Optional WooCommerce order callback URL for this checkout link."
                       },
                       "checksum": {
                         "type": "string",

@@ -261,7 +261,7 @@ Application webhooks do **not** apply to offline BillPay references that were no
 </Note>
 
 <Note>
-A hosted checkout link's optional `callbackUrl` is separate from application webhooks. Application webhooks are configured in the dashboard under your application and fire for all qualifying transactions for that application, regardless of whether a per-link `callbackUrl` was set.
+An optional `callbackUrl` on [Generate Checkout Link](/api-reference/collection/generate-checkout-link/generate-checkout-link) is separate from application webhooks. Application webhooks are configured in the dashboard and apply to all qualifying payments for that application, whether or not you also set `callbackUrl` on a link.
 </Note>
 
 **Supported events:** `PAYMENT RECEIVED`, `PAYMENT FAILED`, `PAYOUT INITIATED`, `PAYOUT REFUNDED`, `PAYOUT REVERSED`

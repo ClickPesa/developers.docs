@@ -21,9 +21,14 @@ Use this API endpoint to generate a Hosted Checkout Link
 
 ## Payment notifications
 
-When a customer completes payment on the hosted checkout page (including mobile push payments), you can receive status updates in two ways:
+When a customer completes payment on the hosted checkout page (including mobile push payments), you can receive status updates in three ways:
 
 1. **[Application webhooks](/home/webhooks#application-level-webhooks)** — Configure `PAYMENT RECEIVED` (and `PAYMENT FAILED` if needed) under your hosted application in the dashboard.
-2. **Per-link `callbackUrl`** — Optional URL passed when generating the link; ClickPesa POSTs to this URL when that specific payment succeeds.
+2. **`callbackUrl` on the generate link request** — Optional field on [Generate Checkout Link](/api-reference/collection/generate-checkout-link/generate-checkout-link). ClickPesa sends an HTTP POST to this URL when a payment for that link succeeds.
+3. **[Query Payment API](/api-reference/collection/querying-for-payments/querying-for-payments)** — Poll by your `orderReference`.
 
 If an application webhook is configured for the event, it is used instead of the merchant-level webhook. See [Webhooks](/home/webhooks) for payload details.
+
+<Note>
+After payment, customers are redirected to the **Return URL** on your [hosted application](/application/hosted-application-setup) in the dashboard. That redirect is not set on the generate link request.
+</Note>
