@@ -1,6 +1,6 @@
 ---
 title: "Order BillPay Control Number"
-description: "A one-time payment number for a specific transaction or invoice — created manually or via API."
+description: "A one-time payment number for a specific transaction or invoice — created via API or, for legacy accounts, by manual concatenation."
 ---
 
 import PaymentInstructions from "/snippets/making-payment.mdx";
@@ -8,25 +8,12 @@ import PaymentInstructions from "/snippets/making-payment.mdx";
 An **Order BillPay Control Number** is a **dynamic number** for a single transaction or invoice.
 It is ideal for **one-time payments** such as e-commerce orders, invoices, or single service charges.
 
-You can generate an Order BillPay Control Number in **two ways** — each with different flexibility and structure.
-
-## 1. Offline / Manual Concatenation
-**Structure:**
-[Merchant BillPay-Namba] + [Order Reference]
-- **Merchant BillPay-Namba** — your 4-digit merchant number assigned by ClickPesa.
-- **Order Reference** — any unique reference from your internal billing or order system.
-
-**Example:**
-Merchant BillPay-Namba: 1122
-Order Reference: 231256
-Order BillPay Control Number: 1122231256
-
 <Tip>
-This method is quick and does not require any API calls.
-It’s useful when you already have an offline billing system but **want to instantly collect payments online** using ClickPesa.
+New integrations should use the **BillPay API** to create order control numbers.
 </Tip>
 
-## 2. Via API
+## Via API (Recommended)
+
 When using the [BillPay API](/api-reference/collection/billpay/create-order-control-number), you get full control over the control number. You can directly set the **custom reference**, which becomes the **actual control number customers will use to pay**.
 This means the number does **not** need to follow the offline concatenation format.
 
@@ -42,6 +29,26 @@ With API generation, you can also:
 **Example use case:**
 A SaaS platform generates an Order BillPay Control Number via API with a fixed amount, partial payment allowed, and a meaningful control number like `INV2025001`.
 
+## Legacy: Manual Concatenation {#legacy-manual-concatenation}
+
+<Warning>
+Legacy mode. Available only when enabled for your account by ClickPesa.
+Contact support or your account manager to request enablement.
+</Warning>
+
+**Structure:**
+[Merchant BillPay-Namba] + [Order Reference]
+- **Merchant BillPay-Namba** — your 4-digit merchant number assigned by ClickPesa.
+- **Order Reference** — any unique reference from your internal billing or order system.
+
+**Example:**
+Merchant BillPay-Namba: 1122
+Order Reference: 231256
+Order BillPay Control Number: 1122231256
+
+<Tip>
+This method does not require API calls. It is intended for merchants with existing offline billing systems who collect payments by combining their BillPay-Namba with an internal order reference.
+</Tip>
 
 ## Making Payments with Order BillPay Control Numbers
 Customers can pay via:
