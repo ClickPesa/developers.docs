@@ -6,6 +6,16 @@ rss: true
 noindex: true
 ---
 
+<Update label="June 2026" tags={["Improvements", "API", "Account"]} rss={{ title: "Monthly Updates", description: "June 2026 - Product updates and improvements" }}>
+
+## Clearer Account Balance Error When No Balance Account Exists
+
+- Updated the **[Retrieve Account Balance](/api-reference/account/get-account-balance)** endpoint to return a clearer `404` message when a merchant has not yet received a successful payment or deposit
+- The previous generic `Account not found` response has been replaced with: `No balance account is linked to this merchant yet. Balance becomes available after the first successful payment or deposit.`
+- API documentation now includes the `404` response and when integrators should expect it
+
+</Update>
+
 <Update label="May 2026" tags={["Improvements", "Email", "Notifications"]} rss={{ title: "Monthly Updates", description: "May 2026 - Product updates and improvements" }}>
 
 ## Notification Experience Improvements

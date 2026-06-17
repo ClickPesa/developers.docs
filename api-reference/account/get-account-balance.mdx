@@ -2,3 +2,7 @@
 title: "Retrieve Account Balance"
 openapi: "GET /account/balance"
 ---
+
+<Note>
+  If the merchant has not yet received a successful payment or deposit, this endpoint returns `404` with the message: `No balance account is linked to this merchant yet. Balance becomes available after the first successful payment or deposit.`
+</Note>

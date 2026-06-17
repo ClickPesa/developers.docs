@@ -42,6 +42,16 @@
                 }
               }
             }
+          },
+          "404": {
+            "description": "Balance account not linked",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundError"
+                }
+              }
+            }
           }
         }
       }
@@ -254,6 +264,16 @@
             "type": "string",
             "description": "Bad Request Error",
             "example": "Invalid currency: currency must be either TZS or USD"
+          }
+        }
+      },
+      "NotFoundError": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Not Found Error",
+            "example": "No balance account is linked to this merchant yet. Balance becomes available after the first successful payment or deposit."
           }
         }
       }
