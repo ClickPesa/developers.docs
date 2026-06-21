@@ -11,8 +11,8 @@ noindex: true
 ## Bank Payout Preview: Beneficiary Name Lookup
 
 - **[Preview Bank Payout](/api-reference/disbursement/bank-payout/preview-bank-payout)** may now include the beneficiary account holder name when lookup succeeds for the selected bank
-- The response includes `nameLookupStatus` (`resolved` or `unavailable`) so you can tell whether `receiver.accountName` is present
-- When `nameLookupStatus` is `unavailable`, `receiver.accountName` is omitted — use your own verified name when creating the payout via **[Create Bank Payout](/api-reference/disbursement/bank-payout/create-bank-payout)**
+- The response includes `nameLookupStatus` (`RESOLVED` or `UNAVAILABLE`) so you can tell whether `receiver.accountName` is present
+- When `nameLookupStatus` is `UNAVAILABLE`, `receiver.accountName` is omitted — use your own verified name when creating the payout via **[Create Bank Payout](/api-reference/disbursement/bank-payout/create-bank-payout)**
 
 ## Clearer Account Balance Error When No Balance Account Exists
 

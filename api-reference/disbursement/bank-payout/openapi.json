@@ -324,8 +324,8 @@
           },
           "nameLookupStatus": {
             "type": "string",
-            "enum": ["resolved", "unavailable"],
-            "description": "Indicates whether the beneficiary name was resolved. `resolved` when `receiver.accountName` is present; `unavailable` when lookup did not return a name."
+            "enum": ["RESOLVED", "UNAVAILABLE"],
+            "description": "Indicates whether the beneficiary name was resolved. `RESOLVED` when `receiver.accountName` is present; `UNAVAILABLE` when lookup did not return a name."
           },
           "receiver": {
             "type": "object",
@@ -336,7 +336,7 @@
               },
               "accountName": {
                 "type": "string",
-                "description": "Beneficiary account holder name when lookup succeeds. Omitted when `nameLookupStatus` is `unavailable`.",
+                "description": "Beneficiary account holder name when lookup succeeds. Omitted when `nameLookupStatus` is `UNAVAILABLE`.",
                 "example": "TEMBO SHOP"
               },
               "accountCurrency": {
