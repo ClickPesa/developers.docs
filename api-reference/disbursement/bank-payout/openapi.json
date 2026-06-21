@@ -22,7 +22,7 @@
     "/payouts/preview-bank-payout": {
       "post": {
         "tags": ["Payouts", "Preview"],
-        "description": "Validates bank payout details like amount, order-reference and verifies payout channels availability",
+        "description": "Validates bank payout details like amount, order-reference and verifies payout channels availability. When beneficiary name lookup is available for the selected bank, the response may include the account holder name.",
         "requestBody": {
           "required": true,
           "content": {
@@ -322,12 +322,22 @@
             "example": "merchant",
             "enum": ["merchant", "both", "customer"]
           },
+          "nameLookupStatus": {
+            "type": "string",
+            "enum": ["resolved", "unavailable"],
+            "description": "Indicates whether the beneficiary name was resolved. `resolved` when `receiver.accountName` is present; `unavailable` when lookup did not return a name."
+          },
           "receiver": {
             "type": "object",
             "properties": {
               "accountNumber": {
                 "type": "string",
                 "example": "0112345400847jhs"
+              },
+              "accountName": {
+                "type": "string",
+                "description": "Beneficiary account holder name when lookup succeeds. Omitted when `nameLookupStatus` is `unavailable`.",
+                "example": "TEMBO SHOP"
               },
               "accountCurrency": {
                 "type": "string",
