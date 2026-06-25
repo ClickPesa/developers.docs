@@ -86,6 +86,15 @@
         ]
       },
       {
+        "tab": "TanQR/Lipa Namba",
+        "pages": [
+          "tan-qr/tan-qr-overview",
+          "tan-qr/lipa-namba-setup",
+          "tan-qr/accepting-payments",
+          "tan-qr/tan-qr-faq"
+        ]
+      },
+      {
         "tab": "ClickPesa Payout Widgets",
         "hidden": true,
         "pages": [
