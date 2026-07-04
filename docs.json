@@ -56,6 +56,75 @@
         ]
       },
       {
+        "tab": "Knowledge Base",
+        "pages": [
+          {
+            "group": "General",
+            "pages": [
+              "knowledge-base/general/get-started",
+              "knowledge-base/general/onboarding",
+              "knowledge-base/general/pwa"
+            ]
+          },
+          {
+            "group": "Collection",
+            "pages": [
+              "knowledge-base/collection/payment-pages",
+              "knowledge-base/collection/e-invoice",
+              "knowledge-base/collection/checkout-link",
+              "knowledge-base/collection/customers",
+              "knowledge-base/collection/offline-payments",
+              "knowledge-base/checkout/checkout"
+            ]
+          },
+          {
+            "group": "Disbursement",
+            "pages": [
+              "knowledge-base/disbursement/single-payout",
+              "knowledge-base/disbursement/bulk-payouts"
+            ]
+          },
+          {
+            "group": "Transactions",
+            "pages": [
+              "knowledge-base/transactions/payments",
+              "knowledge-base/transactions/payouts"
+            ]
+          },
+          {
+            "group": "Account",
+            "pages": [
+              "knowledge-base/account/balance",
+              "knowledge-base/account/deposits",
+              "knowledge-base/account/withdraws"
+            ]
+          },
+          {
+            "group": "Data Export",
+            "pages": [
+              "knowledge-base/data-export/payment-export",
+              "knowledge-base/data-export/payout-export",
+              "knowledge-base/data-export/deposit-export",
+              "knowledge-base/data-export/withdraw-export",
+              "knowledge-base/data-export/quickbooks"
+            ]
+          },
+          {
+            "group": "Settings",
+            "pages": [
+              "knowledge-base/settings/profile",
+              "knowledge-base/settings/team",
+              "knowledge-base/settings/security",
+              "knowledge-base/settings/collection",
+              "knowledge-base/settings/disbursement"
+            ]
+          },
+          "knowledge-base/notifications/notifications",
+          "knowledge-base/integration/api-integration-guidelines",
+          "knowledge-base/release-notes/release-notes"
+        ]
+      },
+      {
         "tab": "ClickPesa Checkout",
         "pages": [
           "checkout/checkout-overview",

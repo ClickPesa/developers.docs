@@ -1,0 +1,7 @@
+Recipient Name,Receiving Channel,Receiving Channel Provider,Account Number,Amount,Transfer Type,Note To Recipient (optional),Recipient Contacts (optional),Note To Recipient Language (optional)
+Paloma Ford,MOBILE MONEY,TIGO PESA,255654190189,"8,000.00",,,,
+Mwakatobe Julius,BANK,AKIBA COMMERCIAL BANK PLC,900665221,"10,000.00",ACH,Pay Invoice #23390,255654190189,ENGLISH
+James Mwotako,MOBILE MONEY,MPESA,255761721021,"300,000.00",,,,
+Denise Polo,MOBILE MONEY,AIRTEL MONEY,255787001924,"10,000.00",,,,
+Jimmy Joseph,BANK,NMB BANK PLC,600665221,"8,000.00",RTGS,,,
+Paschal Lwanga,BANK,CRDB BANK PLC,10066522111,"10,000.00",ACH,Pay Invoice #23390,255754190189,SWAHILI
