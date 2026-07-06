@@ -1,0 +1,65 @@
+---
+title: "Developers"
+description: "Create applications, manage API keys, webhooks, and IP whitelisting in the Merchant Dashboard"
+---
+
+Developers settings is where you configure API integration from the dashboard. For the full integration walkthrough, see [API Integration Setup](/application/api-application-setup).
+
+<Note>
+The Developers tab is available to users with the **Main**, **Manager**, or **Developer** role when developer features are enabled for your account.
+</Note>
+
+## How to access
+
+1. Log in to the [Merchant Dashboard](https://merchant.clickpesa.com).
+2. Open **Settings** and select **Developers**.
+
+You can also open the in-dashboard developer hub at [merchant.clickpesa.com/get-started/developers](https://merchant.clickpesa.com/get-started/developers).
+
+## Applications
+
+Create an application for each platform or integration you connect to ClickPesa.
+
+1. Click **Create New Application**.
+2. Enter an application name.
+3. Select **API** as the integration type.
+4. Choose the features you need (for example **Payment API**, **Payout API**, **Checkout Link**).
+5. Click **Create**.
+
+After creation, copy your **Client ID** and **API Key** immediately — the API key is shown only once. See [API Integration Setup](/application/api-application-setup) for authentication details.
+
+## Webhooks
+
+Configure webhook endpoints under **Developers** to receive real-time payment and payout notifications. See [Webhooks](/home/webhooks) for event types and payload formats.
+
+## Encryption
+
+If your integration uses checksum validation, configure encryption keys in the Developers section. See [Checksum Security](/home/checksum).
+
+## IP Whitelisting
+
+Restrict API access to approved IP addresses under **Developers → Whitelisted IPs**. Requests from unlisted IPs are denied. See [IP Whitelisting](/home/whitelisted-ip-address).
+
+## Developer setup checklist
+
+The in-dashboard developer hub tracks five setup items:
+
+1. **Add Developer Access** — invite a team member with the Developer role under [Team settings](/dashboard/settings/team)
+2. **Create Application** — create an application in Developers settings
+3. **API Keys** — generate and store API keys for your application
+4. **Webhooks** — configure webhook endpoints
+5. **IP Whitelisting** — add approved IP addresses
+
+## Related documentation
+
+<CardGroup cols={2}>
+
+<Card title="Integration Overview" icon="compass" href="/home/integration-overview">
+  Compare API, hosted, and embedded integration options.
+</Card>
+
+<Card title="API Explorer" icon="brackets-curly" href="/api-reference">
+  Explore and test ClickPesa API endpoints.
+</Card>
+
+</CardGroup>

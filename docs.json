@@ -28,6 +28,13 @@
           "home/onboarding",
           "home/changelog",
           {
+            "group": "Account Access",
+            "pages": [
+              "home/login-password-reset",
+              "home/instant-web-access"
+            ]
+          },
+          {
             "group": "Integration Guides",
             "pages": [
               "home/integration-overview",
@@ -58,60 +65,63 @@
       {
         "tab": "Merchant Dashboard",
         "pages": [
-          "dashboard/setup-company-account",
-          "dashboard/login-password-reset",
+          "dashboard/dashboard-overview",
           {
-            "group": "Collection",
+            "group": "How It Works",
             "pages": [
-              "dashboard/payment-pages",
-              "dashboard/e-invoice",
-              "dashboard/customers"
+              "dashboard/get-started",
+              "dashboard/setup-company-account",
+              {
+                "group": "Collection",
+                "pages": [
+                  "dashboard/payment-pages",
+                  "dashboard/e-invoice",
+                  "dashboard/checkout-links",
+                  "dashboard/customers"
+                ]
+              },
+              {
+                "group": "Payouts",
+                "pages": [
+                  "dashboard/disbursement/single-payout",
+                  "dashboard/disbursement/bulk-payouts"
+                ]
+              },
+              {
+                "group": "Transactions & Wallet",
+                "pages": [
+                  "dashboard/transactions/payments",
+                  "dashboard/transactions/payouts",
+                  "dashboard/account/balance",
+                  "dashboard/account/deposits",
+                  "dashboard/account/withdraws"
+                ]
+              },
+              {
+                "group": "Data Export",
+                "pages": [
+                  "dashboard/data-export/payment-export",
+                  "dashboard/data-export/payout-export",
+                  "dashboard/data-export/deposit-export",
+                  "dashboard/data-export/withdraw-export",
+                  "dashboard/data-export/quickbooks"
+                ]
+              },
+              {
+                "group": "Settings",
+                "pages": [
+                  "dashboard/settings/general",
+                  "dashboard/settings/collection",
+                  "dashboard/settings/disbursement",
+                  "dashboard/settings/team",
+                  "dashboard/settings/kyc",
+                  "dashboard/settings/developers",
+                  "dashboard/settings/security"
+                ]
+              },
+              "dashboard/notifications"
             ]
-          },
-          {
-            "group": "Payouts",
-            "pages": [
-              "dashboard/disbursement/single-payout",
-              "dashboard/disbursement/bulk-payouts"
-            ]
-          },
-          {
-            "group": "Transactions",
-            "pages": [
-              "dashboard/transactions/payments",
-              "dashboard/transactions/payouts"
-            ]
-          },
-          {
-            "group": "Account",
-            "pages": [
-              "dashboard/account/balance",
-              "dashboard/account/deposits",
-              "dashboard/account/withdraws"
-            ]
-          },
-          {
-            "group": "Data Export",
-            "pages": [
-              "dashboard/data-export/payment-export",
-              "dashboard/data-export/payout-export",
-              "dashboard/data-export/deposit-export",
-              "dashboard/data-export/withdraw-export",
-              "dashboard/data-export/quickbooks"
-            ]
-          },
-          {
-            "group": "Settings",
-            "pages": [
-              "dashboard/settings/profile",
-              "dashboard/settings/team",
-              "dashboard/settings/security",
-              "dashboard/settings/collection",
-              "dashboard/settings/disbursement"
-            ]
-          },
-          "dashboard/notifications",
-          "dashboard/instant-web-access"
+          }
         ]
       },
       {

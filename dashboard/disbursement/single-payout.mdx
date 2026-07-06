@@ -1,21 +1,15 @@
 ---
 title: "Single Payout"
-description: "The Single Payout feature provides a straightforward way to initiate individual payouts to recipients, making it convenient for organizations to disburse..."
+description: "Send a payout to one beneficiary from the Merchant Dashboard"
 ---
 
-## Introduction
+<Note>
+For programmatic payouts, see the [Payout API Overview](/payout-api/payout-api-overview).
+</Note>
 
-The Single Payout feature provides a straightforward way to initiate individual payouts to recipients, making it convenient for organizations to disburse funds as needed. This method is ideal for scenarios where you need to make one-time payments to specific recipients.
+## How to send a single payout
 
-The bulk payouts feature has the following benefits for organizations:
-
-1. **Simplicity:** Easily initiate individual payouts without the need for batch files.
-2. **Real-time Control:** Make on-the-spot payments when necessary.
-3. **Flexibility:** Suitable for one-time or occasional transactions.
-4. **Enhanced Record-Keeping**: A centralized system offers a more transparent audit trail, aligning businesses better with accounting and auditing standards. Make your accountant and auditor happy. Also there is the option to enhance each payout with a note to ensure clarity in financial communication and facilitate smoother reconciliation.
-5. **Immediate Notifications:** Recipients receive notifications upon successful transactions.
-
-## How to Access and Configure
+### How to Access and Configure
 
 To access the bulk payout feature, visit [merchant.clickpesa.com](https://merchant.clickpesa.com/), login with your account and navigate to the "Payout" menu item.
 
@@ -72,7 +66,7 @@ The following are the fields you will find when doing single payout for **MOBILE
 
 After filling in those details, there will be an option or a button to add note to recipient. This note includes **Email** and **Message** and they are optional. Filling in these fields will ensure Recipient receives notification via Email or SMS upon successfully payout.
 
-**Note**: The notification will be delivered to recipient will be delivered using default language you have set on [General settings](/dashboard/settings/profile).
+**Note**: The notification will be delivered to recipient will be delivered using default language you have set on [General settings](/dashboard/settings/general).
 
 **Note**: Some mobile money number have a limit of 3,000,000 TZS which if you enter amount greater than this, it will cause transaction to bounce.
 
@@ -125,7 +119,7 @@ These are the bank receiving channels we support, make sure to use this names me
 
 ### Notifications
 
-Notifications are sent to beneficiary when payout is initiated using merchant default language which can be set [here](/dashboard/settings/profile).
+Notifications are sent to beneficiary when payout is initiated using merchant default language which can be set [here](/dashboard/settings/general).
 
 Once payout is successfully initiated to beneficiary you will receive notification in your merchant dashboard and email.
 
