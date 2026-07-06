@@ -1,0 +1,207 @@
+---
+title: "Single Payout"
+description: "Send a payout to one beneficiary from the Merchant Dashboard"
+---
+
+<Note>
+For programmatic payouts, see the [Payout API Overview](/payout-api/payout-api-overview).
+</Note>
+
+## How to send a single payout
+
+### How to Access and Configure
+
+To access the bulk payout feature, visit [merchant.clickpesa.com](https://merchant.clickpesa.com/), login with your account and navigate to the "Payout" menu item.
+
+![](/images/knowledge-base/SCR-20240401-qcml-1024x589.png)
+
+In order to be able to make a single payout make sure you have enough balance on your account.
+
+**Initiating a Single Payout**
+
+On a Payout page, A 'Create Payout` button will appear on top right conner. Upon clicking it, a drawer will open with one field to fill, 'Send Via' which allows you to select between BANK or MOBILE MONEY.
+
+![](/images/knowledge-base/image-9-1024x69.png)
+![](/images/knowledge-base/image-11-1024x616.png)
+
+Selecting BANK or MOBILE MONEY, will show other fields related to selected option explained below.
+
+**What are the payout details?**
+
+The following are the fields you will find when doing single payout for **BANK** channel
+
+![](/images/knowledge-base/SCR-20231203-loht-566x1024.png)
+
+| Fields | Explanation | Example |
+| --- | --- | --- |
+| Receiving Channel | BANK | BANK |
+| Amount | **Bank ACH** Minimum: 2,500 TZS  Maximum: 20,000,000 TZS   **Bank RTGS** Minimum: 11,900 TZS  Maximum: 1,000,000,000.00 TZS | 100,000 TZS |
+| Transfer Type | ACH or RTGS | ACH |
+| Bank Name | [BANK NAME](#bank-names) | AMANA BANK LIMITED |
+| Account Name | Name of the BANK ACCOUNT | John Doe |
+| Account Number |  | 0123001298647 |
+
+Note:
+
+1. **ACH (EFT)**  
+   The payout is settled within 1 working day. Weekend days and holidays are not included.
+2. **RTGS (TISS)**  
+   The payout is settled within the same day. Weekend days and holidays are not included
+
+If the bank account name is not correct, the payout will bounce and reserve without fees, make always sure you enter the correct account name.
+
+After filling in those details, there will be an option or a button to add note to recipient. This note includes **Mobile Number**, **Email** and **Message** and they are optional. Filling in these fields will ensure Recipient receives notification via Email or SMS upon successfully payout.
+
+The following are the fields you will find when doing single payout for **MOBILE MONEY** channel
+
+![](/images/knowledge-base/SCR-20231207-sgne-658x1024.png)
+
+| Fields | Explanation | Example |
+| --- | --- | --- |
+| Receiving Channel | BANK | BANK |
+| Amount | **Mobile Money** Minimum: 2,500 TZS  Maximum: 5,000,000.00 TZS | 100,000 TZS |
+| Mobile Network Name | [MOBILE MONEY PROVIDER NAME](/dashboard/disbursement/bulk-payouts#mobile-money-provider-names) | TIGO PESA |
+| Mobile Network Account Name | Name of the MOBILE MONEY WALLET | John Doe |
+| Account Number | Phone Number (format 12 digits including 255 and no 0) | 255789101219 |
+
+After filling in those details, there will be an option or a button to add note to recipient. This note includes **Email** and **Message** and they are optional. Filling in these fields will ensure Recipient receives notification via Email or SMS upon successfully payout.
+
+**Note**: The notification will be delivered to recipient will be delivered using default language you have set on [General settings](/dashboard/settings/general).
+
+**Note**: Some mobile money number have a limit of 3,000,000 TZS which if you enter amount greater than this, it will cause transaction to bounce.
+
+These are the mobile money receiving channels we support, make sure to use this names mentioned in this list when creating your payout file.
+
+| Mobile Money Provider Names |
+| --- |
+| AIRTEL MONEY |
+| EZY PESA |
+| HALOPESA |
+| MPESA |
+| TIGO PESA |
+
+These are the bank receiving channels we support, make sure to use this names mentioned in this list when creating your payout file.
+
+| Bank Names |
+| --- |
+| ABSA BANK TANZANIA LIMITED |
+| AKIBA COMMERCIAL BANK PLC |
+| AMANA BANK LIMITED |
+| BANCABC TANZANIA LIMITED |
+| BANK OF AFRICA TANZANIA LIMITED |
+| BANK OF BARODA TANZANIA LIMITED |
+| BANK OF INDIA TANZANIA LIMITED |
+| CANARA BANK TANZANIA LIMITED |
+| CHINA DASHENG BANK LIMITED |
+| CITIBANK TANZANIA LIMITED |
+| CRDB BANK PLC |
+| DCB COMMERCIAL BANK PLC |
+| DTB TANZANIA PUBLIC LIMITED COMPANY |
+| ECOBANK TANZANIA LIMITED |
+| EQUITY BANK TANZANIA LIMITED |
+| EXIM BANK TANZANIA LIMITED |
+| GT BANK TANZANIA LIMITED |
+| HABIB AFRICAN BANK LIMITED |
+| I&M BANK TANZANIA LIMITED |
+| INTERNATIONAL COMMERCIAL BANK TANZANIA LTD |
+| KCB BANK TANZANIA LIMITED |
+| MKOMBOZI COMMERCIAL BANK PLC |
+| MWALIMU COMMERCIAL BANK PLC |
+| MWANGA HAKIKA BANK LTD |
+| NBC LIMITED |
+| NCBA BANK TANZANIA LIMITED |
+| NMB BANK PLC |
+| PEOPLES BANK OF ZANZIBAR LIMITED |
+| STANBIC BANK TANZANIA LTD |
+| STANDARD CHARTERED BANK TANZANIA LTD |
+| TANZANIA COMMERCIAL BANK PLC |
+| UBA TANZANIA LIMITED |
+
+### Notifications
+
+Notifications are sent to beneficiary when payout is initiated using merchant default language which can be set [here](/dashboard/settings/general).
+
+Once payout is successfully initiated to beneficiary you will receive notification in your merchant dashboard and email.
+
+If payout fails for any reason and is refunded or reversed you will receive notification via your merchant dashboard and email. Learn more about notifications [here](/dashboard/notifications). If payout was created with customer contact details, they will also receive notification when payout is reversed.
+
+### Fees and fee configurations
+
+#### Fee bearer
+
+You can set up who is the **fee bearer** between you and recipient or both on [Payout Settings](/dashboard/settings/disbursement).
+
+What will this mean on the payouts?
+
+1. If fee is on you, the fee will be added on top of the amount you've entered and the recipient will receive the exact amount you provided (You will be charged the whole fee)
+2. If fee is on beneficiary, The fee will be deducted from the amount you've entered and the recipient will receive amount minus fee (Recipient will be charged the whole fee)
+3. If fee is on both, Half of the fee will be added on top of the amount you've entered (you will be charged half of the fee). Recipient will receive Amount minus half of the fee (recipient will be charged half of the fee).
+
+[Click here](https://clickpesa.com/payment-gateway/pricing/) to learn more about how we charge fees
+
+#### Free GTBank Transfer
+
+1. When paying out to customer using GTBank, its free of charge, fee will be 0
+
+### How to create single payout
+
+1. On a Payout page, A 'Create Payout` button will appear on top right conner. Upon clicking it, a drawer will open with one field to fill, 'Send Via' which allows you to select between BANK or MOBILE MONEY.
+2. Fill in details per method selected. Find explanation [here](#payout-details) on what details to fill on those fields
+   - ![](/images/knowledge-base/SCR-20231207-sipl.png)
+3. Click Next Button to see the summary of the details before submitting them.
+   - ![](/images/knowledge-base/SCR-20231207-sgww.png)
+4. If everything is correct, Click Payout button to initiate the payout.
+5. OTP will be sent out to your registered phone number. You will be prompted with OTP field to confirm the payout with options to resend if OTP was not received on your phone number.  
+   ![](/images/knowledge-base/chrome-capture-2024-5-31-1.gif)
+6. Once payout is successful initiated you will receive [notification](/dashboard/notifications) via email or your dashboard.
+
+### Ability to verify mobile account names before paying out
+
+When paying out to mobile, you will be able verify account names. On step 2 after entering details you will find a verify button under account number which when clicked it will return account name which you will be able to compare with the name you submitted.  
+This is important feature as it helps reduce human errors especially when you enter a wrong number.
+
+![](/images/knowledge-base/SCR-20240531-fbtq.png)![](/images/knowledge-base/SCR-20240531-fbyp.png)  
+**Note**: Its currently supported only on **TIGOPESA** and **AIRTELMONEY** Mobile Payouts Only
+
+### How to view single payouts
+
+1. On a Payout page, it contains the summary and table of all single payouts.![](/images/knowledge-base/SCR-20240401-qcml.png)
+2. You will be able to filter payouts summary and data by date, status, channels, and searching by reference, account name, account number, channel or channel provider.
+   - ![](/images/knowledge-base/SCR-20240401-qepb.png)
+3. On the page you should be able to see summary with payouts count and value
+4. You will also be able to see a graph section where data are measured by time or status.  
+   ![](/images/knowledge-base/SCR-20240401-sirr.png)
+5. On the graph you will be able to change graph data by selecting Time, value or status. You should also be able to change data style between area chart and bar chart  
+   ![](/images/knowledge-base/SCR-20240401-scbo.png) ![](/images/knowledge-base/SCR-20240401-scdf.png)  
+      
+   ![](/images/knowledge-base/SCR-20240401-sjrl.png)
+6. You will also be able to sort payouts in the table by amount, date and fee
+   - ![](/images/knowledge-base/SCR-20240401-qfxr.png)
+7. To view single payout,
+   - In the payouts table, locate the payout you wish to view. On the far right of its row, click the “View” button.
+   - ![](/images/knowledge-base/view-payout-5.png)
+   - A drawer will appear on the right, showcasing detailed information about the selected payout.![](/images/knowledge-base/SCR-20240116-thdo.png)
+8. You are able to copy ID and account number data from details drawer for this payout. For sharing it with clickpesa support team in case payout went wrong or sharing it with your customers.  
+   ![](/images/knowledge-base/SCR-20240116-thfw.png)
+9. To export payouts,
+   - In the Payouts Table, locate and click the “Export” button at the far right. this will take you to the [payout export page](/dashboard/data-export/payout-export).
+   - ![](/images/knowledge-base/SCR-20240401-qgjw.png)
+
+## **Common Use Cases**
+
+Single payouts are ideal for various scenarios, such as:
+
+- Paying a one-time bonus to an employee.
+- Disbursing funds to a specific supplier or contractor.
+- Making individual payments to clients or partners on an as-needed basis.
+
+## **Frequently Asked Questions (FAQ)**
+
+1. **Can I use ClickPesa for single payouts if my customers do not have ClickPesa accounts?**
+   - Yes, your customers or recipients do not need ClickPesa accounts to receive single payouts. ClickPesa disburses to existing bank accounts and mobile money wallets.
+2. **What happens if I make a mistake and send a payment to the wrong recipient using ClickPesa's Single Payout feature?**
+   - It's important to ensure that recipient details are accurate when initiating a single payout. If the details are incorrect, the transaction may fail, and the funds will be returned to your ClickPesa account. This process may take a few days.
+3. **Can I track the details of the single payouts I've made using ClickPesa?**
+   - Yes, you can view transaction details, including amounts and recipients, under the "Transaction" section of your ClickPesa account. There is also an option to export transaction data for your records.
+4. Can A Team member initiate or approve a payout?
+   - Yes, we support assigning payout roles to team members for initiating or approving single payouts. [Learn More](/dashboard/settings/disbursement)

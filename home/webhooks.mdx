@@ -21,7 +21,7 @@ ClickPesa supports webhooks at two levels:
 | **Application webhooks** | Transactions for a specific application | Collection API, Disbursement API, [BillPay API](/bill-pay/billpay-api-overview), and hosted checkout or payout links |
 
 <Info>
-For payments and payouts tied to an application (including [USSD push](/api-reference/collection/ussd-push-requests/initiate-ussd-push-request) and card payments via the Collection API, [BillPay](/bill-pay/billpay-api-overview) control numbers created via API, and [Hosted Checkout](/checkout/hosted-checkout/hosted-checkout) links), if the application has a webhook URL configured for the event, the callback is sent to the **application webhook only** — the merchant webhook is not used. If the application has no webhook for the event, the merchant webhook is used instead.
+For payments and payouts tied to an application (including [USSD push](/api-reference/collection/ussd-push-requests/initiate-ussd-push-request) and card payments via the Collection API, [BillPay](/bill-pay/billpay-api-overview) control numbers created via API, and [Hosted Checkout](/checkout/checkout-overview) links), if the application has a webhook URL configured for the event, the callback is sent to the **application webhook only** — the merchant webhook is not used. If the application has no webhook for the event, the merchant webhook is used instead.
 </Info>
 
 
@@ -252,7 +252,7 @@ Application webhooks let you receive events per application for transactions tie
 - **Collection API** — USSD push, card, and other payments you initiate through the API
 - **Disbursement API** — mobile money and bank payouts you create through the API
 - **BillPay API** — when a customer pays against an [order or customer control number](/bill-pay/billpay-api-overview) you created through the API
-- **Hosted integrations** — payments and payouts through hosted links for your application, such as [Hosted Checkout](/checkout/hosted-checkout/hosted-checkout)
+- **Hosted integrations** — payments and payouts through hosted links for your application, such as [Hosted Checkout](/checkout/checkout-overview)
 
 Use application webhooks when you have multiple applications (e.g. different apps or environments) and want separate webhook endpoints per application.
 

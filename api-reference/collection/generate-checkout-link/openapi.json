@@ -21,7 +21,7 @@
   "paths": {
     "/checkout-link/generate-checkout-url": {
       "post": {
-        "description": "Generates a link for receiving payments via ClickPesa Hosted Checkout. After payment, customers are redirected to the Return URL configured on your hosted application in the dashboard. For payment status updates, use application webhooks and/or an optional callbackUrl on the request body (see Payment notifications in the Checkout Link API guide).",
+        "description": "Generates a link for receiving payments via Hosted Checkout. After payment, customers are redirected to the Return URL configured on your hosted application in the dashboard. For payment status updates, use application webhooks and/or an optional callbackUrl on the request body (see Payment notifications in the Checkout Link API guide).",
         "requestBody": {
           "required": true,
           "content": {

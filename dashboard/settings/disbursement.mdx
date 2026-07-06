@@ -1,0 +1,102 @@
+---
+title: "Disbursement"
+description: "This settings is the location where your company's bank account is added. The withdraw settlement account is the bank account where funds are settled when..."
+---
+
+## Withdraw Settlement Account
+
+This settings is the location where your company's bank account is added. The withdraw settlement account is the bank account where funds are settled when you make a withdraw.
+
+**How to add and update settlement account details**
+
+1. On the ClickPesa Merchant Dashboard homepage, go to the bottom left corner and click on the Settings tab, select Disbursement tab.
+2. Click the “Add Bank Details” button to add the details of the account that you to settle funds on withdraw.
+3. After adding your Bank Name, Account Name, Account Number, Account Currency, Swift Code, and Routing Number(Routing number does not apply to some of the banks and countries like Tanzania so you can leave it blank)   
+   ![](/images/knowledge-base/SCR-20240917-dkjy.png)  
+   **Note:** The bank account name needs to be in the name of the registered company. Any other name will not be accepted and the collected funds will not be settled accordingly.
+4. You will be prompted with password field for security check to verify its you who setting bank details.
+5. Edit Settlement Account details
+   1. On settlement settings page, click edit button to modify any information in your settlement account details.   
+      ![](/images/knowledge-base/SCR-20240917-dkqo.png)
+   2. Once you've updated your settlement account details, click the "Save" button to ensure the changes are saved.
+   3. You will be prompted with password field for security check to verify its you who is updating bank details.
+
+### Frequently Asked Questions (FAQ)
+
+1. **Can I add my personal bank account as director as a settlement account?**  
+   The bank account name needs to be in the name of the registered company. Any other name will not be accepted and the collected funds will not be settled accordingly.
+
+## Payouts
+
+### **How to Access Payout Settings**
+
+1. Log in to your ClickPesa Merchant Dashboard.
+2. Navigate to the settings tab, which is typically located at the bottom left corner of your dashboard.
+3. Click on DIsbursement tab on settings page
+4. Scroll to the section called Payouts
+
+![](/images/knowledge-base/payout-settings-1024x588.png)
+
+### Fee Bearer Settings
+
+This Payout Settings allows merchants to define who bears the fees associated with payouts. There are three options available for fee allocation: the merchant, the beneficiary, or both the merchant and beneficiary sharing the fee equally. This document explains how to configure these settings.
+
+These settings are used on [single payout](/dashboard/disbursement/single-payout) and [bulk payouts](/dashboard/disbursement/bulk-payouts).  
+![](/images/knowledge-base/payout-fee.png)
+
+#### **Configuring Fee Bearer Settings**
+
+Once you have accessed the Payout Fee Bearer Settings, you will find the following options:
+
+1. **Merchant (Default):** With this option selected, the merchant covers all fees associated with payouts. The beneficiary receives the full payout amount.
+2. **Beneficiary:** When this option is chosen, the beneficiary is responsible for covering all payout fees. The merchant disburses the payout amount, and any fees are deducted from the beneficiary’s portion.
+3. **Both:** Selecting this option means that both the merchant and beneficiary share the payout fees equally. The fees are divided evenly between the two, and the net payout amount is calculated accordingly.
+
+**How to Set the Fee Bearer**
+
+1. Click on the preferred fee bearer option. The selected option will be highlighted or marked for clarity.
+2. You will be prompted with password field drawer for security check to verify its you who is updating fee bearer.
+
+![](/images/knowledge-base/ScreenShot-Tool-20231031165255-1024x140.png)
+
+### Payout Roles
+
+This settings help merchants to assign payout roles to their team members so they can create/authorize payouts on their behalf.  
+![](/images/knowledge-base/payout-roles.png)
+
+#### **Configuring Payout Role Settings**
+
+Once you have accessed the Payout Settings:
+
+1. If you don’t have any role added, you will find a button saying Assign Role  
+   ![](/images/knowledge-base/SCR-20240917-dpzb.png)
+2. If you already have assigned roles you will find a button saying Assign Role  
+   ![](/images/knowledge-base/assign-role.png)
+3. Clicking those buttons will open a drawer where you can assign a role to your team members, roles including **Initiator** and **Approver**. Team members who are just employees will only be able to be assigned an Initiator role while Managers will be able to be assigned Initiators or Approvers.  
+   ![](/images/knowledge-base/SCR-20240116-tdee.png)
+
+**What are these Payout Roles?**
+
+**Initializor**
+
+1. Can create / initiate [bulk payouts](/dashboard/disbursement/bulk-payouts) but can not confirm it.
+2. Can initiate a [single payout](/dashboard/transactions/payouts) but can not authorize it. The payouts that were created by initiator will have **UNAUTHORIZED** status
+
+**Approver**
+
+1. Can confirm [bulk payouts](/dashboard/disbursement/bulk-payouts)
+2. Can authorize [single payouts](/dashboard/transactions/payouts)
+
+**Tips and Best Practices**
+
+- Consider your business model and customer base when setting the fee bearer option. For example, if your customers are price-sensitive, you may opt to cover the fees as the merchant to enhance the customer experience.
+- It's advisable to clearly communicate the fee bearer settings to your customers, so they are aware of any potential deductions from their payouts.
+
+### **Frequently Asked Questions (FAQ)**
+
+1. **Where are Payout Fee Bearer Settings Used?**
+   - The Payout Fee Bearer Settings are applied to all payout transactions processed through the ClickPesa Merchant Dashboard. The selected fee bearer option determines who covers the fees associated with each payout.
+2. **Can I Change the Fee Bearer for Each Payout Transaction?**
+   - The fee bearer settings are typically configured at the account level. This means that the selected option applies to all payout transactions processed by the merchant. If you have a transaction that need different configurations the best option is to change Fee settings to match transaction requirements, perform the payout and change the settings back to the previous settings. You can always change this setting to match your requirements.
+3. **Can the Fee Bearer Setting Be Communicated to the Beneficiary?**
+   - Yes, it's a good practice to inform the beneficiary about the fee bearer setting for transparency. This can be done through clear communication in your payment or payout policies and during the transaction process to ensure that beneficiaries are aware of any fee deductions from their payouts.

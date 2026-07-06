@@ -1,0 +1,40 @@
+---
+title: "Checkout Links"
+description: "View and manage hosted checkout links in the Merchant Dashboard"
+---
+
+<Note>
+Learn what Checkout Links are in the [Hosted Checkout Overview](/checkout/checkout-overview). To generate links from your application, use the [Checkout Link API](/checkout/checkout-link-api). Activate the feature under [Collection settings](/dashboard/settings/collection#checkout-link-activation).
+</Note>
+
+The **Checkout Links** page lists all hosted checkout links associated with your account — whether created via the [Checkout Link API](/checkout/checkout-link-api), plugins, or other integrations.
+
+## How to access
+
+1. Log in to the [Merchant Dashboard](https://merchant.clickpesa.com).
+2. Under **Collection** in the sidebar, select **Checkout Links**.
+
+<Note>
+Checkout Links requires the `merchant_checkout_links` feature to be enabled for your account. Activate Checkout Link under **Settings → Collection** first.
+</Note>
+
+## What you can do
+
+- **View all links** — see reference IDs, amounts, currencies, and status in a searchable table
+- **Open a link** — click a row to view full link details
+- **Monitor performance** — use summary charts for link count and total value (TZS and USD)
+- **Filter and search** — filter by date range, status, and other fields
+
+## Creating checkout links
+
+Checkout links are created through your integration, not from this page directly:
+
+- **[Checkout Link API](/checkout/checkout-link-api)** — generate links from your application
+- **Plugins** — WooCommerce and other integrations that use Checkout Link
+
+Payment Pages and E-Invoices generate their own checkout URLs automatically. See [Payment Pages](/dashboard/payment-pages) and [E-Invoice](/dashboard/e-invoice).
+
+## Related
+
+- [Checkout Link](/checkout/checkout-link) — use cases and activation
+- [Payment Transactions](/dashboard/transactions/payments) — view payments received through checkout links

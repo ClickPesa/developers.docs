@@ -28,6 +28,13 @@
           "home/onboarding",
           "home/changelog",
           {
+            "group": "Account Access",
+            "pages": [
+              "home/login-password-reset",
+              "home/instant-web-access"
+            ]
+          },
+          {
             "group": "Integration Guides",
             "pages": [
               "home/integration-overview",
@@ -56,14 +63,78 @@
         ]
       },
       {
-        "tab": "ClickPesa Checkout",
+        "tab": "Merchant Dashboard",
+        "pages": [
+          "dashboard/dashboard-overview",
+          {
+            "group": "How It Works",
+            "pages": [
+              "dashboard/get-started",
+              "dashboard/setup-company-account",
+              {
+                "group": "Collection",
+                "pages": [
+                  "dashboard/payment-pages",
+                  "dashboard/e-invoice",
+                  "dashboard/checkout-links",
+                  "dashboard/customers"
+                ]
+              },
+              {
+                "group": "Payouts",
+                "pages": [
+                  "dashboard/disbursement/single-payout",
+                  "dashboard/disbursement/bulk-payouts"
+                ]
+              },
+              {
+                "group": "Transactions & Wallet",
+                "pages": [
+                  "dashboard/transactions/payments",
+                  "dashboard/transactions/payouts",
+                  "dashboard/account/balance",
+                  "dashboard/account/deposits",
+                  "dashboard/account/withdraws"
+                ]
+              },
+              {
+                "group": "Data Export",
+                "pages": [
+                  "dashboard/data-export/payment-export",
+                  "dashboard/data-export/payout-export",
+                  "dashboard/data-export/deposit-export",
+                  "dashboard/data-export/withdraw-export",
+                  "dashboard/data-export/quickbooks"
+                ]
+              },
+              {
+                "group": "Settings",
+                "pages": [
+                  "dashboard/settings/general",
+                  "dashboard/settings/collection",
+                  "dashboard/settings/disbursement",
+                  "dashboard/settings/team",
+                  "dashboard/settings/kyc",
+                  "dashboard/settings/developers",
+                  "dashboard/settings/security"
+                ]
+              },
+              "dashboard/notifications"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "Hosted Checkout",
         "pages": [
           "checkout/checkout-overview",
+          "checkout/common-use-cases",
           {
-            "group": "Hosted Checkout",
+            "group": "How It Works",
             "pages": [
-              "checkout/hosted-checkout/hosted-checkout",
-              "checkout/hosted-checkout/checkout-link-api"
+              "checkout/checkout-page",
+              "checkout/checkout-link",
+              "checkout/checkout-link-api"
             ]
           }
         ]
@@ -89,9 +160,14 @@
         "tab": "TanQR/Lipa Namba",
         "pages": [
           "tan-qr/tan-qr-overview",
-          "tan-qr/lipa-namba-setup",
-          "tan-qr/accepting-payments",
-          "tan-qr/tan-qr-faq"
+          "tan-qr/tan-qr-faq",
+          {
+            "group": "How It Works",
+            "pages": [
+              "tan-qr/lipa-namba-setup",
+              "tan-qr/accepting-payments"
+            ]
+          }
         ]
       },
       {
@@ -119,7 +195,7 @@
         "pages": [
           "payment-api/payment-api-overview",
           {
-            "group": "Payment API",
+            "group": "How It Works",
             "pages": [
               "payment-api/mobile-money-payment-api/mobile-money-payment-api-overview",
               "payment-api/card-payment-api/card-payment-api-overview"
@@ -132,7 +208,7 @@
         "pages": [
           "payout-api/payout-api-overview",
           {
-            "group": "Payout API",
+            "group": "How It Works",
             "pages": [
               "payout-api/mobile-money-payout-api/mobile-money-payout-api-overview",
               "payout-api/bank-payout-api/bank-payout-api-overview"
