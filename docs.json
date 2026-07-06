@@ -115,18 +115,18 @@
         ]
       },
       {
-        "tab": "ClickPesa Checkout",
+        "tab": "Hosted Checkout",
         "pages": [
           "checkout/checkout-overview",
-          "checkout/checkout-page",
+          "checkout/common-use-cases",
           {
-            "group": "Hosted Checkout",
+            "group": "How It Works",
             "pages": [
-              "checkout/hosted-checkout/hosted-checkout",
-              "checkout/hosted-checkout/checkout-link-api"
+              "checkout/checkout-page",
+              "checkout/checkout-link",
+              "checkout/checkout-link-api"
             ]
-          },
-          "checkout/checkout-link"
+          }
         ]
       },
       {
@@ -150,9 +150,14 @@
         "tab": "TanQR/Lipa Namba",
         "pages": [
           "tan-qr/tan-qr-overview",
-          "tan-qr/lipa-namba-setup",
-          "tan-qr/accepting-payments",
-          "tan-qr/tan-qr-faq"
+          "tan-qr/tan-qr-faq",
+          {
+            "group": "How It Works",
+            "pages": [
+              "tan-qr/lipa-namba-setup",
+              "tan-qr/accepting-payments"
+            ]
+          }
         ]
       },
       {
@@ -180,7 +185,7 @@
         "pages": [
           "payment-api/payment-api-overview",
           {
-            "group": "Payment API",
+            "group": "How It Works",
             "pages": [
               "payment-api/mobile-money-payment-api/mobile-money-payment-api-overview",
               "payment-api/card-payment-api/card-payment-api-overview"
@@ -193,7 +198,7 @@
         "pages": [
           "payout-api/payout-api-overview",
           {
-            "group": "Payout API",
+            "group": "How It Works",
             "pages": [
               "payout-api/mobile-money-payout-api/mobile-money-payout-api-overview",
               "payout-api/bank-payout-api/bank-payout-api-overview"

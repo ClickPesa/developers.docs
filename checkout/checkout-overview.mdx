@@ -1,30 +1,49 @@
 ---
-title: "Checkout Overview"
+title: "Hosted Checkout Overview"
 description: "ClickPesa Checkout is a ready-to-use payment acceptance experience provided by ClickPesa."
 ---
 
-It enables seamless payment collection and supports a full range of payment methods and currencies with minimal integration.
+ClickPesa Checkout enables seamless payment collection and supports a full range of payment methods and currencies with minimal integration.
 
-ClickPesa Checkout is available as part of ClickPesa products like [E-invoice](https://merchant.clickpesa.com/invoices) and [Payment Pages](https://merchant.clickpesa.com/payments), where it comes built-in, but it is also [available for integration](/checkout/hosted-checkout/hosted-checkout) into your web application or platform for a seamless payment experience.
+It is available as part of ClickPesa products like [E-invoice](/dashboard/e-invoice) and [Payment Pages](/dashboard/payment-pages), where it comes built-in, and it is also available for integration into your web application or platform through [Checkout Links](/checkout/checkout-link).
 
+- **Quick and Easy Integration** — Simply generate a hosted checkout link, share it with a customer and start accepting payments instantly.
+- **Hassle-Free** — Security and updates are fully managed by ClickPesa, allowing you to focus on your business.
 
-<br/>
+## How It Works
+
+1. **Generate a Checkout Link** — Use the [Checkout Link API](/checkout/checkout-link-api) to generate a hosted checkout link from your app or system. Checkout links are also generated automatically for [Invoices](/dashboard/e-invoice) and [Payment Pages](/dashboard/payment-pages) created in the dashboard.
+
+2. **Redirect Customers** — Add the generated checkout link into your checkout, website or share it via WhatsApp and redirect customers to ClickPesa’s Checkout to make a payment.
+
+3. **Receive Payment Confirmation** — Receive payment updates via [Application Webhooks](/home/webhooks#application-level-webhooks), an optional [`callbackUrl`](/api-reference/collection/generate-checkout-link/generate-checkout-link) on the Generate Checkout Link request, or by polling the [Query Payment API](/api-reference/collection/querying-for-payments/querying-for-payments). Application webhooks apply to all payment methods on the hosted page, including mobile push. Customers are redirected after payment using the Return URL on your hosted application in the dashboard.
+
+## Learn More
+
 <CardGroup cols={1}>
 
-{/* <Card
-   title="Embedded Checkout"
-   icon="code"
-   href="/checkout/embedded-checkout/embedded-checkout"
->
-Integrate ClickPesa Checkout directly into a website or application and accept payments without redirecting customers to ClickPesa
-</Card>
- */}
 <Card
-   title="ClickPesa Hosted Checkout"
-   icon="link"
-   href="/checkout/hosted-checkout/hosted-checkout"
+   title="The Checkout Page"
+   icon="credit-card"
+   href="/checkout/checkout-page"
 >
-Generate a Checkout Link that redirects customers to ClickPesa Hosted Checkout to accept payment
+What your customers see and how they pay — payment methods, currencies and receipts
+</Card>
+
+<Card
+   title="Checkout Link"
+   icon="link"
+   href="/checkout/checkout-link"
+>
+Use cases and how to activate the Checkout Link feature in your dashboard
+</Card>
+
+<Card
+   title="Checkout Link API"
+   icon="brackets-curly"
+   href="/checkout/checkout-link-api"
+>
+Generate Hosted Checkout links from your own application via API
 </Card>
 
 </CardGroup>
