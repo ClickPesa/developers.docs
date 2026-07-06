@@ -15,15 +15,30 @@ For programmatic payouts, see the [Payout API Overview](/payout-api/payout-api-o
 
 To access the bulk payout feature, visit [merchant.clickpesa.com](https://merchant.clickpesa.com/), login with your account and navigate to the "Bulk Payout" menu item.
 
-![](/images/knowledge-base/SCR-20240401-qqlk-1024x590.png)
+<Frame>
+  <img src="/images/knowledge-base/SCR-20240401-qqlk-1024x590.png" alt="Merchant Dashboard screenshot" />
+</Frame>
 
 1. On the page you should be able to see summary with bulk payouts count and value and all payouts associated to batches count.
-2. You will also be able to see a graph section where data are measured by time or status.  
-   ![](/images/knowledge-base/SCR-20240401-sivj.png)
-3. On the graph you will be able to change graph data by selecting Time, value or status. You should also be able to change data style between area chart and bar chart  
-   ![](/images/knowledge-base/SCR-20240401-scbo.png) ![](/images/knowledge-base/SCR-20240401-scdf.png)  
-      
-   ![](/images/knowledge-base/SCR-20240401-sjws.png)
+2. You will also be able to see a graph section where data are measured by time or status.
+
+<Frame>
+<img src="/images/knowledge-base/SCR-20240401-sivj.png" alt="Merchant Dashboard screenshot" />
+</Frame>
+
+3. On the graph you will be able to change graph data by selecting Time, value or status. You should also be able to change data style between area chart and bar chart
+
+<Frame>
+<img src="/images/knowledge-base/SCR-20240401-scbo.png" alt="Merchant Dashboard screenshot" />
+</Frame>
+
+<Frame>
+  <img src="/images/knowledge-base/SCR-20240401-scdf.png" alt="Merchant Dashboard screenshot" />
+</Frame>
+
+<Frame>
+     <img src="/images/knowledge-base/SCR-20240401-sjws.png" alt="Merchant Dashboard screenshot" />
+   </Frame>
 
 ### How to configure
 
@@ -133,30 +148,55 @@ What will this mean on the payouts?
 
 1. **Create new batch payout**   
    To create a bulk payout click the “Create New Batch” button.   
-   ![](/images/knowledge-base/bulk-payouts-create-new-batch-button.svg)
+
+<Frame>
+<img src="/images/knowledge-base/bulk-payouts-create-new-batch-button.svg" alt="Bulk Payouts Create New Batch Button" />
+</Frame>
+
 2. **Upload payout file**   
    You will be taken to the Create Bulk Payout page, on this page you can click on the “Upload your file here” section. This will prompted to select a file, go to the correct folder on your computer where you saved the payout file, select the payout file and upload the payout file. Find explanation [here](#prepare-payout-file) how to prepare your payout file.   
-   ![](/images/knowledge-base/bulk-payouts-create-batch-payout.png)
+
+<Frame>
+<img src="/images/knowledge-base/bulk-payouts-create-batch-payout.png" alt="Bulk Payouts Create Batch Payout" />
+</Frame>
+
 3. **Verification: Field Match**   
    The first verification step ensure that columns in your payout file (called Incoming Fields) match our system's columns (Destination Fields). If your column names are different or slightly off, our system may not understand them. This step lets you fix any mismatches. Check the preview of your data to make sure everything lines up. Once it looks correct, click the “continue” button.
 4. **Verification: Data Check**   
    The second verification step, ensure that your payout file's data is accurate and formatted correctly. If something is off, like the receiving channels are named correctly as per this [overview](#payment-channels), the row highlights red. To fix it, click the pencil icon beside the row. After making corrections in the correct manner, the row turns green; click the save icon then. If there are issues with the minimum or maximum amount, adjust those too. When all rows are green, you will see the total amount on top, including fees, for the payout.
 5. **Balance: Top-up and Payout**   
    Once the payout is green, based on your balance, you have two choices:
-   1. **Save Draft and Top-up (Ignore when enough balance) I**f your balance is not sufficient for the payout, the "Confirm and Payout" button will be disabled. In addition a message will display showing your current balance and the exact amount you are short for doing the batch payout. To address this, click on the top-up option in the highlighted message to do a top-up.  
-      ![](/images/knowledge-base/bulk-upload.png)   
+   1. **Save Draft and Top-up (Ignore when enough balance) I**f your balance is not sufficient for the payout, the "Confirm and Payout" button will be disabled. In addition a message will display showing your current balance and the exact amount you are short for doing the batch payout. To address this, click on the top-up option in the highlighted message to do a top-up.
+
+<Frame>
+<img src="/images/knowledge-base/bulk-upload.png" alt="Bulk Upload" />
+</Frame>   
+
       It opens a drawer, in that drawer select the bank deposit option.   
-      ![](/images/knowledge-base/bulk-payouts-top-up.png)  
+
+<Frame>
+<img src="/images/knowledge-base/bulk-payouts-top-up.png" alt="Bulk Payouts Top Up" />
+</Frame>  
+
       Instruction on how to top up using bank will be provided and you can use these instructions to top up your balance, once your deposit is done you can click on the “Done” button.   
-      ![](/images/knowledge-base/SCR-20240531-gvaj.png)
+
+<Frame>
+<img src="/images/knowledge-base/SCR-20240531-gvaj.png" alt="Merchant Dashboard screenshot" />
+</Frame>
+
    2. **Confirm and Payout (Enough balance)** When there is enough balance funds to do the batch payout click on the button “Confirm and Payout”. The status of the batch payout and transaction will change to “processing” and the payout will happen accordingly by end of the day.
    3. OTP will be sent to your registered phone number and you will be prompted with OTP field for security check before confirming the batch.
    4. Once payouts are successful initiated you will receive [notification](/dashboard/notifications) via email or your dashboard.
    5. Ability to verify mobile account names before paying out  
       When paying out to mobile, you will be able verify account names. After uploading your batch, you will find a verify button under account number on Mobile payouts which when clicked it will return account name which you will be able to compare with the name you submitted.  
         
-      ![](/images/knowledge-base/bulk-upload-name-check.png)  
-      ![](/images/knowledge-base/SCR-20240211-ngsr.png)  
+<Frame>
+<img src="/images/knowledge-base/bulk-upload-name-check.png" alt="Bulk Upload Name Check" />
+</Frame>
+
+<Frame>
+        <img src="/images/knowledge-base/SCR-20240211-ngsr.png" alt="Merchant Dashboard screenshot" />
+      </Frame>  
       This is important feature as it helps reduce human errors especially when you enter a wrong number.  
         
       **Note**: Its currently supported only on **TIGOPESA** and **AIRTELMONEY** Mobile Payouts Only
