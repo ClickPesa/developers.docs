@@ -56,85 +56,77 @@
         ]
       },
       {
-        "tab": "Knowledge Base",
+        "tab": "Merchant Dashboard",
         "pages": [
-          {
-            "group": "General",
-            "pages": [
-              "knowledge-base/general/get-started",
-              "knowledge-base/general/onboarding",
-              "knowledge-base/general/pwa"
-            ]
-          },
+          "dashboard/setup-company-account",
+          "dashboard/login-password-reset",
           {
             "group": "Collection",
             "pages": [
-              "knowledge-base/collection/payment-pages",
-              "knowledge-base/collection/e-invoice",
-              "knowledge-base/collection/checkout-link",
-              "knowledge-base/collection/customers",
-              "knowledge-base/collection/offline-payments",
-              "knowledge-base/checkout/checkout"
+              "dashboard/payment-pages",
+              "dashboard/e-invoice",
+              "dashboard/customers"
             ]
           },
           {
-            "group": "Disbursement",
+            "group": "Payouts",
             "pages": [
-              "knowledge-base/disbursement/single-payout",
-              "knowledge-base/disbursement/bulk-payouts"
+              "dashboard/disbursement/single-payout",
+              "dashboard/disbursement/bulk-payouts"
             ]
           },
           {
             "group": "Transactions",
             "pages": [
-              "knowledge-base/transactions/payments",
-              "knowledge-base/transactions/payouts"
+              "dashboard/transactions/payments",
+              "dashboard/transactions/payouts"
             ]
           },
           {
             "group": "Account",
             "pages": [
-              "knowledge-base/account/balance",
-              "knowledge-base/account/deposits",
-              "knowledge-base/account/withdraws"
+              "dashboard/account/balance",
+              "dashboard/account/deposits",
+              "dashboard/account/withdraws"
             ]
           },
           {
             "group": "Data Export",
             "pages": [
-              "knowledge-base/data-export/payment-export",
-              "knowledge-base/data-export/payout-export",
-              "knowledge-base/data-export/deposit-export",
-              "knowledge-base/data-export/withdraw-export",
-              "knowledge-base/data-export/quickbooks"
+              "dashboard/data-export/payment-export",
+              "dashboard/data-export/payout-export",
+              "dashboard/data-export/deposit-export",
+              "dashboard/data-export/withdraw-export",
+              "dashboard/data-export/quickbooks"
             ]
           },
           {
             "group": "Settings",
             "pages": [
-              "knowledge-base/settings/profile",
-              "knowledge-base/settings/team",
-              "knowledge-base/settings/security",
-              "knowledge-base/settings/collection",
-              "knowledge-base/settings/disbursement"
+              "dashboard/settings/profile",
+              "dashboard/settings/team",
+              "dashboard/settings/security",
+              "dashboard/settings/collection",
+              "dashboard/settings/disbursement"
             ]
           },
-          "knowledge-base/notifications/notifications",
-          "knowledge-base/integration/api-integration-guidelines",
-          "knowledge-base/release-notes/release-notes"
+          "dashboard/notifications",
+          "dashboard/instant-web-access"
         ]
       },
       {
         "tab": "ClickPesa Checkout",
         "pages": [
           "checkout/checkout-overview",
+          "checkout/checkout-page",
           {
             "group": "Hosted Checkout",
             "pages": [
               "checkout/hosted-checkout/hosted-checkout",
               "checkout/hosted-checkout/checkout-link-api"
             ]
-          }
+          },
+          "checkout/checkout-link"
         ]
       },
       {
