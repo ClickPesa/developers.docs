@@ -6,6 +6,22 @@ rss: true
 noindex: true
 ---
 
+<Update label="July 2026" tags={["Improvements", "KYC", "API", "Merchant Dashboard"]} rss={{ title: "Monthly Updates", description: "July 2026 - Product updates and improvements" }}>
+
+## Pre-KYC limits and API usage
+
+Accounts that have not completed KYC now have clearer limits while you get started:
+
+- **Transaction limit:** **TZS 100,000 total** combined across collections, payouts, deposits, and withdraws in TZS.
+- **When the transaction limit is reached:** You can still sign in and view your account, complete KYC, and manage KYC documents. New payouts, collections, and other payment actions are paused until KYC is approved.
+- **Premium features:** Card collections and several collection channel activations stay unavailable until KYC is complete.
+- **API daily limit:** Merchants without approved KYC are limited to **100 API calls per day**, including calls to **[generate-token](/api-reference/authorization/generate-token)**. The count resets every day at **midnight East Africa Time (EAT)**. After KYC approval, this daily API cap is removed.
+- **General API rate limit unchanged:** All API traffic remains subject to the existing **120 requests per minute** per IP address limit.
+
+See [limits before KYC approval](/home/onboarding#limits-before-kyc-approval) and [API Integration Setup](/application/api-application-setup#authentication-overview).
+
+</Update>
+
 <Update label="June 2026" tags={["New Feature", "Merchant Dashboard", "Collection", "TanQR", "Lipa Namba"]} rss={{ title: "Monthly Updates", description: "June 2026 - Product updates and improvements" }}>
 
 ## TanQR/Lipa Namba on the Merchant Dashboard

@@ -20,8 +20,10 @@ Never share your API credentials or JWT token publicly. Always use HTTPS to prot
 
 [API Rate Limits](#authentication-overview) - The ClickPesa API enforces a rate limit of **120 requests per minute** per IP address. This limit applies to **all API endpoints**. If you exceed this limit, your requests will be throttled.
 
+[Pre-KYC API daily limit](#authentication-overview) - If your merchant account has **not completed KYC**, you are also limited to **100 API calls per day** across all third-party API requests, including **[generate-token](/api-reference/authorization/generate-token)**. The count resets every day at **midnight East Africa Time (EAT)**. After KYC approval, only the per-minute IP limit applies.
+
 <Tip>
-Implement appropriate retry logic with exponential backoff in your application to handle rate limit responses gracefully.
+Implement appropriate retry logic with exponential backoff in your application to handle rate limit responses gracefully. If you receive a daily limit response before KYC is complete, wait until the next day or complete KYC to remove the cap.
 </Tip>
 
 ## Application Setup
