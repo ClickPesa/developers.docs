@@ -461,11 +461,6 @@
               "accountName": {
                 "type": "string",
                 "example": "John Doe"
-              },
-              "amount": {
-                "type": "string",
-                "description": "Amount the user will receive in accountCurrency",
-                "example": "20000.00"
               }
             }
           },

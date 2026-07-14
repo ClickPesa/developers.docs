@@ -417,11 +417,6 @@
                 "type": "string",
                 "description": "Beneficiary name: fetched from MNO; if unavailable, falls back to phone number when not required. If required and unavailable, payout fails validation.",
                 "example": "John Doe"
-              },
-              "amount": {
-                "type": "string",
-                "description": "Amount the user will receive in TZS",
-                "example": "1000.00"
               }
             }
           },
