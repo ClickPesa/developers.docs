@@ -140,7 +140,19 @@
         ]
       },
       {
-        "tab": "ClickPesa BillPay",
+        "tab": "Mobile USSD-PUSH API",
+        "pages": [
+          "payment-api/mobile-money-payment-api/mobile-money-payment-api-overview"
+        ]
+      },
+      {
+        "tab": "Card API",
+        "pages": [
+          "payment-api/card-payment-api/card-payment-api-overview"
+        ]
+      },
+      {
+        "tab": "BillPay",
         "pages": [
           "bill-pay/bill-pay-overview",
           "bill-pay/billpay-use-cases",
@@ -171,6 +183,18 @@
         ]
       },
       {
+        "tab": "Mobile Payouts API",
+        "pages": [
+          "payout-api/mobile-money-payout-api/mobile-money-payout-api-overview"
+        ]
+      },
+      {
+        "tab": "Bank Payout API",
+        "pages": [
+          "payout-api/bank-payout-api/bank-payout-api-overview"
+        ]
+      },
+      {
         "tab": "ClickPesa Payout Widgets",
         "hidden": true,
         "pages": [
@@ -191,32 +215,6 @@
         ]
       },
       {
-        "tab": "Payment API",
-        "pages": [
-          "payment-api/payment-api-overview",
-          {
-            "group": "How It Works",
-            "pages": [
-              "payment-api/mobile-money-payment-api/mobile-money-payment-api-overview",
-              "payment-api/card-payment-api/card-payment-api-overview"
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "Payout API",
-        "pages": [
-          "payout-api/payout-api-overview",
-          {
-            "group": "How It Works",
-            "pages": [
-              "payout-api/mobile-money-payout-api/mobile-money-payout-api-overview",
-              "payout-api/bank-payout-api/bank-payout-api-overview"
-            ]
-          }
-        ]
-      },
-      {
         "tab": "Plugins and SDK",
         "pages": [
           "sdk-plugins/plugins-and-extensions"
@@ -232,26 +230,21 @@
             ]
           },
           {
-            "group": "PAYMENTS",
+            "group": "USSD-PUSH",
             "pages": [
               "api-reference/collection/ussd-push-requests/preview-ussd-push-request",
               "api-reference/collection/ussd-push-requests/initiate-ussd-push-request",
-              "api-reference/collection/card-payment/preview-card-payment",
-              "api-reference/collection/card-payment/initiate-card-payment",
               "api-reference/collection/querying-for-payments/querying-for-payments",
               "api-reference/collection/ussd-push-requests/query-all-payments"
             ]
           },
           {
-            "group": "PAYOUTS",
+            "group": "CARD",
             "pages": [
-              "api-reference/disbursement/mno-payout/preview-mno-payout",
-              "api-reference/disbursement/mno-payout/create-mno-payout",
-              "api-reference/disbursement/bank-payout/preview-bank-payout",
-              "api-reference/disbursement/bank-payout/create-bank-payout",
-              "api-reference/disbursement/mno-payout/querying-for-payouts",
-              "api-reference/disbursement/mno-payout/query-all-payouts",
-              "api-reference/list/get-bank-list"
+              "api-reference/collection/card-payment/preview-card-payment",
+              "api-reference/collection/card-payment/initiate-card-payment",
+              "api-reference/collection/card-payment/querying-for-payments",
+              "api-reference/collection/card-payment/query-all-payments"
             ]
           },
           {
@@ -264,6 +257,25 @@
               "api-reference/collection/billpay/querying-for-billpay-details",
               "api-reference/collection/billpay/update-billpay-reference",
               "api-reference/collection/billpay/update-billpay-reference-status"
+            ]
+          },
+          {
+            "group": "MOBILE PAYOUTS",
+            "pages": [
+              "api-reference/disbursement/mno-payout/preview-mno-payout",
+              "api-reference/disbursement/mno-payout/create-mno-payout",
+              "api-reference/disbursement/mno-payout/querying-for-payouts",
+              "api-reference/disbursement/mno-payout/query-all-payouts"
+            ]
+          },
+          {
+            "group": "BANK PAYOUTS",
+            "pages": [
+              "api-reference/disbursement/bank-payout/preview-bank-payout",
+              "api-reference/disbursement/bank-payout/create-bank-payout",
+              "api-reference/disbursement/bank-payout/querying-for-payouts",
+              "api-reference/disbursement/bank-payout/query-all-payouts",
+              "api-reference/list/get-bank-list"
             ]
           },
           {
@@ -313,5 +325,15 @@
       "x": "https://x.com/clickpesa",
       "linkedin": "https://www.linkedin.com/company/clickpesa"
     }
-  }
+  },
+  "redirects": [
+    {
+      "source": "/payment-api/payment-api-overview",
+      "destination": "/payment-api/mobile-money-payment-api/mobile-money-payment-api-overview"
+    },
+    {
+      "source": "/payout-api/payout-api-overview",
+      "destination": "/payout-api/mobile-money-payout-api/mobile-money-payout-api-overview"
+    }
+  ]
 }
