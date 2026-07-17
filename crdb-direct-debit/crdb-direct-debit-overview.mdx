@@ -1,0 +1,100 @@
+---
+title: "CRDB Direct Debit Overview"
+description: "Collect recurring payments from customers' CRDB bank accounts with mandate-based Direct Debit"
+---
+
+**CRDB Direct Debit** lets you collect scheduled payments from a customer's CRDB bank account after they approve a mandate. Once the mandate is active, installments are collected automatically according to the schedule you set.
+
+Use it through the **Merchant Dashboard** with [Payment Plans](/crdb-direct-debit/payment-plans), or through the **[CRDB Direct Debit API](/crdb-direct-debit/api-overview)** for full control in your own systems.
+
+<Tip>
+Direct Debit collections appear in your [Merchant Dashboard](https://merchant.clickpesa.com) payments list with channel **CRDB DIRECT DEBIT MANDATE**, and can trigger [webhook notifications](/home/webhooks) when payments succeed or fail.
+</Tip>
+
+## When To Use It
+
+- **Installment collections:** School fees, loans, rent, or other payments spread over time
+- **Subscriptions and memberships:** Recurring charges on a daily, weekly, monthly, or yearly schedule
+- **Customer agreements:** Collect from a named customer after they approve the debit on their CRDB account
+- **Automated collection:** Reduce manual follow-up once the mandate is active
+
+## How It Works
+
+1. **Activate** — Enable CRDB Direct Debit in your Merchant Dashboard under **Settings → Collection** (KYC and activation fee required).
+2. **Request mandate approval** — Create a Payment Plan in the dashboard, or call the API with the customer's CRDB account, SimBanking phone number, schedule, and installment amount.
+3. **Customer approves** — The customer confirms the mandate through CRDB. You receive a status update when it becomes **ACTIVE** or **REJECTED**.
+4. **Installments collect** — While the mandate is active, scheduled debits run automatically. Successful and failed collections are recorded as payments.
+5. **Optional cancel** — You can cancel an **ACTIVE** mandate (and the linked payment plan) from the dashboard or via the API.
+
+<Warning>
+A CRDB account can only have **one mandate at a time**. Cancel or complete any existing mandate on that debit account before requesting a new one.
+</Warning>
+
+## Mandate statuses
+
+| Status | Meaning |
+| --- | --- |
+| **REQUESTED** | Mandate submitted; waiting for customer / bank confirmation |
+| **ACTIVE** | Mandate approved; scheduled collections can run |
+| **REJECTED** | Mandate was not approved; no installments will collect |
+| **CANCELLED** | Mandate revoked; further scheduled collections stop |
+
+## In the Merchant Dashboard
+
+<CardGroup cols={2}>
+
+<Card
+  title="Set Up Direct Debit"
+  icon="gear"
+  href="/crdb-direct-debit/setup"
+>
+  Activate CRDB Direct Debit in Collection settings.
+</Card>
+
+<Card
+  title="Payment Plans"
+  icon="calendar"
+  href="/crdb-direct-debit/payment-plans"
+>
+  Create and manage installment plans and mandates.
+</Card>
+
+<Card
+  title="Customers"
+  icon="users"
+  href="/dashboard/customers"
+>
+  View a customer's payment plans from their customer profile.
+</Card>
+
+<Card
+  title="Payment Transactions"
+  icon="list"
+  href="/dashboard/transactions/payments"
+>
+  Track Direct Debit installment payments.
+</Card>
+
+</CardGroup>
+
+## For Developers
+
+<CardGroup cols={2}>
+
+<Card
+  title="API Overview"
+  icon="code"
+  href="/crdb-direct-debit/api-overview"
+>
+  Request, query, and cancel mandates with the Collection API.
+</Card>
+
+<Card
+  title="Webhooks"
+  icon="webhook"
+  href="/home/webhooks"
+>
+  Receive payment events and mandate status callbacks.
+</Card>
+
+</CardGroup>

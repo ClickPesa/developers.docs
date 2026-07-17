@@ -1,0 +1,438 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "CORE API - CRDB Direct Debit",
+    "description": "API for requesting, querying, and cancelling CRDB Direct Debit mandates",
+    "version": "1.0.0"
+  },
+  "servers": [
+    {
+      "url": "https://api.clickpesa.com/third-parties"
+    }
+  ],
+  "security": [
+    {
+      "bearerAuth": []
+    }
+  ],
+  "paths": {
+    "/customers/crdb-direct-debit-mandate": {
+      "post": {
+        "operationId": "requestCrdbDirectDebitMandate",
+        "summary": "Request Mandate Approval",
+        "tags": ["CRDB Direct Debit"],
+        "description": "Request CRDB Direct Debit mandate approval and create the linked payment schedule.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": [
+                  "customer",
+                  "phoneNumber",
+                  "debitAccount",
+                  "startDate",
+                  "endDate",
+                  "frequencyType",
+                  "installmentAmount",
+                  "mandateCallbackUrl"
+                ],
+                "properties": {
+                  "customer": {
+                    "type": "object",
+                    "required": ["fullName"],
+                    "properties": {
+                      "fullName": {
+                        "type": "string",
+                        "description": "Full name of the customer",
+                        "example": "Ramona Cormier-Hilll"
+                      },
+                      "email": {
+                        "type": "string",
+                        "description": "Customer email address",
+                        "example": "Aurore56@yahoo.com"
+                      },
+                      "phoneNumber": {
+                        "type": "string",
+                        "description": "Customer phone number (optional contact number)",
+                        "example": "255799468121"
+                      }
+                    }
+                  },
+                  "phoneNumber": {
+                    "type": "string",
+                    "description": "Customer's SimBanking-registered phone number for the debit account. 12 digits, starts with country code, no plus sign.",
+                    "example": "255754712650"
+                  },
+                  "debitAccount": {
+                    "type": "string",
+                    "description": "CRDB account number to debit",
+                    "example": "0152590146100"
+                  },
+                  "startDate": {
+                    "type": "string",
+                    "description": "Mandate start date (DD-MM-YYYY or YYYY-MM-DD)",
+                    "example": "10-12-2025"
+                  },
+                  "endDate": {
+                    "type": "string",
+                    "description": "Mandate end date (DD-MM-YYYY or YYYY-MM-DD)",
+                    "example": "30-12-2025"
+                  },
+                  "frequencyType": {
+                    "type": "string",
+                    "enum": ["DAILY", "WEEKLY", "MONTHLY", "YEARLY"],
+                    "description": "Installment frequency type"
+                  },
+                  "frequency": {
+                    "type": "number",
+                    "description": "Frequency multiplier (default: 1). Example: frequencyType=WEEKLY, frequency=2 means every 2 weeks",
+                    "example": 2
+                  },
+                  "installmentAmount": {
+                    "type": "number",
+                    "description": "Amount to debit per installment (must be positive)",
+                    "example": 2500
+                  },
+                  "mandateCallbackUrl": {
+                    "type": "string",
+                    "format": "uri",
+                    "description": "URL where mandate status callbacks (ACTIVE, REJECTED, CANCELLED) will be sent",
+                    "example": "https://your-system.com/webhooks/crdb-mandate-status"
+                  },
+                  "billDetails": {
+                    "type": "string",
+                    "description": "Optional description of the bill or mandate",
+                    "example": "Loan No. 233422 from Inc."
+                  }
+                }
+              },
+              "example": {
+                "customer": {
+                  "fullName": "Ramona Cormier-Hilll",
+                  "email": "Aurore56@yahoo.com",
+                  "phoneNumber": "255799468121"
+                },
+                "phoneNumber": "255754712650",
+                "debitAccount": "0152590146100",
+                "installmentAmount": 2500,
+                "startDate": "10-12-2025",
+                "endDate": "30-12-2025",
+                "frequencyType": "DAILY",
+                "frequency": 2,
+                "billDetails": "Loan No. 233422 from Inc.",
+                "mandateCallbackUrl": "https://your-system.com/webhooks/crdb-mandate-status"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Mandate request accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "mandateRequestId": {
+                      "type": "string",
+                      "description": "Unique identifier for the mandate request"
+                    },
+                    "mandateStatus": {
+                      "type": "string",
+                      "description": "Current status of the mandate (typically REQUESTED)"
+                    },
+                    "paymentsTotalAmount": {
+                      "type": "number",
+                      "description": "Total amount scheduled over the mandate period"
+                    },
+                    "paymentsInstallments": {
+                      "type": "number",
+                      "description": "Total number of installments scheduled"
+                    }
+                  }
+                },
+                "example": {
+                  "mandateRequestId": "69383ce4f8b5a8e2077df9c7",
+                  "mandateStatus": "REQUESTED",
+                  "paymentsTotalAmount": 27500,
+                  "paymentsInstallments": 11
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation or service error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedError"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "operationId": "getCrdbDirectDebitMandate",
+        "summary": "Get Mandate",
+        "tags": ["CRDB Direct Debit"],
+        "description": "Get CRDB Direct Debit mandate details and linked payment plan summary by mandate request ID",
+        "parameters": [
+          {
+            "name": "requestId",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            },
+            "description": "The mandateRequestId returned when mandate approval was requested",
+            "example": "69383ce4f8b5a8e2077df9c7"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Mandate and payment plan details",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "mandateRequestId": { "type": "string" },
+                    "mandateReference": {
+                      "type": "string",
+                      "description": "CRDB mandate reference used on payment webhooks as orderReference"
+                    },
+                    "mandateStatus": { "type": "string" },
+                    "mandateCallbackUrl": { "type": "string" },
+                    "mandateConfirmedAt": { "type": "string", "format": "date-time" },
+                    "crdbAccountDetails": {
+                      "type": "object",
+                      "properties": {
+                        "phoneNumber": { "type": "string" },
+                        "debitAccount": { "type": "string" },
+                        "accountName": { "type": "string" }
+                      }
+                    },
+                    "paymentPlanDetails": {
+                      "type": "object",
+                      "properties": {
+                        "startDate": { "type": "string" },
+                        "endDate": { "type": "string" },
+                        "frequencyType": { "type": "string" },
+                        "frequency": { "type": "number" },
+                        "installmentAmount": { "type": "number" },
+                        "installmentsNumber": { "type": "number" },
+                        "installmentsCompleted": { "type": "number" },
+                        "remainingAmount": { "type": "number" },
+                        "totalAmount": { "type": "number" },
+                        "billDetails": { "type": "string" }
+                      }
+                    }
+                  }
+                },
+                "example": {
+                  "mandateRequestId": "69383ce4f8b5a8e2077df9c7",
+                  "mandateReference": "9009099",
+                  "mandateStatus": "ACTIVE",
+                  "mandateCallbackUrl": "https://your-system.com/webhooks/crdb-mandate-status",
+                  "mandateConfirmedAt": "2025-12-09T15:16:09.557Z",
+                  "crdbAccountDetails": {
+                    "phoneNumber": "255754712650",
+                    "debitAccount": "0152590146100",
+                    "accountName": "Ramona Cormier-Hilll"
+                  },
+                  "paymentPlanDetails": {
+                    "startDate": "2025-12-10",
+                    "endDate": "2025-12-30",
+                    "frequencyType": "DAILY",
+                    "frequency": 2,
+                    "installmentAmount": 2500,
+                    "installmentsNumber": 11,
+                    "installmentsCompleted": 0,
+                    "remainingAmount": 27500,
+                    "totalAmount": 27500,
+                    "billDetails": "Loan No. 233422 from Inc."
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Mandate not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": "CRDB direct debit mandate not found"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/customers/crdb-direct-debit-mandate/cancel": {
+      "post": {
+        "operationId": "cancelCrdbDirectDebitMandate",
+        "summary": "Cancel Mandate",
+        "tags": ["CRDB Direct Debit"],
+        "description": "Cancel an ACTIVE CRDB Direct Debit mandate. When the linked payment plan is still active, the plan and unpaid cycles are cancelled too.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["requestId"],
+                "properties": {
+                  "requestId": {
+                    "type": "string",
+                    "description": "The mandateRequestId returned when the mandate was requested",
+                    "example": "69383ce4f8b5a8e2077df9c7"
+                  }
+                }
+              },
+              "example": {
+                "requestId": "69383ce4f8b5a8e2077df9c7"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Mandate cancelled",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "mandateRequestId": { "type": "string" },
+                    "mandateStatus": {
+                      "type": "string",
+                      "description": "Will be CANCELLED after successful cancellation"
+                    },
+                    "paymentsTotalAmount": { "type": "number" },
+                    "paymentsInstallments": { "type": "number" }
+                  }
+                },
+                "example": {
+                  "mandateRequestId": "69383ce4f8b5a8e2077df9c7",
+                  "mandateStatus": "CANCELLED",
+                  "paymentsTotalAmount": 27500,
+                  "paymentsInstallments": 11
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Mandate not active or service error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "statusCode": 400,
+                  "message": [
+                    "Cannot cancel CRDB direct debit mandate. Mandate must be ACTIVE to cancel. Current status: REQUESTED"
+                  ],
+                  "error": "Bad Request"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Mandate not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                },
+                "example": {
+                  "error": "CRDB direct debit mandate not found"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT",
+        "description": "Bearer token from Generate Authorization Token"
+      }
+    },
+    "schemas": {
+      "Error": {
+        "type": "object",
+        "properties": {
+          "error": { "type": "string" },
+          "message": {
+            "oneOf": [
+              { "type": "string" },
+              { "type": "array", "items": { "type": "string" } }
+            ]
+          },
+          "statusCode": { "type": "number" }
+        }
+      },
+      "UnauthorizedError": {
+        "type": "object",
+        "properties": {
+          "statusCode": { "type": "number", "example": 401 },
+          "message": { "type": "string", "example": "Unauthorized" },
+          "error": { "type": "string", "example": "Unauthorized" }
+        }
+      }
+    }
+  }
+}

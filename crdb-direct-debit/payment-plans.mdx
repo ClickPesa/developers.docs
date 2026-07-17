@@ -1,0 +1,63 @@
+---
+title: "Payment Plans"
+description: "Create and manage CRDB Direct Debit payment plans in the Merchant Dashboard"
+---
+
+**Payment Plans** are how you set up recurring CRDB Direct Debit collections in the Merchant Dashboard. Each plan links a customer, a debit schedule, and a CRDB mandate.
+
+<Note>
+Activate [CRDB Direct Debit](/crdb-direct-debit/setup) before creating a plan. Developers can also request mandate approvals with the [CRDB Direct Debit API](/crdb-direct-debit/api-overview).
+</Note>
+
+## What You Can Do
+
+- Create a plan with installment amount, start/end dates, and frequency (daily, weekly, monthly, or yearly)
+- Request CRDB Direct Debit mandate approval for the customer's CRDB account
+- Track mandate status (**REQUESTED**, **ACTIVE**, **REJECTED**, **CANCELLED**)
+- Review upcoming and past installment cycles on the plan details page
+- See plans for a specific customer on the customer **Payment Plans** tab
+- Cancel an active mandate when collections should stop
+
+## Create a Payment Plan
+
+1. Open **Payment Plans** in the Merchant Dashboard sidebar, or open a [customer](/dashboard/customers) and use their **Payment Plans** tab.
+2. Start **Create Payment Plan**.
+3. Choose the customer and plan details:
+   - **Installment amount** (TZS)
+   - **Start date** and **end date**
+   - **Frequency** (for example every month, or every 2 weeks)
+   - **Bill details** / description
+4. Add the CRDB payment method details:
+   - **CRDB account number** (debit account)
+   - **CRDB SimBank mobile number** (12 digits, country code, no `+`) — must be registered for SimBanking on that account
+5. Review the plan summary and upcoming installments, then submit to **request approval**.
+
+After submission, the mandate starts as **REQUESTED**. When CRDB confirms, the plan becomes **ACTIVE** and scheduled collections can begin. If the mandate is **REJECTED**, installments will not collect.
+
+<Warning>
+A CRDB account can only have **one mandate at a time**. If the debit account already has an active mandate, cancel or complete it before creating a new plan.
+</Warning>
+
+## Plan Details
+
+On a plan's details page you can:
+
+- See customer and mandate information (including CRDB account and SimBank number)
+- Review installment cycles (due dates, amounts, and collection status)
+- Follow mandate status changes
+- Cancel an **ACTIVE** mandate when needed
+
+## Notifications
+
+You receive merchant notifications when a Direct Debit mandate is:
+
+- **Requested**
+- **Approved** (plan active)
+- **Rejected**
+- **Cancelled**
+
+See [Notifications](/dashboard/notifications) for in-app, email, and web channels.
+
+## Payments
+
+Successful and failed installment attempts appear under **Transactions → Payments** with channel **CRDB DIRECT DEBIT MANDATE**. Configure [webhooks](/home/webhooks) if you want the same events in your own systems.

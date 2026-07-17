@@ -18,10 +18,10 @@ ClickPesa supports webhooks at two levels:
 | Level | Scope | When Used |
 |-------|-------|-----------|
 | **Merchant webhooks** | All transactions for the merchant | Dashboard payments and other activity not linked to a specific application |
-| **Application webhooks** | Transactions for a specific application | Collection API, Disbursement API, [BillPay API](/bill-pay/billpay-api-overview), and hosted checkout or payout links |
+| **Application webhooks** | Transactions for a specific application | Collection API, Disbursement API, [BillPay API](/bill-pay/billpay-api-overview), [CRDB Direct Debit](/crdb-direct-debit/api-overview) payments, and hosted checkout or payout links |
 
 <Info>
-For payments and payouts tied to an application (including [USSD push](/api-reference/collection/ussd-push-requests/initiate-ussd-push-request) and card payments via the Collection API, [BillPay](/bill-pay/billpay-api-overview) control numbers created via API, and [Hosted Checkout](/checkout/checkout-overview) links), if the application has a webhook URL configured for the event, the callback is sent to the **application webhook only** — the merchant webhook is not used. If the application has no webhook for the event, the merchant webhook is used instead.
+For payments and payouts tied to an application (including [USSD push](/api-reference/collection/ussd-push-requests/initiate-ussd-push-request) and card payments via the Collection API, [BillPay](/bill-pay/billpay-api-overview) control numbers created via API, [CRDB Direct Debit](/crdb-direct-debit/api-overview) installments, and [Hosted Checkout](/checkout/checkout-overview) links), if the application has a webhook URL configured for the event, the callback is sent to the **application webhook only** — the merchant webhook is not used. If the application has no webhook for the event, the merchant webhook is used instead.
 </Info>
 
 
@@ -84,6 +84,10 @@ For `PAYMENT RECEIVED` webhooks, the `collectedAmount` field is always zero or m
   }
 }
 ```
+
+<Note>
+For **CRDB Direct Debit** installments, `channel` is `CRDB DIRECT DEBIT MANDATE` and `orderReference` is the **mandate reference** from CRDB (also returned on mandate status callbacks as `mandateReference`). Mandate status changes (**ACTIVE**, **REJECTED**, **CANCELLED**) are sent to the `mandateCallbackUrl` you provide when requesting mandate approval — not to these payment webhook URLs. See the [CRDB Direct Debit API overview](/crdb-direct-debit/api-overview#mandate-status-callbacks).
+</Note>
 
 ### `PAYOUT INITIATED`
 

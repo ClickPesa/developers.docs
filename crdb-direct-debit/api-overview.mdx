@@ -1,0 +1,126 @@
+---
+title: "CRDB Direct Debit API"
+description: "Request mandate approvals, query, and cancel CRDB Direct Debit mandates with the Collection API"
+---
+
+The CRDB Direct Debit API lets you request mandate approvals for recurring collections from customers' CRDB bank accounts, receive mandate status callbacks, and get payment events through webhooks.
+
+## Prerequisites
+
+1. **Activate CRDB Direct Debit** for your merchant account in the [Merchant Dashboard](/crdb-direct-debit/setup).
+2. **API keys** — [Create an Application](/application/api-application-setup) with the **Collection API** feature enabled.
+3. **Authorization token** — Use your API keys to [Generate an Authorization Token](/api-reference/authorization/generate-token).
+
+## How It Works
+
+### Step 1 – Request Mandate Approval
+
+<Card
+  title="Request Mandate Approval"
+  icon="brackets-curly"
+  href="/api-reference/collection/crdb-direct-debit/request-mandate"
+  horizontal
+>
+  Request mandate approval and create the linked payment schedule. Provide customer details, CRDB debit account, SimBanking phone number, dates, frequency, installment amount, and a mandate callback URL.
+</Card>
+
+The response includes `mandateRequestId`, initial `mandateStatus` (**REQUESTED**), total amount, and number of installments.
+
+### Step 2 – Receive Mandate Status Callbacks
+
+ClickPesa sends an HTTP `POST` to your `mandateCallbackUrl` when the mandate status changes to **ACTIVE**, **REJECTED**, or **CANCELLED**.
+
+Use `mandateReference` from the **ACTIVE** / **REJECTED** callback to correlate later installment payments (`orderReference` on payment webhooks matches this reference).
+
+See [Mandate status callbacks](/crdb-direct-debit/api-overview#mandate-status-callbacks) below and the [Request Mandate Approval](/api-reference/collection/crdb-direct-debit/request-mandate) reference.
+
+### Step 3 – Query Mandate Details (optional)
+
+<Card
+  title="Get Mandate"
+  icon="brackets-curly"
+  href="/api-reference/collection/crdb-direct-debit/get-mandate"
+  horizontal
+>
+  Retrieve mandate status, CRDB account details, and payment plan summary using `mandateRequestId`.
+</Card>
+
+### Step 4 – Receive Payment Events
+
+Configure **[Application webhooks](/home/webhooks#application-level-webhooks)** (or merchant webhooks) for:
+
+- `PAYMENT RECEIVED` — installment collected successfully
+- `PAYMENT FAILED` — installment failed (for example insufficient funds, or mandate issues)
+
+Payment payloads use `"channel": "CRDB DIRECT DEBIT MANDATE"`. The `orderReference` field is the **mandate reference** from CRDB.
+
+### Step 5 – Cancel Mandate (optional)
+
+<Card
+  title="Cancel Mandate"
+  icon="brackets-curly"
+  href="/api-reference/collection/crdb-direct-debit/cancel-mandate"
+  horizontal
+>
+  Cancel an **ACTIVE** mandate. The linked payment plan and unpaid cycles are cancelled when the plan is still active.
+</Card>
+
+## Mandate Status Callbacks
+
+Callbacks are sent to the `mandateCallbackUrl` you provided when requesting mandate approval.
+
+**ACTIVE**
+
+```json
+{
+  "mandateRequestId": "69383ce4f8b5a8e2077df9c7",
+  "mandateReference": "9009099",
+  "mandateStatus": "ACTIVE",
+  "mandateConfirmedAt": "2025-12-09T15:16:09.557Z"
+}
+```
+
+**REJECTED**
+
+```json
+{
+  "mandateRequestId": "69382ac2358bdec745001d88",
+  "mandateReference": "7767768907",
+  "mandateStatus": "REJECTED",
+  "mandateConfirmedAt": "2025-12-09T13:58:47.229Z"
+}
+```
+
+**CANCELLED**
+
+```json
+{
+  "mandateRequestId": "693072b84e85ba41d1de3580",
+  "mandateStatus": "CANCELLED",
+  "mandateReference": "10540",
+  "mandateCancelledAt": "2025-12-03T17:26:54.264Z"
+}
+```
+
+## Important Rules
+
+- One **active mandate per CRDB debit account** at a time
+- `phoneNumber` must be a **SimBanking-registered** number for the debit account (12 digits, country code, no `+`)
+- Dates: `DD-MM-YYYY` or `YYYY-MM-DD`
+- Frequency types: `DAILY`, `WEEKLY`, `MONTHLY`, `YEARLY` (optional `frequency` multiplier, default `1`)
+- Cancel is only allowed when mandate status is **ACTIVE**
+
+## API Reference
+
+| Endpoint | Description |
+| --- | --- |
+| [Request Mandate Approval](/api-reference/collection/crdb-direct-debit/request-mandate) | Request mandate approval and create the payment schedule |
+| [Get Mandate](/api-reference/collection/crdb-direct-debit/get-mandate) | Retrieve mandate status and plan summary |
+| [Cancel Mandate](/api-reference/collection/crdb-direct-debit/cancel-mandate) | Cancel an active mandate |
+
+## Also See
+
+- [CRDB Direct Debit Overview](/crdb-direct-debit/crdb-direct-debit-overview)
+- [Payment Plans (dashboard)](/crdb-direct-debit/payment-plans)
+- [Webhooks](/home/webhooks)
+- [FAQ](/crdb-direct-debit/faq)

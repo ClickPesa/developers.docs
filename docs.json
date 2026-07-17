@@ -77,7 +77,8 @@
                   "dashboard/payment-pages",
                   "dashboard/e-invoice",
                   "dashboard/checkout-links",
-                  "dashboard/customers"
+                  "dashboard/customers",
+                  "crdb-direct-debit/payment-plans"
                 ]
               },
               {
@@ -183,6 +184,21 @@
         ]
       },
       {
+        "tab": "CRDB Direct Debit",
+        "pages": [
+          "crdb-direct-debit/crdb-direct-debit-overview",
+          "crdb-direct-debit/faq",
+          {
+            "group": "How It Works",
+            "pages": [
+              "crdb-direct-debit/setup",
+              "crdb-direct-debit/payment-plans",
+              "crdb-direct-debit/api-overview"
+            ]
+          }
+        ]
+      },
+      {
         "tab": "Mobile Payouts API",
         "pages": [
           "payout-api/mobile-money-payout-api/mobile-money-payout-api-overview"
@@ -257,6 +273,14 @@
               "api-reference/collection/billpay/querying-for-billpay-details",
               "api-reference/collection/billpay/update-billpay-reference",
               "api-reference/collection/billpay/update-billpay-reference-status"
+            ]
+          },
+          {
+            "group": "CRDB DIRECT DEBIT",
+            "pages": [
+              "api-reference/collection/crdb-direct-debit/request-mandate",
+              "api-reference/collection/crdb-direct-debit/get-mandate",
+              "api-reference/collection/crdb-direct-debit/cancel-mandate"
             ]
           },
           {

@@ -6,7 +6,17 @@ rss: true
 noindex: true
 ---
 
-<Update label="July 2026" tags={["Improvements", "KYC", "API", "Merchant Dashboard"]} rss={{ title: "Monthly Updates", description: "July 2026 - Product updates and improvements" }}>
+<Update label="July 2026" tags={["New Feature", "Improvements", "KYC", "API", "Merchant Dashboard", "CRDB Direct Debit"]} rss={{ title: "Monthly Updates", description: "July 2026 - Product updates and improvements" }}>
+
+## CRDB Direct Debit and Payment Plans
+
+Collect recurring payments from customers' CRDB bank accounts after they approve a mandate:
+
+- **Activate Direct Debit** from **Settings → Collection** or **Get Started → Payment Methods** (KYC required; one-time activation fee **250,000 TZS**)
+- **Payment Plans in the Merchant Dashboard:** Create installment schedules, request mandate approvals, track cycles, and manage plans from **Payment Plans** or a customer's **Payment Plans** tab
+- **CRDB Direct Debit API:** Request mandate approvals, query, and cancel mandates with Collection API applications — including mandate status callbacks and payment webhooks (`CRDB DIRECT DEBIT MANDATE`)
+- **Merchant notifications** when a mandate is requested, approved, rejected, or cancelled
+- **Documentation:** New [CRDB Direct Debit guides](/crdb-direct-debit/crdb-direct-debit-overview), [Payment Plans](/crdb-direct-debit/payment-plans), and [API reference](/crdb-direct-debit/api-overview)
 
 ## Pre-KYC limits and API usage
 

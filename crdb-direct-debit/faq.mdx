@@ -1,0 +1,62 @@
+---
+title: "CRDB Direct Debit FAQ"
+description: "Common questions about CRDB Direct Debit, Payment Plans, and mandates"
+---
+
+## Activation
+
+**Why can't I turn on CRDB Direct Debit?**
+
+Complete [KYC](/dashboard/settings/kyc) first. Direct Debit also requires a one-time activation fee of **250,000 TZS**. See [Set Up CRDB Direct Debit](/crdb-direct-debit/setup).
+
+## Mandates and accounts
+
+**Can one CRDB account have multiple mandates?**
+
+No. A debit account can have only **one mandate at a time**. Cancel or complete the existing mandate before requesting another.
+
+**What phone number should I use?**
+
+Use the customer's **CRDB SimBanking** mobile number for the debit account: 12 digits starting with the country code (for example `2557…`), without a `+`.
+
+**What do REQUESTED, ACTIVE, REJECTED, and CANCELLED mean?**
+
+See [mandate statuses](/crdb-direct-debit/crdb-direct-debit-overview#mandate-statuses) in the overview.
+
+## Payment Plans
+
+**Where do I create a plan in the dashboard?**
+
+Open **Payment Plans** in the sidebar, or open a customer and use the **Payment Plans** tab. Guide: [Payment Plans](/crdb-direct-debit/payment-plans).
+
+**What happens if a mandate is rejected?**
+
+The related plan will not collect installments. Create a new plan only after resolving the rejection (and ensuring no conflicting mandate remains on the account).
+
+**Can I cancel collections mid-plan?**
+
+Yes, if the mandate is **ACTIVE**. Cancel from the plan details in the dashboard or via [Cancel Mandate](/api-reference/collection/crdb-direct-debit/cancel-mandate).
+
+## API and webhooks
+
+**Which application feature do I need?**
+
+The application must have the **Collection API** feature enabled.
+
+**How do I match installment payments to a mandate?**
+
+Use `mandateReference` from the mandate status callback. On `PAYMENT RECEIVED` / `PAYMENT FAILED` webhooks, `orderReference` is that mandate reference, and `channel` is `CRDB DIRECT DEBIT MANDATE`.
+
+**Are mandate status updates sent on the same webhook as payments?**
+
+No. Mandate status changes go to the **`mandateCallbackUrl`** you supply when requesting mandate approval. Payment success/failure uses your configured [application or merchant webhooks](/home/webhooks).
+
+## Notifications
+
+**Will I get notified in the dashboard?**
+
+Yes. Merchants receive notifications when a mandate is requested, approved, rejected, or cancelled. See [Notifications](/dashboard/notifications).
+
+## Need more help?
+
+Contact [support@clickpesa.com](mailto:support@clickpesa.com).
