@@ -50,15 +50,17 @@ icon: "compass"
 
 ## Choose a Collection Product
 
-| | **TanQR/Lipa Namba** | **BillPay** | **CRDB Direct Debit** |
-| --- | --- | --- | --- |
-| **What the customer uses** | Your QR code or Lipa Namba | A BillPay control number | Approves a bank mandate on their CRDB account |
-| **How they pay** | Scan QR, or pay via USSD and bank channels using your Lipa Namba | Pay via mobile money USSD, SIM banking, or bank channels using the control number | Scheduled debits from their CRDB account after mandate approval |
-| **Best for** | Store collections — physical and online | Deposits, order payments, invoices, and customer-specific references | Installments, subscriptions, and recurring agreements |
-| **Setup** | [Merchant Dashboard](/tan-qr/lipa-namba-setup) | [Merchant Dashboard](/bill-pay/billpay-namba) or [BillPay API](/bill-pay/billpay-api-overview) | [Merchant Dashboard](/crdb-direct-debit/setup) or [Direct Debit API](/crdb-direct-debit/api-overview) |
+| | **TanQR/Lipa Namba** | **BillPay** | **USSD Push** | **Card** | **CRDB Direct Debit** |
+| --- | --- | --- | --- | --- | --- |
+| **What the customer uses** | Your QR code or Lipa Namba | A BillPay control number | Their mobile money wallet | Their Visa, Mastercard, Amex, or UnionPay card | Approves a bank mandate on their CRDB account |
+| **How they pay** | Scan QR, or pay via USSD and bank channels using your Lipa Namba | Pay via mobile money USSD, SIM banking, or bank channels using the control number | Approves a USSD push prompt on their phone with their wallet PIN | Enters card details on a hosted checkout session | Scheduled debits from their CRDB account after mandate approval |
+| **Best for** | Store collections — physical and online | Deposits, order payments, invoices, and customer-specific references | In-app or online checkout where you send a payment request to the customer's phone | Online card payments | Installments, subscriptions, and recurring agreements |
+| **Setup** | [Merchant Dashboard](/tan-qr/lipa-namba-setup) | [Merchant Dashboard](/bill-pay/billpay-namba) or [BillPay API](/bill-pay/billpay-api-overview) | [USSD Push API](/payment-api/mobile-money-payment-api/mobile-money-payment-api-overview) | [Card API](/payment-api/card-payment-api/card-payment-api-overview) | [Merchant Dashboard](/crdb-direct-debit/setup) or [Direct Debit API](/crdb-direct-debit/api-overview) |
 
 - Use **[TanQR/Lipa Namba](/tan-qr/tan-qr-overview)** when you want customers to scan your QR code or pay using your Lipa Namba.
 - Use **[BillPay](/bill-pay/bill-pay-overview)** when you need control numbers for deposits, orders, invoices, or customer-specific references.
+- Use **[USSD Push](/payment-api/mobile-money-payment-api/mobile-money-payment-api-overview)** when you want to send a payment prompt to the customer's mobile money wallet.
+- Use **[Card](/payment-api/card-payment-api/card-payment-api-overview)** when you want customers to pay with Visa, Mastercard, Amex, or UnionPay via a hosted checkout session.
 - Use **[CRDB Direct Debit](/crdb-direct-debit/crdb-direct-debit-overview)** when you need mandate-based recurring collections from CRDB accounts.
 
 ## Additional Features & Considerations
