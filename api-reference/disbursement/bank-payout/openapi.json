@@ -22,7 +22,7 @@
     "/payouts/verify-bank-account": {
       "post": {
         "tags": ["Payouts"],
-        "description": "Verifies a bank account and returns the account holder name when name lookup succeeds. For CRDB accounts (`bic` `CORUTZTZ`), this uses the CRDB account name check. Use the returned `accountName` when creating a bank payout.",
+        "description": "Verifies a bank account and returns the account holder name when name lookup succeeds",
         "requestBody": {
           "required": true,
           "content": {
