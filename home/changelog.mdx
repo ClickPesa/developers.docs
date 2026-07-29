@@ -8,6 +8,12 @@ noindex: true
 
 <Update label="July 2026" tags={["New Feature", "Improvements", "KYC", "API", "Merchant Dashboard", "CRDB Direct Debit"]} rss={{ title: "Monthly Updates", description: "July 2026 - Product updates and improvements" }}>
 
+## Verify Bank Account API
+
+- **[Verify Bank Account](/api-reference/disbursement/bank-payout/verify-bank-account)** resolves the beneficiary account holder name before you create a bank payout
+- For CRDB accounts (`bic` `CORUTZTZ`), lookup uses the CRDB account name check and returns `accountName`
+- Use the returned `accountName` in **[Create Bank Payout](/api-reference/disbursement/bank-payout/create-bank-payout)**
+
 ## CRDB Direct Debit and Payment Plans
 
 Collect recurring payments from customers' CRDB bank accounts after they approve a mandate:

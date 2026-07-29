@@ -19,6 +19,94 @@
     }
   ],
   "paths": {
+    "/payouts/verify-bank-account": {
+      "post": {
+        "tags": ["Payouts"],
+        "description": "Verifies a bank account and returns the account holder name when name lookup succeeds. For CRDB accounts (`bic` `CORUTZTZ`), this uses the CRDB account name check. Use the returned `accountName` when creating a bank payout.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["accountNumber", "bic"],
+                "properties": {
+                  "accountNumber": {
+                    "type": "string",
+                    "description": "Beneficiary bank account number",
+                    "example": "0150123456789"
+                  },
+                  "bic": {
+                    "type": "string",
+                    "description": "Beneficiary bank BIC. You can fetch the list of bank BICs from the [banks list endpoint.](/api-reference/list/get-bank-list). For CRDB use `CORUTZTZ`.",
+                    "example": "CORUTZTZ"
+                  }
+                }
+              },
+              "example": {
+                "bic": "CORUTZTZ",
+                "accountNumber": "0150123456789"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Verified bank account name",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/VerifyBankAccountResponse"
+                },
+                "example": {
+                  "accountName": "TEMBO SHOP"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid or Expired Token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedError"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Account not found or name lookup unavailable",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundError"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal Server Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/InternalServerError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/payouts/preview-bank-payout": {
       "post": {
         "tags": ["Payouts", "Preview"],
@@ -247,6 +335,27 @@
   },
   "components": {
     "schemas": {
+      "VerifyBankAccountResponse": {
+        "type": "object",
+        "required": ["accountName"],
+        "properties": {
+          "accountName": {
+            "type": "string",
+            "description": "Resolved beneficiary account holder name",
+            "example": "TEMBO SHOP"
+          }
+        }
+      },
+      "NotFoundError": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Error when the account cannot be verified or is not found",
+            "example": "Account not found"
+          }
+        }
+      },
       "PreviewBankPayoutResponse": {
         "type": "object",
         "properties": {
