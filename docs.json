@@ -295,7 +295,6 @@
           {
             "group": "BANK PAYOUTS",
             "pages": [
-              "api-reference/disbursement/bank-payout/verify-bank-account",
               "api-reference/disbursement/bank-payout/preview-bank-payout",
               "api-reference/disbursement/bank-payout/create-bank-payout",
               "api-reference/disbursement/bank-payout/querying-for-payouts",
