@@ -66,7 +66,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Response"
+                  "$ref": "#/components/schemas/CreateResponse"
                 }
               }
             }
@@ -172,7 +172,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Response"
+                  "$ref": "#/components/schemas/CreateResponse"
                 }
               }
             }
@@ -560,6 +560,16 @@
   },
   "components": {
     "schemas": {
+      "CreateResponse": {
+        "type": "object",
+        "properties": {
+          "billPayNumber": {
+            "type": "string",
+            "description": "BillPay number - This is the number that will be used to make payment. If a custom `billReference` was provided in the request, this will match that value.",
+            "example": "55042914871931"
+          }
+        }
+      },
       "Response": {
         "type": "object",
         "properties": {
