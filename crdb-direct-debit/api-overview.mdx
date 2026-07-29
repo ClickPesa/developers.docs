@@ -26,6 +26,8 @@ The CRDB Direct Debit API lets you request mandate approvals for recurring colle
 
 The response includes `mandateRequestId`, initial `mandateStatus` (**REQUESTED**), total amount, and number of installments.
 
+The customer then receives notifications with instructions on how to approve the mandate via their CRDB SIM-Banking App.
+
 ### Step 2 – Receive Mandate Status Callbacks
 
 ClickPesa sends an HTTP `POST` to your `mandateCallbackUrl` when the mandate status changes to **ACTIVE**, **REJECTED**, or **CANCELLED**.

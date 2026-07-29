@@ -15,14 +15,14 @@ Direct Debit collections appear in your [Merchant Dashboard](https://merchant.cl
 
 - **Installment collections:** School fees, loans, rent, or other payments spread over time
 - **Subscriptions and memberships:** Recurring charges on a daily, weekly, monthly, or yearly schedule
-- **Customer agreements:** Collect from a named customer after they approve the debit on their CRDB account
+- **Customer agreements:** Collect from a named customer after they approve the mandate via their CRDB SIM-Banking App
 - **Automated collection:** Reduce manual follow-up once the mandate is active
 
 ## How It Works
 
 1. **Activate** — Enable CRDB Direct Debit in your Merchant Dashboard under **Settings → Collection** (KYC and activation fee required).
 2. **Request mandate approval** — Create a Payment Plan in the dashboard, or call the API with the customer's CRDB account, SimBanking phone number, schedule, and installment amount.
-3. **Customer approves** — The customer confirms the mandate through CRDB. You receive a status update when it becomes **ACTIVE** or **REJECTED**.
+3. **Customer approves** — The customer receives notifications with instructions on how to approve the mandate via their CRDB SIM-Banking App. You receive a status update when it becomes **ACTIVE** or **REJECTED**.
 4. **Installments collect** — While the mandate is active, scheduled debits run automatically. Successful and failed collections are recorded as payments.
 5. **Optional cancel** — You can cancel an **ACTIVE** mandate (and the linked payment plan) from the dashboard or via the API.
 
@@ -34,7 +34,7 @@ A CRDB account can only have **one mandate at a time**. Cancel or complete any e
 
 | Status | Meaning |
 | --- | --- |
-| **REQUESTED** | Mandate submitted; waiting for customer / bank confirmation |
+| **REQUESTED** | Mandate submitted; customer receives notifications with instructions to approve via their CRDB SIM-Banking App |
 | **ACTIVE** | Mandate approved; scheduled collections can run |
 | **REJECTED** | Mandate was not approved; no installments will collect |
 | **CANCELLED** | Mandate revoked; further scheduled collections stop |
