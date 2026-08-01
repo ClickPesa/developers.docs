@@ -47,6 +47,10 @@ Bulk create up to **50 Order Control Numbers** per request. Same item shape as t
 Bulk create up to **50 Customer Control Numbers** per request. Same item shape as the single create endpoint. Supports partial success with per-item error reporting.
 </Card>
 
+<Note>
+You can pass your own references that already exist in your system (for example invoice IDs, loan IDs or order numbers) as `billReference`. That value becomes the customer-facing control number. It must be unique within ClickPesa for your account.
+</Note>
+
 
 ### Step 2 – Share BillPay Control Number
 

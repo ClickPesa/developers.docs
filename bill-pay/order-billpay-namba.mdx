@@ -17,6 +17,10 @@ New integrations should use the **BillPay API** to create order control numbers.
 When using the [BillPay API](/api-reference/collection/billpay/create-order-control-number), you get full control over the control number. You can directly set the **custom reference**, which becomes the **actual control number customers will use to pay**.
 This means the number does **not** need to follow the offline concatenation format.
 
+<Note>
+You can use your own references that already exist in your system (for example invoice, loan IDs or order IDs) as `billReference`. The value must be unique within ClickPesa for your account.
+</Note>
+
 With API generation, you can also:
 - **Set the amount** to be paid.
 - **Control payment mode**:

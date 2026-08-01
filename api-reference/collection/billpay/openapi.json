@@ -47,7 +47,7 @@
                   },
                   "billReference": {
                     "type": "string",
-                    "description": "Custom bill reference (alphanumeric). If provided, this will be the number used to make payment. If not provided, the system auto-generates one"
+                    "description": "Custom bill reference (alphanumeric). You can use your own references that already exist in your system (e.g. invoice or order IDs). If provided, this will be the number used to make payment. If not provided, the system auto-generates one"
                   }
                 }
               },
@@ -150,7 +150,7 @@
                   },
                   "billReference": {
                     "type": "string",
-                    "description": "Custom bill reference (alphanumeric). If provided, this will be the number used to make payment. If not provided, the system auto-generates one"
+                    "description": "Custom bill reference (alphanumeric). You can use your own references that already exist in your system (e.g. invoice or order IDs). If provided, this will be the number used to make payment. If not provided, the system auto-generates one"
                   }
                 }
               },
@@ -229,7 +229,7 @@
                     "items": {
                       "type": "object",
                       "properties": {
-                        "billReference": { "type": "string", "description": "Custom bill reference (alphanumeric, max 20 chars)" },
+                        "billReference": { "type": "string", "description": "Custom bill reference (alphanumeric, max 20 chars). You can use your own references that already exist in your system" },
                         "billAmount": { "type": "number", "description": "Amount of the bill" },
                         "billDescription": { "type": "string", "description": "Description of the bill" },
                         "billPaymentMode": { "type": "string", "enum": ["ALLOW_PARTIAL_AND_OVER_PAYMENT", "EXACT"], "description": "Payment mode. Applied only when billAmount is set" }
@@ -298,7 +298,7 @@
                         "customerName": { "type": "string", "description": "Name of the customer" },
                         "customerEmail": { "type": "string", "description": "Email (required if customerPhone not provided)" },
                         "customerPhone": { "type": "string", "description": "Phone - 12 digits, country code, no plus (required if customerEmail not provided)" },
-                        "billReference": { "type": "string", "description": "Custom bill reference" },
+                        "billReference": { "type": "string", "description": "Custom bill reference. You can use your own references that already exist in your system" },
                         "billAmount": { "type": "number", "description": "Amount of the bill" },
                         "billDescription": { "type": "string", "description": "Description of the bill" },
                         "billPaymentMode": { "type": "string", "enum": ["ALLOW_PARTIAL_AND_OVER_PAYMENT", "EXACT"], "description": "Payment mode" }
