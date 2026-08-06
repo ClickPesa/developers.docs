@@ -21,7 +21,7 @@ description: "The BillPay API enables you to create BillPay Control Numbers for 
  icon="brackets-curly"
  href="/api-reference/collection/billpay/create-order-control-number" horizontal>
 This endpoint creates an **Order Control Number** for a specific transaction or invoice.
-You can specify the **amount**, **payment mode** (full or partial), a **custom reference**, and other metadata.
+You can specify the **amount**, **payment mode** (full or partial), a **max total** that can be collected, a **custom reference**, and other metadata.
 </Card>
 
 <Card
@@ -29,7 +29,7 @@ You can specify the **amount**, **payment mode** (full or partial), a **custom r
  icon="brackets-curly"
  href="/api-reference/collection/billpay/create-customer-control-number" horizontal>
 This endpoint creates a **Customer Control Number** for a specific customer.
-You can include **customer name**, **bill description**, **amount**, and **payment mode**.
+You can include **customer name**, **bill description**, **amount**, a **max total** that can be collected, and **payment mode**.
 Multiple control numbers can be generated per customer for different bills or purposes.
 </Card>
 
@@ -110,7 +110,7 @@ This applies to order and customer control numbers you create through the BillPa
  title="Query BillPay Control Number Details"
  icon="brackets-curly"
  href="/api-reference/collection/billpay/querying-for-billpay-details" horizontal>
-Use this endpoint to retrieve full details of a BillPay Control Number, including, amount, reference, linked customer and invoice details.
+Use this endpoint to retrieve full details of a BillPay Control Number, including amount, max total, how much can still be collected, reference, linked customer and invoice details.
 This is useful for displaying bill details to customers or performing audits.
 </Card>
 
@@ -118,5 +118,5 @@ This is useful for displaying bill details to customers or performing audits.
  title="Update BillPay Control Number Details"
  icon="brackets-curly"
  href="/api-reference/collection/billpay/update-billpay-reference" horizontal>
- Use this endpoint to update a BillPay Control Number Details: **billStatus**, **billAmount**, **billDescription**, or **billPaymentMode**. Useful in reusing the reference number without recreating.
+ Use this endpoint to update a BillPay Control Number Details: **billStatus**, **billAmount**, **billMaxCollectionAmount**, **billDescription**, or **billPaymentMode**. Useful in reusing the reference number without recreating.
 </Card>

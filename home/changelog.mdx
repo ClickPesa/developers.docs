@@ -6,6 +6,25 @@ rss: true
 noindex: true
 ---
 
+<Update label="August 2026" tags={["New Feature", "BillPay", "API"]} rss={{ title: "Monthly Updates", description: "August 2026 - Product updates and improvements" }}>
+
+## BillPay: Cap How Much a Control Number Can Collect
+
+You can now set a maximum total amount for a BillPay control number when partial and over payments are allowed:
+
+- **Set a max on create or update:** Pass `billMaxCollectionAmount` when you [create](/api-reference/collection/billpay/create-customer-control-number) a control number (including bulk) or [update](/api-reference/collection/billpay/update-billpay-reference) an existing one
+- **Stops at the limit:** Each payment counts toward the max. If a payment would go over what’s left, it is rejected
+- **Closes when full:** Once the max is reached, the control number is marked inactive and no longer accepts payments
+- **Target amount still optional:** You can set a max with or without `billAmount`. If you set both, the max must be at least as large as the bill amount
+- **Change the max later:** Updating the max recalculates how much can still be collected based on what was already paid
+- **Reversals keep the used amount:** If a payment is reversed, that amount still counts toward the max
+- **Works with partial and over payments:** Use with payment mode `ALLOW_PARTIAL_AND_OVER_PAYMENT`
+- **See what’s left:** [Querying the control number](/api-reference/collection/billpay/querying-for-billpay-details) returns the max and how much can still be collected
+
+Learn more in the [BillPay API guide](/bill-pay/billpay-api-overview).
+
+</Update>
+
 <Update label="July 2026" tags={["New Feature", "Improvements", "KYC", "API", "Merchant Dashboard", "CRDB Direct Debit"]} rss={{ title: "Monthly Updates", description: "July 2026 - Product updates and improvements" }}>
 
 ## CRDB Direct Debit and Payment Plans

@@ -38,8 +38,9 @@ A **dynamic number** for a specific transaction or invoice.
 **Two ways to generate:**
 1. **Offline / Manual Concatenation:** Combine your Merchant BillPay-Namba with an internal order reference (e.g., `1122` + `231256` = `1122231256`). Quick way to accept online payments for offline invoices.
 2. **API Generation:** Create via [BillPay API](/api-reference/collection/billpay/create-order-control-number) with full flexibility:
-   - Set the **amount** to be paid.
+   - Set the **amount** to be paid (optional).
    - Control **payment mode**: full, partial, or over.
+   - Optionally set a **max total** that can be collected; the number closes when the limit is reached.
    - Add a **bill description**.
    - Provide a **custom reference** as the control number.
    - If no reference is provided, ClickPesa will **auto-generate** one.
@@ -56,6 +57,7 @@ A **static unique number** assigned to a specific customer.
    - Specify **customer name** (e.g., student, client).
    - Add **bill description** (e.g., Tuition Fees, Rent - July 2025 ).
    - Set **payment amount** and **mode** (full, partial, over).
+   - Optionally set a **max total** that can be collected across payments.
    - Allow **multiple control numbers per customer**, each for a different bill or purpose.
    - Provide a **custom reference** or let ClickPesa auto-generate one.
 

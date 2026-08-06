@@ -9,7 +9,7 @@ A webshop generates a BillPay Control Number at checkout and displays payment in
 
 - Customer selects mobile money or bank payment method.
 - Webshop generates the **Order BillPay Control Number**:
-  - Can be **offline concatenation** or **API-generated** for more control (set amount, partial payments, custom reference, description).
+  - Can be **offline concatenation** or **API-generated** for more control (set amount, payment mode, max total, custom reference, description).
 - Payment instructions, including mobile money USSD code and **Order BillPay Control Number**, are displayed.
 - The customer completes the payment via mobile money USSD, SIM banking, or CRDB Wakala.
 - The webshop receives **instant payment confirmation** via webhook or tracks it via [Query Payment API](/api-reference/collection/querying-for-payments/querying-for-payments).
@@ -23,6 +23,7 @@ Businesses can generate a BillPay Control Number for each invoice and send it to
 - API generation allows specifying:
   - Fixed amount or flexible amount.
   - Partial payments or overs.
+  - A max total that can be collected (optional).
   - Bill description for easy reconciliation.
 - Customer pays using mobile money, CRDB SIM banking, or Wakala.
 - The invoicing system automatically matches the payment using the [Query Payment API](/api-reference/collection/querying-for-payments/querying-for-payments) or webhooks.
@@ -49,6 +50,7 @@ Ideal for schools, gyms, or subscription services:
     - Specify **customer name**.
     - Add **bill description** (e.g., Fees, Pocket Money).
     - Set payment amount and mode (full, partial, over).
+    - Optionally set a **max total** so collections stop when the limit is reached.
     - Create multiple numbers for the same customer, each accepting multiple payments.
 - Customers can pay via mobile money, CRDB SIM banking, or Wakala.
 - Payments are tracked automatically via webhook or [Query Payment API](/api-reference/collection/querying-for-payments/querying-for-payments).

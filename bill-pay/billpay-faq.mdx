@@ -8,8 +8,9 @@ description: "Frequently Asked Questions about BillPay Control Numbers"
 **A:** You can now create an **Order BillPay Control Number via the [BillPay API](/api-reference/collection/billpay/create-order-control-number)**.
 
 - **API Generation:** Provides flexibility to specify:
-  - Amount to be paid
+  - Amount to be paid (optional)
   - Payment mode (full, partial, or over)
+  - Max total that can be collected (optional — closes the number when the limit is reached)
   - Bill description
   - Custom reference (used as the customer-facing control number)
   - If no custom reference is provided, ClickPesa will auto-generate one.
@@ -23,6 +24,20 @@ When a customer pays using the control number, ClickPesa routes the payment to y
 
 **A:** Yes. Partial payments are accepted **if enabled** during API creation.
 - You'll be notified of the amount received via **webhook**, **email**, and **dashboard notifications**.
+- If you also set a **max total** (`billMaxCollectionAmount`), the payment must fit within what’s left to collect.
+---
+
+[Can I limit how much can be collected on a control number?](#)
+
+**A:** Yes. When payment mode is `ALLOW_PARTIAL_AND_OVER_PAYMENT`, set **`billMaxCollectionAmount`** on create or update.
+
+- Each payment counts toward the max. A payment that would go over what’s left is rejected.
+- When the max is reached, the control number becomes inactive and stops accepting payments.
+- You can set a max with or without `billAmount`. If you set both, the max must be at least as large as the bill amount.
+- If a payment is reversed, that amount still counts toward the max.
+- Works best with **customer** control numbers if you expect several payments toward the same limit. **Order** control numbers still accept only one payment.
+
+See the [BillPay API](/bill-pay/billpay-api-overview) and [create customer control number](/api-reference/collection/billpay/create-customer-control-number).
 
 ---
 
@@ -39,6 +54,7 @@ When a customer pays using the control number, ClickPesa routes the payment to y
   - Designed for ongoing or repeat payments from the same customer.
   - Can receive multiple payments.
   - Ideal for **partial, recurring, or subscription payments**.
+  - If you set a **max total**, further payments stop once that limit is reached.
   - You can also create **multiple numbers per customer**, each tied to a different bill or purpose.
 
 ---
@@ -59,7 +75,8 @@ When a customer pays using the control number, ClickPesa routes the payment to y
 **A:** A **Customer BillPay Control Number** is a **static, permanent number** that remains **active indefinitely** until manually deactivated or removed.
 
 - **Designed for recurring payments:** Customer BillPay Control Numbers are created for ongoing relationships with customers and are intended for multiple transactions over time.
-- **No expiration:** Unlike Order BillPay Control Numbers, Customer BillPay Control Numbers do **not expire** and do **not close automatically** after payment.
+- **No expiration by default:** Unlike Order BillPay Control Numbers, Customer BillPay Control Numbers do **not expire** and do **not close automatically** after each payment.
+- **Exception — max total:** If you set `billMaxCollectionAmount`, the number becomes inactive when that limit is reached.
 - **Reusable for multiple payments:** The same Customer BillPay Control Number can be used repeatedly for **partial, recurring, or subscription payments** from the same customer.
 - **Multiple numbers per customer:** You can create **multiple Customer BillPay Control Numbers** for the same customer, each tied to a different bill or purpose (e.g., tuition, fees, pocket money).
 - **Manual management:** You can deactivate or remove Customer BillPay Control Numbers through the API when they are no longer needed.
@@ -78,6 +95,7 @@ When a customer pays using the control number, ClickPesa routes the payment to y
 - Provide the **customer name** (for Customer numbers)
 - Add a **bill description**
 - Set payment amount and mode
+- Set a **max total** that can be collected (`billMaxCollectionAmount`), when using partial and over payments
 - Provide a **custom reference** or let ClickPesa auto-generate one
 This improves reconciliation and reporting, especially for recurring or batch payments.
 

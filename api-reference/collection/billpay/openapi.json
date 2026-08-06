@@ -38,12 +38,17 @@
                       "EXACT"
                     ],
                     "default": "ALLOW_PARTIAL_AND_OVER_PAYMENT",
-                    "description": "Payment mode for the bill. Applied only when billAmount is set"
+                    "description": "Payment mode for the bill. Applied when `billAmount` is set, or when `billMaxCollectionAmount` is set (forced to `ALLOW_PARTIAL_AND_OVER_PAYMENT`)"
                   },
                   "billAmount": {
                     "type": "number",
-                    "description": "Amount of the bill",
+                    "description": "Target/expected bill payment amount",
                     "example": 90900
+                  },
+                  "billMaxCollectionAmount": {
+                    "type": "number",
+                    "description": "Maximum total amount this control number can collect. Closes when the limit is reached. Only with `ALLOW_PARTIAL_AND_OVER_PAYMENT`. If `billAmount` is also set, this must be at least `billAmount`.",
+                    "example": 150000
                   },
                   "billReference": {
                     "type": "string",
@@ -53,8 +58,9 @@
               },
               "example": {
                 "billDescription": "Water Bill - July 2024",
-                "billPaymentMode": "EXACT",
+                "billPaymentMode": "ALLOW_PARTIAL_AND_OVER_PAYMENT",
                 "billAmount": 90900,
+                "billMaxCollectionAmount": 150000,
                 "billReference": "CUSTOMJH121"
               }
             }
@@ -141,12 +147,17 @@
                       "EXACT"
                     ],
                     "default": "ALLOW_PARTIAL_AND_OVER_PAYMENT",
-                    "description": "Payment mode for the bill. Applied only when billAmount is set"
+                    "description": "Payment mode for the bill. Applied when `billAmount` is set, or when `billMaxCollectionAmount` is set (forced to `ALLOW_PARTIAL_AND_OVER_PAYMENT`)"
                   },
                   "billAmount": {
                     "type": "number",
-                    "description": "Amount of the bill",
+                    "description": "Target/expected bill payment amount",
                     "example": 90900
+                  },
+                  "billMaxCollectionAmount": {
+                    "type": "number",
+                    "description": "Maximum total amount this control number can collect. Closes when the limit is reached. Only with `ALLOW_PARTIAL_AND_OVER_PAYMENT`. If `billAmount` is also set, this must be at least `billAmount`.",
+                    "example": 150000
                   },
                   "billReference": {
                     "type": "string",
@@ -156,8 +167,9 @@
               },
               "example": {
                 "billDescription": "Water Bill - July 2024",
-                "billPaymentMode": "EXACT",
+                "billPaymentMode": "ALLOW_PARTIAL_AND_OVER_PAYMENT",
                 "billAmount": 90900,
+                "billMaxCollectionAmount": 150000,
                 "billReference": "CUSTOMJH121",
                 "customerName": "John Doe",
                 "customerEmail": "john@example.com",
@@ -219,7 +231,9 @@
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": ["controlNumbers"],
+                "required": [
+                  "controlNumbers"
+                ],
                 "properties": {
                   "controlNumbers": {
                     "type": "array",
@@ -229,10 +243,30 @@
                     "items": {
                       "type": "object",
                       "properties": {
-                        "billReference": { "type": "string", "description": "Custom bill reference (alphanumeric, max 20 chars). You can use your own references that already exist in your system" },
-                        "billAmount": { "type": "number", "description": "Amount of the bill" },
-                        "billDescription": { "type": "string", "description": "Description of the bill" },
-                        "billPaymentMode": { "type": "string", "enum": ["ALLOW_PARTIAL_AND_OVER_PAYMENT", "EXACT"], "description": "Payment mode. Applied only when billAmount is set" }
+                        "billReference": {
+                          "type": "string",
+                          "description": "Custom bill reference (alphanumeric, max 20 chars). You can use your own references that already exist in your system"
+                        },
+                        "billAmount": {
+                          "type": "number",
+                          "description": "Target/expected bill payment amount"
+                        },
+                        "billMaxCollectionAmount": {
+                          "type": "number",
+                          "description": "Maximum total amount this control number can collect. Closes when the limit is reached. Only with `ALLOW_PARTIAL_AND_OVER_PAYMENT`."
+                        },
+                        "billDescription": {
+                          "type": "string",
+                          "description": "Description of the bill"
+                        },
+                        "billPaymentMode": {
+                          "type": "string",
+                          "enum": [
+                            "ALLOW_PARTIAL_AND_OVER_PAYMENT",
+                            "EXACT"
+                          ],
+                          "description": "Payment mode. Applied when `billAmount` is set, or when `billMaxCollectionAmount` is set"
+                        }
                       }
                     }
                   }
@@ -240,8 +274,15 @@
               },
               "example": {
                 "controlNumbers": [
-                  { "billAmount": 25000, "billDescription": "Order 1" },
-                  { "billReference": "ORD002", "billAmount": 50000 }
+                  {
+                    "billAmount": 25000,
+                    "billMaxCollectionAmount": 75000,
+                    "billDescription": "Order 1"
+                  },
+                  {
+                    "billReference": "ORD002",
+                    "billAmount": 50000
+                  }
                 ]
               }
             }
@@ -252,7 +293,9 @@
             "description": "Bulk create result - may include partial success with per-item errors",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/BulkCreateResponse" }
+                "schema": {
+                  "$ref": "#/components/schemas/BulkCreateResponse"
+                }
               }
             }
           },
@@ -260,7 +303,9 @@
             "description": "Validation Error",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/ValidationError" }
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationError"
+                }
               }
             }
           },
@@ -268,7 +313,9 @@
             "description": "Unauthorized",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/UnauthorizedError" }
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedError"
+                }
               }
             }
           }
@@ -277,14 +324,16 @@
     },
     "/billpay/bulk-create-customer-control-numbers": {
       "post": {
-        "description": "Bulk create BillPay Customer Control Numbers (max 50 per request). Each item follows the single-create format. Supports partial success — valid items are created; invalid ones are returned in the errors array",
+        "description": "Bulk create BillPay Customer Control Numbers (max 50 per request). Each item follows the single-create format. Supports partial success \u2014 valid items are created; invalid ones are returned in the errors array",
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
                 "type": "object",
-                "required": ["controlNumbers"],
+                "required": [
+                  "controlNumbers"
+                ],
                 "properties": {
                   "controlNumbers": {
                     "type": "array",
@@ -293,15 +342,46 @@
                     "description": "Array of customer control number items",
                     "items": {
                       "type": "object",
-                      "required": ["customerName"],
+                      "required": [
+                        "customerName"
+                      ],
                       "properties": {
-                        "customerName": { "type": "string", "description": "Name of the customer" },
-                        "customerEmail": { "type": "string", "description": "Email (required if customerPhone not provided)" },
-                        "customerPhone": { "type": "string", "description": "Phone - 12 digits, country code, no plus (required if customerEmail not provided)" },
-                        "billReference": { "type": "string", "description": "Custom bill reference. You can use your own references that already exist in your system" },
-                        "billAmount": { "type": "number", "description": "Amount of the bill" },
-                        "billDescription": { "type": "string", "description": "Description of the bill" },
-                        "billPaymentMode": { "type": "string", "enum": ["ALLOW_PARTIAL_AND_OVER_PAYMENT", "EXACT"], "description": "Payment mode" }
+                        "customerName": {
+                          "type": "string",
+                          "description": "Name of the customer"
+                        },
+                        "customerEmail": {
+                          "type": "string",
+                          "description": "Email (required if customerPhone not provided)"
+                        },
+                        "customerPhone": {
+                          "type": "string",
+                          "description": "Phone - 12 digits, country code, no plus (required if customerEmail not provided)"
+                        },
+                        "billReference": {
+                          "type": "string",
+                          "description": "Custom bill reference. You can use your own references that already exist in your system"
+                        },
+                        "billAmount": {
+                          "type": "number",
+                          "description": "Target/expected bill payment amount"
+                        },
+                        "billMaxCollectionAmount": {
+                          "type": "number",
+                          "description": "Maximum total amount this control number can collect. Closes when the limit is reached. Only with `ALLOW_PARTIAL_AND_OVER_PAYMENT`."
+                        },
+                        "billDescription": {
+                          "type": "string",
+                          "description": "Description of the bill"
+                        },
+                        "billPaymentMode": {
+                          "type": "string",
+                          "enum": [
+                            "ALLOW_PARTIAL_AND_OVER_PAYMENT",
+                            "EXACT"
+                          ],
+                          "description": "Payment mode. Applied when `billAmount` is set, or when `billMaxCollectionAmount` is set"
+                        }
                       }
                     }
                   }
@@ -309,8 +389,17 @@
               },
               "example": {
                 "controlNumbers": [
-                  { "customerName": "John Doe", "customerEmail": "john@example.com", "billAmount": 25000 },
-                  { "customerName": "Jane Smith", "customerPhone": "255712345678", "billReference": "CUST002" }
+                  {
+                    "customerName": "John Doe",
+                    "customerEmail": "john@example.com",
+                    "billAmount": 25000,
+                    "billMaxCollectionAmount": 75000
+                  },
+                  {
+                    "customerName": "Jane Smith",
+                    "customerPhone": "255712345678",
+                    "billReference": "CUST002"
+                  }
                 ]
               }
             }
@@ -321,7 +410,9 @@
             "description": "Bulk create result - may include partial success with per-item errors",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/BulkCreateResponse" }
+                "schema": {
+                  "$ref": "#/components/schemas/BulkCreateResponse"
+                }
               }
             }
           },
@@ -329,7 +420,9 @@
             "description": "Validation Error",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/ValidationError" }
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationError"
+                }
               }
             }
           },
@@ -337,7 +430,9 @@
             "description": "Unauthorized",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/UnauthorizedError" }
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedError"
+                }
               }
             }
           }
@@ -392,13 +487,15 @@
         }
       },
       "patch": {
-        "description": "Partially updates a BillPay reference. Use to update amount, description, payment mode, or status without recreating the reference.",
+        "description": "Partially updates a BillPay reference. Use to update amount, description, payment mode, collection ceiling, or status without recreating the reference.",
         "parameters": [
           {
             "name": "billPayNumber",
             "in": "path",
             "required": true,
-            "schema": { "type": "string" },
+            "schema": {
+              "type": "string"
+            },
             "description": "BillPay number to update"
           }
         ],
@@ -412,13 +509,20 @@
                 "properties": {
                   "billStatus": {
                     "type": "string",
-                    "enum": ["ACTIVE", "INACTIVE"],
+                    "enum": [
+                      "ACTIVE",
+                      "INACTIVE"
+                    ],
                     "description": "Status of the BillPay reference"
                   },
                   "billAmount": {
                     "type": "number",
                     "minimum": 0.01,
-                    "description": "Amount of the bill (positive, max 2 decimal places)"
+                    "description": "Target/expected bill payment amount (positive, max 2 decimal places)"
+                  },
+                  "billMaxCollectionAmount": {
+                    "type": "number",
+                    "description": "New max total that can be collected. Remaining is recalculated from what was already paid. Only with `ALLOW_PARTIAL_AND_OVER_PAYMENT`."
                   },
                   "billDescription": {
                     "type": "string",
@@ -427,13 +531,17 @@
                   },
                   "billPaymentMode": {
                     "type": "string",
-                    "enum": ["ALLOW_PARTIAL_AND_OVER_PAYMENT", "EXACT"],
-                    "description": "Payment mode"
+                    "enum": [
+                      "ALLOW_PARTIAL_AND_OVER_PAYMENT",
+                      "EXACT"
+                    ],
+                    "description": "Payment mode. Switching to `EXACT` removes the collection limit."
                   }
                 }
               },
               "example": {
                 "billAmount": 50000,
+                "billMaxCollectionAmount": 100000,
                 "billDescription": "Updated order description"
               }
             }
@@ -444,7 +552,9 @@
             "description": "Successfully updated BillPay reference",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/UpdateBillPayReferenceResponse" }
+                "schema": {
+                  "$ref": "#/components/schemas/UpdateBillPayReferenceResponse"
+                }
               }
             }
           },
@@ -452,7 +562,9 @@
             "description": "Validation Error",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/ValidationError" }
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationError"
+                }
               }
             }
           },
@@ -460,7 +572,9 @@
             "description": "Unauthorized",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/UnauthorizedError" }
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedError"
+                }
               }
             }
           },
@@ -468,7 +582,9 @@
             "description": "Not found",
             "content": {
               "application/json": {
-                "schema": { "$ref": "#/components/schemas/NotFoundError" }
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundError"
+                }
               }
             }
           }
@@ -590,13 +706,23 @@
           },
           "billAmount": {
             "type": "number",
-            "description": "Amount of the bill",
+            "description": "Target/expected bill payment amount",
             "example": 90900
+          },
+          "billMaxCollectionAmount": {
+            "type": "number",
+            "description": "Max total this control number can collect",
+            "example": 150000
+          },
+          "billRemainingAmount": {
+            "type": "number",
+            "description": "How much can still be collected",
+            "example": 60000
           },
           "billPaymentMode": {
             "type": "string",
-            "description": "Payment mode for the bill. Applied only when billAmount is set",
-            "example": "EXACT"
+            "description": "Payment mode for the bill",
+            "example": "ALLOW_PARTIAL_AND_OVER_PAYMENT"
           }
         }
       },
@@ -605,18 +731,32 @@
         "properties": {
           "billPayNumbers": {
             "type": "array",
-            "items": { "type": "string" },
+            "items": {
+              "type": "string"
+            },
             "description": "Array of successfully created BillPay numbers"
           },
-          "created": { "type": "number", "description": "Count of successfully created control numbers" },
-          "failed": { "type": "number", "description": "Count of failed items" },
+          "created": {
+            "type": "number",
+            "description": "Count of successfully created control numbers"
+          },
+          "failed": {
+            "type": "number",
+            "description": "Count of failed items"
+          },
           "errors": {
             "type": "array",
             "items": {
               "type": "object",
               "properties": {
-                "index": { "type": "number", "description": "0-based index of the failed item in the request array" },
-                "reason": { "type": "string", "description": "Error message for the failed item" }
+                "index": {
+                  "type": "number",
+                  "description": "0-based index of the failed item in the request array"
+                },
+                "reason": {
+                  "type": "string",
+                  "description": "Error message for the failed item"
+                }
               }
             },
             "description": "Present only when failed > 0"
@@ -652,12 +792,23 @@
           },
           "billStatus": {
             "type": "string",
-            "enum": ["ACTIVE", "INACTIVE"],
+            "enum": [
+              "ACTIVE",
+              "INACTIVE"
+            ],
             "description": "The updated status of the BillPay reference"
           },
           "billAmount": {
             "type": "number",
-            "description": "Amount of the bill"
+            "description": "Target/expected bill payment amount"
+          },
+          "billMaxCollectionAmount": {
+            "type": "number",
+            "description": "Max total this control number can collect"
+          },
+          "billRemainingAmount": {
+            "type": "number",
+            "description": "How much can still be collected"
           },
           "billDescription": {
             "type": "string",
@@ -665,7 +816,10 @@
           },
           "billPaymentMode": {
             "type": "string",
-            "enum": ["ALLOW_PARTIAL_AND_OVER_PAYMENT", "EXACT"],
+            "enum": [
+              "ALLOW_PARTIAL_AND_OVER_PAYMENT",
+              "EXACT"
+            ],
             "description": "Payment mode"
           }
         }
