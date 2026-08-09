@@ -6,7 +6,18 @@ rss: true
 noindex: true
 ---
 
-<Update label="August 2026" tags={["New Feature", "BillPay", "API"]} rss={{ title: "Monthly Updates", description: "August 2026 - Product updates and improvements" }}>
+<Update label="August 2026" tags={["Improvements",, "API", "Payout"]} rss={{ title: "Monthly Updates", description: "August 2026 - Product updates and improvements" }}>
+
+## Bank payouts: Settlement set by ClickPesa
+
+ClickPesa now auto sets settlement for bank payouts:
+
+- Keep sending `transferType` on [preview](/api-reference/disbursement/bank-payout/preview-bank-payout) and [create](/api-reference/disbursement/bank-payout/create-bank-payout)
+- Use the response `transferType` for the value that was or will be applied
+- TZS: ACH up to **20,000,000 TZS**, RTGS above that
+- USD: RTGS
+
+See the [Bank Payout API overview](/payout-api/bank-payout-api/bank-payout-api-overview).
 
 ## BillPay: Cap How Much a Control Number Can Collect
 

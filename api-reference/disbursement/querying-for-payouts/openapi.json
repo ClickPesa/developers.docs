@@ -131,10 +131,11 @@
             },
             "transferType": {
               "type": "string",
-              "description": "Transfer type - when applicable",
+              "description": "Settlement applied to the payout, when applicable.",
               "enum": [
                 "ACH",
-                "RTGS"
+                "RTGS",
+                "GTB"
               ]
             },
             "notes": {

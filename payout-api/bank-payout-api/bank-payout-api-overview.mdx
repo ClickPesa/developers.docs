@@ -5,11 +5,19 @@ description: "The Bank Payout API enables you to send payouts directly to recipi
 
 ## Prerequisites
 
-1. **API Keys** -  
+1. **API Keys** -
    [Generate API Keys](/application/api-application-setup) for Hosted Checkout integration.
 
-2. **Authorization Token** -  
+2. **Authorization Token** -
    Use **API Keys** to [Generate Authorization Token](/api-reference/authorization/generate-token).
+
+## Settlement type
+
+ClickPesa auto sets the settlement for each bank payout.
+
+- Check the response `transferType` for what was/will be applied
+- For TZS, amounts up to **20,000,000 TZS** typically use ACH; higher amounts use RTGS
+- USD bank payouts use RTGS
 
 ## How It Works
 

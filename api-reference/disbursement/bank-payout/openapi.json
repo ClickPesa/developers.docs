@@ -22,7 +22,7 @@
     "/payouts/preview-bank-payout": {
       "post": {
         "tags": ["Payouts", "Preview"],
-        "description": "Validates bank payout details like amount, order-reference and verifies payout channels availability. When beneficiary name lookup is available for the selected bank, the response may include the account holder name.",
+        "description": "Validates bank payout details like amount, order-reference and verifies payout channels availability. When beneficiary name lookup is available for the selected bank, the response may include the account holder name. ClickPesa sets the settlement; response `transferType` shows what was applied.",
         "requestBody": {
           "required": true,
           "content": {
@@ -65,7 +65,8 @@
                   },
                   "transferType": {
                     "type": "string",
-                    "enum": ["ACH", "RTGS"]
+                    "enum": ["ACH", "RTGS"],
+                    "description": "Required. ClickPesa sets the final settlement — see the response `transferType`."
                   },
                   "checksum": {
                     "type": "string",
@@ -133,6 +134,7 @@
     "/payouts/create-bank-payout": {
       "post": {
         "tags": ["Payouts", "Initiate"],
+        "description": "Creates a bank payout. ClickPesa sets the settlement; response `transferType` shows what was applied.",
         "requestBody": {
           "required": true,
           "content": {
@@ -179,7 +181,8 @@
                   },
                   "transferType": {
                     "type": "string",
-                    "enum": ["ACH", "RTGS"]
+                    "enum": ["ACH", "RTGS"],
+                    "description": "Required. ClickPesa sets the final settlement — see the response `transferType`."
                   },
                   "checksum": {
                     "type": "string",
@@ -353,7 +356,9 @@
           },
           "transferType": {
             "type": "string",
-            "enum": ["ACH", "RTGS"]
+            "enum": ["ACH", "RTGS", "GTB"],
+            "description": "Settlement applied to this payout.",
+            "example": "ACH"
           }
         }
       },
@@ -433,8 +438,9 @@
           },
           "transferType": {
             "type": "string",
-            "enum": ["ACH", "RTGS"],
+            "enum": ["ACH", "RTGS", "GTB"],
             "nullable": true,
+            "description": "Settlement applied to this payout.",
             "example": "ACH"
           },
           "order": {
