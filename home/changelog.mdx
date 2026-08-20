@@ -8,6 +8,16 @@ noindex: true
 
 <Update label="August 2026" tags={["Improvements",, "API", "Payout"]} rss={{ title: "Monthly Updates", description: "August 2026 - Product updates and improvements" }}>
 
+## Bank payouts: Estimated arrival
+
+Bank payout [preview](/api-reference/disbursement/bank-payout/preview-bank-payout) and [create](/api-reference/disbursement/bank-payout/create-bank-payout) now return `estimatedArrival`, so you can tell recipients when funds are expected to arrive:
+
+- **Set expectations before you send:** Preview returns `estimatedArrival` so you can show customers whether the payout is **Instant** or **1-3 Working Days**
+- **Same value after create:** Create includes the same `estimatedArrival` on the payout response, so your records and customer messaging stay aligned
+- **Two possible values:** `Instant` or `1-3 Working Days`
+
+See the [Bank Payout API overview](/payout-api/bank-payout-api/bank-payout-api-overview).
+
 ## Bank payouts: Settlement set by ClickPesa
 
 ClickPesa now auto sets settlement for bank payouts:
