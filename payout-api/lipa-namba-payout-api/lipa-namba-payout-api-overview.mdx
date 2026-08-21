@@ -1,0 +1,99 @@
+---
+title: "Lipa Namba Payout API"
+description: "Send money to any Lipa Namba or TanQR in Tanzania, instantly."
+---
+
+You can now send money to any Lipa Namba or TanQR in Tanzania, instantly.
+
+<Note>
+This API **pays out to** someone else's Lipa Namba or TanQR. Collecting payments **via** your own TanQR/Lipa Namba is a separate product — see [TanQR/Lipa Namba](/tan-qr/tan-qr-overview).
+</Note>
+
+Preview checks the destination, the recipient's name, the fee, and your balance. Then create sends the payout.
+
+Pay from **TZS** or **USD** (`currency`). Recipients always receive **TZS**. When you pay from USD, preview and create responses include `exchanged` and `exchange`.
+
+Provide **exactly one** destination:
+
+- `lipaNamba` + `providerCode` (from the providers list), or
+- `qrCode` (full TanQR string containing `tz.go.bot.tips`)
+
+Preview runs a name lookup. If the beneficiary name cannot be resolved, preview fails — do not create until preview succeeds.
+
+<Warning>
+[Create Lipa Namba Payout](/api-reference/disbursement/lipa-namba-payout/create-lipa-namba-payout) allows one create request every **60 seconds** per merchant. Creating another payout before the cooldown ends returns an error with the remaining wait time. Preview is not affected.
+</Warning>
+
+<Note>
+Lipa Namba payouts are asynchronous. Treat create `AUTHORIZED` as **accepted**, not settled. Notify on acceptance, then send a **second** notification when status is `SUCCESS` or `REFUNDED`. See [Payout statuses](/home/payout-status).
+</Note>
+
+## Prerequisites
+
+1. **API Keys** -
+   [Generate API Keys](/application/api-application-setup) for Hosted Checkout integration.
+
+2. **Authorization Token** -
+   Use **API Keys** to [Generate Authorization Token](/api-reference/authorization/generate-token).
+
+## How It Works
+
+**Step 1** - Retrieve Account Balance
+
+<Card
+  title="Retrieve Account Balance"
+  icon="brackets-curly"
+  href="/api-reference/account/get-account-balance"
+  horizontal
+>
+  Retrieve your available account balance to ensure sufficient funds for
+  processing payouts.
+</Card>
+
+**Step 2** - Retrieve Lipa Namba Providers
+
+<Card
+  title="Retrieve Lipa Namba Providers"
+  icon="brackets-curly"
+  href="/api-reference/disbursement/lipa-namba-payout/list-lipa-namba-providers"
+  horizontal
+>
+  Retrieve supported providers and their `providerCode` values. Required when
+  paying with `lipaNamba`.
+</Card>
+
+**Step 3** - Validate Payout Details
+
+<Card
+  title="Preview Lipa Namba Payout"
+  icon="brackets-curly"
+  href="/api-reference/disbursement/lipa-namba-payout/preview-lipa-namba-payout"
+  horizontal
+>
+  Validates the Lipa Namba or TanQR, resolves the beneficiary name, and
+  returns fee and balance impact.
+</Card>
+
+**Step 4** - Initiate Lipa Namba Payout
+
+<Card
+  title="Create Lipa Namba Payout"
+  icon="brackets-curly"
+  href="/api-reference/disbursement/lipa-namba-payout/create-lipa-namba-payout"
+  horizontal
+>
+  Initiate the payout. The specified amount is transferred to the recipient’s
+  Lipa Namba.
+</Card>
+
+**Step 5** - Check Payout Status
+
+<Card
+  title="Check Payout Status"
+  icon="brackets-curly"
+  href="/api-reference/disbursement/lipa-namba-payout/querying-for-payouts"
+  horizontal
+>
+  Query the payout status using the **Order Reference**. Filter all payouts
+  with `channel=TIPS LIPA NAMBA`.
+</Card>

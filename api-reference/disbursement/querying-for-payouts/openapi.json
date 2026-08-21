@@ -109,6 +109,7 @@
               "type": "string",
               "description": "Payout status",
               "enum": [
+                "AUTHORIZED",
                 "SUCCESS",
                 "PROCESSING",
                 "PENDING",
@@ -122,7 +123,8 @@
               "description": "Payout channel",
               "enum": [
                 "BANK TRANSFER",
-                "MOBILE MONEY"
+                "MOBILE MONEY",
+                "TIPS LIPA NAMBA"
               ]
             },
             "channelProvider": {

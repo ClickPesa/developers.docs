@@ -6,7 +6,18 @@ rss: true
 noindex: true
 ---
 
-<Update label="August 2026" tags={["Improvements",, "API", "Payout"]} rss={{ title: "Monthly Updates", description: "August 2026 - Product updates and improvements" }}>
+<Update label="August 2026" tags={["New Feature", "Improvements", "API", "Payout"]} rss={{ title: "Monthly Updates", description: "August 2026 - Product updates and improvements" }}>
+
+## Lipa Namba Payout API
+
+You can now send money to any Lipa Namba or TanQR in Tanzania, instantly.
+
+- **[List providers](/api-reference/disbursement/lipa-namba-payout/list-lipa-namba-providers)**, then [preview](/api-reference/disbursement/lipa-namba-payout/preview-lipa-namba-payout) and [create](/api-reference/disbursement/lipa-namba-payout/create-lipa-namba-payout)
+- Pay with `lipaNamba` + `providerCode`, or with a TanQR `qrCode`
+- Preview resolves the beneficiary name before you create
+- Create is often `AUTHORIZED` (accepted). Use [payout status](/home/payout-status) or webhooks until `SUCCESS` or `REFUNDED`
+
+See the [Lipa Namba Payout API overview](/payout-api/lipa-namba-payout-api/lipa-namba-payout-api-overview).
 
 ## Bank payouts: Estimated arrival
 

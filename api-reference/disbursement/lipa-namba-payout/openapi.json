@@ -19,70 +19,65 @@
     }
   ],
   "paths": {
-    "/payouts/preview-bank-payout": {
+    "/payouts/lipa-namba-providers": {
+      "get": {
+        "tags": ["Payouts", "Lipa Namba"],
+        "description": "Returns the list of Lipa Namba providers.",
+        "responses": {
+          "200": {
+            "description": "Lipa Namba providers",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/LipaNambaProvidersResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid or Expired Token",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UnauthorizedError"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Validation Error",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ValidationError"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/payouts/preview-lipa-namba-payout": {
       "post": {
         "tags": ["Payouts", "Preview"],
-        "description": "Validates a bank payout and returns the fee, balance, and estimated arrival.",
+        "description": "Validates a Lipa Namba or TanQR payout and returns the fee, balance, and beneficiary name.",
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "required": [
-                  "amount",
-                  "orderReference",
-                  "accountNumber",
-                  "currency",
-                  "bic"
-                ],
-                "properties": {
-                  "amount": {
-                    "type": "number"
-                  },
-                  "accountNumber": {
-                    "type": "string"
-                  },
-                  "currency": {
-                    "type": "string",
-                    "enum": ["TZS", "USD"],
-                    "description": "Account currency to pay out from (TZS or USD)"
-                  },
-                  "accountCurrency": {
-                    "type": "string",
-                    "enum": ["TZS"],
-                    "default": "TZS",
-                    "description": "Receiving currency for the payout (TZS)"
-                  },
-                  "orderReference": {
-                    "type": "string",
-                    "description": "Your unique Order reference"
-                  },
-                  "bic": {
-                    "type": "string",
-                    "description": "Beneficiary bank BIC. You can fetch the list of bank BICs from the [banks list endpoint.](/api-reference/list/get-bank-list)"
-                  },
-                  "transferType": {
-                    "type": "string",
-                    "enum": ["ACH", "RTGS"],
-                    "description": "Optional. Accepted for existing integrations. ClickPesa selects the settlement rail — use the response `transferType`."
-                  },
-                  "checksum": {
-                    "type": "string",
-                    "description": "If enabled, this is the generated checksum of the payload. Refer to the [documentation](/home/checksum) for more details."
-                  }
-                }
+                "$ref": "#/components/schemas/LipaNambaPayoutRequest"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "Bank payout preview response",
+            "description": "Lipa Namba payout preview response",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/PreviewBankPayoutResponse"
+                  "$ref": "#/components/schemas/PreviewLipaNambaPayoutResponse"
                 }
               }
             }
@@ -130,74 +125,27 @@
         }
       }
     },
-    "/payouts/create-bank-payout": {
+    "/payouts/create-lipa-namba-payout": {
       "post": {
-        "tags": ["Payouts", "Initiate"],
-        "description": "Sends a payout to a bank account.",
+        "tags": ["Payouts", "Create"],
+        "description": "Sends a payout to a Lipa Namba or TanQR.",
         "requestBody": {
           "required": true,
           "content": {
             "application/json": {
               "schema": {
-                "type": "object",
-                "required": [
-                  "amount",
-                  "orderReference",
-                  "accountNumber",
-                  "currency",
-                  "bic",
-                  "accountName"
-                ],
-                "properties": {
-                  "amount": {
-                    "type": "number"
-                  },
-                  "accountNumber": {
-                    "type": "string"
-                  },
-                  "accountName": {
-                    "type": "string"
-                  },
-                  "currency": {
-                    "type": "string",
-                    "enum": ["TZS", "USD"],
-                    "description": "Account currency to pay out from (TZS or USD)"
-                  },
-                  "accountCurrency": {
-                    "type": "string",
-                    "enum": ["TZS"],
-                    "default": "TZS",
-                    "description": "Receiving currency for the payout (TZS)"
-                  },
-                  "orderReference": {
-                    "type": "string",
-                    "description": "Your unique Order reference"
-                  },
-                  "bic": {
-                    "type": "string",
-                    "description": "Beneficiary bank BIC. You can fetch the list of bank BICs from the [banks list endpoint.](/api-reference/list/get-bank-list)"
-                  },
-                  "transferType": {
-                    "type": "string",
-                    "enum": ["ACH", "RTGS"],
-                    "description": "Optional. Accepted for existing integrations. ClickPesa selects the settlement rail — use the response `transferType`."
-                  },
-                  "checksum": {
-                    "type": "string",
-                    "description": "If enabled, this is the generated checksum of the payload. Refer to the [documentation](/home/checksum) for more details."
-                  }
-                }
+                "$ref": "#/components/schemas/LipaNambaPayoutRequest"
               }
             }
           }
         },
         "responses": {
           "200": {
-            "description": "Create bank payout response",
+            "description": "Create Lipa Namba payout response",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/CreateBankPayoutResponse"
+                  "$ref": "#/components/schemas/CreateLipaNambaPayoutResponse"
                 }
               }
             }
@@ -248,26 +196,81 @@
   },
   "components": {
     "schemas": {
-      "PreviewBankPayoutResponse": {
+      "LipaNambaPayoutRequest": {
+        "type": "object",
+        "required": ["amount", "orderReference", "currency"],
+        "properties": {
+          "amount": {
+            "type": "number",
+            "description": "Your payout amount"
+          },
+          "currency": {
+            "type": "string",
+            "enum": ["TZS", "USD"],
+            "description": "Account currency to pay out from (TZS or USD). Recipient receives TZS."
+          },
+          "orderReference": {
+            "type": "string",
+            "description": "Your unique Order reference"
+          },
+          "lipaNamba": {
+            "type": "string",
+            "description": "Recipient Lipa Namba (merchant code). Required if `qrCode` is not sent. Do not send with `qrCode`.",
+            "example": "48001268"
+          },
+          "providerCode": {
+            "type": "string",
+            "description": "Required when `lipaNamba` is provided. Use a `providerCode` from [Retrieve Lipa Namba Providers](/api-reference/disbursement/lipa-namba-payout/list-lipa-namba-providers).",
+            "example": "503"
+          },
+          "qrCode": {
+            "type": "string",
+            "description": "Full TanQR string. Must include `tz.go.bot.tips`. Required if `lipaNamba` is not sent. Do not send with `lipaNamba`."
+          },
+          "checksum": {
+            "type": "string",
+            "description": "If enabled, this is the generated checksum of the payload. Refer to the [documentation](/home/checksum) for more details."
+          }
+        }
+      },
+      "LipaNambaProvidersResponse": {
+        "type": "array",
+        "items": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Display name of the provider",
+              "example": "Vodacom M-Pesa"
+            },
+            "providerCode": {
+              "type": "string",
+              "description": "Pass as `providerCode` when using `lipaNamba`",
+              "example": "503"
+            }
+          }
+        }
+      },
+      "PreviewLipaNambaPayoutResponse": {
         "type": "object",
         "properties": {
           "amount": {
             "type": "number",
             "description": "Total amount to be deducted from your account balance (includes fee)",
-            "example": 1047.1
+            "example": 10100
           },
           "balance": {
             "type": "number",
-            "example": 2000
+            "example": 250000
           },
           "channelProvider": {
             "type": "string",
-            "example": "AMANA BANK LIMITED"
+            "example": "Vodacom M-Pesa"
           },
           "fee": {
             "type": "number",
             "description": "Transaction fee deducted from source currency (included in amount)",
-            "example": 47.1
+            "example": 100
           },
           "exchanged": {
             "type": "boolean",
@@ -306,7 +309,7 @@
               "amount": {
                 "type": "number",
                 "description": "Amount to be added during order creation/payload",
-                "example": 1000
+                "example": 10000
               },
               "currency": {
                 "type": "string",
@@ -323,50 +326,34 @@
             "example": "merchant",
             "enum": ["merchant", "both", "customer"]
           },
-          "nameLookupStatus": {
-            "type": "string",
-            "enum": ["RESOLVED", "UNAVAILABLE"],
-            "description": "Indicates whether the beneficiary name was resolved. `RESOLVED` when `receiver.accountName` is present; `UNAVAILABLE` when lookup did not return a name."
-          },
           "receiver": {
             "type": "object",
             "properties": {
-              "accountNumber": {
-                "type": "string",
-                "example": "0112345400847jhs"
-              },
               "accountName": {
                 "type": "string",
-                "description": "Beneficiary account holder name when lookup succeeds. Omitted when `nameLookupStatus` is `UNAVAILABLE`.",
-                "example": "TEMBO SHOP"
+                "description": "Name returned from Lipa Namba lookup. Preview fails if this cannot be resolved.",
+                "example": "ACME TRADERS LTD"
+              },
+              "accountNumber": {
+                "type": "string",
+                "description": "Lipa Namba / merchant code credited",
+                "example": "48001268"
               },
               "accountCurrency": {
                 "type": "string",
-                "description": "Currency the user will receive funds in",
+                "description": "Currency the recipient will receive funds in",
                 "example": "TZS"
               },
               "amount": {
                 "type": "number",
-                "description": "Amount the user will receive in accountCurrency",
-                "example": 1000
+                "description": "Amount the recipient will receive in TZS",
+                "example": 10000
               }
             }
-          },
-          "transferType": {
-            "type": "string",
-            "enum": ["ACH", "RTGS", "GTB"],
-            "description": "Settlement applied to this payout.",
-            "example": "ACH"
-          },
-          "estimatedArrival": {
-            "type": "string",
-            "enum": ["Instant", "1-3 Working Days"],
-            "description": "Expected time for funds to arrive.",
-            "example": "Instant"
           }
         }
       },
-      "CreateBankPayoutResponse": {
+      "CreateLipaNambaPayoutResponse": {
         "type": "object",
         "properties": {
           "updatedAt": {
@@ -381,12 +368,13 @@
             "type": "string"
           },
           "orderReference": {
-            "type": "string"
+            "type": "string",
+            "description": "Your unique order reference"
           },
           "amount": {
             "type": "string",
             "description": "Total amount deducted from your account balance (includes fee)",
-            "example": "202360.00"
+            "example": "10100.00"
           },
           "currency": {
             "type": "string",
@@ -395,7 +383,7 @@
           "fee": {
             "type": "string",
             "description": "Transaction fee deducted from source currency (included in amount)",
-            "example": "2360.00"
+            "example": "100.00"
           },
           "exchanged": {
             "type": "boolean",
@@ -430,28 +418,15 @@
           },
           "status": {
             "type": "string",
-            "enum": ["AUTHORIZED", "SUCCESS", "REVERSED"]
+            "enum": ["AUTHORIZED", "PROCESSING", "SUCCESS", "FAILED", "REFUNDED", "REVERSED"]
           },
           "channel": {
             "type": "string",
-            "enum": ["BANK TRANSFER"]
+            "enum": ["TIPS LIPA NAMBA"]
           },
           "channelProvider": {
             "type": "string",
-            "example": "Equity Bank Tanzania Limited"
-          },
-          "transferType": {
-            "type": "string",
-            "enum": ["ACH", "RTGS", "GTB"],
-            "nullable": true,
-            "description": "Settlement applied to this payout.",
-            "example": "ACH"
-          },
-          "estimatedArrival": {
-            "type": "string",
-            "enum": ["Instant", "1-3 Working Days"],
-            "description": "Expected time for funds to arrive.",
-            "example": "Instant"
+            "example": "Vodacom M-Pesa"
           },
           "order": {
             "type": "object",
@@ -459,7 +434,7 @@
               "amount": {
                 "type": "string",
                 "description": "Amount added during order creation/payload",
-                "example": "20000.00"
+                "example": "10000.00"
               },
               "currency": {
                 "type": "string",
@@ -472,11 +447,12 @@
             "properties": {
               "accountNumber": {
                 "type": "string",
-                "example": "123456789"
+                "example": "48001268"
               },
               "accountName": {
                 "type": "string",
-                "example": "John Doe"
+                "description": "Beneficiary name from Lipa Namba lookup",
+                "example": "ACME TRADERS LTD"
               }
             }
           },
@@ -493,12 +469,16 @@
             "type": "string",
             "enum": [
               "Valid Client ID is required",
-              "Unsupported channel provider",
               "Application has no access to PAYOUT API feature. Enable it on your application.",
               "Invalid Order Reference, should only contain alphanumeric characters and cannot be blank",
-              "Insufficient balance: available balance is {balance} TZS"
+              "lipaNamba or qrCode is required",
+              "Provide either lipaNamba or qrCode, not both",
+              "providerCode is required when lipaNamba is provided",
+              "Lipa Namba beneficiary name could not be resolved. Preview is required before payout.",
+              "Insufficient balance: available balance is {balance} TZS",
+              "Payout request is already in progress, please retry after {remaining time} seconds"
             ],
-            "example": "Invalid Order Reference, should only contain alphanumeric characters and cannot be blank"
+            "example": "lipaNamba or qrCode is required"
           }
         }
       },

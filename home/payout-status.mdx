@@ -14,6 +14,10 @@ icon: "circle-info"
 | `REVERSED`   | Payout failed and funds has been returned due to Provider errors.         |
 | `PROCESSING` | Payout is currently being processed.                                      |
 
+<Note>
+[Lipa Namba payouts](/payout-api/lipa-namba-payout-api/lipa-namba-payout-api-overview) are asynchronous. Treat `AUTHORIZED` as **accepted**, not settled. Send a final notification only when status is `SUCCESS` or `REFUNDED`.
+</Note>
+
 ## Payment Status in the ClickPesa Dashboard
 
 - You can view the payment status in the [ClickPesa Dashboard](https://merchant.clickpesa.com) under the [Transactions](https://merchant.clickpesa.com/transactions) section.

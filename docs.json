@@ -211,6 +211,12 @@
         ]
       },
       {
+        "tab": "Lipa Namba Payout API",
+        "pages": [
+          "payout-api/lipa-namba-payout-api/lipa-namba-payout-api-overview"
+        ]
+      },
+      {
         "tab": "ClickPesa Payout Widgets",
         "hidden": true,
         "pages": [
@@ -300,6 +306,16 @@
               "api-reference/disbursement/bank-payout/querying-for-payouts",
               "api-reference/disbursement/bank-payout/query-all-payouts",
               "api-reference/list/get-bank-list"
+            ]
+          },
+          {
+            "group": "LIPA NAMBA PAYOUTS",
+            "pages": [
+              "api-reference/disbursement/lipa-namba-payout/list-lipa-namba-providers",
+              "api-reference/disbursement/lipa-namba-payout/preview-lipa-namba-payout",
+              "api-reference/disbursement/lipa-namba-payout/create-lipa-namba-payout",
+              "api-reference/disbursement/lipa-namba-payout/querying-for-payouts",
+              "api-reference/disbursement/lipa-namba-payout/query-all-payouts"
             ]
           },
           {
