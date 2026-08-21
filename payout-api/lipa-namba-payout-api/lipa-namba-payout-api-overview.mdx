@@ -9,6 +9,8 @@ You can now send money to any Lipa Namba or TanQR in Tanzania, instantly.
 This API **pays out to** someone else's Lipa Namba or TanQR. Collecting payments **via** your own TanQR/Lipa Namba is a separate product — see [TanQR/Lipa Namba](/tan-qr/tan-qr-overview).
 </Note>
 
+To send a Lipa Namba payout without code, use [Single Payout](/dashboard/disbursement/single-payout) in the Merchant Dashboard (Lipa Namba + provider, with **Verify Name**). Dashboard payouts do not support TanQR scan — use this API for `qrCode`.
+
 Preview checks the destination, the recipient's name, the fee, and your balance. Then create sends the payout.
 
 Pay from **TZS** or **USD** (`currency`). Recipients always receive **TZS**. When you pay from USD, preview and create responses include `exchanged` and `exchange`.

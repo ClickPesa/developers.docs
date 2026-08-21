@@ -4,7 +4,7 @@ description: "Send a payout to one beneficiary from the Merchant Dashboard"
 ---
 
 <Note>
-For programmatic payouts, see the [Mobile Payouts API](/payout-api/mobile-money-payout-api/mobile-money-payout-api-overview) or [Bank Payout API](/payout-api/bank-payout-api/bank-payout-api-overview).
+For programmatic payouts, see the [Mobile Payouts API](/payout-api/mobile-money-payout-api/mobile-money-payout-api-overview), [Bank Payout API](/payout-api/bank-payout-api/bank-payout-api-overview), or [Lipa Namba Payout API](/payout-api/lipa-namba-payout-api/lipa-namba-payout-api-overview).
 </Note>
 
 ## How to send a single payout
@@ -21,7 +21,7 @@ In order to be able to make a single payout make sure you have enough balance on
 
 **Initiating a Single Payout**
 
-On a Payout page, A 'Create Payout` button will appear on top right conner. Upon clicking it, a drawer will open with one field to fill, 'Send Via' which allows you to select between BANK or MOBILE MONEY.
+On a Payout page, A 'Create Payout` button will appear on top right conner. Upon clicking it, a drawer will open with one field to fill, 'Send Via' which allows you to select between BANK, MOBILE MONEY, or Lipa Namba.
 
 <Frame>
   <img src="/images/knowledge-base/image-9-1024x69.png" alt="Image 9 1024x69" />
@@ -31,7 +31,7 @@ On a Payout page, A 'Create Payout` button will appear on top right conner. Upon
   <img src="/images/knowledge-base/image-11-1024x616.png" alt="Image 11 1024x616" />
 </Frame>
 
-Selecting BANK or MOBILE MONEY, will show other fields related to selected option explained below.
+Selecting BANK, MOBILE MONEY, or Lipa Namba, will show other fields related to selected option explained below.
 
 **What are the payout details?**
 
@@ -74,6 +74,22 @@ The following are the fields you will find when doing single payout for **MOBILE
 | Mobile Network Name | [MOBILE MONEY PROVIDER NAME](/dashboard/disbursement/bulk-payouts#mobile-money-provider-names) | TIGO PESA |
 | Mobile Network Account Name | Name of the MOBILE MONEY WALLET | John Doe |
 | Account Number | Phone Number (format 12 digits including 255 and no 0) | 255789101219 |
+
+After filling in those details, there will be an option or a button to add note to recipient. This note includes **Email** and **Message** and they are optional. Filling in these fields will ensure Recipient receives notification via Email or SMS upon successfully payout.
+
+The following are the fields you will find when doing single payout for **Lipa Namba**
+
+| Fields | Explanation | Example |
+| --- | --- | --- |
+| Receiving Channel | Lipa Namba | Lipa Namba |
+| Amount | Send from TZS or USD. The recipient always receives TZS. | 100,000 TZS |
+| Provider | Lipa Namba provider | Vodacom M-Pesa |
+| Lipa Namba | The Lipa Namba number | 123456 |
+| Account Name | Filled by **Verify Name**. Required before you can continue. | JOHN DOE |
+
+Click **Verify Name** after entering the Lipa Namba and provider. The beneficiary name is required — you cannot type it in.
+
+You can send from a TZS or USD balance. The recipient always receives TZS.
 
 After filling in those details, there will be an option or a button to add note to recipient. This note includes **Email** and **Message** and they are optional. Filling in these fields will ensure Recipient receives notification via Email or SMS upon successfully payout.
 
@@ -156,7 +172,7 @@ What will this mean on the payouts?
 
 ### How to create single payout
 
-1. On a Payout page, A 'Create Payout` button will appear on top right conner. Upon clicking it, a drawer will open with one field to fill, 'Send Via' which allows you to select between BANK or MOBILE MONEY.
+1. On a Payout page, A 'Create Payout` button will appear on top right conner. Upon clicking it, a drawer will open with one field to fill, 'Send Via' which allows you to select between BANK, MOBILE MONEY, or Lipa Namba.
 2. Fill in details per method selected. Find explanation [here](#payout-details) on what details to fill on those fields
 
 <Frame>
@@ -169,7 +185,7 @@ What will this mean on the payouts?
 <img src="/images/knowledge-base/SCR-20231207-sgww.png" alt="Merchant Dashboard screenshot" />
 </Frame>
 
-On the summary step, you can use **Save Beneficiary Details** to store this recipient for later. On the next payout, choose a saved beneficiary to fill in the details automatically. Works for both **Mobile Money** and **Bank Transfer**.
+On the summary step, you can use **Save Beneficiary Details** to store this recipient for later. On the next payout, choose a saved beneficiary to fill in the details automatically. Works for **Mobile Money**, **Bank Transfer**, and **Lipa Namba**. Saving a Lipa Namba beneficiary requires **Verify Name**.
 
 4. If everything is correct, Click Payout button to initiate the payout.
 5. OTP will be sent out to your registered phone number. You will be prompted with OTP field to confirm the payout with options to resend if OTP was not received on your phone number.
@@ -194,6 +210,10 @@ This is important feature as it helps reduce human errors especially when you en
 </Frame>  
 **Note**: Its currently supported only on **Mixx By Yas** (`TIGOPESA`) and **AIRTELMONEY** Mobile Payouts Only
 
+### Ability to verify Lipa Namba names before paying out
+
+When paying out to a Lipa Namba, click **Verify Name** after you enter the number and provider. The name is required before you can continue.
+
 ### How to view single payouts
 
 1. On a Payout page, it contains the summary and table of all single payouts.
@@ -202,7 +222,7 @@ This is important feature as it helps reduce human errors especially when you en
 <img src="/images/knowledge-base/SCR-20240401-qcml.png" alt="Merchant Dashboard screenshot" />
 </Frame>
 
-2. You will be able to filter payouts summary and data by date, status, channels, and searching by reference, account name, account number, channel or channel provider.
+2. You will be able to filter payouts summary and data by date, status, channels (**MOBILE MONEY**, **BANK TRANSFER**, **LIPA NAMBA**), and searching by reference, account name, account number or Lipa Namba, channel, or channel provider.
 
 <Frame>
 <img src="/images/knowledge-base/SCR-20240401-qepb.png" alt="Merchant Dashboard screenshot" />
@@ -271,7 +291,7 @@ Single payouts are ideal for various scenarios, such as:
 ## **Frequently Asked Questions (FAQ)**
 
 1. **Can I use ClickPesa for single payouts if my customers do not have ClickPesa accounts?**
-   - Yes, your customers or recipients do not need ClickPesa accounts to receive single payouts. ClickPesa disburses to existing bank accounts and mobile money wallets.
+   - Yes, your customers or recipients do not need ClickPesa accounts to receive single payouts. ClickPesa disburses to existing bank accounts, mobile money wallets, and Lipa Namba.
 2. **What happens if I make a mistake and send a payment to the wrong recipient using ClickPesa's Single Payout feature?**
    - It's important to ensure that recipient details are accurate when initiating a single payout. If the details are incorrect, the transaction may fail, and the funds will be returned to your ClickPesa account. This process may take a few days.
 3. **Can I track the details of the single payouts I've made using ClickPesa?**

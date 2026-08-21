@@ -6,7 +6,19 @@ rss: true
 noindex: true
 ---
 
-<Update label="August 2026" tags={["New Feature", "Improvements", "API", "Payout"]} rss={{ title: "Monthly Updates", description: "August 2026 - Product updates and improvements" }}>
+<Update label="August 2026" tags={["New Feature", "Improvements", "API", "Payout", "Merchant Dashboard"]} rss={{ title: "Monthly Updates", description: "August 2026 - Product updates and improvements" }}>
+
+## Lipa Namba payouts on the Merchant Dashboard
+
+You can now send Lipa Namba payouts from the [Merchant Dashboard](https://merchant.clickpesa.com), alongside bank and mobile money.
+
+- **Send Via Lipa Namba:** On [Single Payout](/dashboard/disbursement/single-payout), choose Lipa Namba, pick a provider, enter the number, and click **Verify Name**. The beneficiary name is required before you can continue
+- **TZS or USD send:** Pay from a TZS or USD balance. The recipient always receives TZS
+- **Saved beneficiaries:** Store a Lipa Namba (provider + number) after Verify Name, then reuse it on the next payout
+- **List, filter, search, and export:** Filter Channel by **LIPA NAMBA**, search by Lipa Namba number, and include Lipa Namba payouts in CSV, Excel, and QuickBooks exports
+- Lipa Namba are not currently supported on Bulk Payouts
+
+Dashboard payouts use Lipa Namba + provider (no TanQR scan). TanQR scan remains available on the API.
 
 ## Lipa Namba Payout API
 
