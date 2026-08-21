@@ -60,7 +60,7 @@ To use this feature, you have to create a file with the payout details following
 | Transfer Type | Only applicable for Bank Transfer | ACH |
 | Note To Recipient (optional) | Note to Recipient | This is the payout for gasoline usage 4 June 2023. |
 | Recipient Contacts (optional) | Email or Phone Number (format 12 digits including 255 and no 0) | 255789101219 |
-| Language (optional) | SWAHILI or ENGLISH (see [Payout Notification Examples](#payout-notification-examples)) | SWAHILI |
+| Language (optional) | Language for this beneficiary notification only: `SWAHILI` or `ENGLISH` (see [Payout Notification Examples](#payout-notification-examples)). Overrides your [Settings → General](/dashboard/settings/general) default for this send. Leave blank to use the dashboard default. | SWAHILI |
 
 Note:
 
@@ -120,7 +120,7 @@ This are the bank receiving channels we support, make sure to use this names men
 
 ### Notifications
 
-Notifications are sent to beneficiary when payout is initiated using merchant default language which can be set [here](/dashboard/settings/general).
+Notifications are sent to the beneficiary in your [default language](/dashboard/settings/general), unless the payout row includes **Language**. That value is used only for that beneficiary notification and does not change your saved Settings → General default.
 
 Once payout is successfully initiated to beneficiary you will receive notification in your merchant dashboard and email.
 

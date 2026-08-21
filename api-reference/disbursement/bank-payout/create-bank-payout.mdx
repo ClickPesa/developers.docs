@@ -2,3 +2,7 @@
 title: "Create Bank Payout"
 openapi: "POST /payouts/create-bank-payout"
 ---
+
+<Warning>
+Create requests are limited to one per merchant every **60 seconds**. Re-submitting earlier returns an error with the remaining wait time.
+</Warning>

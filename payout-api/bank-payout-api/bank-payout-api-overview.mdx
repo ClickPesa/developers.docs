@@ -3,6 +3,14 @@ title: "Bank Payout API"
 description: "The Bank Payout API enables you to send payouts directly to recipients' bank accounts in Tanzania."
 ---
 
+Preview a bank payout to confirm fees, settlement, estimated arrival, and — when the bank supports it — the beneficiary account name. Then create the payout to send funds to the recipient's Tanzanian bank account.
+
+Pay from **TZS** or **USD** (`currency`). Recipients receive **TZS**. When the source currency differs from the receiving currency, preview and create responses include `exchanged` and `exchange`.
+
+<Warning>
+[Create Bank Payout](/api-reference/disbursement/bank-payout/create-bank-payout) allows one create request every **60 seconds** per merchant. Creating another payout before the cooldown ends returns an error with the remaining wait time. Preview is not affected.
+</Warning>
+
 ## Prerequisites
 
 1. **API Keys** -
@@ -11,14 +19,24 @@ description: "The Bank Payout API enables you to send payouts directly to recipi
 2. **Authorization Token** -
    Use **API Keys** to [Generate Authorization Token](/api-reference/authorization/generate-token).
 
-## Settlement type
+## Settlement
 
-ClickPesa auto sets the settlement for each bank payout.
+ClickPesa uses the best available route for each bank payout. Request `transferType` is optional — existing integrations can keep sending `ACH` or `RTGS`, but it does not select the rail. Use the response `transferType` for the value that was or will be applied.
 
-- Check the response `transferType` for what was/will be applied
-- For TZS, amounts up to **20,000,000 TZS** typically use ACH; higher amounts use RTGS
-- USD bank payouts use RTGS
-- Preview and create responses include `estimatedArrival` (`Instant` or `1-3 Working Days`)
+Typical settlement:
+
+- TZS up to **20,000,000 TZS**: ACH
+- TZS above that: RTGS
+- USD: RTGS
+
+Preview and create also return `estimatedArrival` (`Instant` or `1-3 Working Days`).
+
+## Beneficiary name lookup
+
+[Preview Bank Payout](/api-reference/disbursement/bank-payout/preview-bank-payout) may include the account holder name when lookup succeeds for the selected bank.
+
+- `nameLookupStatus` is `RESOLVED` when `receiver.accountName` is present
+- `nameLookupStatus` is `UNAVAILABLE` when lookup did not return a name — `receiver.accountName` is omitted. Pass your own verified name on [Create Bank Payout](/api-reference/disbursement/bank-payout/create-bank-payout)
 
 ## How It Works
 
@@ -42,8 +60,8 @@ ClickPesa auto sets the settlement for each bank payout.
   href="/api-reference/list/get-bank-list"
   horizontal
 >
-  Retrieve your available account balance to ensure sufficient funds for
-  processing payouts.
+  Retrieve the list of supported banks and their BICs to use when previewing
+  and creating a payout.
 </Card>
 
 **Step 3** - Validate Payout Details
@@ -55,7 +73,8 @@ ClickPesa auto sets the settlement for each bank payout.
   horizontal
 >
   Validates bank payout details like **bank name**, **amount**, **order
-  reference**, and **fee** before processing the payout.
+  reference**, and **fee** before processing the payout. May include the
+  beneficiary account name when lookup is available.
 </Card>
 
 **Step 4** - Initiate Bank Payout

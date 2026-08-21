@@ -34,8 +34,7 @@
                   "orderReference",
                   "accountNumber",
                   "currency",
-                  "bic",
-                  "transferType"
+                  "bic"
                 ],
                 "properties": {
                   "amount": {
@@ -66,7 +65,7 @@
                   "transferType": {
                     "type": "string",
                     "enum": ["ACH", "RTGS"],
-                    "description": "Required. ClickPesa sets the final settlement — see the response `transferType`."
+                    "description": "Optional. Accepted for existing integrations. ClickPesa selects the settlement rail — use the response `transferType`."
                   },
                   "checksum": {
                     "type": "string",
@@ -134,7 +133,7 @@
     "/payouts/create-bank-payout": {
       "post": {
         "tags": ["Payouts", "Initiate"],
-        "description": "Creates a bank payout. ClickPesa sets the settlement; response `transferType` shows what was applied.",
+        "description": "Creates a bank payout. ClickPesa sets the settlement; response `transferType` shows what was applied. Limited to one create request every 60 seconds per merchant; re-submitting earlier returns an error with the remaining wait time.",
         "requestBody": {
           "required": true,
           "content": {
@@ -147,7 +146,6 @@
                   "accountNumber",
                   "currency",
                   "bic",
-                  "transferType",
                   "accountName"
                 ],
                 "properties": {
@@ -182,7 +180,7 @@
                   "transferType": {
                     "type": "string",
                     "enum": ["ACH", "RTGS"],
-                    "description": "Required. ClickPesa sets the final settlement — see the response `transferType`."
+                    "description": "Optional. Accepted for existing integrations. ClickPesa selects the settlement rail — use the response `transferType`."
                   },
                   "checksum": {
                     "type": "string",

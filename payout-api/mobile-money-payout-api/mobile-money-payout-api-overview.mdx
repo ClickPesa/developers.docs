@@ -3,6 +3,14 @@ title: "Mobile Payouts API"
 description: "Send payouts directly to recipients' mobile money wallets."
 ---
 
+Preview a mobile money payout to confirm the phone number, amount, fee, and available balance. Then create the payout to send funds to the recipient's mobile wallet.
+
+Pay from **TZS** or **USD** (`currency`). Recipients always receive **TZS** — mobile wallets cannot hold USD. When you pay from USD, preview and create responses include `exchanged` and `exchange`.
+
+<Warning>
+[Create Mobile Money Payout](/api-reference/disbursement/mno-payout/create-mno-payout) allows one create request every **60 seconds** per merchant. Creating another payout before the cooldown ends returns an error with the remaining wait time. Preview is not affected.
+</Warning>
+
 ## Prerequisites
 
 1. **API Keys** -
@@ -14,8 +22,6 @@ description: "Send payouts directly to recipients' mobile money wallets."
 ## How It Works
 
 **Step 1** - Retrieve Account Balance
-
-{" "}
 
 <Card
   title="Retrieve account balance"
@@ -29,8 +35,6 @@ description: "Send payouts directly to recipients' mobile money wallets."
 
 **Step 2** - Validate payout details
 
-{" "}
-
 <Card
   title="Preview Mobile Money Payout"
   icon="brackets-curly"
@@ -43,8 +47,6 @@ description: "Send payouts directly to recipients' mobile money wallets."
 
 **Step 3** - Initiate Mobile Money Payout
 
-{" "}
-
 <Card
   title="Create Mobile Money Payout"
   icon="brackets-curly"
@@ -56,8 +58,6 @@ description: "Send payouts directly to recipients' mobile money wallets."
 </Card>
 
 **Step 4** - Check payout status
-
-{" "}
 
 <Card
   title="Check Payout Status"

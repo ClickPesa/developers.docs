@@ -119,7 +119,7 @@
     "/payouts/create-mobile-money-payout": {
       "post": {
         "tags": ["Payouts", "Create"],
-        "description": "Initiate a mobile money payout by sending a request to the API. The specified amount will be transferred to the recipient's mobile wallet.",
+        "description": "Initiate a mobile money payout by sending a request to the API. The specified amount will be transferred to the recipient's mobile wallet. Limited to one create request every 60 seconds per merchant; re-submitting earlier returns an error with the remaining wait time.",
         "requestBody": {
           "required": true,
           "content": {

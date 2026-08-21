@@ -2,3 +2,7 @@
 title: "Preview Bank Payout"
 openapi: "POST /payouts/preview-bank-payout"
 ---
+
+<Note>
+When name lookup is available for the selected bank, the response includes `nameLookupStatus` (`RESOLVED` or `UNAVAILABLE`). If `UNAVAILABLE`, `receiver.accountName` is omitted — pass your own verified name on [Create Bank Payout](/api-reference/disbursement/bank-payout/create-bank-payout).
+</Note>
