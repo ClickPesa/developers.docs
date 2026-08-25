@@ -50,9 +50,10 @@ To fully use this feature, refer to the [Payment methods documentation](/dashboa
 
 2. Fill in the following information about the payment page and submit
    1. Name of the page
-   2. Amount to be paid
-   3. Currency of the amount
-   4. Description (if applicable). To add description, click add description button, this will open a description field as shown below.
+   2. Amount mode
+      - **Fixed amount:** Set the amount and currency. Use this for tickets, products, or a set price. Whether the payer can change that amount is controlled by **Allow Amount Update** in [Collection settings](/dashboard/settings/collection)
+      - **Open amount:** Choose the currency only. The payer enters how much to pay on checkout. Use this for donations and other contributions where the amount is not fixed
+   3. Description (optional). Click **Add description** to open the description field as shown below.
 
 <Frame>
 <img src="/images/knowledge-base/payment-page-description.svg" alt="Payment Page Description" />
@@ -61,7 +62,8 @@ To fully use this feature, refer to the [Payment methods documentation](/dashboa
 <Frame>
         <img src="/images/knowledge-base/payment-page-add-page-description.svg" alt="Payment Page Add Page Description" />
       </Frame>
-   5. Customer details (if applicable) To add customer, click create for a customer button, this will open a customer field as shown below.
+   4. Expiry date (optional). Click **Add expiry date** to set a last day the page can accept payments. After that date, the page stops accepting payments
+   5. Customer (optional). Click **Attach customer** to open the customer field as shown below.
 
 <Frame>
 <img src="/images/knowledge-base/payment-payment-create.svg" alt="Payment Payment Create" />
@@ -71,11 +73,15 @@ To fully use this feature, refer to the [Payment methods documentation](/dashboa
         <img src="/images/knowledge-base/payment-page-add-new-customer.png" alt="Payment Page Add New Customer" />
       </Frame>
    6. Image of the product or service (if applicable).
-3. When clicking the link, you will be redirected to a single payment page URL. Here, you can view a summary of the page and a list of all payments made for that page.
+3. After you create the page, open it from the list to see a summary and all payments made for that page.
 
 ### How to share a payment page
 
-1. To share payment page link with your customers, copy the link which is shown on the summary with label Payment Page Checkout Link, click the copy icon as shown on the image below to copy the URL. This can then be shared on e-mail, WhatsApp, website or any other communication channel.
+1. Open the payment page. Under **Actions**, you can:
+   - **Open Page** — open the hosted checkout page in a new tab
+   - **Copy Link** — copy the checkout URL to share by email, WhatsApp, your website, or any other channel
+   - **Share WhatsApp** — open WhatsApp with the checkout link ready to send
+   - **Download QR** — download a QR code image of the checkout link
 
 <Frame>
 <img src="/images/knowledge-base/sharepage.png" alt="Sharepage" />
@@ -111,10 +117,10 @@ When creating a payment page, if you know which payment method the customers are
 
 ## Common Use Cases
 
-1. Events, festivals and sport facilities can use Payment Pages to sell online tickets.
-2. Educational institutions can use Payment Pages to collect school contributions from students and their parents.
+1. Events, festivals and sport facilities can use a **fixed amount** Payment Page to sell online tickets.
+2. Educational institutions can use Payment Pages to collect school contributions from students and their parents. Use **open amount** when each contribution can differ, or **fixed amount** when the fee is set.
 3. Microfinances can use Payment Pages to receive funds from their customers. This not only facilitates easier collection of loan repayments but also helps them keep track of customers who have paid and those who haven't, particularly in relation to loans.
-4. NGOs can use Payment Pages to accept contributions and donations from supporters, providing a convenient and transparent way to manage incoming funds.
+4. NGOs can use an **open amount** Payment Page to accept contributions and donations from supporters.
 
 ## Frequently Asked Questions (FAQ)
 

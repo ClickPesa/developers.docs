@@ -17,13 +17,18 @@ To initiate a payment, users must have a valid [Payment Page link](/dashboard/pa
 
 ### Payment Page
 
-When customers visit the Payment page, they will see the amount set for the payment page and its currency, and the payment page name, if the payment page has a customer then the customer’s name will be displayed. It will also show the merchant’s email at the bottom which customers can use to contact the merchant.
+When customers visit the payment page, they see the page name and, if a customer is attached, the customer’s name. The merchant’s email is shown at the bottom so customers can get in touch.
+
+- **Fixed amount:** The amount and currency are shown on the page
+- **Open amount:** No amount is shown until the customer enters one in checkout
+
+If the page has passed its expiry date or has been deactivated, it no longer accepts payments.
 
 <Frame>
   <img src="/images/knowledge-base/checkout-payment-page.png" alt="Checkout Payment Page" />
 </Frame>
 
-Lastly, there is a button called “Make Payment” which will open a drawer and allow the customer to fill in the details needed to make their payment. More about making payments in the section about [Filling Payment Details](#filling-details).
+Lastly, there is a **Pay Now** button which opens checkout so the customer can enter details and pay. More about making payments in the section about [Filling Payment Details](#filling-details).
 
 ### Invoice
 
@@ -76,7 +81,7 @@ Lastly, there is a button called “Make Payment” which will open a drawer and
 
 ## Filling Payment Details
 
-When a customer visits a valid Payment Page, Invoice, or Checkout-Link link, they will see comprehensive details about the payment. This information includes the payment amount, the entity receiving the payment, and the customer's name if provided. Users can proceed by clicking the "Make Payment" button.
+When a customer visits a valid Payment Page, Invoice, or Checkout-Link link, they will see details about the payment — including the amount when one is set, who is receiving the payment, and the customer's name if provided. Users can proceed by clicking the "Pay Now" button.
 
 <Frame>
   <img src="/images/knowledge-base/image-7-1024x692.png" alt="Image 7 1024x692" />
@@ -92,7 +97,9 @@ If the Payment Page, Invoice, or Checkout-Link lacks customer details, users wil
 
 ### **Amount Section**
 
-For Payment Pages and Invoices, customers can enter a custom payment amount, which may differ from the originally assigned amount during order creation. However, for Checkout-Links, the amount field is disabled, and customers must pay the full amount as initially assigned during order creation.
+- **Open amount Payment Pages:** The amount field is empty. The customer must enter how much to pay
+- **Fixed amount Payment Pages and Invoices:** The amount is prefilled. Customers can change it only if **Allow Amount Update** is enabled in [Collection settings](/dashboard/settings/collection)
+- **Checkout Links:** The amount field is locked. Customers must pay the amount set when the link was created
 
 <Frame>
   <img src="/images/knowledge-base/image-5-1024x387.png" alt="Image 5 1024x387" />
