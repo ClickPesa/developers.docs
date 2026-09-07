@@ -6,9 +6,160 @@ icon: "rocket"
 
 Leverage our hosted or embedded functionality to go to market with your payments business quickly and securely. Power every payment flow with a single API. From pay-ins to pay-outs and everything in between, manage payment operations with ease.
 
+## First API call
+
+ClickPesa does not provide a sandbox. Every request, including the [API Explorer](/api-reference), runs against live production and moves real funds. Until [KYC is approved](/home/onboarding#limits-before-kyc-approval) you are limited to **TZS 100,000** across collections, payouts, deposits, and withdraws, and **100 API calls per day** (including token generation).
+
+Create an application and copy your Client ID and API Key from [API Integration Setup](/application/api-application-setup). Generate a token once, reuse it for up to **1 hour**, and preview with a small amount before you initiate. Full testing guidance: [Sandbox and Testing Environment](/home/sandbox-and-testing-environment).
+
+<CodeGroup>
+
+```bash cURL
+# 1. Generate a token (counts toward the pre-KYC daily API cap)
+curl -X POST https://api.clickpesa.com/third-parties/generate-token \
+  -H "client-id: YOUR_CLIENT_ID" \
+  -H "api-key: YOUR_API_KEY"
+
+# 2. Preview a small USSD Push (reuse TOKEN for up to 1 hour)
+# The generate-token response already prefixes token with "Bearer "
+curl -X POST https://api.clickpesa.com/third-parties/payments/preview-ussd-push-request \
+  -H "Authorization: TOKEN" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "amount": "1000",
+    "currency": "TZS",
+    "orderReference": "TEST001",
+    "phoneNumber": "255712345678"
+  }'
+```
+
+```javascript JavaScript
+const BASE_URL = "https://api.clickpesa.com/third-parties";
+
+async function generateToken(clientId, apiKey) {
+  const res = await fetch(`${BASE_URL}/generate-token`, {
+    method: "POST",
+    headers: {
+      "client-id": clientId,
+      "api-key": apiKey,
+    },
+  });
+  return res.json(); // { success, token } — token already includes "Bearer "
+}
+
+async function previewUssdPush(token, payload) {
+  const res = await fetch(`${BASE_URL}/payments/preview-ussd-push-request`, {
+    method: "POST",
+    headers: {
+      Authorization: token,
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(payload),
+  });
+  return res.json();
+}
+
+const { token } = await generateToken("YOUR_CLIENT_ID", "YOUR_API_KEY");
+
+const preview = await previewUssdPush(token, {
+  amount: "1000",
+  currency: "TZS",
+  orderReference: "TEST001", // alphanumeric, max 20 characters
+  phoneNumber: "255712345678",
+});
+
+console.log(preview);
+```
+
+```python Python
+import requests
+
+BASE_URL = "https://api.clickpesa.com/third-parties"
+
+def generate_token(client_id, api_key):
+    response = requests.post(
+        f"{BASE_URL}/generate-token",
+        headers={"client-id": client_id, "api-key": api_key},
+    )
+    response.raise_for_status()
+    return response.json()  # { "success", "token" } — token already includes "Bearer "
+
+def preview_ussd_push(token, payload):
+    response = requests.post(
+        f"{BASE_URL}/payments/preview-ussd-push-request",
+        headers={"Authorization": token, "Content-Type": "application/json"},
+        json=payload,
+    )
+    response.raise_for_status()
+    return response.json()
+
+token = generate_token("YOUR_CLIENT_ID", "YOUR_API_KEY")["token"]
+
+preview = preview_ussd_push(
+    token,
+    {
+        "amount": "1000",
+        "currency": "TZS",
+        "orderReference": "TEST001",  # alphanumeric, max 20 characters
+        "phoneNumber": "255712345678",
+    },
+)
+
+print(preview)
+```
+
+```php PHP
+<?php
+$baseUrl = "https://api.clickpesa.com/third-parties";
+
+$ch = curl_init("$baseUrl/generate-token");
+curl_setopt_array($ch, [
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_POST => true,
+  CURLOPT_HTTPHEADER => [
+    "client-id: YOUR_CLIENT_ID",
+    "api-key: YOUR_API_KEY",
+  ],
+]);
+$tokenResponse = json_decode(curl_exec($ch), true);
+curl_close($ch);
+
+$token = $tokenResponse["token"]; // already includes "Bearer "
+
+$payload = json_encode([
+  "amount" => "1000",
+  "currency" => "TZS",
+  "orderReference" => "TEST001", // alphanumeric, max 20 characters
+  "phoneNumber" => "255712345678",
+]);
+
+$ch = curl_init("$baseUrl/payments/preview-ussd-push-request");
+curl_setopt_array($ch, [
+  CURLOPT_RETURNTRANSFER => true,
+  CURLOPT_POST => true,
+  CURLOPT_HTTPHEADER => [
+    "Authorization: $token",
+    "Content-Type: application/json",
+  ],
+  CURLOPT_POSTFIELDS => $payload,
+]);
+$preview = curl_exec($ch);
+curl_close($ch);
+
+echo $preview;
+```
+
+</CodeGroup>
+
+`orderReference` on USSD Push must be alphanumeric and at most **20 characters**. Prefer [preview](/api-reference/collection/ussd-push-requests/preview-ussd-push-request) over [initiate](/api-reference/collection/ussd-push-requests/initiate-ussd-push-request) until the request looks correct.
+
 <CardGroup cols={2}>
   <Card title="Get Started With ClickPesa" icon="circle-play" href="/home/onboarding">
     Learn how to open a ClickPesa account for your business and complete KYC
+  </Card>
+
+  <Card title="Sandbox and Testing Environment" icon="flask" href="/home/sandbox-and-testing-environment">
+    No sandbox — test on live production with small amounts and the pre-KYC limits
   </Card>
 
   <Card title="Changelog" icon="timer" href="/home/changelog">
