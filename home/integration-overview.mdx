@@ -63,6 +63,21 @@ icon: "compass"
 - Use **[Card](/payment-api/card-payment-api/card-payment-api-overview)** when you want customers to pay with Visa, Mastercard, Amex, or UnionPay via a hosted checkout session.
 - Use **[CRDB Direct Debit](/crdb-direct-debit/crdb-direct-debit-overview)** when you need mandate-based recurring collections from CRDB accounts.
 
+## Sandbox and Testing Environment
+
+ClickPesa does not provide a sandbox or testing environment. All API calls, including those from the [API Explorer](/api-reference), run against the live production environment. Transactions move real funds.
+
+Until [KYC is approved](/home/onboarding#limits-before-kyc-approval), your account is limited to **TZS 100,000 total** across collections, payouts, deposits, and withdraws, and **100 API calls per day** (including [token generation](/api-reference/authorization/generate-token)). When the transaction cap is reached, payment actions pause until KYC is approved.
+
+Use these practices while integrating:
+
+- **Use small amounts.** Before KYC, keep test collections and payouts small so you do not exhaust the TZS 100,000 shared limit. After KYC, continue with small amounts while you validate your flow — there is still no sandbox.
+- **Reuse your JWT.** Tokens are valid for **1 hour**. Generating a new token on every request counts toward the daily API cap. Store the token and reuse it until it expires. See [API Integration Setup](/application/api-application-setup).
+- **Prefer preview and query over initiate.** Use preview endpoints to validate details, then initiate once. Query payment or payout status instead of sending the same request again. API Explorer calls count toward the daily limit as well.
+- **Leave IP whitelisting off while exploring.** Once you add a whitelisted IP, the [API Explorer stops working](/home/whitelisted-ip-address) for your account. Enable it when you are calling the API from your own servers.
+- **Configure webhooks early.** Point them at a reachable HTTPS URL so you can confirm live payment and payout outcomes without polling. See [Webhooks](/home/webhooks).
+- **Know what is blocked before KYC.** Card collections, TanQR/Lipa Namba, and CRDB Direct Debit cannot be enabled until KYC is approved. Complete [KYC](/home/onboarding#step-2-complete-kyc) to remove transaction and API limits and unlock those products.
+
 ## Additional Features & Considerations
 
 <CardGroup cols={2}>
