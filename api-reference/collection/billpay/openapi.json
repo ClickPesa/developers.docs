@@ -52,7 +52,8 @@
                   },
                   "billReference": {
                     "type": "string",
-                    "description": "Custom bill reference (alphanumeric). You can use your own references that already exist in your system (e.g. invoice or order IDs). If provided, this will be the number used to make payment. If not provided, the system auto-generates one"
+                    "maxLength": 20,
+                    "description": "Custom bill reference (alphanumeric, maximum 20 characters). You can use your own references that already exist in your system (e.g. invoice or order IDs). If provided, this will be the number used to make payment. If not provided, the system auto-generates one"
                   }
                 }
               },
@@ -161,7 +162,8 @@
                   },
                   "billReference": {
                     "type": "string",
-                    "description": "Custom bill reference (alphanumeric). You can use your own references that already exist in your system (e.g. invoice or order IDs). If provided, this will be the number used to make payment. If not provided, the system auto-generates one"
+                    "maxLength": 20,
+                    "description": "Custom bill reference (alphanumeric, maximum 20 characters). You can use your own references that already exist in your system (e.g. invoice or order IDs). If provided, this will be the number used to make payment. If not provided, the system auto-generates one"
                   }
                 }
               },
@@ -245,7 +247,8 @@
                       "properties": {
                         "billReference": {
                           "type": "string",
-                          "description": "Custom bill reference (alphanumeric, max 20 chars). You can use your own references that already exist in your system"
+                          "maxLength": 20,
+                          "description": "Custom bill reference (alphanumeric, maximum 20 characters). You can use your own references that already exist in your system"
                         },
                         "billAmount": {
                           "type": "number",
@@ -360,7 +363,8 @@
                         },
                         "billReference": {
                           "type": "string",
-                          "description": "Custom bill reference. You can use your own references that already exist in your system"
+                          "maxLength": 20,
+                          "description": "Custom bill reference (alphanumeric, maximum 20 characters). You can use your own references that already exist in your system"
                         },
                         "billAmount": {
                           "type": "number",

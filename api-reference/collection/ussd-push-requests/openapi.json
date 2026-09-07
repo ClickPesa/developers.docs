@@ -50,7 +50,8 @@
                   },
                   "orderReference": {
                     "type": "string",
-                    "description": "Your unique Order reference"
+                    "maxLength": 20,
+                    "description": "Your unique order reference. Alphanumeric, maximum 20 characters (mobile money provider limit)."
                   },
                   "phoneNumber": {
                     "type": "string",
@@ -156,7 +157,8 @@
                   },
                   "orderReference": {
                     "type": "string",
-                    "description": "Your unique Order reference"
+                    "maxLength": 20,
+                    "description": "Your unique order reference. Alphanumeric, maximum 20 characters (mobile money provider limit)."
                   },
                   "phoneNumber": {
                     "type": "string",
@@ -299,7 +301,8 @@
             "enum": [
               "Valid Client ID is required",
               "Application has no access to COLLECTION API feature. Enable it on your application.",
-              "Invalid Order Reference, should only contain alphanumeric characters and cannot be blank"
+              "Invalid Order Reference, should only contain alphanumeric characters and cannot be blank",
+              "Order Reference should be less than or equal to 20 characters"
             ],
             "example": "Invalid Order Reference, should only contain alphanumeric characters and cannot be blank"
           }
@@ -381,7 +384,8 @@
               "Invalid / unsupported phone number",
               "Valid Client ID is required",
               "Application has no access to COLLECTION API feature. Enable it on your application.",
-              "Invalid Order Reference, should only contain alphanumeric characters and cannot be blank"
+              "Invalid Order Reference, should only contain alphanumeric characters and cannot be blank",
+              "Order Reference should be less than or equal to 20 characters"
             ],
             "example": "Invalid / unsupported phone number"
           }

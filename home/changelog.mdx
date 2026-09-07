@@ -262,6 +262,17 @@ Learn more in [Account alerts](/dashboard/notifications#account-alerts).
 
 <Update label="January 2026" tags={["Breaking Change", "Improvements"]} rss={{ title: "Monthly Updates", description: "January 2026 - Product updates and improvements" }}>
 
+## Order Reference Length Validation for Push Payment APIs
+
+- Added order reference length validation for **USSD Push Payment** endpoints due to limitations from some mobile money providers
+- **Maximum length**: Order references are limited to **20 characters** for push payment requests
+- **Affected endpoints**:
+  - **[payments/preview-ussd-push-request](/api-reference/collection/ussd-push-requests/preview-ussd-push-request)**: Validates order reference length before previewing payment methods
+  - **[payments/initiate-ussd-push-request](/api-reference/collection/ussd-push-requests/initiate-ussd-push-request)**: Validates order reference length before initiating payment
+- **Validation behavior**: If the order reference exceeds 20 characters, the API returns `"Order Reference should be less than or equal to 20 characters"`
+
+BillPay custom **`billReference`** is also limited to **20 characters**. See [create order control number](/api-reference/collection/billpay/create-order-control-number).
+
 ## Enhanced Checksum Generation Algorithm
 
 - **Improved checksum generation** with support for **recursive canonicalization** and **JSON serialization** for better consistency and reliability

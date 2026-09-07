@@ -39,7 +39,8 @@
             "pages": [
               "home/integration-overview",
               "home/payment-status",
-              "home/payout-status"
+              "home/payout-status",
+              "home/sandbox-and-testing-environment"
             ]
           },
           {
