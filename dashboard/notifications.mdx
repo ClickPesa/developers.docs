@@ -1,12 +1,105 @@
 ---
 title: "Notifications"
-description: "Stay informed about payments, deposits, payouts, and withdrawals via email, in-app, and web notifications — plus account alerts in the dashboard"
+description: "Email and SMS for payments, payouts, and deposits — plus the dashboard bell and account alerts"
 ---
 
-The Merchant Dashboard keeps you informed in two ways:
+The person who needs to act on a payment is often not the one who created the ClickPesa account. If only one inbox sees it, money can sit unnoticed. After a customer pays, they also need a way to reach your business — a support email and phone, not a login address.
 
-1. **Transaction notifications** — real-time updates about payments, deposits, and payouts (bell icon, email, and web)
-2. **Account alerts** — banners at the top of relevant pages for setup, KYC, settlement, collection, and product updates
+**Settings → Notifications** lets you send the same payment, payout, and deposit alerts to your team, including by SMS. **Settings → General** lets you put a support contact on checkout, receipts, invoices, and payment confirmations.
+
+The dashboard also has:
+
+1. **In-app bell** — the notification icon in the header
+2. **Account alerts** — banners on relevant pages for setup, KYC, settlement, and product updates
+
+## Email and SMS
+
+Choose who gets transaction email and SMS, and in which language.
+
+**Default language**
+
+English or Swahili. Used for messages to you, your customers, and payout recipients, unless a payout row sets its own language.
+
+**Receiving emails**
+
+Up to **5** addresses. If no email is added, your **account email** is used. If you add emails, only those inboxes get transaction email.
+
+**Receiving SMS numbers**
+
+Up to **3** Tanzanian numbers in `+255` format. If no phone is added, your **account phone** is used. If you add phones, only those numbers get transaction SMS.
+
+**What you can turn off**
+
+Turn collections, disbursements, or deposits **off** if you do not want email or SMS for that activity.
+
+| Activity | Alerts |
+| --- | --- |
+| Collections | Payments received or unsuccessful, including when an invoice is paid |
+| Disbursements | Payouts and withdrawals sent, reversed, refunded, or unsuccessful |
+| Deposits | Deposit instructions, received, or unsuccessful |
+
+KYC, API keys, and Direct Debit updates always go to your **account email**. They are not sent as SMS.
+
+Invoice emails go to your **customer**. You are not emailed when you share, update, or mark an invoice paid. When they pay, that is a collection alert.
+
+<Steps>
+  <Step title="Open Settings → Notifications">
+    Open **Settings** from the bottom-left sidebar and select **Notifications**.
+  </Step>
+  <Step title="Edit">
+    Click **Edit**, then set language, receiving emails, SMS numbers, and which activities send alerts.
+  </Step>
+  <Step title="Save">
+    Click **Save**.
+  </Step>
+</Steps>
+
+Email and SMS are set on this page, not in the bell menu.
+
+## Customer support
+
+Customers who just paid — or a recipient waiting on a payout — will look for a way to reach you. Add a **customer support** email and phone under [Settings → General](/dashboard/settings/general). That contact is what they see on checkout, receipts, invoices, and payment confirmations. Your account email and phone stay private.
+
+**Customers** get a confirmation when they pay you, and an invoice email when you share, update, or mark an invoice paid.
+
+**Payout recipients** are notified when ClickPesa can reach them (for example their mobile money number). Add their email, phone, or a note if you want the message to include your business name and support contact.
+
+See [Single Payout](/dashboard/disbursement/single-payout) and [Bulk Payouts](/dashboard/disbursement/bulk-payouts).
+
+## In-app notifications
+
+<Steps>
+  <Step title="Open notifications">
+    Click the notification icon at the top right of the dashboard.
+
+    <Frame caption="Notification bell in the dashboard header.">
+      <img src="/images/knowledge-base/SCR-20240401-rwrz.png" alt="Notification icon in Merchant Dashboard header" />
+    </Frame>
+  </Step>
+  <Step title="Browse in-app notifications">
+    View payment, payout, and deposit updates in the notifications panel.
+
+    <Frame caption="In-app notifications list.">
+      <img src="/images/knowledge-base/SCR-20231116-rbmo.png" alt="In-app notifications panel" />
+    </Frame>
+  </Step>
+  <Step title="Open a notification">
+    Click a notification to open its details in a drawer.
+
+    <Frame caption="Single notification details.">
+      <img src="/images/knowledge-base/notification.png" alt="Notification detail drawer" />
+    </Frame>
+  </Step>
+  <Step title="Delete or mark as read">
+    Use the three-dot menu on a notification to delete it or mark it read or unread.
+
+    <Frame caption="Notification actions menu.">
+      <img src="/images/knowledge-base/SCR-20231116-rcrk.png" alt="Notification delete and mark as read menu" />
+    </Frame>
+  </Step>
+</Steps>
+
+If web notifications are enabled and you have granted permission for merchant.clickpesa.com, you can receive **web** notifications while logged in, even when the dashboard tab is in the background.
 
 ## Account alerts
 
@@ -19,106 +112,25 @@ Account alerts highlight actions that need your attention or share important pro
 - **Dismiss informational updates:** Product updates and similar messages can be dismissed after you’ve read them so they don’t keep reappearing
 - **Collapse when needed:** You can temporarily hide or expand alerts on a page while you work
 
-Account alerts are separate from the notification bell. Use [notification settings](#notification-settings) for payment, payout, and deposit preferences.
-
-## Transaction notifications
-
-Transaction notifications alert you to key account activity in real time. You can customize which transaction types and channels you receive alerts for.
-
-**Notification categories**
-
-1. **Payout** — payout initiated, refunded, or reversed
-2. **Deposit** — deposit instructions and confirmations
-3. **Local payment** — payments settled into your account
-4. **CRDB Direct Debit mandates** — mandate requested, approved, rejected, or cancelled (see [Payment Plans](/crdb-direct-debit/payment-plans))
-
-**Channels**
-
-1. **Email** — sent to your registered email address
-2. **In-app** — shown inside the Merchant Dashboard
-3. **Web** — browser notifications when logged in (Safari support may vary)
-
-## View notifications
-
-<Steps>
-  <Step title="Open notifications">
-    Click the notification icon at the top right of the dashboard.
-
-    <Frame caption="Notification bell in the dashboard header.">
-      <img src="/images/knowledge-base/SCR-20240401-rwrz.png" alt="Notification icon in Merchant Dashboard header" />
-    </Frame>
-  </Step>
-
-  <Step title="Browse in-app notifications">
-    View payment, payout, and deposit updates in the notifications panel.
-
-    <Frame caption="In-app notifications list.">
-      <img src="/images/knowledge-base/SCR-20231116-rbmo.png" alt="In-app notifications panel" />
-    </Frame>
-  </Step>
-
-  <Step title="Open a notification">
-    Click a notification to open its details in a drawer.
-
-    <Frame caption="Single notification details.">
-      <img src="/images/knowledge-base/notification.png" alt="Notification detail drawer" />
-    </Frame>
-  </Step>
-
-  <Step title="Delete or mark as read">
-    Use the three-dot menu on a notification to delete it or mark it read or unread.
-
-    <Frame caption="Notification actions menu.">
-      <img src="/images/knowledge-base/SCR-20231116-rcrk.png" alt="Notification delete and mark as read menu" />
-    </Frame>
-  </Step>
-</Steps>
-
-You also receive **email** notifications with the same information when email alerts are enabled.
-
-If web notifications are enabled and you have granted permission for merchant.clickpesa.com, you can receive **web** notifications while logged in, even when the dashboard tab is in the background.
-
-## Notification settings
-
-<Steps>
-  <Step title="Open notifications">
-    Click the notification icon at the top right of the dashboard.
-
-    <Frame caption="Notification bell in the dashboard header.">
-      <img src="/images/knowledge-base/SCR-20240401-rwrz.png" alt="Notification icon in Merchant Dashboard header" />
-    </Frame>
-  </Step>
-
-  <Step title="Open settings">
-    Click the settings icon at the bottom right of the notifications panel.
-
-    <Frame caption="Notification settings icon.">
-      <img src="/images/knowledge-base/settings.png" alt="Notification settings icon" />
-    </Frame>
-  </Step>
-
-  <Step title="Customize preferences">
-    Turn categories and channels on or off per your preference.
-
-    <Frame caption="Notification category and channel toggles.">
-      <img src="/images/knowledge-base/SCR-20231116-rbtn.png" alt="Notification settings toggles" />
-    </Frame>
-  </Step>
-</Steps>
+Account alerts are separate from the notification bell and from **Settings → Notifications**.
 
 ## FAQ
 
-**Can I receive notifications for only certain transaction types?**
+**How do I stop transaction emails?**
 
-Yes. Use notification settings to enable alerts for selected categories only.
+Turn off collections, disbursements, or deposits under **Settings → Notifications**, or remove that address from the emails you added.
 
-**Are web notifications available when I am not on the dashboard?**
+**How do I add another inbox or phone?**
 
-Web notifications require an active browser session where you are logged in and have granted permission.
+Add it under receiving emails (max 5) or receiving SMS numbers (max 3, `+255`). Once you add people, only they get those alerts.
 
-**How do I stop email notifications?**
+**Will KYC or API key emails go to my team list?**
 
-Turn off **Email** for the categories you do not want in notification settings.
+No. Those stay on your account email.
+
+**Will I get an email when I share an invoice?**
+
+No. Invoice emails go to the customer. When they pay, you get a collection alert if collections is on.
 
 **Do notification settings affect security alerts?**
 

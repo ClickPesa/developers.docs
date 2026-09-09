@@ -118,10 +118,10 @@
                   "dashboard/settings/team",
                   "dashboard/settings/kyc",
                   "dashboard/settings/developers",
-                  "dashboard/settings/security"
+                  "dashboard/settings/security",
+                  "dashboard/notifications"
                 ]
-              },
-              "dashboard/notifications"
+              }
             ]
           }
         ]
