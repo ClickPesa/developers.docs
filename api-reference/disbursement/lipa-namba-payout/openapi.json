@@ -21,7 +21,10 @@
   "paths": {
     "/payouts/lipa-namba-providers": {
       "get": {
-        "tags": ["Payouts", "Lipa Namba"],
+        "tags": [
+          "Payouts",
+          "Lipa Namba"
+        ],
         "description": "Returns the list of Lipa Namba providers.",
         "responses": {
           "200": {
@@ -59,7 +62,10 @@
     },
     "/payouts/preview-lipa-namba-payout": {
       "post": {
-        "tags": ["Payouts", "Preview"],
+        "tags": [
+          "Payouts",
+          "Preview"
+        ],
         "description": "Validates a Lipa Namba or TanQR payout and returns the fee, balance, and beneficiary name.",
         "requestBody": {
           "required": true,
@@ -121,13 +127,26 @@
                 }
               }
             }
+          },
+          "404": {
+            "description": "Balance account not linked",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundError"
+                }
+              }
+            }
           }
         }
       }
     },
     "/payouts/create-lipa-namba-payout": {
       "post": {
-        "tags": ["Payouts", "Create"],
+        "tags": [
+          "Payouts",
+          "Create"
+        ],
         "description": "Sends a payout to a Lipa Namba or TanQR.",
         "requestBody": {
           "required": true,
@@ -189,6 +208,16 @@
                 }
               }
             }
+          },
+          "404": {
+            "description": "Balance account not linked",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundError"
+                }
+              }
+            }
           }
         }
       }
@@ -198,7 +227,11 @@
     "schemas": {
       "LipaNambaPayoutRequest": {
         "type": "object",
-        "required": ["amount", "orderReference", "currency"],
+        "required": [
+          "amount",
+          "orderReference",
+          "currency"
+        ],
         "properties": {
           "amount": {
             "type": "number",
@@ -206,7 +239,10 @@
           },
           "currency": {
             "type": "string",
-            "enum": ["TZS", "USD"],
+            "enum": [
+              "TZS",
+              "USD"
+            ],
             "description": "Account currency to pay out from (TZS or USD). Recipient receives TZS."
           },
           "orderReference": {
@@ -324,7 +360,11 @@
           "payoutFeeBearer": {
             "type": "string",
             "example": "merchant",
-            "enum": ["merchant", "both", "customer"]
+            "enum": [
+              "merchant",
+              "both",
+              "customer"
+            ]
           },
           "receiver": {
             "type": "object",
@@ -418,11 +458,20 @@
           },
           "status": {
             "type": "string",
-            "enum": ["AUTHORIZED", "PROCESSING", "SUCCESS", "FAILED", "REFUNDED", "REVERSED"]
+            "enum": [
+              "AUTHORIZED",
+              "PROCESSING",
+              "SUCCESS",
+              "FAILED",
+              "REFUNDED",
+              "REVERSED"
+            ]
           },
           "channel": {
             "type": "string",
-            "enum": ["TIPS LIPA NAMBA"]
+            "enum": [
+              "TIPS LIPA NAMBA"
+            ]
           },
           "channelProvider": {
             "type": "string",
@@ -508,6 +557,16 @@
             "type": "string",
             "description": "Unauthorized Error",
             "example": "Unauthorized"
+          }
+        }
+      },
+      "NotFoundError": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Not Found Error",
+            "example": "No balance account is linked to this merchant yet. Balance becomes available after the first successful payment or deposit."
           }
         }
       }

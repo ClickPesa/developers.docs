@@ -21,7 +21,10 @@
   "paths": {
     "/payouts/preview-bank-payout": {
       "post": {
-        "tags": ["Payouts", "Preview"],
+        "tags": [
+          "Payouts",
+          "Preview"
+        ],
         "description": "Validates a bank payout and returns the fee, balance, and estimated arrival.",
         "requestBody": {
           "required": true,
@@ -45,12 +48,17 @@
                   },
                   "currency": {
                     "type": "string",
-                    "enum": ["TZS", "USD"],
+                    "enum": [
+                      "TZS",
+                      "USD"
+                    ],
                     "description": "Account currency to pay out from (TZS or USD)"
                   },
                   "accountCurrency": {
                     "type": "string",
-                    "enum": ["TZS"],
+                    "enum": [
+                      "TZS"
+                    ],
                     "default": "TZS",
                     "description": "Receiving currency for the payout (TZS)"
                   },
@@ -64,8 +72,11 @@
                   },
                   "transferType": {
                     "type": "string",
-                    "enum": ["ACH", "RTGS"],
-                    "description": "Optional. Accepted for existing integrations. ClickPesa selects the settlement rail — use the response `transferType`."
+                    "enum": [
+                      "ACH",
+                      "RTGS"
+                    ],
+                    "description": "Optional. Accepted for existing integrations. ClickPesa selects the settlement rail \u2014 use the response `transferType`."
                   },
                   "checksum": {
                     "type": "string",
@@ -126,13 +137,26 @@
                 }
               }
             }
+          },
+          "404": {
+            "description": "Balance account not linked",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundError"
+                }
+              }
+            }
           }
         }
       }
     },
     "/payouts/create-bank-payout": {
       "post": {
-        "tags": ["Payouts", "Initiate"],
+        "tags": [
+          "Payouts",
+          "Initiate"
+        ],
         "description": "Sends a payout to a bank account.",
         "requestBody": {
           "required": true,
@@ -160,12 +184,17 @@
                   },
                   "currency": {
                     "type": "string",
-                    "enum": ["TZS", "USD"],
+                    "enum": [
+                      "TZS",
+                      "USD"
+                    ],
                     "description": "Account currency to pay out from (TZS or USD)"
                   },
                   "accountCurrency": {
                     "type": "string",
-                    "enum": ["TZS"],
+                    "enum": [
+                      "TZS"
+                    ],
                     "default": "TZS",
                     "description": "Receiving currency for the payout (TZS)"
                   },
@@ -179,8 +208,11 @@
                   },
                   "transferType": {
                     "type": "string",
-                    "enum": ["ACH", "RTGS"],
-                    "description": "Optional. Accepted for existing integrations. ClickPesa selects the settlement rail — use the response `transferType`."
+                    "enum": [
+                      "ACH",
+                      "RTGS"
+                    ],
+                    "description": "Optional. Accepted for existing integrations. ClickPesa selects the settlement rail \u2014 use the response `transferType`."
                   },
                   "checksum": {
                     "type": "string",
@@ -238,6 +270,16 @@
               "application/json": {
                 "schema": {
                   "$ref": "#/components/schemas/InternalServerError"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Balance account not linked",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundError"
                 }
               }
             }
@@ -321,11 +363,18 @@
           "payoutFeeBearer": {
             "type": "string",
             "example": "merchant",
-            "enum": ["merchant", "both", "customer"]
+            "enum": [
+              "merchant",
+              "both",
+              "customer"
+            ]
           },
           "nameLookupStatus": {
             "type": "string",
-            "enum": ["RESOLVED", "UNAVAILABLE"],
+            "enum": [
+              "RESOLVED",
+              "UNAVAILABLE"
+            ],
             "description": "Indicates whether the beneficiary name was resolved. `RESOLVED` when `receiver.accountName` is present; `UNAVAILABLE` when lookup did not return a name."
           },
           "receiver": {
@@ -354,13 +403,20 @@
           },
           "transferType": {
             "type": "string",
-            "enum": ["ACH", "RTGS", "GTB"],
+            "enum": [
+              "ACH",
+              "RTGS",
+              "GTB"
+            ],
             "description": "Settlement applied to this payout.",
             "example": "ACH"
           },
           "estimatedArrival": {
             "type": "string",
-            "enum": ["Instant", "1-3 Working Days"],
+            "enum": [
+              "Instant",
+              "1-3 Working Days"
+            ],
             "description": "Expected time for funds to arrive.",
             "example": "Instant"
           }
@@ -430,11 +486,17 @@
           },
           "status": {
             "type": "string",
-            "enum": ["AUTHORIZED", "SUCCESS", "REVERSED"]
+            "enum": [
+              "AUTHORIZED",
+              "SUCCESS",
+              "REVERSED"
+            ]
           },
           "channel": {
             "type": "string",
-            "enum": ["BANK TRANSFER"]
+            "enum": [
+              "BANK TRANSFER"
+            ]
           },
           "channelProvider": {
             "type": "string",
@@ -442,14 +504,21 @@
           },
           "transferType": {
             "type": "string",
-            "enum": ["ACH", "RTGS", "GTB"],
+            "enum": [
+              "ACH",
+              "RTGS",
+              "GTB"
+            ],
             "nullable": true,
             "description": "Settlement applied to this payout.",
             "example": "ACH"
           },
           "estimatedArrival": {
             "type": "string",
-            "enum": ["Instant", "1-3 Working Days"],
+            "enum": [
+              "Instant",
+              "1-3 Working Days"
+            ],
             "description": "Expected time for funds to arrive.",
             "example": "Instant"
           },
@@ -528,6 +597,16 @@
             "type": "string",
             "description": "Unauthorized Error",
             "example": "Unauthorized"
+          }
+        }
+      },
+      "NotFoundError": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "description": "Not Found Error",
+            "example": "No balance account is linked to this merchant yet. Balance becomes available after the first successful payment or deposit."
           }
         }
       }

@@ -172,7 +172,7 @@ Learn more in [Account alerts](/dashboard/notifications#account-alerts).
 
 ## Clearer Account Balance Error When No Balance Account Exists
 
-- Updated the **[Retrieve Account Balance](/api-reference/account/get-account-balance)** endpoint to return a clearer `404` message when a merchant has not yet received a successful payment or deposit
+- Updated the **[Retrieve Account Balance](/api-reference/account/get-account-balance)** endpoint and Disbursement API payout create/preview endpoints (**[Mobile Money](/api-reference/disbursement/mno-payout/create-mno-payout)**, **[Bank](/api-reference/disbursement/bank-payout/create-bank-payout)**, **[Lipa Namba](/api-reference/disbursement/lipa-namba-payout/create-lipa-namba-payout)**) to return a clearer `404` message when a merchant has not yet received a successful payment or deposit
 - The previous generic `Account not found` response has been replaced with: `No balance account is linked to this merchant yet. Balance becomes available after the first successful payment or deposit.`
 - API documentation now includes the `404` response and when integrators should expect it
 
