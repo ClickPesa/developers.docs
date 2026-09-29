@@ -15,12 +15,10 @@ Create an application and copy your Client ID and API Key from [API Integration 
 <CodeGroup>
 
 ```bash cURL
-# 1. Generate a token (counts toward the pre-KYC daily API cap)
 curl -X POST https://api.clickpesa.com/third-parties/generate-token \
   -H "client-id: YOUR_CLIENT_ID" \
   -H "api-key: YOUR_API_KEY"
 
-# 2. Preview a small USSD Push (reuse TOKEN for up to 1 hour)
 # The generate-token response already prefixes token with "Bearer "
 curl -X POST https://api.clickpesa.com/third-parties/payments/preview-ussd-push-request \
   -H "Authorization: TOKEN" \
@@ -150,8 +148,6 @@ echo $preview;
 ```
 
 </CodeGroup>
-
-`orderReference` on USSD Push must be alphanumeric and at most **20 characters**. Prefer [preview](/api-reference/collection/ussd-push-requests/preview-ussd-push-request) over [initiate](/api-reference/collection/ussd-push-requests/initiate-ussd-push-request) until the request looks correct.
 
 <CardGroup cols={2}>
   <Card title="Get Started With ClickPesa" icon="circle-play" href="/home/onboarding">
