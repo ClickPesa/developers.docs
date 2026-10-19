@@ -234,7 +234,7 @@
           },
           "paymentPhoneNumber": {
             "type": "string",
-            "description": "Sender's phone number (only available for USSD Push Payment requests and BillPay Payment requests)",
+            "description": "Sender's phone number. Included for USSD Push, BillPay, and CRDB Collection when the payer's mobile number was received.",
             "example": "255712345678"
           },
           "orderReference": {
