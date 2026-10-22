@@ -8,6 +8,14 @@ noindex: true
 
 <Update label="October 2026" tags={["Improvements", "API", "Collection"]} rss={{ title: "Monthly Updates", description: "October 2026 - Product updates and improvements" }}>
 
+## Airtel Money USSD: Lipia Bili path
+
+Airtel Money USSD payment instructions now include a second path, alongside the existing ClickPesa menu:
+
+- Dial `*150*60#`, then **5** Lipia Bili → **4** Weka Namba ya Biashara → payment number **901030** → reference → amount → **1** Kubali → PIN
+- The existing path still applies: **6** Huduma za Kifedha / Financial Services → **6** SACCOS and MFI → **1** MFI → **5** A-G → **8** ClickPesa
+- Updated in [BillPay payment instructions](/bill-pay/bill-pay-overview#making-payments-with-billpay-control-numbers)
+
 ## `paymentPhoneNumber` on CRDB Collection and `PAYMENT RECEIVED`
 
 - **`paymentPhoneNumber`** is now included for **CRDB Collection** payments on [Query All Payments](/api-reference/collection/query-all-payments/query-all-payments), [Query Payment](/api-reference/collection/querying-for-payments/querying-for-payments), and the [`PAYMENT RECEIVED` webhook](/home/webhooks#payment-received)
