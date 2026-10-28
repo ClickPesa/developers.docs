@@ -2,4 +2,15 @@
 title: "Generate Authorization Token"
 openapi: "POST /generate-token"
 ---
-<Note> JTW token is valid for **1 hour** from the time of issuance. After it expires, you must generate a new token. </Note>
+<Note>
+The JWT is valid for **1 hour** from issuance. Reuse it until it expires; do not call generate-token on every API request.
+</Note>
+
+<Warning>
+**Generate-token rate limits** (in addition to the general **120 requests per minute** per IP):
+
+- **Successful mint:** **1 token per Client ID per IP every 3 minutes**. Another application (another Client ID) on the same IP may mint in that window. A second mint for the **same** Client ID from that IP in those 3 minutes returns **429**.
+- **Failed mint** (invalid or missing `client-id` / `api-key`): failed attempts from that **IP** are capped in the same **3-minute** window. Further failures return **429**.
+
+A **429** body includes `fields.retryAfterSeconds` and a `Retry-After` header. Wait that many seconds before retrying. Integrators with many Client IDs on one IP (for example a platform) can mint once per application in the window; cache each JWT for up to an hour.
+</Warning>

@@ -8,6 +8,16 @@ noindex: true
 
 <Update label="October 2026" tags={["Improvements", "API", "Collection"]} rss={{ title: "Monthly Updates", description: "October 2026 - Product updates and improvements" }}>
 
+## Generate-token rate limits
+
+[Generate token](/api-reference/authorization/generate-token) now has limits in addition to **120 requests per minute** per IP:
+
+- **Successful mint:** **1 token per Client ID per IP every 3 minutes**. Other applications on the same IP may still mint in that window.
+- **Failed mint:** failed attempts from the same IP are capped in that 3-minute window.
+- **429** responses include `fields.retryAfterSeconds` and a `Retry-After` header.
+
+Reuse the JWT until it expires (1 hour). Documented on [API Integration Setup](/application/api-application-setup#authentication-overview).
+
 ## Airtel Money USSD: Lipia Bili path
 
 Airtel Money USSD payment instructions now include a second path, alongside the existing ClickPesa menu:

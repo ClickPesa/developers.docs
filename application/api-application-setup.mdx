@@ -20,10 +20,12 @@ Never share your API credentials or JWT token publicly. Always use HTTPS to prot
 
 [API Rate Limits](#authentication-overview) - The ClickPesa API enforces a rate limit of **120 requests per minute** per IP address. This limit applies to **all API endpoints**. If you exceed this limit, your requests will be throttled.
 
-[Pre-KYC API daily limit](#authentication-overview) - If your merchant account has **not completed KYC**, you are also limited to **100 API calls per day** across all third-party API requests, including **[generate-token](/api-reference/authorization/generate-token)**. The count resets every day at **midnight East Africa Time (EAT)**. After KYC approval, only the per-minute IP limit applies.
+[Generate-token rate limits](#authentication-overview) - **[Generate token](/api-reference/authorization/generate-token)** has extra limits on top of the per-minute cap. **Successful** calls: **1 token per Client ID per IP every 3 minutes**. Other Client IDs on the same IP may still mint in that window. **Failed** calls (invalid or missing credentials) from the same IP are capped in the same 3-minute window. A **429** includes `fields.retryAfterSeconds` and `Retry-After`. Reuse each JWT until it expires (**1 hour**).
+
+[Pre-KYC API daily limit](#authentication-overview) - If your merchant account has **not completed KYC**, you are also limited to **100 API calls per day** across all third-party API requests, including **[generate-token](/api-reference/authorization/generate-token)**. The count resets every day at **midnight East Africa Time (EAT)**. After KYC approval, the daily API cap is removed; the per-minute and generate-token limits still apply.
 
 <Tip>
-Implement appropriate retry logic with exponential backoff in your application to handle rate limit responses gracefully. If you receive a daily limit response before KYC is complete, wait until the next day or complete KYC to remove the cap.
+Implement appropriate retry logic with exponential backoff in your application to handle rate limit responses gracefully. If generate-token returns **429**, wait `fields.retryAfterSeconds` before calling it again. If you receive a daily limit response before KYC is complete, wait until the next day or complete KYC to remove the cap.
 </Tip>
 
 ## Application Setup

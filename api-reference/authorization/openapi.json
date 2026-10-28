@@ -77,6 +77,25 @@
                 }
               }
             }
+          },
+          "429": {
+            "description": "Too many generate-token requests. Successful mints are limited to 1 per Client ID per IP every 3 minutes. Failed attempts from the same IP are capped in the same window.",
+            "headers": {
+              "Retry-After": {
+                "description": "Seconds until you may retry generate-token.",
+                "schema": {
+                  "type": "integer",
+                  "example": 47
+                }
+              }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/GenerateTokenRateLimitError"
+                }
+              }
+            }
           }
         }
       }
@@ -116,6 +135,31 @@
         },
         "required": [
           "message"
+        ]
+      },
+      "GenerateTokenRateLimitError": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Too many token requests. Try again in 47 seconds."
+          },
+          "fields": {
+            "type": "object",
+            "properties": {
+              "retryAfterSeconds": {
+                "type": "integer",
+                "example": 47
+              }
+            },
+            "required": [
+              "retryAfterSeconds"
+            ]
+          }
+        },
+        "required": [
+          "message",
+          "fields"
         ]
       },
       "GenerateTokenMissingCredentialsError": {
