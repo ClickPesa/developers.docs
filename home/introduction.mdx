@@ -8,7 +8,7 @@ Leverage our hosted or embedded functionality to go to market with your payments
 
 ## First API call
 
-ClickPesa does not provide a sandbox. Every request, including the [API Explorer](/api-reference), runs against live production and moves real funds. Until [KYC is approved](/home/onboarding#limits-before-kyc-approval) you are limited to **TZS 100,000** across collections, payouts, deposits, and withdraws, and **100 API calls per day** (including token generation).
+ClickPesa does not provide a sandbox. Every request, including the [API Explorer](/api-reference), runs against live production and moves real funds. Until [KYC is approved](/home/onboarding#limits-before-kyc-approval) you are limited to **TZS 100,000** across collections, payouts, deposits, and withdraws, and API access is unavailable. You can still review the platform with [Invoices](/dashboard/e-invoice), [Payment Pages](/dashboard/payment-pages), and [BillPay](/bill-pay/bill-pay-overview).
 
 Create an application and copy your Client ID and API Key from [API Integration Setup](/application/api-application-setup). Generate a token once, reuse it for up to **1 hour**, and preview with a small amount before you initiate. Full testing guidance: [Sandbox and Testing Environment](/home/sandbox-and-testing-environment).
 
@@ -155,7 +155,7 @@ echo $preview;
   </Card>
 
   <Card title="Sandbox and Testing Environment" icon="flask" href="/home/sandbox-and-testing-environment">
-    No sandbox — test on live production with small amounts and the pre-KYC limits
+    No sandbox — review Invoices, Payment Pages, and BillPay before KYC, then call the API after approval
   </Card>
 
   <Card title="Changelog" icon="timer" href="/home/changelog">

@@ -6,6 +6,26 @@ rss: true
 noindex: true
 ---
 
+<Update label="November 2026" tags={["Improvements", "API", "KYC", "Merchant Dashboard"]} rss={{ title: "Monthly Updates", description: "November 2026 - Product updates and improvements" }}>
+
+## API access requires approved KYC
+
+Merchants whose KYC is not approved can no longer call the third-party API:
+
+- **Token generation and API calls** are refused until KYC is approved
+- **Applications and API keys** cannot be created until KYC is approved
+- The dashboard transaction limit is unchanged: **TZS 100,000 total** across collections, payouts, deposits, and withdraws until KYC is approved
+- **Review without the API:** Invoices, Payment Pages, and BillPay stay available for reviewing the platform before KYC is approved
+- **General API rate limit unchanged:** approved merchants remain subject to **120 requests per minute** per IP address, and the generate-token limits
+
+See [limits before KYC approval](/home/onboarding#limits-before-kyc-approval) and [API Integration Setup](/application/api-application-setup#authentication-overview).
+
+## Signup business types
+
+**I am not registered / Individual** is no longer offered when registering a business. Existing accounts with that type select a registered business type under **Settings → KYC** before uploading documents.
+
+</Update>
+
 <Update label="October 2026" tags={["Improvements", "API", "Collection"]} rss={{ title: "Monthly Updates", description: "October 2026 - Product updates and improvements" }}>
 
 ## Generate-token rate limits
